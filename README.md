@@ -1,2 +1,2 @@
 # shurui91.github.io
-online personal profolio and resume
+online personal profolio
