@@ -1,281 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
-		<title>Shurui Liu's website</title>
-		<link rel="shortcut icon" href="assets/images/gt_favicon.png">
-		<!-- Bootstrap itself -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
+	<title>Shurui Liu's website</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<!-- Bootstrap itself -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<!-- Custom styles -->
-		<link rel="stylesheet" href="assets/css/magister.css">
-		<!-- Fonts -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Wire+One" rel="stylesheet">
-		<!-- word fading -->
-		<script>
-		$(document).ready(function() {
-	$('#fadeout1').fadeTo(0, 0.8);
-	$('#fadeout2').fadeTo(0, 0.6);
-	$('#fadeout3').fadeTo(0, 0.4);
-	$('#fadeout4').fadeTo(0, 0.2);
-});
-</script>
-		<!-- Google Analytics code -->
-		<script>
-		(function(i, s, o, g, r, a, m) {
-	i['GoogleAnalyticsObject'] = r;
-	(i[r] =
-		i[r] ||
-		function() {
-			(i[r].q = i[r].q || []).push(arguments);
-		}),
-		(i[r].l = 1 * new Date());
-	(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-	a.async = 1;
-	a.src = g;
-	m.parentNode.insertBefore(a, m);
-})(
-	window,
-	document,
-	'script',
-	'https://www.google-analytics.com/analytics.js',
-	'ga'
-);
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="assets/css/magister.css">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Wire+One" rel="stylesheet">
+	<!-- word fading -->
+	<script>
+		$(document).ready(function () {
+			$('#fadeout1').fadeTo(0, 0.8);
+			$('#fadeout2').fadeTo(0, 0.6);
+			$('#fadeout3').fadeTo(0, 0.4);
+			$('#fadeout4').fadeTo(0, 0.2);
+		});
+	</script>
+	<!-- Google Analytics code -->
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			(i[r] =
+				i[r] ||
+				function () {
+					(i[r].q = i[r].q || []).push(arguments);
+				}),
+				(i[r].l = 1 * new Date());
+			(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m);
+		})(
+			window,
+			document,
+			'script',
+			'https://www.google-analytics.com/analytics.js',
+			'ga'
+		);
 
-ga('create', 'UA-81854499-1', 'auto');
-ga('send', 'pageview');
-</script>
-	</head>
+		ga('create', 'UA-81854499-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
 
-	<!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
-	<body class="theme-invert">
-		<nav class="mainmenu">
-			<div class="container">
-				<div class="dropdown">
-					<button type="button" class="navbar-toggle" data-toggle="dropdown"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-					<!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						<li><a href="#home" class="active">Home</a></li>
-						<li><a href="#about">About me</a></li>
-						<li><a href="#projects">Projects</a></li>
-						<li><a href="#extra">Extracurriculum Activities</a></li>
-						<li><a href="#contact">Get in touch</a></li>
+<!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
+
+<body class="theme-invert">
+	<nav class="mainmenu">
+		<div class="container">
+			<div class="dropdown">
+				<button type="button" class="navbar-toggle" data-toggle="dropdown"><span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li><a href="#home" class="active">Home</a></li>
+					<li><a href="#about">About me</a></li>
+					<li><a href="#projects">Projects</a></li>
+					<li><a href="#extra">Extracurriculum Activities</a></li>
+					<li><a href="#contact">Get in touch</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Main (Home) section -->
+	<section class="section" id="home">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+					<!-- Site Title, your name, HELLO msg, etc. -->
+					<h3 class="title">Shurui Liu</h3>
+					<h4 class="subtitle">Software Engineer at Lollicup USA</h4>
+					<!-- Short introductory (optional) -->
+					<h5 class="tagline">
+						A guy has limited energy but unlimited enthusiasm for challenges.<br>
+					</h5>
+				</div> <!-- /col -->
+			</div> <!-- /row -->
+
+		</div>
+	</section>
+
+	<!-- Second (About) section -->
+	<section class="section" id="about">
+		<div class="container">
+			<h3 class="text-center title">About me</h3>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<p>
+						I am <b>Shurui</b>, people also call me <b>Aaron</b> when they found it's hard to pronounce my
+						Chinese name. I graduated from USC with a Computer Science Master's Degree in May 2017. Right
+						now I am a fulltime software engineer at Lollicup USA.
+					</p></br>
+					<table class="table">
+						<thead>
+							<th>Simple History</th>
+							<th>Time</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Software Engineer, Lollicup USA Inc., Chino, CA</td>
+								<td>Feb 2018 - Current</td>
+							</tr>
+							<tr>
+								<td>Website Developer, International Pioneer, Los Angeles, CA</td>
+								<td>May 2017 - Feb 2018</td>
+							</tr>
+							<tr>
+								<td>Software Engineer Intern, EverFocus, Duarte, CA</td>
+								<td>May 2016 - Aug 2016</td>
+							</tr>
+							<tr>
+								<td>CS Master, University of Southern California, Los Angeles, CA</td>
+								<td>2015 - 2017</td>
+							</tr>
+							<tr id="fadeout1">
+								<td>Website Developer, ENS Kitchen & Bath, Anaheim, CA</td>
+								<td>Mar 2013 - Jan 2014</td>
+							</tr>
+							<tr id="fadeout2">
+								<td>CS Undergraduate, University of Toledo, Toledo, OH</td>
+								<td>2010-2013</td>
+							</tr>
+							<tr id="fadeout3">
+								<td>Zhenjiang Experimental High School, Zhenjiang, Jiangsu, China</td>
+								<td>2006-2009</td>
+							</tr>
+							<tr id="fadeout4">
+								<td>Middle School...</td>
+								<td>2003-2006</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Third (Projects) section -->
+	<section class="section" id="projects">
+		<div class="container">
+			<h3 class="text-center title">Projects</h3>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<table class="table borderless">
+						<thead>
+							<th>Project</th>
+							<th>Demo/Link</th>
+							<th>Date</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>TinyURL (URL shortener) Service</td>
+								<td><a class="btn btn-primary btn-xs" href="https://github.com/shurui91/tinyURL"
+										target="_blank">Github Repo</a></td>
+								<td>Feb 2017 - Mar 2017</td>
+							</tr>
+							<tr>
+								<td>Access Control System (XTron)</td>
+								<td><a class="btn btn-primary btn-xs"
+										href="http://www2.everfocus.com/product.cfm?productid=1937"
+										target="_blank">Link</a></td>
+								<td>May 2016 - Aug 2016</td>
+							</tr>
+							<tr>
+								<td>Weather Forecast Webapp</td>
+								<td><a class="btn btn-success btn-xs"
+										href="http://shurui91.com/571/hw6/forecast_server.php" target="_blank">Demo</a>
+								</td>
+								<td>Sep 2016 - Oct 2016</td>
+							</tr>
+							<tr>
+								<td>Raspberry Pi Auto Slideshow</td>
+								<td><a class="btn btn-success btn-xs" href="https://www.youtube.com/watch?v=ayr2VIZYtX8"
+										target="_blank">Demo</a></td>
+								<td>Jan 2016 - Feb 2016</td>
+							</tr>
+							<tr>
+								<td>Church in Cerritos, Wordpress</td>
+								<td><a class="btn btn-success btn-xs" href="http://www.churchincerritos.org"
+										target="_blank">Demo</a></td>
+								<td>Sep 2014 - Dec 2014</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Fourth (Extracurriculum) section -->
+	<section class="section" id="extra">
+		<div class="container">
+			<h3 class="text-center title">Extracurriculum Activities</h3>
+			<p class="text-center">I am a runner! I like running for one or two times each week to keep my head clear.
+			</p>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<table class="table borderless">
+						<thead>
+							<th>Events</th>
+							<th>Record</th>
+							<th>Date</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>San Francisco Half Marathon 2019, San Francisco, CA</td>
+								<td>02:17:11</td>
+								<td>July 2019</td>
+							</tr>
+							<tr>
+								<td>San Francisco Half Marathon 2018, San Francisco, CA</td>
+								<td>02:18:10</td>
+								<td>July 2018</td>
+							</tr>
+							<tr>
+								<td>Eugene Half Marathon 2018, Eugene, OR</td>
+								<td>02:10:52</td>
+								<td>April 2018</td>
+							</tr>
+							<tr>
+								<td>Surf City Half Marathon 2018, Huntington Beach, CA</td>
+								<td>02:15:35</td>
+								<td>February 2018</td>
+							</tr>
+							<tr>
+								<td>Long Beach Half Marathon 2017, Long Beach, CA</td>
+								<td>02:17:37</td>
+								<td>October 2017</td>
+							</tr>
+							<tr>
+								<td>San Francisco Half Marathon 2017, San Francisco, CA</td>
+								<td>02:20:42</td>
+								<td>July 2017</td>
+							</tr>
+							<tr>
+								<td>Orange County Half Marathon 2017, Newport Beach, CA</td>
+								<td>02:13:06</td>
+								<td>May 2017</td>
+							</tr>
+							<tr>
+								<td>San Diego Half Marathon 2017, San Diego, CA</td>
+								<td>02:03:16</td>
+								<td>March 2017</td>
+							</tr>
+							<tr>
+								<td>Surf City Half Marathon 2017, Huntington Beach, CA</td>
+								<td>01:59:35</td>
+								<td>February 2017</td>
+							</tr>
+							<tr>
+								<td>San Francisco Half Marathon 2016, San Francisco, CA</td>
+								<td>02:20:11</td>
+								<td>July 2016</td>
+							</tr>
+							<tr>
+								<td>Hollywood Half Marathon 2016, Hollywood, CA</td>
+								<td>02:10:18</td>
+								<td>April 2016</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Fifth (Contact) section -->
+	<section class="section" id="contact">
+		<div class="container">
+			<h3 class="text-center title">Get in touch</h3>
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<p class="lead">I am always looking for frontend, backend and fullstack development opportunities.
+					</p>
+					<p>Feel free to email me!</p>
+					<p><b>aaron dot liu dot usc at gmail dot com</b><br><br></p>
+					<ul class="list-inline list-social">
+						<li>
+							<a href="https://github.com/shurui91" class="btn btn-link" target="_blank">
+								<i class="fa fa-github fa-fw"></i> Github
+							</a>
+						</li>
+						<li>
+							<a href="https://www.linkedin.com/in/shuruiliu/" class="btn btn-link" target="_blank">
+								<i class="fa fa-linkedin fa-fw"></i> LinkedIn
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
-		</nav>
+		</div>
+	</section>
+	<!-- Load js libs only when the page is loaded. -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="assets/js/modernizr.custom.72241.js"></script>
+	<!-- Custom template scripts -->
+	<script src="assets/js/magister.js"></script>
+</body>
 
-		<!-- Main (Home) section -->
-		<section class="section" id="home">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
-						<!-- Site Title, your name, HELLO msg, etc. -->
-						<h3 class="title">Shurui Liu</h3>
-						<h4 class="subtitle">CS Master @ University of Southern California</h4>
-						<!-- Short introductory (optional) -->
-						<h5 class="tagline">
-							A guy has limited energy but unlimited enthusiasm for challenges.<br>
-						</h5>
-					</div> <!-- /col -->
-				</div> <!-- /row -->
-
-			</div>
-		</section>
-
-		<!-- Second (About) section -->
-		<section class="section" id="about">
-			<div class="container">
-				<h3 class="text-center title">About me</h3>
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<p>
-							I am <b>Shurui</b>, people also call me <b>Aaron</b> when they found it's hard to pronounce my Chinese name.
-							I graduated from USC with a Computer Science Master's Degree in May 2017.
-						</p></br>
-						<table class="table">
-							<thead>
-								<th>Simple History</th>
-								<th>Time</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Software Engineer, Lollicup USA Inc., Chino, CA</td>
-									<td>Feb 2018 - Current</td>
-								</tr>
-								<tr>
-									<td>Website Developer, International Pioneer, Los Angeles, CA</td>
-									<td>May 2017 - Feb 2018</td>
-								</tr>
-								<tr>
-									<td>Software Engineer Intern, EverFocus, Duarte, CA</td>
-									<td>May 2016 - Aug 2016</td>
-								</tr>
-								<tr>
-									<td>CS Master, University of Southern California, Los Angeles, CA</td>
-									<td>2015 - 2017</td>
-								</tr>
-								<tr id="fadeout1">
-									<td>Website Developer, ENS Kitchen & Bath, Anaheim, CA</td>
-									<td>Mar 2013 - Jan 2014</td>
-								</tr>
-								<tr id="fadeout2">
-									<td>CS Undergraduate, University of Toledo, Toledo, OH</td>
-									<td>2010-2013</td>
-								</tr>
-								<tr id="fadeout3">
-									<td>Zhenjiang Experimental High School, Zhenjiang, Jiangsu, China</td>
-									<td>2006-2009</td>
-								</tr>
-								<tr id="fadeout4">
-									<td>Middle School...</td>
-									<td>2003-2006</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Third (Projects) section -->
-		<section class="section" id="projects">
-			<div class="container">
-				<h3 class="text-center title">Projects</h3>
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<table class="table borderless">
-							<thead>
-								<th>Project</th>
-								<th>Demo/Link</th>
-								<th>Date</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>TinyURL (URL shortener) Service</td>
-									<td><a class="btn btn-primary btn-xs" href="https://github.com/shurui91/tinyURL" target="_blank">Github Repo</a></td>
-									<td>Feb 2017 - Mar 2017</td>
-								</tr>
-								<tr>
-									<td>Access Control System (XTron)</td>
-									<td><a class="btn btn-primary btn-xs" href="http://www2.everfocus.com/product.cfm?productid=1937" target="_blank">Link</a></td>
-									<td>May 2016 - Aug 2016</td>
-								</tr>
-								<tr>
-									<td>Weather Forecast Webapp</td>
-									<td><a class="btn btn-success btn-xs" href="http://shurui91.com/571/hw6/forecast_server.php" target="_blank">Demo</a></td>
-									<td>Sep 2016 - Oct 2016</td>
-								</tr>
-								<tr>
-									<td>Raspberry Pi Auto Slideshow</td>
-									<td><a class="btn btn-success btn-xs" href="https://www.youtube.com/watch?v=ayr2VIZYtX8" target="_blank">Demo</a></td>
-									<td>Jan 2016 - Feb 2016</td>
-								</tr>
-								<tr>
-									<td>Church in Cerritos, Wordpress</td>
-									<td><a class="btn btn-success btn-xs" href="http://www.churchincerritos.org" target="_blank">Demo</a></td>
-									<td>Sep 2014 - Dec 2014</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Fourth (Extracurriculum) section -->
-		<section class="section" id="extra">
-			<div class="container">
-				<h3 class="text-center title">Extracurriculum Activities</h3>
-				<p class="text-center">I am a runner! I like running for one or two times each week to keep my head clear. </p>
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<table class="table borderless">
-							<thead>
-								<th>Events</th>
-								<th>Record</th>
-								<th>Date</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Eugene Half Marathon 2018, Eugene, OR</td>
-									<td>02:10:52</td>
-									<td>April 2018</td>
-								</tr>
-								<tr>
-									<td>Surf City Half Marathon 2018, Huntington Beach, CA</td>
-									<td>02:15:35</td>
-									<td>February 2018</td>
-								</tr>
-								<tr>
-									<td>Long Beach Half Marathon 2017, Long Beach, CA</td>
-									<td>02:17:37</td>
-									<td>October 2017</td>
-								</tr>
-								<tr>
-									<td>San Francisco Half Marathon 2017, San Francisco, CA</td>
-									<td>02:20:42</td>
-									<td>July 2017</td>
-								</tr>
-								<tr>
-									<td>Orange County Half Marathon 2017, Newport Beach, CA</td>
-									<td>02:13:06</td>
-									<td>May 2017</td>
-								</tr>
-								<tr>
-									<td>San Diego Half Marathon 2017, San Diego, CA</td>
-									<td>02:03:16</td>
-									<td>March 2017</td>
-								</tr>
-								<tr>
-									<td>Surf City Half Marathon 2017, Huntington Beach, CA</td>
-									<td>01:59:35</td>
-									<td>February 2017</td>
-								</tr>
-								<tr>
-									<td>San Francisco Half Marathon 2016, San Francisco, CA</td>
-									<td>02:20:11</td>
-									<td>July 2016</td>
-								</tr>
-								<tr>
-									<td>Hollywood Half Marathon 2016, Hollywood, CA</td>
-									<td>02:10:18</td>
-									<td>April 2016</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Fifth (Contact) section -->
-		<section class="section" id="contact">
-			<div class="container">
-				<h3 class="text-center title">Get in touch</h3>
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 text-center">
-						<p class="lead">I am always looking for frontend, backend and fullstack development opportunities.</p>
-						<p>Feel free to email me!</p>
-						<p><b>aaron dot liu dot usc at gmail dot com</b><br><br></p>
-						<ul class="list-inline list-social">
-							<li><a href="https://twitter.com/shurui91" class="btn btn-link" target="_blank"><i class="fa fa-twitter fa-fw"></i> Twitter</a></li>
-							<li><a href="https://github.com/shurui91" class="btn btn-link" target="_blank"><i class="fa fa-github fa-fw"></i> Github</a></li>
-							<li><a href="https://www.linkedin.com/in/aaron-shurui-liu-26a07563" class="btn btn-link" target="_blank"><i class="fa fa-linkedin fa-fw"></i> LinkedIn</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Load js libs only when the page is loaded. -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="assets/js/modernizr.custom.72241.js"></script>
-		<!-- Custom template scripts -->
-		<script src="assets/js/magister.js"></script>
-	</body>
 </html>
