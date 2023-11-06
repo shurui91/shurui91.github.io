@@ -24,7 +24,7 @@
 <meta property="og:description" content="Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i &lt; j &lt; k and nums[i] &lt; nums[j] &lt; nums[k]. If no such indices exists, return false. Example">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-10-09T15:35:25.000Z">
-<meta property="article:modified_time" content="2023-11-06T21:27:55.197Z">
+<meta property="article:modified_time" content="2023-11-06T22:27:58.099Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -276,7 +276,7 @@
 <blockquote>
 <p>给你一个整数数组 nums ，判断这个数组中是否存在长度为 3 的递增子序列。<br>如果存在这样的三元组下标 (i, j, k) 且满足 i &lt; j &lt; k ，使得 nums[i] &lt; nums[j] &lt; nums[k] ，返回 true ；否则，返回 false 。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/increasing-triplet-subsequence%E8%91%97%E4%BD%9C%E6%9D%83%E5%BD%92%E9%A2%86%E6%89%A3%E7%BD%91%E7%BB%9C%E6%89%80%E6%9C%89%E3%80%82%E5%95%86%E4%B8%9A%E8%BD%AC%E8%BD%BD%E8%AF%B7%E8%81%94%E7%B3%BB%E5%AE%98%E6%96%B9%E6%8E%88%E6%9D%83%EF%BC%8C%E9%9D%9E%E5%95%86%E4%B8%9A%E8%BD%AC%E8%BD%BD%E8%AF%B7%E6%B3%A8%E6%98%8E%E5%87%BA%E5%A4%84%E3%80%82">https://leetcode.cn/problems/increasing-triplet-subsequence著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</a></p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是我们把遍历过程中遇到的三个数字分别记为 <code>first</code>, <code>second</code> 和 <code>third</code> 的话，并把 <code>first</code> 和 <code>second</code> 设为 <code>Integer.MAX_VALUE</code>。开始遍历 input 数组，按照判断条件，我们会先遇到 <code>first</code>，然后如果有另一个数字大于 <code>first</code> 的话，就把他记为 <code>second</code>，如果再有一个数字大于 <code>second</code> 的话，则我们找到一个合法的解了。但是还有一种情况是如果我们找到 <code>second</code> 之后再遇到一个数字能小于 <code>first</code> 的话，我们就更新 <code>first</code>。这里的逻辑是尽量让 <code>first</code> 和 <code>second</code> 变得更小，这样能给第三个数字留充足的空间。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是我们把遍历过程中遇到的可能组成上升子序列的三个数字分别记为 <code>first</code>, <code>second</code> 和 <code>third</code>，并把 <code>first</code> 和 <code>second</code> 设为 <code>Integer.MAX_VALUE</code>。开始遍历 input 数组，按照判断条件，我们会先遇到 <code>first</code>，然后如果有另一个数字大于 <code>first</code> 的话，就把他记为 <code>second</code>，如果再有一个数字大于 <code>second</code> 的话，则我们找到一个合法的解了。但是还有一种情况是如果我们找到 <code>second</code> 之后再遇到一个数字能小于 <code>first</code> 的话，我们就更新 <code>first</code>。这里的逻辑是尽量让 <code>first</code> 和 <code>second</code> 变得更小，这样能给第三个数字留充足的空间。</p>
 <p>这里如果我们能找到一个数字比 <code>first</code> 更小的话（记为<code>first*</code>），此时三元组也是合法的。虽然 <code>first*</code> 出现在<code>second</code> 之后，但是他的出现并没有影响 <code>second</code> 的值，所以只要我们能找到一个数字大于 <code>second</code> 的话，那么还是能找到合法的解。</p>
 <p>注意这道题是属于 <code>LIS</code> 最长上升子序列的题，只不过这个子序列的长度是固定的。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
