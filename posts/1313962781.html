@@ -13,30 +13,30 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
     <meta name="description" content="Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:0 &lt;&#x3D; a, b, c, d &lt; na, b, c, and d are distinct.nums[a] + nums">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 18. 4Sum">
-<meta property="og:url" content="http://example.com/posts/1313962781.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://shurui91.github.io/posts/1313962781.html">
+<meta property="og:site_name" content="CNoodle">
 <meta property="og:description" content="Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:0 &lt;&#x3D; a, b, c, d &lt; na, b, c, and d are distinct.nums[a] + nums">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-26T12:37:34.000Z">
 <meta property="article:modified_time" content="2023-11-06T17:47:38.556Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
+<meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="javascript">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="two sum">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 18. 4Sum - Hexo</title>
+  <title>[LeetCode] 18. 4Sum - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"shurui91.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -309,15 +309,15 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+      
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/two-sum/" class="print-no-link">#two sum</a>
       
@@ -332,13 +332,13 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>[LeetCode] 18. 4Sum</div>
-      <div>http://example.com/posts/1313962781.html</div>
+      <div>https://shurui91.github.io/posts/1313962781.html</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>John Doe</div>
+          <div>Aaron Liu</div>
         </div>
       
       
