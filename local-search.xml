@@ -22,9 +22,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -77,6 +77,29 @@
       <tag>java</tag>
       
       <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1441. Build an Array With Stack Operations</title>
+    <link href="/posts/2354514140.html"/>
+    <url>/posts/2354514140.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array target and an integer n.<br>You have an empty stack with the two following operations:<br>“Push”: pushes an integer to the top of the stack.<br>“Pop”: removes the integer on the top of the stack.<br>You also have a stream of the integers in the range [1, n].<br>Use the two stack operations to make the numbers in the stack (from the bottom to the top) equal to target. You should follow the following rules:<br>If the stream of the integers is not empty, pick the next integer from the stream and push it to the top of the stack.<br>If the stack is not empty, pop the integer at the top of the stack.<br>If, at any moment, the elements in the stack (from the bottom to the top) are equal to target, do not read new integers from the stream and do not do more operations on the stack.<br>Return the stack operations needed to build target following the mentioned rules. If there are multiple valid answers, return any of them.</p><p>Example 1:<br>Input: target &#x3D; [1,3], n &#x3D; 3<br>Output: [“Push”,”Push”,”Pop”,”Push”]<br>Explanation:<br>Read number 1 and automatically push in the array -&gt; [1]<br>Read number 2 and automatically push in the array then Pop it -&gt; [1]<br>Read number 3 and automatically push in the array -&gt; [1,3]</p><p>Example 2:<br>Input: target &#x3D; [1,2,3], n &#x3D; 3<br>Output: [“Push”,”Push”,”Push”]</p><p>Example 3:<br>Input: target &#x3D; [1,2], n &#x3D; 4<br>Output: [“Push”,”Push”]<br>Explanation: You only need to read the first 2 numbers and stop.</p><p>Example 4:<br>Input: target &#x3D; [2,3,4], n &#x3D; 4<br>Output: [“Push”,”Pop”,”Push”,”Push”,”Push”]</p><p>Constraints:<br>1 &lt;&#x3D; target.length &lt;&#x3D; 100<br>1 &lt;&#x3D; target[i] &lt;&#x3D; 100<br>1 &lt;&#x3D; n &lt;&#x3D; 100<br>target is strictly increasing.</p><blockquote><p>题意是给你一个目标数组 target 和一个整数 n。每次迭代，需要从  list &#x3D; {1,2,3…, n} 中依序读取一个数字。<br>请使用下述操作来构建目标数组 target:<br>Push：从 list 中读取一个新元素， 并将其推入数组中。<br>Pop：删除数组中的最后一个元素。如果目标数组构建完成，就停止读取更多元素。<br>题目数据保证目标数组严格递增，并且只包含 1 到 n 之间的数字。请返回构建目标数组所用的操作序列。题目数据保证答案是唯一的。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/build-an-array-with-stack-operations">https://leetcode-cn.com/problems/build-an-array-with-stack-operations</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><p>用栈操作构建数组。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是通过 stack 的操作，返回应该做的操作。举个例子，因为最后的结果是从 1 开始判断的，所以需要从 1 到 N 遍历每个数字，如果当前数字需要，你就会知道当前这个数字是需要 push 的；如果当前数字不需要，因为需要模拟 stack 的操作，所以需要 push 再 pop。<br>我看到美版讨论里面有个人问怎么保证答案是唯一的，他给出了这么个例子，<br>target &#x3D; [3,4], n &#x3D; 4<br>[Push, Push, Pop, Pop, Push, Push][Push, Pop, Push, Pop, Push, Push]<br>他在问既然结果是3，4，到底应该是可以连续 push 呢还是不能有连续的操作。按照题意，因为 target 的长度是固定的，所以如果你额外多 push 了东西，数组是会越界的，所以不能这么做，只能在发觉当前这个数字是不需要的时候立马就 pop 出来。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">buildArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] target, <span class="hljs-type">int</span> n)</span> &#123;<br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (j &lt; target.length) &#123;<br>            res.add(<span class="hljs-string">&quot;Push&quot;</span>);<br>            <span class="hljs-keyword">if</span> (target[j] != i) &#123;<br>                res.add(<span class="hljs-string">&quot;Pop&quot;</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
