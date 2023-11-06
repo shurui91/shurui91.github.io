@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1. Two Sum</title>
+    <link href="/posts/4117090286.html"/>
+    <url>/posts/4117090286.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>You can return the answer in any order.<br>Example 1:Input: nums &#x3D; [2,7,11,15], target &#x3D; 9Output: [0,1]Explanation: Because nums[0] + nums[1] &#x3D;&#x3D; 9, we return [0, 1].<br>Example 2:Input: nums &#x3D; [3,2,4], target &#x3D; 6Output: [1,2]<br>Example 3:Input: nums &#x3D; [3,3], target &#x3D; 6Output: [0,1]<br>Constraints:<br>2 &lt;&#x3D; nums.length &lt;&#x3D; 104<br>-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>-109 &lt;&#x3D; target &lt;&#x3D; 109<br>Only one valid answer exists.<br>Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?</p><p>两数之和。</p><blockquote><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 的那 两个 整数，并返回它们的数组下标。<br>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br>你可以按任意顺序返回答案。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum">https://leetcode-cn.com/problems/two-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>暴力解是O(n^2)级别的复杂度，一定会超时。为了不超时，我们使用 hashmap 记录每个元素和他的下标。找的时候是在找 hashmap 里是否存在能组成 target 的另一个数字 target - nums[i]。<br>LC里面有一部分题目也是需要通过 hashmap 或者 two pointer 来加快运行速度的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h4 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) &#123;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length &lt; <span class="hljs-number">2</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-comment">// &lt;element, index&gt;</span><br>HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">complement</span> <span class="hljs-operator">=</span> target - nums[i];<br><span class="hljs-keyword">if</span> (map.containsKey(complement)) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; map.get(complement), i &#125;;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>map.put(nums[i], i);<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><h4 id="JavaScript实现"><a href="#JavaScript实现" class="headerlink" title="JavaScript实现"></a>JavaScript实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">target</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, target</span>) &#123;<br><span class="hljs-keyword">let</span> map = &#123;&#125;;<br><span class="hljs-keyword">const</span> len = nums.<span class="hljs-property">length</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br><span class="hljs-keyword">let</span> cur = nums[i];<br><span class="hljs-keyword">let</span> complement = target - cur;<br><span class="hljs-keyword">if</span> (map[complement] !== <span class="hljs-literal">undefined</span>) &#123;<br><span class="hljs-keyword">return</span> [map[complement], i];<br>&#125;<br>map[cur] = i;<br>&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+      <tag>two sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
