@@ -16,22 +16,21 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。 如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，">
+    <meta name="description" content="The DNA sequence is composed of a series of nucleotides abbreviated as ‘A’, ‘C’, ‘G’, and ‘T’. For example, “ACGAATTCCG” is a DNA sequence. When studying DNA, it is useful to identify repeated sequenc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 题目总结">
-<meta property="og:url" content="https://shurui91.github.io/posts/939082724.html">
+<meta property="og:title" content="[LeetCode] 187. Repeated DNA Sequences">
+<meta property="og:url" content="https://shurui91.github.io/posts/2461659226.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。 如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，">
+<meta property="og:description" content="The DNA sequence is composed of a series of nucleotides abbreviated as ‘A’, ‘C’, ‘G’, and ‘T’. For example, “ACGAATTCCG” is a DNA sequence. When studying DNA, it is useful to identify repeated sequenc">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-18T16:12:48.000Z">
-<meta property="article:modified_time" content="2023-11-06T18:19:23.484Z">
+<meta property="article:published_time" content="2019-10-17T08:04:25.000Z">
+<meta property="article:modified_time" content="2023-11-06T19:57:41.410Z">
 <meta property="article:author" content="Aaron Liu">
-<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LeetCode 题目总结 - CNoodle</title>
+  <title>[LeetCode] 187. Repeated DNA Sequences - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LeetCode 题目总结"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 187. Repeated DNA Sequences"></span>
           
         </div>
 
@@ -196,8 +195,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-18 09:12" pubdate>
-          March 18, 2020 am
+        <time datetime="2019-10-17 01:04" pubdate>
+          October 17, 2019 am
         </time>
       </span>
     
@@ -208,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          1.7k words
         
       </span>
     
@@ -219,7 +218,7 @@
         
         
         
-          13 mins
+          15 mins
         
       </span>
     
@@ -256,56 +255,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LeetCode 题目总结</h1>
+            <h1 id="seo-header">[LeetCode] 187. Repeated DNA Sequences</h1>
             
             
               <div class="markdown-body">
                 
-                <p>本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。</p>
-<p>如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，其中有一些类型在 2021 年 6 月以前官方没有收录，有的按照题设分类，有的按照思路&#x2F;解法分类。同时有一些题目的解法或者思想很类似的，我也会以相关题目的形式列在文章的最底部。对于每一种类型的题，你可以基本按照题号从小到大开始刷，比较小的题号（尤其前 400）都是经典题，一般直接问算法，比较大的题号往往是前 400 题中某个题目的 followup 或变形，如果你看懂题目要考什么，其实涉及的算法在前 400 题应该都有涉及。题是刷不完的，只有总结反思才会有提高。</p>
-<ul>
-<li>flood fill 岛屿类 - 往往是通过 BFS&#x2F;DFS 从一个点开始遍历整个二维数组，根据题意找岛的个数&#x2F;面积或者找一个点与点之间的距离，一个走到某个坐标上的步数&#x2F;时间</li>
-<li>matrix 矩阵类，跟岛屿类型的题很接近，但是主要考点是二维数组的非常规遍历，翻转。官方把岛屿类的题也归类到 matrix 一类了，我这里做了一些区分</li>
-<li>monotonic stack 单调栈 - 不容易想到但是的确能解决问题的一种思路，如果不用单调栈，暴力解基本是 O(n^2) 级别的</li>
-<li>two pointer 双指针，包括很多可以用双指针做但是没有标注成双指针类型的题</li>
-<li>prefix sum 前缀和</li>
-<li>sliding window 滑动窗口</li>
-<li>sliding window with fixed size 固定尺寸的滑动窗口</li>
-<li>palindrome 回文 - 也是双指针的一个子类，两边往中间逼近</li>
-<li>line sweep 扫描线&#x2F;差分数组 - 这一类的题其实也分为两个子类，一类是类似会议室那种，一类是合并子区间那种</li>
-<li>counting sort 计数排序</li>
-<li>bucket sort 桶排序</li>
-<li>Longest Increasing Subsequence (LIS) 最长递增子序列<ul>
-<li>这个类型的题往往跟 DP 有关</li>
-</ul>
-</li>
-<li>Longest Common Subsequence (LCS) 最长相同子序列，经典题有<ul>
-<li>Edit Distance</li>
-<li>Longest Common Subsequence</li>
-</ul>
-</li>
-<li>two sum 两数之和 - 一些算是 two sum 的 followup 题</li>
-<li>MOD - 结果非常大，需要取模的题。如果需要优化，大多涉及到二分</li>
-<li>binary search 二分法<ul>
-<li>一个很好的二分法入门</li>
-<li>我总结的三个二分法模板及其区别</li>
-</ul>
-</li>
-<li>binary search on answer 在答案上二分<ul>
-<li>也是二分的一类题，一般不是直接在 input 数组上做二分</li>
-</ul>
-</li>
-<li>Dijkstra 迪杰斯特拉算法<ul>
-<li>使用类似广度优先搜索的方法解决图的单源最短路径问题，一般会涉及有向和有权的图</li>
-</ul>
-</li>
-<li>graph 图论 - 包括很多 input signature 给的是树但是实际是需要自己把图或邻接表建立起来的题，和官方压根没有给出 graph 这个 tag 的题（比如1192题，2021年6月这个题官方加了tag了）</li>
-<li>union find - 并查集 - 解决一些 BFS 做会复杂度高或 DFS 做会 stack overflow 的图论的题，比如如果数据是以数据流的形式给出的，BFS 的复杂度就会很高。并查集有时候在 union 的过程中就能找到答案。</li>
-<li>knapsack 背包问题 - 动态规划中的一个子类</li>
-<li>memorization - 记忆化（递归）- 动态规划中的一个子类</li>
-<li>simulation - 模拟，一般不涉及算法，就是根据题意实现</li>
-</ul>
-<p>发现博客园没有很好的文章目录，我做了一个 <a target="_blank" rel="noopener" href="https://docs.qq.com/sheet/DVnNKeUNIaEJzSmtU?tab=bb08j2">腾讯文档</a> 记录总结写过题解的题目并附上链接。</p>
+                <p>The DNA sequence is composed of a series of nucleotides abbreviated as ‘A’, ‘C’, ‘G’, and ‘T’.</p>
+<p>For example, “ACGAATTCCG” is a DNA sequence.</p>
+<p>When studying DNA, it is useful to identify repeated sequences within the DNA.</p>
+<p>Given a string s that represents a DNA sequence, return all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in any order.</p>
+<p>Example 1:<br>Input: s &#x3D; “AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT”<br>Output: [“AAAAACCCCC”,”CCCCCAAAAA”]</p>
+<p>Example 2:<br>Input: s &#x3D; “AAAAAAAAAAAAA”<br>Output: [“AAAAAAAAAA”]</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s[i] is either ‘A’, ‘C’, ‘G’, or ‘T’.</p>
+<p>重复的DNA序列。</p>
+<blockquote>
+<p>DNA序列 由一系列核苷酸组成，缩写为 ‘A’, ‘C’, ‘G’ 和 ‘T’.。<br>例如，”ACGAATTCCG” 是一个 DNA序列 。在研究 DNA 时，识别 DNA 中的重复序列非常有用。<br>给定一个表示 DNA序列 的字符串 s ，返回所有在 DNA 分子中出现不止一次的 长度为 10 的序列(子字符串)。你可以按 任意顺序 返回答案。<br>来源：力扣（LeetCode）链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/repeated-dna-sequences">https://leetcode.cn/problems/repeated-dna-sequences</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给的 input 是一个 DNA 序列，请输出所有出现多次的 DNA 子序列。这题有位运算的做法但是感觉用 hashset 的做法更方便。注意 DNA 的定义是一个长度为 10 的子字符串。<br>思路是用两个 hashset，第一个存子序列是否出现过（seen），第二个存最后的输出（res）。当某个子序列在 seen 中已经有了，就存入 res；最后输出 res 里面所有的子序列。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - n 是 input 字符串长度<br>空间O(n) - 用了两个 hashset</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">findRepeatedDnaSequences</span><span class="hljs-params">(String s)</span> &#123;<br>        HashSet&lt;String&gt; seen = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        HashSet&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length() - <span class="hljs-number">9</span>; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> s.substring(i, i + <span class="hljs-number">10</span>);<br>            <span class="hljs-keyword">if</span> (!seen.add(str)) &#123;<br>                res.add(str);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(res);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">string[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findRepeatedDnaSequences = <span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) &#123;<br>	<span class="hljs-keyword">let</span> seen = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>();<br>	<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span> - <span class="hljs-number">9</span>; i++) &#123;<br>		<span class="hljs-keyword">const</span> str = s.<span class="hljs-title function_">substring</span>(i, i + <span class="hljs-number">10</span>);<br>		<span class="hljs-keyword">if</span> (seen.<span class="hljs-title function_">has</span>(str)) &#123;<br>			res.<span class="hljs-title function_">add</span>(str);<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			seen.<span class="hljs-title function_">add</span>(str);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(res);<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -315,13 +288,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
-      
-    </div>
-  
 </div>
 
 
@@ -330,8 +296,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LeetCode 题目总结</div>
-      <div>https://shurui91.github.io/posts/939082724.html</div>
+      <div>[LeetCode] 187. Repeated DNA Sequences</div>
+      <div>https://shurui91.github.io/posts/2461659226.html</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +309,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 18, 2020</div>
+          <div>October 17, 2019</div>
         </div>
       
       
@@ -375,9 +341,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1313962781.html" title="[LeetCode] 18. 4Sum">
+                      <a href="/posts/939082724.html" title="LeetCode 题目总结">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 18. 4Sum</span>
+                        <span class="hidden-mobile">LeetCode 题目总结</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -385,8 +351,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2461659226.html" title="[LeetCode] 187. Repeated DNA Sequences">
-                        <span class="hidden-mobile">[LeetCode] 187. Repeated DNA Sequences</span>
+                      <a href="/posts/4117090286.html" title="[LeetCode] 1. Two Sum">
+                        <span class="hidden-mobile">[LeetCode] 1. Two Sum</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -406,8 +372,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/939082724.html';
-          this.page.identifier = '/posts/939082724.html';
+          this.page.url = 'https://shurui91.github.io/posts/2461659226.html';
+          this.page.identifier = '/posts/2461659226.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
