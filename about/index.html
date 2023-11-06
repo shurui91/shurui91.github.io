@@ -17,20 +17,28 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="Tags - leetcode">
-<meta property="og:url" content="https://shurui91.github.io/tags/leetcode/index.html">
+<meta property="og:title" content="About">
+<meta property="og:url" content="https://shurui91.github.io/about/index.html">
 <meta property="og:site_name" content="CNoodle">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-06T19:18:05.000Z">
+<meta property="article:modified_time" content="2023-11-06T19:44:18.942Z">
 <meta property="article:author" content="Aaron Liu">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Tags - leetcode - CNoodle</title>
+  <title>About - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +88,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 60vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -168,23 +176,19 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/avatar.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Tags - leetcode"></span>
+            <span id="subtitle" data-typed-text="About"></span>
           
         </div>
 
         
       </div>
 
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
       
     </div>
   </div>
@@ -200,41 +204,78 @@
         <div id="board"
           >
           
+            <div class="about-avatar">
+              <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
+            </div>
+          
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">3 posts in total</p>
-  <hr>
-  
-  
-    
+<div class="text-center">
+  <div class="about-info">
+    <div class="about-name">Aaron Liu</div>
+    <div class="about-intro">A passionate SDE</div>
+    <div class="about-icons">
       
-      <p class="h5">2020</p>
-    
-    <a href="/posts/1313962781.html" class="list-group-item list-group-item-action">
-      <time>04-26</time>
-      <div class="list-group-item-title">[LeetCode] 18. 4Sum</div>
-    </a>
-  
-    
-    <a href="/posts/939082724.html" class="list-group-item list-group-item-action">
-      <time>03-18</time>
-      <div class="list-group-item-title">LeetCode 题目总结</div>
-    </a>
-  
-    
+        
+        
+        
+        <a href=https://github.com/shurui91 class="
+           hint--bottom hint--rounded"
+           aria-label=GitHub
+           target="_blank"
+        >
+          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
+          
+        </a>
       
-      <p class="h5">2019</p>
-    
-    <a href="/posts/4117090286.html" class="list-group-item list-group-item-action">
-      <time>10-08</time>
-      <div class="list-group-item-title">[LeetCode] 1. Two Sum</div>
-    </a>
-  
+        
+        
+        
+        <a href=https://www.linkedin.com/in/shuruiliu/ class="
+           hint--bottom hint--rounded"
+           aria-label=LinkedIn
+           target="_blank"
+        >
+          <i class="iconfont icon-linkedin-fill" aria-hidden="true"></i>
+          
+        </a>
+      
+    </div>
+  </div>
 </div>
+
+<article class="about-content page-content mt-5">
+  <div class="markdown-body">
+    
+  </div>
+
+  
+</article>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
 
 
 
@@ -338,6 +379,59 @@
 
 
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
