@@ -8,7 +8,7 @@
     <link href="/posts/763011099.html"/>
     <url>/posts/763011099.html</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>Given the root of a binary tree, return the number of nodes where the value of the node is equal to the average of the values in its subtree.</p><p>Note:<br>The average of n elements is the sum of the n elements divided by n and rounded down to the nearest integer.<br>A subtree of root is a tree consisting of root and all of its descendants.</p><p>Example 1:<br>Input: root &#x3D; [4,8,5,0,1,null,6]<br>Output: 5<br>Explanation:<br>For the node with value 4: The average of its subtree is (4 + 8 + 5 + 0 + 1 + 6) &#x2F; 6 &#x3D; 24 &#x2F; 6 &#x3D; 4.<br>For the node with value 5: The average of its subtree is (5 + 6) &#x2F; 2 &#x3D; 11 &#x2F; 2 &#x3D; 5.<br>For the node with value 0: The average of its subtree is 0 &#x2F; 1 &#x3D; 0.<br>For the node with value 1: The average of its subtree is 1 &#x2F; 1 &#x3D; 1.<br>For the node with value 6: The average of its subtree is 6 &#x2F; 1 &#x3D; 6.</p><p>Example 2:<br>Input: root &#x3D; [1]<br>Output: 1<br>Explanation: For the node with value 1: The average of its subtree is 1 &#x2F; 1 &#x3D; 1.</p><p>Constraints:<br>The number of nodes in the tree is in the range [1, 1000].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p><p>统计值等于子树平均值的节点数。</p><blockquote><p>给你一棵二叉树的根节点 root ，找出并返回满足要求的节点数，要求节点的值等于其 子树 中值的 平均值 。<br>注意：<br>n 个元素的平均值可以由 n 个元素 求和 然后再除以 n ，并 向下舍入 到最近的整数。<br>root 的 子树 由 root 和它的所有后代组成。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是后序遍历。因为题目让我们找的节点需要让其子树满足一些条件，这也就意味着对于任何一个节点，他需要从他的子节点获取一些信息，由此我们想到大致的思路是后序遍历。</p><p>那么具体一点，子节点需要往父节点传什么信息呢？因为要求的是子树中所有节点 val 的平均值，那么我们需要收集所有子节点的 node.val 和子节点的个数这两个信息。这里我用一个数组保存。其他部分就比较直观了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> count;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">averageOfSubtree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br>        helper(root);<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br><br>    <span class="hljs-comment">// [sum, count of nodes]</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] helper(TreeNode root) &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; <span class="hljs-number">0</span>, <span class="hljs-number">0</span> &#125;;<br>        &#125;<br>        <span class="hljs-type">int</span>[] left = helper(root.left);<br>        <span class="hljs-type">int</span>[] right = helper(root.right);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> left[<span class="hljs-number">0</span>] + right[<span class="hljs-number">0</span>] + root.val;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">nodeCount</span> <span class="hljs-operator">=</span> left[<span class="hljs-number">1</span>] + right[<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (root.val == sum / nodeCount) &#123;<br>            count++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; sum, nodeCount &#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -43,11 +43,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>simulation</tag>
-      
-      <tag>array</tag>
       
     </tags>
     
@@ -68,13 +68,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>simulation</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -95,11 +95,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -149,9 +149,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -176,11 +176,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -226,11 +226,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -274,9 +274,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -301,9 +301,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -330,13 +330,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
