@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an array of n integers nums and an integer target, find the number of index triplets i, j, k with 0 &lt;&#x3D; i &lt; j &lt; k &lt; n that satisfy the condition nums[i] + nums[j] + nums[k] &lt;">
+    <meta name="description" content="We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right. When two">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 259. 3Sum Smaller">
-<meta property="og:url" content="https://shurui91.github.io/posts/1916472686.html">
+<meta property="og:title" content="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank">
+<meta property="og:url" content="https://shurui91.github.io/posts/2043097135.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an array of n integers nums and an integer target, find the number of index triplets i, j, k with 0 &lt;&#x3D; i &lt; j &lt; k &lt; n that satisfy the condition nums[i] + nums[j] + nums[k] &lt;">
+<meta property="og:description" content="We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right. When two">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-28T12:16:40.000Z">
-<meta property="article:modified_time" content="2023-11-06T22:13:43.049Z">
+<meta property="article:published_time" content="2020-07-05T19:34:23.000Z">
+<meta property="article:modified_time" content="2023-11-07T06:13:07.677Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="brainteaser">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 259. 3Sum Smaller - CNoodle</title>
+  <title>[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 259. 3Sum Smaller"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-05-28 05:16" pubdate>
-          May 28, 2020 am
+        <time datetime="2020-07-05 12:34" pubdate>
+          July 5, 2020 pm
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k words
+          3.2k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          9 mins
+          27 mins
         
       </span>
     
@@ -260,22 +260,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 259. 3Sum Smaller</h1>
+            <h1 id="seo-header">[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an array of n integers nums and an integer target, find the number of index triplets i, j, k with 0 &lt;&#x3D; i &lt; j &lt; k &lt; n that satisfy the condition nums[i] + nums[j] + nums[k] &lt; target.<br>Example 1:<br>Input: nums &#x3D; [-2,0,1,3], target &#x3D; 2<br>Output: 2<br>Explanation: Because there are two triplets which sums are less than 2:<br>[-2,0,1]<br>[-2,0,3]</p>
-<p>Example 2:<br>Input: nums &#x3D; [], target &#x3D; 0<br>Output: 0</p>
-<p>Example 3:<br>Input: nums &#x3D; [0], target &#x3D; 0<br>Output: 0<br>Constraints:<br>n &#x3D;&#x3D; nums.length<br>0 &lt;&#x3D; n &lt;&#x3D; 3500<br>-100 &lt;&#x3D; nums[i] &lt;&#x3D; 100<br>-100 &lt;&#x3D; target &lt;&#x3D; 100</p>
-<p>较小的三数之和。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路跟 3sum 差不多，但是这个题要找的是有多少种组合能满足三数之和小于 target。思路还是先固定一个数字，然后另两个数字是通过双指针逼近的方式做。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p>
+                <p>We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right.</p>
+<p>When two ants moving in two different directions meet at some point, they change their directions and continue moving again. Assume changing directions doesn’t take any additional time.</p>
+<p>When an ant reaches one end of the plank at a time t, it falls out of the plank imediately.</p>
+<p>Given an integer n and two integer arrays left and right, the positions of the ants moving to the left and the right. Return the moment when the last ant(s) fall out of the plank.</p>
+<p>Example 1:<br>Input: n &#x3D; 4, left &#x3D; [4,3], right &#x3D; [0,1]<br>Output: 4<br>Explanation: In the image above:<br>-The ant at index 0 is named A and going to the right.<br>-The ant at index 1 is named B and going to the right.<br>-The ant at index 3 is named C and going to the left.<br>-The ant at index 4 is named D and going to the left.<br>Note that the last moment when an ant was on the plank is t &#x3D; 4 second, after that it falls imediately out of the plank. (i.e. We can say that at t &#x3D; 4.0000000001, there is no ants on the plank).</p>
+<p>Example 2:<br>Input: n &#x3D; 7, left &#x3D; [], right &#x3D; [0,1,2,3,4,5,6,7]<br>Output: 7<br>Explanation: All ants are going to the right, the ant at index 0 needs 7 seconds to fall.</p>
+<p>Example 3:<br>Input: n &#x3D; 7, left &#x3D; [0,1,2,3,4,5,6,7], right &#x3D; []<br>Output: 7<br>Explanation: All ants are going to the left, the ant at index 7 needs 7 seconds to fall.</p>
+<p>Example 4:<br>Input: n &#x3D; 9, left &#x3D; [5], right &#x3D; [4]<br>Output: 5<br>Explanation: At t &#x3D; 1 second, both ants will be at the same intial position but with different direction.</p>
+<p>Example 5:<br>Input: n &#x3D; 6, left &#x3D; [6], right &#x3D; [0]<br>Output: 6</p>
+<p>Constraints:<br>1 &lt;&#x3D; n &lt;&#x3D; 10^4<br>0 &lt;&#x3D; left.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; left[i] &lt;&#x3D; n<br>0 &lt;&#x3D; right.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; right[i] &lt;&#x3D; n<br>1 &lt;&#x3D; left.length + right.length &lt;&#x3D; n + 1<br>All values of left and right are unique, and each value can appear only in one of the two arrays.</p>
+<p>所有蚂蚁掉下来前的最后一刻。</p>
+<blockquote>
+<p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。<br>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。<br>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。<br>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t &#x3D; 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是问蚂蚁最多需要多长时间才能完全离开面板。如果你想通了，思路很简单。题意规定当蚂蚁相遇的时候，两只蚂蚁需要向各自相反方向走，这个规则乍一看其实会让你感觉是不是会增加一个蚂蚁离开面板的时间，其实是不会的。当两只蚂蚁相遇，你可以把他视为如果是 a 和 b 相撞，可以将 a 和 b 相互调换一下位置，相当于是两者直接各自擦肩而过了。LeetCode 中还有几道题也用到这个思想，很有用。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">threeSumSmaller</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>		Arrays.sort(nums);<br>		<span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length - <span class="hljs-number">2</span>; i++) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>				<span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; target) &#123;<br>					res += right - left;<br>					left++;<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					right--;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getLastMoment</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[] left, <span class="hljs-type">int</span>[] right)</span> &#123;<br>		Arrays.sort(left);<br>		Arrays.sort(right);<br>		<span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length != <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>		&#125;<br>		<span class="hljs-keyword">if</span> (left.length != <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> left[left.length - <span class="hljs-number">1</span>];<br>		&#125;<br>		<span class="hljs-keyword">return</span> Math.max(left[left.length - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>相关题目<br>259. 3Sum Smaller<br>611. Valid Triangle Number</p>
-
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">left</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">right</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> getLastMoment = <span class="hljs-keyword">function</span> (<span class="hljs-params">n, left, right</span>) &#123;<br>	left.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>	right.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(left);<br>	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(right);<br>	<span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; right.<span class="hljs-property">length</span>) &#123;<br>		<span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>	&#125;<br>	<span class="hljs-keyword">if</span> (left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br>		<span class="hljs-keyword">return</span> left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -291,11 +301,11 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+      
+        <a href="/tags/brainteaser/" class="print-no-link">#brainteaser</a>
       
     </div>
   
@@ -307,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 259. 3Sum Smaller</div>
-      <div>https://shurui91.github.io/posts/1916472686.html</div>
+      <div>[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</div>
+      <div>https://shurui91.github.io/posts/2043097135.html</div>
     </div>
     <div class="license-meta">
       
@@ -320,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 28, 2020</div>
+          <div>July 5, 2020</div>
         </div>
       
       
@@ -352,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2043097135.html" title="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank">
+                      <a href="/posts/2693420280.html" title="[LeetCode] 421. Maximum XOR of Two Numbers in an Array">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</span>
+                        <span class="hidden-mobile">[LeetCode] 421. Maximum XOR of Two Numbers in an Array</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -362,8 +372,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2354514140.html" title="[LeetCode] 1441. Build an Array With Stack Operations">
-                        <span class="hidden-mobile">[LeetCode] 1441. Build an Array With Stack Operations</span>
+                      <a href="/posts/1916472686.html" title="[LeetCode] 259. 3Sum Smaller">
+                        <span class="hidden-mobile">[LeetCode] 259. 3Sum Smaller</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -383,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1916472686.html';
-          this.page.identifier = '/posts/1916472686.html';
+          this.page.url = 'https://shurui91.github.io/posts/2043097135.html';
+          this.page.identifier = '/posts/2043097135.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
