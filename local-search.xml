@@ -16,11 +16,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -62,7 +62,7 @@
     <link href="/posts/2043097135.html"/>
     <url>/posts/2043097135.html</url>
     
-    <content type="html"><![CDATA[<p>We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right.</p><p>When two ants moving in two different directions meet at some point, they change their directions and continue moving again. Assume changing directions doesn’t take any additional time.</p><p>When an ant reaches one end of the plank at a time t, it falls out of the plank imediately.</p><p>Given an integer n and two integer arrays left and right, the positions of the ants moving to the left and the right. Return the moment when the last ant(s) fall out of the plank.</p><p>Example 1:<br>Input: n &#x3D; 4, left &#x3D; [4,3], right &#x3D; [0,1]<br>Output: 4<br>Explanation: In the image above:<br>-The ant at index 0 is named A and going to the right.<br>-The ant at index 1 is named B and going to the right.<br>-The ant at index 3 is named C and going to the left.<br>-The ant at index 4 is named D and going to the left.<br>Note that the last moment when an ant was on the plank is t &#x3D; 4 second, after that it falls imediately out of the plank. (i.e. We can say that at t &#x3D; 4.0000000001, there is no ants on the plank).</p><p>Example 2:<br>Input: n &#x3D; 7, left &#x3D; [], right &#x3D; [0,1,2,3,4,5,6,7]<br>Output: 7<br>Explanation: All ants are going to the right, the ant at index 0 needs 7 seconds to fall.</p><p>Example 3:<br>Input: n &#x3D; 7, left &#x3D; [0,1,2,3,4,5,6,7], right &#x3D; []<br>Output: 7<br>Explanation: All ants are going to the left, the ant at index 7 needs 7 seconds to fall.</p><p>Example 4:<br>Input: n &#x3D; 9, left &#x3D; [5], right &#x3D; [4]<br>Output: 5<br>Explanation: At t &#x3D; 1 second, both ants will be at the same intial position but with different direction.</p><p>Example 5:<br>Input: n &#x3D; 6, left &#x3D; [6], right &#x3D; [0]<br>Output: 6</p><p>Constraints:<br>1 &lt;&#x3D; n &lt;&#x3D; 10^4<br>0 &lt;&#x3D; left.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; left[i] &lt;&#x3D; n<br>0 &lt;&#x3D; right.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; right[i] &lt;&#x3D; n<br>1 &lt;&#x3D; left.length + right.length &lt;&#x3D; n + 1<br>All values of left and right are unique, and each value can appear only in one of the two arrays.</p><p>所有蚂蚁掉下来前的最后一刻。</p><blockquote><p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。<br>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。<br>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。<br>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t &#x3D; 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是问蚂蚁最多需要多长时间才能完全离开面板。如果你想通了，思路很简单。题意规定当蚂蚁相遇的时候，两只蚂蚁需要向各自相反方向走，这个规则乍一看其实会让你感觉是不是会增加一个蚂蚁离开面板的时间，其实是不会的。当两只蚂蚁相遇，你可以把他视为如果是 a 和 b 相撞，可以将 a 和 b 相互调换一下位置，相当于是两者直接各自擦肩而过了。LeetCode 中还有几道题也用到这个思想，很有用。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getLastMoment</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[] left, <span class="hljs-type">int</span>[] right)</span> &#123;<br>Arrays.sort(left);<br>Arrays.sort(right);<br><span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length != <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>&#125;<br><span class="hljs-keyword">if</span> (left.length != <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> left[left.length - <span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-keyword">return</span> Math.max(left[left.length - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">left</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">right</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> getLastMoment = <span class="hljs-keyword">function</span> (<span class="hljs-params">n, left, right</span>) &#123;<br>left.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>right.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(left);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(right);<br><span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>&#125;<br><span class="hljs-keyword">if</span> (left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right.</p><p>When two ants moving in two different directions meet at some point, they change their directions and continue moving again. Assume changing directions doesn’t take any additional time.</p><p>When an ant reaches one end of the plank at a time t, it falls out of the plank imediately.</p><p>Given an integer n and two integer arrays left and right, the positions of the ants moving to the left and the right. Return the moment when the last ant(s) fall out of the plank.</p><p>Example 1:<br>Input: n &#x3D; 4, left &#x3D; [4,3], right &#x3D; [0,1]<br>Output: 4<br>Explanation: In the image above:<br>-The ant at index 0 is named A and going to the right.<br>-The ant at index 1 is named B and going to the right.<br>-The ant at index 3 is named C and going to the left.<br>-The ant at index 4 is named D and going to the left.<br>Note that the last moment when an ant was on the plank is t &#x3D; 4 second, after that it falls imediately out of the plank. (i.e. We can say that at t &#x3D; 4.0000000001, there is no ants on the plank).</p><p>Example 2:<br>Input: n &#x3D; 7, left &#x3D; [], right &#x3D; [0,1,2,3,4,5,6,7]<br>Output: 7<br>Explanation: All ants are going to the right, the ant at index 0 needs 7 seconds to fall.</p><p>Example 3:<br>Input: n &#x3D; 7, left &#x3D; [0,1,2,3,4,5,6,7], right &#x3D; []<br>Output: 7<br>Explanation: All ants are going to the left, the ant at index 7 needs 7 seconds to fall.</p><p>Example 4:<br>Input: n &#x3D; 9, left &#x3D; [5], right &#x3D; [4]<br>Output: 5<br>Explanation: At t &#x3D; 1 second, both ants will be at the same intial position but with different direction.</p><p>Example 5:<br>Input: n &#x3D; 6, left &#x3D; [6], right &#x3D; [0]<br>Output: 6</p><p>Constraints:<br>1 &lt;&#x3D; n &lt;&#x3D; 10^4<br>0 &lt;&#x3D; left.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; left[i] &lt;&#x3D; n<br>0 &lt;&#x3D; right.length &lt;&#x3D; n + 1<br>0 &lt;&#x3D; right[i] &lt;&#x3D; n<br>1 &lt;&#x3D; left.length + right.length &lt;&#x3D; n + 1<br>All values of left and right are unique, and each value can appear only in one of the two arrays.</p><p>所有蚂蚁掉下来前的最后一刻。</p><blockquote><p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。<br>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。<br>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。<br>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t &#x3D; 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是问蚂蚁最多需要多长时间才能完全离开面板。如果你想通了，思路很简单。题意规定当蚂蚁相遇的时候，两只蚂蚁需要向各自相反方向走，这个规则乍一看其实会让你感觉是不是会增加一个蚂蚁离开面板的时间，其实是不会的，题目也是这样说的。当两只蚂蚁 a 和 b 相遇，你可以将 a 和 b 相互调换一下位置，相当于是两者直接各自擦肩而过了。LeetCode 中还有几道题也用到这个思想，很有用。</p><p>知道这个结论之后，这道题瞬间就变成了<code>所有向左走的蚂蚁中最右边的那一只从木板上掉下来的时刻</code>和<code>所有向右走的蚂蚁中最左边的那一只从木板上掉下来的时刻</code>的较大值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getLastMoment</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[] left, <span class="hljs-type">int</span>[] right)</span> &#123;<br>Arrays.sort(left);<br>Arrays.sort(right);<br><span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length != <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>&#125;<br><span class="hljs-keyword">if</span> (left.length != <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> left[left.length - <span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-keyword">return</span> Math.max(left[left.length - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">left</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">right</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> getLastMoment = <span class="hljs-keyword">function</span> (<span class="hljs-params">n, left, right</span>) &#123;<br>left.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>right.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(left);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(right);<br><span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-keyword">if</span> (!left.<span class="hljs-property">length</span> &amp;&amp; right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>&#125;<br><span class="hljs-keyword">if</span> (left.<span class="hljs-property">length</span> &amp;&amp; !right.<span class="hljs-property">length</span>) &#123;<br><span class="hljs-keyword">return</span> left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(left[left.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -70,9 +70,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -97,11 +97,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -147,11 +147,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -195,9 +195,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>javascript</tag>
       
@@ -222,9 +222,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -251,13 +251,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>java</tag>
       
       <tag>javascript</tag>
       

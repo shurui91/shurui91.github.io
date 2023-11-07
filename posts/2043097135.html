@@ -24,11 +24,11 @@
 <meta property="og:description" content="We have a wooden plank of the length n units. Some ants are walking on the plank, each ant moves with speed 1 unit per second. Some of the ants move to the left, the other move to the right. When two">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-05T19:34:23.000Z">
-<meta property="article:modified_time" content="2023-11-07T06:13:07.677Z">
+<meta property="article:modified_time" content="2023-11-07T06:18:39.747Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="javascript">
 <meta property="article:tag" content="brainteaser">
 <meta name="twitter:card" content="summary_large_image">
@@ -279,7 +279,8 @@
 <blockquote>
 <p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。<br>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。<br>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。<br>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t &#x3D; 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是问蚂蚁最多需要多长时间才能完全离开面板。如果你想通了，思路很简单。题意规定当蚂蚁相遇的时候，两只蚂蚁需要向各自相反方向走，这个规则乍一看其实会让你感觉是不是会增加一个蚂蚁离开面板的时间，其实是不会的。当两只蚂蚁相遇，你可以把他视为如果是 a 和 b 相撞，可以将 a 和 b 相互调换一下位置，相当于是两者直接各自擦肩而过了。LeetCode 中还有几道题也用到这个思想，很有用。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是问蚂蚁最多需要多长时间才能完全离开面板。如果你想通了，思路很简单。题意规定当蚂蚁相遇的时候，两只蚂蚁需要向各自相反方向走，这个规则乍一看其实会让你感觉是不是会增加一个蚂蚁离开面板的时间，其实是不会的，题目也是这样说的。当两只蚂蚁 a 和 b 相遇，你可以将 a 和 b 相互调换一下位置，相当于是两者直接各自擦肩而过了。LeetCode 中还有几道题也用到这个思想，很有用。</p>
+<p>知道这个结论之后，这道题瞬间就变成了<code>所有向左走的蚂蚁中最右边的那一只从木板上掉下来的时刻</code>和<code>所有向右走的蚂蚁中最左边的那一只从木板上掉下来的时刻</code>的较大值。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getLastMoment</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[] left, <span class="hljs-type">int</span>[] right)</span> &#123;<br>		Arrays.sort(left);<br>		Arrays.sort(right);<br>		<span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (left.length == <span class="hljs-number">0</span> &amp;&amp; right.length != <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> n - right[<span class="hljs-number">0</span>];<br>		&#125;<br>		<span class="hljs-keyword">if</span> (left.length != <span class="hljs-number">0</span> &amp;&amp; right.length == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> left[left.length - <span class="hljs-number">1</span>];<br>		&#125;<br>		<span class="hljs-keyword">return</span> Math.max(left[left.length - <span class="hljs-number">1</span>], n - right[<span class="hljs-number">0</span>]);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -299,9 +300,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
+      
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
