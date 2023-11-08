@@ -16,9 +16,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -68,11 +68,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
       
       <tag>simulation</tag>
+      
+      <tag>array</tag>
       
     </tags>
     
@@ -93,13 +93,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
       <tag>simulation</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
@@ -120,11 +120,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
       
       <tag>simulation</tag>
+      
+      <tag>array</tag>
       
       <tag>heap</tag>
       
@@ -147,9 +147,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>greedy</tag>
       
@@ -174,13 +174,40 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 524. Longest Word in Dictionary through Deleting</title>
+    <link href="/posts/2214751183.html"/>
+    <url>/posts/2214751183.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a string and a string dictionary, find the longest string in the dictionary that can be formed by deleting some characters of the given string. If there are more than one possible results, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.</p><p>Example 1:<br>Input:<br>s &#x3D; “abpcplea”, d &#x3D; [“ale”,”apple”,”monkey”,”plea”]</p><p>Output:<br>“apple”</p><p>Example 2:<br>Input:<br>s &#x3D; “abpcplea”, d &#x3D; [“a”,”b”,”c”]</p><p>Output:<br>“a”</p><p>Note:<br>All the strings in the input will only contain lower-case letters.<br>The size of the dictionary won’t exceed 1,000.<br>The length of all the strings in the input won’t exceed 1,000.</p><p>通过删除字母匹配到字典里最长单词。</p><blockquote><p>给定一个字符串和一个字符串字典，找到字典里面最长的字符串，该字符串可以通过删除给定字符串的某些字符来得到。如果答案不止一个，返回长度最长且字典顺序最小的字符串。如果答案不存在，则返回空字符串。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting">https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是双指针，类似于392题找子序列。因为 s 删除字母是无序的，所以只能通过判断子序列的方式来看 dictionary 中的每个单词是不是由 s 删减而来。如果你找到一个单词了，之后再有一个单词，他也是 s 的子序列的话，需要用 <code>str.compareTo()</code> 额外判断 str 的字典序是否比 res 小，若是则替换 res，从而得到字典序最小的结果。</p><p><code>a.compareTo(b)</code> 这个函数如果返回负数，说明 a 的字典序比 b 小，返回正数说明 a 的字典序比 b 大。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn) - 要与m个单词比较，单词平均长度为n<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">findLongestWord</span><span class="hljs-params">(String s, List&lt;String&gt; dictionary)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">for</span> (String word : dictionary) &#123;<br>            <span class="hljs-keyword">if</span> (helper(word, s)) &#123;<br>                <span class="hljs-keyword">if</span> (word.length() &gt; res.length()) &#123;<br>                    res = word;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (word.length() == res.length() &amp;&amp; word.compareTo(res) &lt; <span class="hljs-number">0</span>) &#123;<br>                    res = word;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(String s, String t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.length() &amp;&amp; j &lt; t.length()) &#123;<br>            <span class="hljs-keyword">if</span> (s.charAt(i) == t.charAt(j)) &#123;<br>                i++;<br>            &#125;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> i == s.length();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">392. Is Subsequence<br>524. Longest Word in Dictionary through Deleting<br>720. Longest Word in Dictionary<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
       <tag>java</tag>
       
-      <tag>simulation</tag>
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -201,11 +228,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -255,9 +282,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -307,9 +334,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -336,11 +363,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -386,11 +413,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
       <tag>simulation</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -413,11 +440,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -461,11 +488,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -488,9 +515,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>javascript</tag>
       
@@ -515,9 +542,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -544,13 +571,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>java</tag>
       
       <tag>javascript</tag>
       
