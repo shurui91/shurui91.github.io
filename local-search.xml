@@ -16,9 +16,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -68,9 +68,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -93,13 +93,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>simulation</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -120,9 +120,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -147,9 +147,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -174,13 +174,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>simulation</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -201,9 +201,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -230,11 +230,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -257,11 +257,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -311,11 +311,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>brainteaser</tag>
       
@@ -363,9 +363,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -392,11 +392,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -442,11 +442,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>simulation</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -469,13 +469,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -505,6 +505,33 @@
   
   
   <entry>
+    <title>[LeetCode] 11. Container With Most Water</title>
+    <link href="/posts/308930466.html"/>
+    <url>/posts/308930466.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).</p><p>Find two lines that together with the x-axis form a container, such that the container contains the most water.</p><p>Return the maximum amount of water a container can store.</p><p>Notice that you may not slant the container.</p><p>Example 1:<br><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="Image"><br>Input: height &#x3D; [1,8,6,2,5,4,8,3,7]<br>Output: 49<br>Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.</p><p>Example 2:<br>Input: height &#x3D; [1,1]<br>Output: 1</p><p>Constraints:<br>n &#x3D;&#x3D; height.length<br>2 &lt;&#x3D; n &lt;&#x3D; 105<br>0 &lt;&#x3D; height[i] &lt;&#x3D; 104</p><p>盛最多水的容器。</p><blockquote><p>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。<br>找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<br>返回容器可以储存的最大水量。<br>说明：你不能倾斜容器。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/container-with-most-water">https://leetcode.cn/problems/container-with-most-water</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>双指针，两边往中间逼近。逼近的条件是哪边的高度比较矮，就移动哪个指针。<br>存储水量 &#x3D; 宽度 * 高度 &#x3D; (right - left) * Math.min(height[left], height[right])</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> height.length - <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>res = Math.max(res, Math.min(height[left], height[right]) * (right - left));<br><span class="hljs-keyword">if</span> (height[left] &lt; height[right]) &#123;<br>left++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>right--;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">height</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> maxArea = <span class="hljs-keyword">function</span>(<span class="hljs-params">height</span>) &#123;<br><span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">let</span> left = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">let</span> right = height.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(height[left], height[right]) * (right - left));<br><span class="hljs-keyword">if</span> (height[left] &lt; height[right]) &#123;<br>left++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>right--;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 283. Move Zeroes</title>
     <link href="/posts/1531534607.html"/>
     <url>/posts/1531534607.html</url>
@@ -517,13 +544,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -544,11 +571,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -571,11 +598,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>selection sort</tag>
       
@@ -600,15 +627,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
