@@ -16,26 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given an integer array gifts denoting the number of gifts in various piles. Every second, you do the following: Choose the pile with the maximum number of gifts.If there is more than one pile">
+    <meta name="description" content="Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2558. Take Gifts From the Richest Pile">
-<meta property="og:url" content="https://shurui91.github.io/posts/3117302007.html">
+<meta property="og:title" content="[LeetCode] 720. Longest Word in Dictionary">
+<meta property="og:url" content="https://shurui91.github.io/posts/2419185708.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given an integer array gifts denoting the number of gifts in various piles. Every second, you do the following: Choose the pile with the maximum number of gifts.If there is more than one pile">
+<meta property="og:description" content="Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible a">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-28T13:05:24.000Z">
-<meta property="article:modified_time" content="2023-11-07T07:25:39.842Z">
+<meta property="article:published_time" content="2020-10-29T21:24:14.000Z">
+<meta property="article:modified_time" content="2023-11-08T08:31:31.585Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="simulation">
-<meta property="article:tag" content="heap">
+<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="string">
+<meta property="article:tag" content="sort">
+<meta property="article:tag" content="trie">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2558. Take Gifts From the Richest Pile - CNoodle</title>
+  <title>[LeetCode] 720. Longest Word in Dictionary - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2558. Take Gifts From the Richest Pile"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 720. Longest Word in Dictionary"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-28 06:05" pubdate>
-          October 28, 2023 am
+        <time datetime="2020-10-29 14:24" pubdate>
+          October 29, 2020 pm
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          3.1k words
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          16 mins
+          27 mins
         
       </span>
     
@@ -260,31 +261,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2558. Take Gifts From the Richest Pile</h1>
+            <h1 id="seo-header">[LeetCode] 720. Longest Word in Dictionary</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given an integer array gifts denoting the number of gifts in various piles. Every second, you do the following:</p>
-<p>Choose the pile with the maximum number of gifts.<br>If there is more than one pile with the maximum number of gifts, choose any.<br>Leave behind the floor of the square root of the number of gifts in the pile. Take the rest of the gifts.<br>Return the number of gifts remaining after k seconds.</p>
-<p>Example 1:<br>Input: gifts &#x3D; [25,64,9,4,100], k &#x3D; 4<br>Output: 29<br>Explanation:<br>The gifts are taken in the following way:</p>
-<ul>
-<li>In the first second, the last pile is chosen and 10 gifts are left behind.</li>
-<li>Then the second pile is chosen and 8 gifts are left behind.</li>
-<li>After that the first pile is chosen and 5 gifts are left behind.</li>
-<li>Finally, the last pile is chosen again and 3 gifts are left behind.<br>The final remaining gifts are [5,8,9,4,3], so the total number of gifts remaining is 29.</li>
-</ul>
-<p>Example 2:<br>Input: gifts &#x3D; [1,1,1,1], k &#x3D; 4<br>Output: 4<br>Explanation:<br>In this case, regardless which pile you choose, you have to leave behind 1 gift in each pile.<br>That is, you can’t take any pile with you.<br>So, the total gifts remaining are 4.</p>
-<p>Constraints:<br>1 &lt;&#x3D; gifts.length &lt;&#x3D; 103<br>1 &lt;&#x3D; gifts[i] &lt;&#x3D; 109<br>1 &lt;&#x3D; k &lt;&#x3D; 103</p>
-<p>Follow-up: Can you come up with an algorithm that is less than <code>O(n2)</code> time complexity?</p>
-<p>从数量最多的堆取走礼物。</p>
+                <p>Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words. If there is more than one possible answer, return the longest word with the smallest lexicographical order.</p>
+<p>If there is no answer, return the empty string.</p>
+<p>Example 1:<br>Input:<br>words &#x3D; [“w”,”wo”,”wor”,”worl”, “world”]<br>Output: “world”<br>Explanation:<br>The word “world” can be built one character at a time by “w”, “wo”, “wor”, and “worl”.</p>
+<p>Example 2:<br>Input:<br>words &#x3D; [“a”, “banana”, “app”, “appl”, “ap”, “apply”, “apple”]<br>Output: “apple”<br>Explanation:<br>Both “apply” and “apple” can be built from other words in the dictionary. However, “apple” is lexicographically smaller than “apply”.</p>
+<p>Note:<br>All the strings in the input will only contain lowercase letters.<br>The length of words will be in the range [1, 1000].<br>The length of words[i] will be in the range [1, 30].</p>
+<p>词典中最长的单词。</p>
 <blockquote>
-<p>给你一个整数数组 gifts ，表示各堆礼物的数量。每一秒，你需要执行以下操作：<br>选择礼物数量最多的那一堆。<br>如果不止一堆都符合礼物数量最多，从中选择任一堆即可。<br>选中的那一堆留下平方根数量的礼物（向下取整），取走其他的礼物。<br>返回在 k 秒后剩下的礼物数量。</p>
+<p>给出一个字符串数组 words 组成的一本英语词典。返回 words 中最长的一个单词，该单词是由 words 词典中其他单词逐步添加一个字母组成。<br>若其中有多个可行的答案，则返回答案中字典序最小的单词。若无答案，则返回空字符串。<br>题意是给出一个字符串数组 words 组成的一本英语词典。从中找出最长的一个单词，该单词是由 words 词典中其他单词逐步添加一个字母组成。若其中有多个可行的答案，则返回答案中字典序最小的单词。若无答案，则返回空字符串。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是最大堆。首先创建一个最大堆将每一堆礼物放进去，放进去的同时累加一下礼物的个数，记为 res。<br>接着开始从最大堆中弹出元素 top。弹出堆顶元素的时候记得要从 res 中减去 top 的平方根，然后将剩余的部分再放回最大堆，同时记得 k–。<br>注意如果遇到一堆礼物的个数 &#x3D; 1的时候，说明这一堆礼物无法再分割了，此时即可跳出 while 循环返回 res。</p>
+<h2 id="思路一，hashset"><a href="#思路一，hashset" class="headerlink" title="思路一，hashset"></a>思路一，hashset</h2><p>我们需要一个 hashset 记录单词。注意 Arrays.sort() 是可以对字母&#x2F;单词排序的，所以我们用这个函数先对 input array 进行排序，这样字典序较小的单词会靠前。此时我们再次扫描 input array，遍历每个单词，把每个单词加入一个 hashset。加入之前判断</p>
+<p>这个单词的长度是否为 1 或者 hashset 里面已经存在了这个单词除去最后一个字母的前缀（比如 abc 的话，我们去检查一下 hashset 里是否有 ab）。这两个条件只要满足一个，就可以更新 res 的长度。<br>单词长度为 1 的话，只能是有一个空的前缀，但是越晚出现的单个字母，其字典序应该更大。这也就是为什么出现单个字母我们也需要更新 res 的原因。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">pickGifts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] gifts, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        PriorityQueue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; b - a);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> g : gifts) &#123;<br>            queue.offer(g);<br>            res += g;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">kk</span> <span class="hljs-operator">=</span> k;<br>        <span class="hljs-keyword">while</span> (kk &gt; <span class="hljs-number">0</span> &amp;&amp; !queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> queue.poll();<br>            <span class="hljs-keyword">if</span> (top == <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">taken</span> <span class="hljs-operator">=</span> top - (<span class="hljs-type">int</span>) Math.sqrt(top);<br>            res -= taken;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rest</span> <span class="hljs-operator">=</span> top - taken;<br>            queue.offer(rest);<br>            kk--;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestWord</span><span class="hljs-params">(String[] words)</span> &#123;<br>		Arrays.sort(words);<br>		Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;String&gt;();<br>		<span class="hljs-type">String</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>		<span class="hljs-keyword">for</span> (String w : words) &#123;<br>			<span class="hljs-keyword">if</span> (w.length() == <span class="hljs-number">1</span> || set.contains(w.substring(<span class="hljs-number">0</span>, w.length() - <span class="hljs-number">1</span>))) &#123;<br>				res = w.length() &gt; res.length() ? w : res;<br>				set.add(w);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="思路二，字典树"><a href="#思路二，字典树" class="headerlink" title="思路二，字典树"></a>思路二，字典树</h2><p>再来是字典树 + BFS 的做法。这里我们还是自己写一个 node class 表示节点。遍历 input 数组，把每个单词都做成一个字典树的node。之后通过 BFS 的方式遍历 queue 中所有的 node，返回字典序最小的结果。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - node class</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-comment">// 字典树节点,每个节点代表一个字母</span><br>	<span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>		<span class="hljs-comment">// 该节点的下一个字母</span><br>		Node[] children = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>[<span class="hljs-number">26</span>];<br>		<span class="hljs-comment">// 如果是单词结尾，保存该单词，否则为空</span><br>		String word;<br>	&#125;<br><br>	<span class="hljs-comment">// 定义字典树根节点</span><br>	<span class="hljs-type">Node</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();<br><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestWord</span><span class="hljs-params">(String[] words)</span> &#123;<br>		<span class="hljs-comment">// 根节点默认单词为空</span><br>		root.word = <span class="hljs-string">&quot;&quot;</span>;<br>		<span class="hljs-comment">// 将每一个单词加入字典树</span><br>		<span class="hljs-keyword">for</span> (String s : words) &#123;<br>			<span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> root;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>;<br>				<span class="hljs-keyword">if</span> (node.children[c] == <span class="hljs-literal">null</span>) &#123;<br>					node.children[c] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>();<br>				&#125;<br>				node = node.children[c];<br>			&#125;<br>			<span class="hljs-comment">// 单词结尾时，将该单词保存至当前节点中</span><br>			node.word = s;<br>		&#125;<br>		<span class="hljs-comment">// bfs</span><br>		Queue&lt;Node&gt; q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>		<span class="hljs-comment">// bfs起点</span><br>		q.offer(root);<br>		<span class="hljs-comment">// 返回结果</span><br>		<span class="hljs-type">String</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>		<span class="hljs-keyword">while</span> (q.size() &gt; <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> q.size();<br>			<span class="hljs-comment">// 当前长度下字典顺序最小的单词</span><br>			<span class="hljs-type">String</span> <span class="hljs-variable">smallestValid</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>			<span class="hljs-keyword">while</span> (size &gt; <span class="hljs-number">0</span>) &#123;<br>				size--;<br>				<span class="hljs-type">Node</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> q.poll();<br>				<span class="hljs-comment">// 记录当前长度下字典顺序最小的单词</span><br>				<span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;&quot;</span>.equals(smallestValid)) &#123;<br>					smallestValid = n.word;<br>				&#125;<br>				Node[] children = n.children;<br>				<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>					<span class="hljs-comment">// 如果子节点为空，或者子节点不是单词结尾，跳过</span><br>					<span class="hljs-keyword">if</span> (children[i] == <span class="hljs-literal">null</span> || children[i].word == <span class="hljs-literal">null</span>) &#123;<br>						<span class="hljs-keyword">continue</span>;<br>					&#125;<br>					<span class="hljs-comment">// 将子节点添加到Queue中（子节点为下一个长度的单词）</span><br>					q.offer(children[i]);<br>				&#125;<br>			&#125;<br>			<span class="hljs-comment">// 当前长度遍历完之后，将字典顺序最小的一个保存至返回结果</span><br>			res = smallestValid;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-number">392.</span> <span class="hljs-variable">Is</span> <span class="hljs-variable">Subsequence</span><br><span class="hljs-number">524.</span> <span class="hljs-built_in">Longest</span> <span class="hljs-built_in">Word</span> <span class="hljs-variable">in</span> <span class="hljs-variable">Dictionary</span> <span class="hljs-variable">through</span> <span class="hljs-variable">Deleting</span><br><span class="hljs-number">720.</span> <span class="hljs-built_in">Longest</span> <span class="hljs-built_in">Word</span> <span class="hljs-variable">in</span> <span class="hljs-variable">Dictionary</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -301,11 +303,13 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
       
-        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
-        <a href="/tags/heap/" class="print-no-link">#heap</a>
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
+      
+        <a href="/tags/trie/" class="print-no-link">#trie</a>
       
     </div>
   
@@ -317,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2558. Take Gifts From the Richest Pile</div>
-      <div>https://shurui91.github.io/posts/3117302007.html</div>
+      <div>[LeetCode] 720. Longest Word in Dictionary</div>
+      <div>https://shurui91.github.io/posts/2419185708.html</div>
     </div>
     <div class="license-meta">
       
@@ -330,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 28, 2023</div>
+          <div>October 29, 2020</div>
         </div>
       
       
@@ -362,9 +366,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2455330241.html" title="[LeetCode] 2149. Rearrange Array Elements by Sign">
+                      <a href="/posts/3837729252.html" title="[LeetCode] 2460. Apply Operations to an Array">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2149. Rearrange Array Elements by Sign</span>
+                        <span class="hidden-mobile">[LeetCode] 2460. Apply Operations to an Array</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -372,8 +376,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1880376029.html" title="[LeetCode] 1921. Eliminate Maximum Number of Monsters">
-                        <span class="hidden-mobile">[LeetCode] 1921. Eliminate Maximum Number of Monsters</span>
+                      <a href="/posts/2214751183.html" title="[LeetCode] 524. Longest Word in Dictionary through Deleting">
+                        <span class="hidden-mobile">[LeetCode] 524. Longest Word in Dictionary through Deleting</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -393,8 +397,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3117302007.html';
-          this.page.identifier = '/posts/3117302007.html';
+          this.page.url = 'https://shurui91.github.io/posts/2419185708.html';
+          this.page.identifier = '/posts/2419185708.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
