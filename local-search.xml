@@ -18,9 +18,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
       <tag>counting sort</tag>
       
@@ -43,9 +43,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>graph</tag>
-      
       <tag>java</tag>
+      
+      <tag>graph</tag>
       
       <tag>dynamic programming</tag>
       
@@ -93,9 +93,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -145,9 +145,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -170,11 +170,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -197,9 +197,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -224,13 +224,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>greedy</tag>
+      <tag>java</tag>
       
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -251,13 +251,40 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
+      <tag>java</tag>
+      
       <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1244. Design A Leaderboard</title>
+    <link href="/posts/41030754.html"/>
+    <url>/posts/41030754.html</url>
+    
+    <content type="html"><![CDATA[<p>Design a Leaderboard class, which has 3 functions:</p><p>addScore(playerId, score): Update the leaderboard by adding score to the given player’s score. If there is no player with such id in the leaderboard, add him to the leaderboard with the given score.</p><p>top(K): Return the score sum of the top K players.</p><p>reset(playerId): Reset the score of the player with the given id to 0 (in other words erase it from the leaderboard). It is guaranteed that the player was added to the leaderboard before calling this function.</p><p>Initially, the leaderboard is empty.</p><p>Example 1:<br>Input:<br>[“Leaderboard”,”addScore”,”addScore”,”addScore”,”addScore”,”addScore”,”top”,”reset”,”reset”,”addScore”,”top”]<br>[[],[1,73],[2,56],[3,39],[4,51],[5,4],[1],[1],[2],[2,51],[3]]<br>Output:<br>[null,null,null,null,null,null,73,null,null,null,141]<br>Explanation:<br>Leaderboard leaderboard &#x3D; new Leaderboard ();<br>leaderboard.addScore(1,73); &#x2F;&#x2F; leaderboard &#x3D; [[1,73]];<br>leaderboard.addScore(2,56); &#x2F;&#x2F; leaderboard &#x3D; [[1,73],[2,56]];<br>leaderboard.addScore(3,39); &#x2F;&#x2F; leaderboard &#x3D; [[1,73],[2,56],[3,39]];<br>leaderboard.addScore(4,51); &#x2F;&#x2F; leaderboard &#x3D; [[1,73],[2,56],[3,39],[4,51]];<br>leaderboard.addScore(5,4); &#x2F;&#x2F; leaderboard &#x3D; [[1,73],[2,56],[3,39],[4,51],[5,4]];<br>leaderboard.top(1); &#x2F;&#x2F; returns 73;<br>leaderboard.reset(1); &#x2F;&#x2F; leaderboard &#x3D; [[2,56],[3,39],[4,51],[5,4]];<br>leaderboard.reset(2); &#x2F;&#x2F; leaderboard &#x3D; [[3,39],[4,51],[5,4]];<br>leaderboard.addScore(2,51); &#x2F;&#x2F; leaderboard &#x3D; [[2,51],[3,39],[4,51],[5,4]];<br>leaderboard.top(3); &#x2F;&#x2F; returns 141 &#x3D; 51 + 51 + 39;<br>Constraints:<br>1 &lt;&#x3D; playerId, K &lt;&#x3D; 10000<br>It’s guaranteed that K is less than or equal to the current number of players.<br>1 &lt;&#x3D; score &lt;&#x3D; 100<br>There will be at most 1000 function calls.</p><p>力扣排行榜。</p><blockquote><p>新一轮的「力扣杯」编程大赛即将启动，为了动态显示参赛者的得分数据，需要设计一个排行榜 Leaderboard。<br>请你帮忙来设计这个 Leaderboard 类，使得它有如下 3 个函数：<br>addScore(playerId, score)：假如参赛者已经在排行榜上，就给他的当前得分增加 score 点分值并更新排行。<br>假如该参赛者不在排行榜上，就把他添加到榜单上，并且将分数设置为 score。<br>top(K)：返回前 K 名参赛者的 得分总和。<br>reset(playerId)：将指定参赛者的成绩清零（换句话说，将其从排行榜中删除）。题目保证在调用此函数前，该参赛者已有成绩，并且在榜单上。<br>请注意，在初始状态下，排行榜是空的。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/design-a-leaderboard">https://leetcode-cn.com/problems/design-a-leaderboard</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h2><p>这是一道设计题。我的思路如下，我们需要一个 hashmap，一个 treemap。除了题目要求实现的函数之外，我还需要一个 helper 函数。他的作用是当某一个 player 的分数有变动的时候，我需要将对应 unique score 记录的 player 的个数做出修改。其余部分参见代码。<br>hashmap - &lt;playerId, his score&gt;<br>treemap - &lt;each unique score, how many people have this same score&gt;</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Leaderboard</span> &#123;<br><span class="hljs-comment">// &lt;playerId, score&gt;</span><br>HashMap&lt;Integer, Integer&gt; map;<br><span class="hljs-comment">// &lt;score, num of people&gt;</span><br>TreeMap&lt;Integer, Integer&gt; treemap;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Leaderboard</span><span class="hljs-params">()</span> &#123;<br>map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>treemap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addScore</span><span class="hljs-params">(<span class="hljs-type">int</span> playerId, <span class="hljs-type">int</span> score)</span> &#123;<br><span class="hljs-type">Integer</span> <span class="hljs-variable">curScore</span> <span class="hljs-operator">=</span> map.get(playerId);<br><span class="hljs-keyword">if</span> (curScore != <span class="hljs-literal">null</span>) &#123;<br>helper(curScore);<br>curScore += score;<br>map.put(playerId, curScore);<br><span class="hljs-keyword">if</span> (treemap.containsKey(curScore)) &#123;<br>treemap.put(curScore, treemap.get(curScore) + <span class="hljs-number">1</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>treemap.put(curScore, <span class="hljs-number">1</span>);<br>&#125;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>map.put(playerId, score);<br>treemap.put(score, treemap.getOrDefault(score, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>&#125;<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">top</span><span class="hljs-params">(<span class="hljs-type">int</span> K)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>Map.Entry&lt;Integer, Integer&gt; scoreEntry = treemap.lastEntry();<br><span class="hljs-keyword">while</span> (K &gt; <span class="hljs-number">0</span> &amp;&amp; scoreEntry != <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> Math.min(scoreEntry.getValue(), K);<br>sum += scoreEntry.getKey() * count;<br>scoreEntry = treemap.lowerEntry(scoreEntry.getKey());<br>K -= count;<br>&#125;<br><span class="hljs-keyword">return</span> sum;<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reset</span><span class="hljs-params">(<span class="hljs-type">int</span> playerId)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> map.get(playerId);<br>map.put(playerId, <span class="hljs-number">0</span>);<br>helper(score);<br>treemap.put(<span class="hljs-number">0</span>, treemap.getOrDefault(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>&#125;<br> <br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> score)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> treemap.get(score);<br><span class="hljs-keyword">if</span> (count &lt;= <span class="hljs-number">1</span>) &#123;<br>treemap.remove(score);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>treemap.put(score, count - <span class="hljs-number">1</span>);<br>&#125;<br>&#125;<br>&#125;<br> <br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your Leaderboard object will be instantiated and called as such:</span><br><span class="hljs-comment"> * Leaderboard obj = new Leaderboard();</span><br><span class="hljs-comment"> * obj.addScore(playerId,score);</span><br><span class="hljs-comment"> * int param_2 = obj.top(K);</span><br><span class="hljs-comment"> * obj.reset(playerId);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure><h2 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h2><p>二刷我再提供另外一种思路，需要用到 hashmap 和一个 list。同时这里我需要自己创建一个 node class，存放每个元素的 id 和 score。hashmap 存的是&lt;id, Node&gt;，list 存的是所有的 node。</p><ul><li>addScore, 如果某个 id 不存在，则创建一个新的 node，记录其 score，并分别放入 hashmap 和 list。如果某个 id 存在，则去 hashmap 中找到这个 node，累加他的 score</li><li>top，对 list 按 score 从大到小排序，然后取前 k 个元素，累加他们的 score</li><li>reset，按 playerId 去 hashmap 中找到这个对应的 node，将其 score 置为 0</li></ul><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Leaderboard</span> &#123;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br><span class="hljs-type">int</span> id;<br><span class="hljs-type">int</span> score;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Node</span><span class="hljs-params">(<span class="hljs-type">int</span> id, <span class="hljs-type">int</span> score)</span> &#123;<br><span class="hljs-built_in">this</span>.id = id;<br><span class="hljs-built_in">this</span>.score = score;<br>&#125;<br>&#125;<br>HashMap&lt;Integer, Node&gt; map;<br>List&lt;Node&gt; list;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Leaderboard</span><span class="hljs-params">()</span> &#123;<br>map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addScore</span><span class="hljs-params">(<span class="hljs-type">int</span> playerId, <span class="hljs-type">int</span> score)</span> &#123;<br><span class="hljs-keyword">if</span> (map.containsKey(playerId)) &#123;<br>map.get(playerId).score += score;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-type">Node</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(playerId, score);<br>map.put(playerId, node);<br>list.add(node);<br>&#125;<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">top</span><span class="hljs-params">(<span class="hljs-type">int</span> K)</span> &#123;<br>Collections.sort(list, (a, b) -&gt; b.score - a.score);<br><span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; Math.min(K, list.size()); i++) &#123;<br>sum += list.get(i).score;<br>&#125;<br><span class="hljs-keyword">return</span> sum;<br>&#125;<br> <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reset</span><span class="hljs-params">(<span class="hljs-type">int</span> playerId)</span> &#123;<br>map.get(playerId).score = <span class="hljs-number">0</span>;<br>&#125;<br>&#125;<br> <br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your Leaderboard object will be instantiated and called as such:</span><br><span class="hljs-comment"> * Leaderboard obj = new Leaderboard();</span><br><span class="hljs-comment"> * obj.addScore(playerId,score);</span><br><span class="hljs-comment"> * int param_2 = obj.top(K);</span><br><span class="hljs-comment"> * obj.reset(playerId);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>design</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -278,9 +305,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>graph</tag>
-      
       <tag>java</tag>
+      
+      <tag>graph</tag>
       
       <tag>greedy</tag>
       
@@ -305,13 +332,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
       
-      <tag>string</tag>
+      <tag>java</tag>
       
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
       <tag>trie</tag>
       
@@ -334,11 +361,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -361,15 +388,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
+      <tag>java</tag>
       
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -415,9 +442,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -467,11 +494,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>dynamic programming</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -496,11 +523,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -546,9 +573,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -573,13 +600,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -621,13 +648,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -648,13 +675,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -675,11 +702,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -702,9 +729,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -731,15 +758,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
-      
-      <tag>javascript</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
