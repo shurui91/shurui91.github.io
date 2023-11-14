@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2785. Sort Vowels in a String</title>
+    <link href="/posts/3042380718.html"/>
+    <url>/posts/3042380718.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a 0-indexed string s, permute s to get a new string t such that:<br>All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that s[i] is a consonant, then t[i] &#x3D; s[i].<br>The vowels must be sorted in the nondecreasing order of their ASCII values. More formally, for pairs of indices i, j with 0 &lt;&#x3D; i &lt; j &lt; s.length such that s[i] and s[j] are vowels, then t[i] must not have a higher ASCII value than t[j].<br>Return the resulting string.</p><p>The vowels are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’, and they can appear in lowercase or uppercase. Consonants comprise all letters that are not vowels.</p><p>Example 1:<br>Input: s &#x3D; “lEetcOde”<br>Output: “lEOtcede”<br>Explanation: ‘E’, ‘O’, and ‘e’ are the vowels in s; ‘l’, ‘t’, ‘c’, and ‘d’ are all consonants. The vowels are sorted according to their ASCII values, and the consonants remain in the same places.</p><p>Example 2:<br>Input: s &#x3D; “lYmpH”<br>Output: “lYmpH”<br>Explanation: There are no vowels in s (all characters in s are consonants), so we return “lYmpH”.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists only of letters of the English alphabet in uppercase and lowercase.</p><p>将字符串中的元音字母排序。</p><blockquote><p>给你一个下标从 0 开始的字符串 s ，将 s 中的元素重新 排列 得到新的字符串 t ，它满足：<br>所有辅音字母都在原来的位置上。更正式的，如果满足 0 &lt;&#x3D; i &lt; s.length 的下标 i 处的 s[i] 是个辅音字母，那么 t[i] &#x3D; s[i] 。<br>元音字母都必须以他们的 ASCII 值按 非递减 顺序排列。更正式的，对于满足 0 &lt;&#x3D; i &lt; j &lt; s.length 的下标 i 和 j  ，如果 s[i] 和 s[j] 都是元音字母，那么 t[i] 的 ASCII 值不能大于 t[j] 的 ASCII 值。<br>请你返回结果字母串。<br>元音字母为 ‘a’ ，’e’ ，’i’ ，’o’ 和 ‘u’ ，它们可能是小写字母也可能是大写字母，辅音字母是除了这 5 个字母以外的所有字母。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路就是排序，但是这道题我们只对元音字母排序。具体做法我们需要遍历 input 字符串两次。第一次遍历，我们可以用一个 list 把所有的元音字母记下来，然后对这个 list 按字典序排序，这样 list 中字典序较大的字母在前。第二次遍历，如果遇到的 index 原本是一个辅音字母，则直接加入 stringbuilder，如果遇到的 index 原本是元音字母，则去 list 中拿一个字母出来放到这个位置上。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sortVowels</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-comment">// 把元音字母的index记录下来</span><br>        List&lt;Character&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;aeiouAEIOU&quot;</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) != -<span class="hljs-number">1</span>) &#123;<br>                list.add(letter);<br>            &#125;<br>        &#125;<br><br>        Collections.sort(list, (a, b) -&gt; a.compareTo(b));<br>        <span class="hljs-comment">// System.out.println(list);</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) == -<span class="hljs-number">1</span>) &#123;<br>                sb.append(letter);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                sb.append(list.get(j++));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>counting sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance</title>
     <link href="/posts/3321093076.html"/>
     <url>/posts/3321093076.html</url>
@@ -16,9 +43,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>graph</tag>
+      
+      <tag>java</tag>
       
       <tag>dynamic programming</tag>
       
@@ -118,9 +145,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>simulation</tag>
       
@@ -143,9 +170,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>two pointer</tag>
       
@@ -170,9 +197,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>simulation</tag>
       
@@ -197,9 +224,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>greedy</tag>
       
@@ -224,9 +251,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>two pointer</tag>
       
@@ -251,9 +278,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>graph</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -307,9 +334,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>two pointer</tag>
       
@@ -334,9 +361,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>two pointer</tag>
       
@@ -388,9 +415,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -442,9 +469,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>dynamic programming</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -469,9 +496,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>two pointer</tag>
       
@@ -546,9 +573,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -594,9 +621,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -621,9 +648,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -675,9 +702,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
@@ -704,9 +731,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>java</tag>
+      
+      <tag>array</tag>
       
       <tag>javascript</tag>
       
