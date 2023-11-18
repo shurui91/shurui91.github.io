@@ -293,6 +293,35 @@
   
   
   <entry>
+    <title>[LeetCode] 1838. Frequency of the Most Frequent Element</title>
+    <link href="/posts/2171882472.html"/>
+    <url>/posts/2171882472.html</url>
+    
+    <content type="html"><![CDATA[<p>The frequency of an element is the number of times it occurs in an array.</p><p>You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the element at that index by 1.</p><p>Return the maximum possible frequency of an element after performing at most k operations.</p><p>Example 1:<br>Input: nums &#x3D; [1,2,4], k &#x3D; 5<br>Output: 3<br>Explanation: Increment the first element three times and the second element two times to make nums &#x3D; [4,4,4].<br>4 has a frequency of 3.</p><p>Example 2:<br>Input: nums &#x3D; [1,4,8,13], k &#x3D; 5<br>Output: 2<br>Explanation: There are multiple optimal solutions:</p><ul><li>Increment the first element three times to make nums &#x3D; [4,4,8,13]. 4 has a frequency of 2.</li><li>Increment the second element four times to make nums &#x3D; [1,8,8,13]. 8 has a frequency of 2.</li><li>Increment the third element five times to make nums &#x3D; [1,4,13,13]. 13 has a frequency of 2.</li></ul><p>Example 3:<br>Input: nums &#x3D; [3,9,6], k &#x3D; 2<br>Output: 1</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p><p>最高频元素的频数。</p><blockquote><p>元素的 频数 是该元素在一个数组中出现的次数。<br>给你一个整数数组 nums 和一个整数 k 。在一步操作中，你可以选择 nums 的一个下标，并将该下标对应元素的值增加 1 。<br>执行最多 k 次操作后，返回数组中最高频元素的 最大可能频数。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element">https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题我暂时提供一个滑动窗口的思路，不太好想。注意题目的解释有一点问题，不是只能对着一个元素做加一操作，而是你可以找若干个元素，对这若干个元素分别做加一操作，做 k 次操作。这些元素中有的可以做不止一次操作，只要全局操作次数为 k 即可。但是对哪些元素做加一操作，这就需要用到滑动窗口了。</p><p>首先我们需要对 input 数组排序，之后还是用经典的滑动窗口模板，给出 start 和 end 两个指针。对于 end 指针指向的元素 nums[end]，我们可以把它视为一个 target number，意思是我们试图把其他小于 nums[end] 的元素都通过加一操作变为 nums[end]，从而使得 nums[end] 是出现次数最多的元素。对于 start 和 end 指针夹住的这一段元素，他们的加和很好算；但是如果他们的加和 sum + k 次操作之后的和大于这一段计划中的和的话，则需要移动 start 指针缩短窗口的距离。通过这个方法我们可以算出符合条件的最大的子数组的长度。</p><p>这一段计划中的和应该是<code>出现次数最多的元素 * 个数 = nums[end] * (end - start)</code>。这里 end - start 这个范围不一定准，取决于滑动窗口的代码如何写。</p><p>最后注意数据范围，计算 sum 的时候要用 long 型。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxFrequency</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>Arrays.sort(nums);<br><span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>sum += nums[end];<br><span class="hljs-keyword">while</span> (sum + k &lt; (<span class="hljs-type">long</span>) nums[end] * (end - start + <span class="hljs-number">1</span>)) &#123;<br>sum -= nums[start];<br>start++;<br>&#125;<br>res = Math.max(res, end - start + <span class="hljs-number">1</span>);<br>end++;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 765. Couples Holding Hands</title>
     <link href="/posts/3447756879.html"/>
     <url>/posts/3447756879.html</url>
