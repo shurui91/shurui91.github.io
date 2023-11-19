@@ -16,22 +16,24 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。 如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，">
+    <meta name="description" content="Design a hit counter which counts the number of hits received in the past 5 minutes. Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 题目总结">
-<meta property="og:url" content="https://shurui91.github.io/posts/939082724.html">
+<meta property="og:title" content="[LeetCode] 362. Design Hit Counter">
+<meta property="og:url" content="https://shurui91.github.io/posts/3607955859.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。 如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，">
+<meta property="og:description" content="Design a hit counter which counts the number of hits received in the past 5 minutes. Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made t">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-18T16:12:48.000Z">
-<meta property="article:modified_time" content="2023-11-08T03:46:49.206Z">
+<meta property="article:published_time" content="2020-04-14T11:11:47.000Z">
+<meta property="article:modified_time" content="2023-11-19T16:03:28.506Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="design">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LeetCode 题目总结 - CNoodle</title>
+  <title>[LeetCode] 362. Design Hit Counter - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LeetCode 题目总结"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 362. Design Hit Counter"></span>
           
         </div>
 
@@ -196,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-18 09:12" pubdate>
-          March 18, 2020 am
+        <time datetime="2020-04-14 04:11" pubdate>
+          April 14, 2020 am
         </time>
       </span>
     
@@ -208,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          2.5k words
         
       </span>
     
@@ -219,7 +221,7 @@
         
         
         
-          13 mins
+          21 mins
         
       </span>
     
@@ -256,56 +258,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LeetCode 题目总结</h1>
+            <h1 id="seo-header">[LeetCode] 362. Design Hit Counter</h1>
             
             
               <div class="markdown-body">
                 
-                <p>本博客不定期更新 LeetCode 题目总结，所有题目使用 Java 实现，小部分题目也提供 JavaScript 代码。我不追求一行 AC 但是我追求一题多解，比较常规的思路，解释清楚复杂度，代码可读性强。欢迎留言和评论，共同进步。这本是我自己用来复习的笔记，如果也能帮到你，那也是我的福报。</p>
-<p>如果你想按类型刷题，可以参考我的标签。我做出的分类比 LC 官方的更细一些，比如我有如下展示的这些类型，其中有一些类型在 2021 年 6 月以前官方没有收录，有的按照题设分类，有的按照思路&#x2F;解法分类。同时有一些题目的解法或者思想很类似的，我也会以相关题目的形式列在文章的最底部。对于每一种类型的题，你可以基本按照题号从小到大开始刷，比较小的题号（尤其前 400）都是经典题，一般直接问算法，比较大的题号往往是前 400 题中某个题目的 followup 或变形，如果你看懂题目要考什么，其实涉及的算法在前 400 题应该都有涉及。题是刷不完的，只有总结反思才会有提高。</p>
-<ul>
-<li>flood fill 岛屿类 - 往往是通过 BFS&#x2F;DFS 从一个点开始遍历整个二维数组，根据题意找岛的个数&#x2F;面积或者找一个点与点之间的距离，一个走到某个坐标上的步数&#x2F;时间</li>
-<li>matrix 矩阵类，跟岛屿类型的题很接近，但是主要考点是二维数组的非常规遍历，翻转。官方把岛屿类的题也归类到 matrix 一类了，我这里做了一些区分</li>
-<li>monotonic stack 单调栈 - 不容易想到但是的确能解决问题的一种思路，如果不用单调栈，暴力解基本是 O(n^2) 级别的</li>
-<li>two pointer 双指针，包括很多可以用双指针做但是没有标注成双指针类型的题</li>
-<li>prefix sum 前缀和</li>
-<li>sliding window 滑动窗口</li>
-<li>sliding window with fixed size 固定尺寸的滑动窗口</li>
-<li>palindrome 回文 - 也是双指针的一个子类，两边往中间逼近</li>
-<li>line sweep 扫描线&#x2F;差分数组 - 这一类的题其实也分为两个子类，一类是类似会议室那种，一类是合并子区间那种</li>
-<li>counting sort 计数排序</li>
-<li>bucket sort 桶排序</li>
-<li>Longest Increasing Subsequence (LIS) 最长递增子序列<ul>
-<li>这个类型的题往往跟 DP 有关</li>
-</ul>
-</li>
-<li>Longest Common Subsequence (LCS) 最长相同子序列，经典题有<ul>
-<li>Edit Distance</li>
-<li>Longest Common Subsequence</li>
-</ul>
-</li>
-<li>two sum 两数之和 - 一些算是 two sum 的 followup 题</li>
-<li>MOD - 结果非常大，需要取模的题。如果需要优化，大多涉及到二分</li>
-<li>binary search 二分法<ul>
-<li>一个很好的二分法入门</li>
-<li>我总结的三个二分法模板及其区别</li>
-</ul>
-</li>
-<li>binary search on answer 在答案上二分<ul>
-<li>也是二分的一类题，一般不是直接在 input 数组上做二分</li>
-</ul>
-</li>
-<li>Dijkstra 迪杰斯特拉算法<ul>
-<li>使用类似广度优先搜索的方法解决图的单源最短路径问题，一般会涉及有向和有权的图</li>
-</ul>
-</li>
-<li>graph 图论 - 包括很多 input signature 给的是树但是实际是需要自己把图或邻接表建立起来的题，和官方压根没有给出 graph 这个 tag 的题（比如1192题，2021年6月这个题官方加了tag了）</li>
-<li>union find - 并查集 - 解决一些 BFS 做会复杂度高或 DFS 做会 stack overflow 的图论的题，比如如果数据是以数据流的形式给出的，BFS 的复杂度就会很高。并查集有时候在 union 的过程中就能找到答案。</li>
-<li>knapsack 背包问题 - 动态规划中的一个子类</li>
-<li>memorization - 记忆化（递归）- 动态规划中的一个子类</li>
-<li>simulation - 模拟，一般不涉及算法，就是根据题意实现</li>
-</ul>
-<p>发现博客园没有很好的文章目录，我做了一个 <a target="_blank" rel="noopener" href="https://docs.qq.com/sheet/DVnNKeUNIaEJzSmtU?tab=bb08j2">腾讯文档</a> 记录总结写过题解的题目并附上链接。</p>
+                <p>Design a hit counter which counts the number of hits received in the past 5 minutes.</p>
+<p>Each function accepts a timestamp parameter (in seconds granularity) and you may assume that calls are being made to the system in chronological order (ie, the timestamp is monotonically increasing). You may assume that the earliest timestamp starts at 1.</p>
+<p>It is possible that several hits arrive roughly at the same time.</p>
+<p>Example:<br>HitCounter counter &#x3D; new HitCounter();</p>
+<p>&#x2F;&#x2F; hit at timestamp 1.<br>counter.hit(1);</p>
+<p>&#x2F;&#x2F; hit at timestamp 2.<br>counter.hit(2);</p>
+<p>&#x2F;&#x2F; hit at timestamp 3.<br>counter.hit(3);</p>
+<p>&#x2F;&#x2F; get hits at timestamp 4, should return 3.<br>counter.getHits(4);</p>
+<p>&#x2F;&#x2F; hit at timestamp 300.<br>counter.hit(300);</p>
+<p>&#x2F;&#x2F; get hits at timestamp 300, should return 4.<br>counter.getHits(300);</p>
+<p>&#x2F;&#x2F; get hits at timestamp 301, should return 3.<br>counter.getHits(301);<br>Follow up:<br>What if the number of hits per second could be very large? Does your design scale?</p>
+<p>敲击计数器。</p>
+<blockquote>
+<p>设计一个敲击计数器，使它可以统计在过去5分钟内被敲击次数。每个函数会接收一个时间戳参数（以秒为单位），你可以假设最早的时间戳从1开始，且都是按照时间顺序对系统进行调用（即时间戳是单调递增）。在同一时刻有可能会有多次敲击。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>两种思路。</p>
+<ol>
+<li>用一个 queue 记录每次敲击的 timestamp，当试图访问 getHits 函数的时候，查看 queue 头部的元素的 timestamp 和当前 timestamp 是否差值大于 300，若大于则说明无效了，需要弹出 queue 中所有跟目前 timestamp 差值大于 300 的元素，queue 的 size 则是过去五分钟内的敲击次数。</li>
+</ol>
+<p>这个做法在遇到一些极端的 case 的时候会有问题，比如 time &#x3D; 1 的时候我敲击了一次，但是 time &#x3D; 5 的时候我敲击了一万次，time &#x3D; 6 的时候我又敲击了两万次。这样重复多次，如果在 300 秒以内有太多上万次的敲击，queue 可能会存不下。所以参见方法二的优化。</p>
+<ol start="2">
+<li>用两个数组 times 和 hits，分别记录敲击的时间和次数。敲击的时候，先用 <code>timestamp % 300</code>，这样我们就可以直接跳过 <code>timestamp - 300</code> 甚至更早于这个时间点的敲击了。如果 timestamp 做模运算的那个位置上有值但是不等于当前的 timestamp，说明这个位置上的 timestamp 是 五分钟以前甚至更早的，此时我们可以直接把这个位置的数字重置为 1。若小于300秒则直接在hits同样位置++，说明这依然是五分钟以内的敲击，同时在times数组内记录最新的timestamp。统计敲击次数的时候，是遍历hits数组，若hits[i]不为0，则判断当前i位置上times和timestamp的差值是否又大于300，若大于则不能加入结果集。</li>
+</ol>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(300) - O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">HitCounter</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] hits;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] times;<br><br>	<span class="hljs-comment">/** Initialize your data structure here. */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-title function_">HitCounter</span><span class="hljs-params">()</span> &#123;<br>		hits = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">300</span>];<br>		times = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">300</span>];<br>	&#125;<br><br>	<span class="hljs-comment">/** Record a hit.</span><br><span class="hljs-comment">	    <span class="hljs-doctag">@param</span> timestamp - The current timestamp (in seconds granularity). */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">hit</span><span class="hljs-params">(<span class="hljs-type">int</span> timestamp)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> timestamp % <span class="hljs-number">300</span>;<br>		<span class="hljs-keyword">if</span> (times[index] != timestamp) &#123;<br>			times[index] = timestamp;<br>			hits[index] = <span class="hljs-number">1</span>;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			hits[index]++;<br>		&#125;<br>	&#125;<br><br>	<span class="hljs-comment">/** Return the number of hits in the past 5 minutes.</span><br><span class="hljs-comment">	    <span class="hljs-doctag">@param</span> timestamp - The current timestamp (in seconds granularity). */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getHits</span><span class="hljs-params">(<span class="hljs-type">int</span> timestamp)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">total</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span>; i++) &#123;<br>			<span class="hljs-keyword">if</span> (timestamp - times[i] &lt; <span class="hljs-number">300</span>) &#123;<br>				total += hits[i];<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> total;<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your HitCounter object will be instantiated and called as such:</span><br><span class="hljs-comment"> * HitCounter obj = new HitCounter();</span><br><span class="hljs-comment"> * obj.hit(timestamp);</span><br><span class="hljs-comment"> * int param_2 = obj.getHits(timestamp);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -320,6 +303,10 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/java/" class="print-no-link">#java</a>
+      
+        <a href="/tags/design/" class="print-no-link">#design</a>
+      
     </div>
   
 </div>
@@ -330,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LeetCode 题目总结</div>
-      <div>https://shurui91.github.io/posts/939082724.html</div>
+      <div>[LeetCode] 362. Design Hit Counter</div>
+      <div>https://shurui91.github.io/posts/3607955859.html</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 18, 2020</div>
+          <div>April 14, 2020</div>
         </div>
       
       
@@ -375,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3607955859.html" title="[LeetCode] 362. Design Hit Counter">
+                      <a href="/posts/1313962781.html" title="[LeetCode] 18. 4Sum">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 362. Design Hit Counter</span>
+                        <span class="hidden-mobile">[LeetCode] 18. 4Sum</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -385,8 +372,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/308930466.html" title="[LeetCode] 11. Container With Most Water">
-                        <span class="hidden-mobile">[LeetCode] 11. Container With Most Water</span>
+                      <a href="/posts/939082724.html" title="LeetCode 题目总结">
+                        <span class="hidden-mobile">LeetCode 题目总结</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -406,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/939082724.html';
-          this.page.identifier = '/posts/939082724.html';
+          this.page.url = 'https://shurui91.github.io/posts/3607955859.html';
+          this.page.identifier = '/posts/3607955859.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
