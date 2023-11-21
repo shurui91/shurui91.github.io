@@ -120,9 +120,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -199,9 +199,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -280,11 +280,40 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
       
+      <tag>java</tag>
+      
       <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1814. Count Nice Pairs in an Array</title>
+    <link href="/posts/861179681.html"/>
+    <url>/posts/861179681.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an array nums that consists of non-negative integers. Let us define rev(x) as the reverse of the non-negative integer x. For example, rev(123) &#x3D; 321, and rev(120) &#x3D; 21. A pair of indices (i, j) is nice if it satisfies all of the following conditions:</p><p>0 &lt;&#x3D; i &lt; j &lt; nums.length<br>nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])<br>Return the number of nice pairs of indices. Since that number can be too large, return it modulo 109 + 7.</p><p>Example 1:<br>Input: nums &#x3D; [42,11,1,97]<br>Output: 2<br>Explanation: The two pairs are:</p><ul><li>(0,3) : 42 + rev(97) &#x3D; 42 + 79 &#x3D; 121, 97 + rev(42) &#x3D; 97 + 24 &#x3D; 121.</li><li>(1,2) : 11 + rev(1) &#x3D; 11 + 1 &#x3D; 12, 1 + rev(11) &#x3D; 1 + 11 &#x3D; 12.</li></ul><p>Example 2:<br>Input: nums &#x3D; [13,10,35,24,76]<br>Output: 4</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 109</p><p>统计一个数组中好对子的数目。</p><blockquote>给你一个数组 nums ，数组中只包含非负整数。定义 rev(x) 的值为将整数 x 各个数字位反转得到的结果。比方说 rev(123) = 321 ， rev(120) = 21 。我们称满足下面条件的下标对 (i, j) 是 好的 ：<p>0 &lt;&#x3D; i &lt; j &lt; nums.length<br>nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])<br>请你返回好下标对的数目。由于结果可能会很大，请将结果对 109 + 7 取余 后返回。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/count-nice-pairs-in-an-array">https://leetcode.cn/problems/count-nice-pairs-in-an-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题思路类似 two sum。注意题目描述，题目让你找的是有多少对下标（i, j）满足 nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])，其中 rev() 函数是把这个数字翻转过来。</p><p>这个题目很像 two sum，也是找两数之和，只不过等号右边也是两数之和。我们可以把这个等式转换成 nums[i] - rev(nums[i]) &#x3D;&#x3D; nums[j] - rev(nums[j])，这样我们找的就是是否存在两个不同的下标，对应的两个数字的 nums[i] - rev(nums[i]) 相等。这里为了保险起见，计算结果我用了 long 型避免溢出。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n * logC) - rev()函数的复杂度是 logC<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countNicePairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>) + <span class="hljs-number">7</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rev</span> <span class="hljs-operator">=</span> helper(num);<br>            <span class="hljs-keyword">if</span> (map.containsKey(num - rev)) &#123;<br>                count += map.get(num - rev);<br>            &#125;<br>            map.put(num - rev, map.getOrDefault(num - rev, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>) (count % MOD);<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (num != <span class="hljs-number">0</span>) &#123;<br>            res = res * <span class="hljs-number">10</span> + num % <span class="hljs-number">10</span>;<br>            num /= <span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>two sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -305,9 +334,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -388,9 +417,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -419,9 +448,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -446,9 +475,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -550,9 +579,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>dynamic programming</tag>
       
@@ -581,9 +610,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -629,9 +658,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -658,11 +687,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>two sum</tag>
       
@@ -729,11 +758,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -756,11 +785,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -781,11 +810,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -839,13 +868,13 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
