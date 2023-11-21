@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</title>
+    <link href="/posts/3172184168.html"/>
+    <url>/posts/3172184168.html</url>
+    
+    <content type="html"><![CDATA[<p>A string s is called good if there are no two different characters in s that have the same frequency.</p><p>Given a string s, return the minimum number of characters you need to delete to make s good.</p><p>The frequency of a character in a string is the number of times it appears in the string. For example, in the string “aab”, the frequency of ‘a’ is 2, while the frequency of ‘b’ is 1.</p><p>Example 1:<br>Input: s &#x3D; “aab”<br>Output: 0<br>Explanation: s is already good.</p><p>Example 2:<br>Input: s &#x3D; “aaabbbcc”<br>Output: 2<br>Explanation: You can delete two ‘b’s resulting in the good string “aaabcc”.<br>Another way it to delete one ‘b’ and one ‘c’ resulting in the good string “aaabbc”.</p><p>Example 3:<br>Input: s &#x3D; “ceabaacb”<br>Output: 2<br>Explanation: You can delete both ‘c’s resulting in the good string “eabaab”.<br>Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s contains only lowercase English letters.</p><p>字符频次唯一的最小删除次数。</p><blockquote><p>如果字符串 s 中 不存在 两个不同字符 频次 相同的情况，就称 s 是 优质字符串 。<br>给你一个字符串 s，返回使 s 成为 优质字符串 需要删除的 最小 字符数。<br>字符串中字符的 频次 是该字符在字符串中的出现次数。例如，在字符串 “aab” 中，’a’ 的频次是 2，而 ‘b’ 的频次是 1 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历数组的时候，用一个长度为26的 <code>int[] map</code> 数组记录 input 字符串中每个不同字母的出现次数。</p><p>接着我们再创建一个 hashset，去遍历这个长度为 26 的 int 数组，对于当前字母的出现次数 map[i]，如果他在 hashset 中出现过，那么他就不是一个 unique 的出现次数，那么我们就把这个出现次数减一，直到他变成一个 unique 的出现次数，再加入 hashset。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletions</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] &gt; <span class="hljs-number">0</span> &amp;&amp; set.contains(map[i])) &#123;<br>                map[i]--;<br>                count++;<br>            &#125;<br>            set.add(map[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</title>
     <link href="/posts/1449407836.html"/>
     <url>/posts/1449407836.html</url>
