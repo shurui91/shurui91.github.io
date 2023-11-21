@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a 0-indexed string s, permute s to get a new string t such that:All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that">
+    <meta name="description" content="You are given a 0-indexed integer array nums. The array nums is beautiful if:nums.length is even.nums[i] !&#x3D; nums[i + 1] for all i % 2 &#x3D;&#x3D; 0.Note that an empty array is considered beautif">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2785. Sort Vowels in a String">
-<meta property="og:url" content="https://shurui91.github.io/posts/3042380718.html">
+<meta property="og:title" content="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
+<meta property="og:url" content="https://shurui91.github.io/posts/1449407836.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a 0-indexed string s, permute s to get a new string t such that:All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that">
+<meta property="og:description" content="You are given a 0-indexed integer array nums. The array nums is beautiful if:nums.length is even.nums[i] !&#x3D; nums[i + 1] for all i % 2 &#x3D;&#x3D; 0.Note that an empty array is considered beautif">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-14T02:38:57.000Z">
-<meta property="article:modified_time" content="2023-11-14T02:40:34.571Z">
+<meta property="article:published_time" content="2023-11-21T19:17:44.000Z">
+<meta property="article:modified_time" content="2023-11-21T20:39:24.275Z">
 <meta property="article:author" content="Aaron Liu">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="sort">
-<meta property="article:tag" content="string">
-<meta property="article:tag" content="counting sort">
+<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="stack">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2785. Sort Vowels in a String - CNoodle</title>
+  <title>[LeetCode] 2216. Minimum Deletions to Make Array Beautiful - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2785. Sort Vowels in a String"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-13 18:38" pubdate>
-          November 13, 2023 pm
+        <time datetime="2023-11-21 11:17" pubdate>
+          November 21, 2023 am
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          1.9k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          19 mins
+          16 mins
         
       </span>
     
@@ -260,24 +260,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2785. Sort Vowels in a String</h1>
+            <h1 id="seo-header">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a 0-indexed string s, permute s to get a new string t such that:<br>All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that s[i] is a consonant, then t[i] &#x3D; s[i].<br>The vowels must be sorted in the nondecreasing order of their ASCII values. More formally, for pairs of indices i, j with 0 &lt;&#x3D; i &lt; j &lt; s.length such that s[i] and s[j] are vowels, then t[i] must not have a higher ASCII value than t[j].<br>Return the resulting string.</p>
-<p>The vowels are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’, and they can appear in lowercase or uppercase. Consonants comprise all letters that are not vowels.</p>
-<p>Example 1:<br>Input: s &#x3D; “lEetcOde”<br>Output: “lEOtcede”<br>Explanation: ‘E’, ‘O’, and ‘e’ are the vowels in s; ‘l’, ‘t’, ‘c’, and ‘d’ are all consonants. The vowels are sorted according to their ASCII values, and the consonants remain in the same places.</p>
-<p>Example 2:<br>Input: s &#x3D; “lYmpH”<br>Output: “lYmpH”<br>Explanation: There are no vowels in s (all characters in s are consonants), so we return “lYmpH”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists only of letters of the English alphabet in uppercase and lowercase.</p>
-<p>将字符串中的元音字母排序。</p>
+                <p>You are given a 0-indexed integer array nums. The array nums is beautiful if:<br>nums.length is even.<br>nums[i] !&#x3D; nums[i + 1] for all i % 2 &#x3D;&#x3D; 0.<br>Note that an empty array is considered beautiful.</p>
+<p>You can delete any number of elements from nums. When you delete an element, all the elements to the right of the deleted element will be shifted one unit to the left to fill the gap created and all the elements to the left of the deleted element will remain unchanged.</p>
+<p>Return the minimum number of elements to delete from nums to make it beautiful.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,1,2,3,5]<br>Output: 1<br>Explanation: You can delete either nums[0] or nums[1] to make nums &#x3D; [1,2,3,5] which is beautiful. It can be proven you need at least 1 deletion to make nums beautiful.</p>
+<p>Example 2:<br>Input: nums &#x3D; [1,1,2,2,3,3]<br>Output: 2<br>Explanation: You can delete nums[0] and nums[5] to make nums &#x3D; [1,2,2,3] which is beautiful. It can be proven you need at least 2 deletions to make nums beautiful.</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 105</p>
+<p>美化数组的最少删除数。</p>
 <blockquote>
-<p>给你一个下标从 0 开始的字符串 s ，将 s 中的元素重新 排列 得到新的字符串 t ，它满足：<br>所有辅音字母都在原来的位置上。更正式的，如果满足 0 &lt;&#x3D; i &lt; s.length 的下标 i 处的 s[i] 是个辅音字母，那么 t[i] &#x3D; s[i] 。<br>元音字母都必须以他们的 ASCII 值按 非递减 顺序排列。更正式的，对于满足 0 &lt;&#x3D; i &lt; j &lt; s.length 的下标 i 和 j  ，如果 s[i] 和 s[j] 都是元音字母，那么 t[i] 的 ASCII 值不能大于 t[j] 的 ASCII 值。<br>请你返回结果字母串。<br>元音字母为 ‘a’ ，’e’ ，’i’ ，’o’ 和 ‘u’ ，它们可能是小写字母也可能是大写字母，辅音字母是除了这 5 个字母以外的所有字母。</p>
+<p>给你一个下标从 0 开始的整数数组 nums ，如果满足下述条件，则认为数组 nums 是一个 美丽数组 ：<br>nums.length 为偶数<br>对所有满足 i % 2 &#x3D;&#x3D; 0 的下标 i ，nums[i] !&#x3D; nums[i + 1] 均成立<br>注意，空数组同样认为是美丽数组。<br>你可以从 nums 中删除任意数量的元素。当你删除一个元素时，被删除元素右侧的所有元素将会向左移动一个单位以填补空缺，而左侧的元素将会保持 不变 。<br>返回使 nums 变为美丽数组所需删除的 最少 元素数目。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路就是排序，但是这道题我们只对元音字母排序。具体做法我们需要遍历 input 字符串两次。第一次遍历，我们可以用一个 list 把所有的元音字母记下来，然后对这个 list 按字典序排序，这样 list 中字典序较大的字母在前。第二次遍历，如果遇到的 index 原本是一个辅音字母，则直接加入 stringbuilder，如果遇到的 index 原本是元音字母，则去 list 中拿一个字母出来放到这个位置上。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sortVowels</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-comment">// 把元音字母的index记录下来</span><br>        List&lt;Character&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;aeiouAEIOU&quot;</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) != -<span class="hljs-number">1</span>) &#123;<br>                list.add(letter);<br>            &#125;<br>        &#125;<br><br>        Collections.sort(list, (a, b) -&gt; a.compareTo(b));<br>        <span class="hljs-comment">// System.out.println(list);</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) == -<span class="hljs-number">1</span>) &#123;<br>                sb.append(letter);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                sb.append(list.get(j++));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我参考了<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-deletions-to-make-array-beautiful/solutions/2530304/mei-hua-shu-zu-de-zui-shao-shan-chu-shu-qx4af/?envType=daily-question&envId=2023-11-21">这个帖子</a>。<br>对应题目的要求</p>
+<ul>
+<li><p>对所有满足 i % 2 &#x3D;&#x3D; 0 的下标 i ，nums[i] !&#x3D; nums[i + 1] 均成立<br>这里我需要一个 boolean 变量 <code>even</code> 记录目前遍历到的下标是奇数还是偶数。如果当前的 i 是奇数，可以不处理；如果当前的 i 是偶数且 nums[i] &#x3D;&#x3D; nums[i + 1]，我们一定要删除一个，但是无所谓删除 nums[i] 还是 nums[i + 1]，这里我们只要记录删除了一个，即 count++ 就好。因为无论删除哪个，之后的所有元素的下标都往左移动一步，比如 i + 2 变成 i + 1，i + 3 变成 i + 2 等等。<br>所以在遍历的过程中我们一直需要去追踪当前的 i 到底是奇数还是偶数以判断当 nums[i] &#x3D;&#x3D; nums[i + 1] 的时候要不要删除元素。</p>
+</li>
+<li><p>nums.length 为偶数<br>满足第一个条件之后我们最后判断数组长度 n - 要删除的元素个数 count 的奇偶性，如果是奇数，则再删除一个元素即可</p>
+</li>
+</ul>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletion</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>		<span class="hljs-type">boolean</span> <span class="hljs-variable">even</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i + <span class="hljs-number">1</span> &lt; n; i++) &#123;<br>			<span class="hljs-keyword">if</span> (nums[i] == nums[i + <span class="hljs-number">1</span>] &amp;&amp; even) &#123;<br>				count++;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				even = !even;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">if</span> ((n - count) % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>			count++;<br>		&#125;<br>		<span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -289,15 +296,15 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/LeetCode/" class="print-no-link">#LeetCode</a>
       
-        <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
+        <a href="/tags/stack/" class="print-no-link">#stack</a>
       
     </div>
   
@@ -309,8 +316,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2785. Sort Vowels in a String</div>
-      <div>https://shurui91.github.io/posts/3042380718.html</div>
+      <div>[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</div>
+      <div>https://shurui91.github.io/posts/1449407836.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +329,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 13, 2023</div>
+          <div>November 21, 2023</div>
         </div>
       
       
@@ -354,18 +361,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3321093076.html" title="[LeetCode] 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance">
-                        <span class="hidden-mobile">[LeetCode] 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance</span>
+                      <a href="/posts/3042380718.html" title="[LeetCode] 2785. Sort Vowels in a String">
+                        <span class="hidden-mobile">[LeetCode] 2785. Sort Vowels in a String</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +386,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3042380718.html';
-          this.page.identifier = '/posts/3042380718.html';
+          this.page.url = 'https://shurui91.github.io/posts/1449407836.html';
+          this.page.identifier = '/posts/1449407836.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
