@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>[LeetCode] 1410. HTML Entity Parser</title>
+    <link href="/posts/2208021994.html"/>
+    <url>/posts/2208021994.html</url>
+    
+    <content type="html"><![CDATA[<p>HTML entity parser is the parser that takes HTML code as input and replace all the entities of the special characters by the characters itself.</p><p>The special characters and their entities for HTML are:<br>Quotation Mark: the entity is &quot; and symbol character is “.<br>Single Quote Mark: the entity is &apos; and symbol character is ‘.<br>Ampersand: the entity is &amp; and symbol character is &amp;.<br>Greater Than Sign: the entity is &gt; and symbol character is &gt;.<br>Less Than Sign: the entity is &lt; and symbol character is &lt;.<br>Slash: the entity is &frasl; and symbol character is &#x2F;.<br>Given the input text string to the HTML parser, you have to implement the entity parser.</p><p>Return the text after replacing the entities by the special characters.</p><p>Example 1:<br>Input: text &#x3D; “&amp; is an HTML entity but &ambassador; is not.”<br>Output: “&amp; is an HTML entity but &ambassador; is not.”<br>Explanation: The parser will replace the &amp; entity by &amp;</p><p>Example 2:<br>Input: text &#x3D; “and I quote: &quot;…&quot;”<br>Output: “and I quote: &quot;…&quot;“</p><p>Constraints:<br>1 &lt;&#x3D; text.length &lt;&#x3D; 105<br>The string may contain any possible characters out of all the 256 ASCII characters.</p><p>HTML 实体解析器。</p><blockquote>「HTML 实体解析器」 是一种特殊的解析器，它将 HTML 代码作为输入，并用字符本身替换掉所有这些特殊的字符实体。<p>HTML 里这些特殊字符和它们对应的字符实体包括：<br>双引号：字符实体为 &quot; ，对应的字符是 “ 。<br>单引号：字符实体为 &apos; ，对应的字符是 ‘ 。<br>与符号：字符实体为 &amp; ，对应对的字符是 &amp; 。<br>大于号：字符实体为 &gt; ，对应的字符是 &gt; 。<br>小于号：字符实体为 &lt; ，对应的字符是 &lt; 。<br>斜线号：字符实体为 &frasl; ，对应的字符是 &#x2F; 。<br>给你输入字符串 text ，请你实现一个 HTML 实体解析器，返回解析器解析后的结果。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用java自带的string.replace()函数做，记得把对<code>&amp;</code>符号的判断放在最后。否则如下这个 case 会有错。<br>Input &#x3D;&gt; “&amp;gt;”<br>如果不把 <code>&amp;amp;</code> 放到最后判断，这个 input 会被判定成 <code>&amp;gt;</code>，即<code>&gt;</code>。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">entityParser</span><span class="hljs-params">(String text)</span> &#123;<br>        <span class="hljs-keyword">return</span> text.replace(<span class="hljs-string">&quot;&amp;quot;&quot;</span>, <span class="hljs-string">&quot;\&quot;&quot;</span>).replace(<span class="hljs-string">&quot;&amp;apos;&quot;</span>, <span class="hljs-string">&quot;&#x27;&quot;</span>).replace(<span class="hljs-string">&quot;&amp;gt;&quot;</span>, <span class="hljs-string">&quot;&gt;&quot;</span>).replace(<span class="hljs-string">&quot;&amp;lt;&quot;</span>, <span class="hljs-string">&quot;&lt;&quot;</span>).replace(<span class="hljs-string">&quot;&amp;frasl;&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>).replace(<span class="hljs-string">&quot;&amp;amp;&quot;</span>, <span class="hljs-string">&quot;&amp;&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</title>
     <link href="/posts/3172184168.html"/>
     <url>/posts/3172184168.html</url>
@@ -16,15 +39,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -149,9 +172,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -228,9 +251,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -309,9 +332,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -336,9 +359,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>two sum</tag>
       
@@ -363,9 +386,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>design</tag>
       
@@ -446,9 +469,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -477,9 +500,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -504,9 +527,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -585,9 +608,9 @@
       
       <tag>java</tag>
       
-      <tag>simulation</tag>
-      
       <tag>string</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -608,9 +631,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>dynamic programming</tag>
       
@@ -639,9 +662,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -687,13 +710,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
-      <tag>simulation</tag>
+      <tag>two pointer</tag>
       
       <tag>string</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -716,11 +739,11 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>two sum</tag>
       
@@ -787,11 +810,11 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
@@ -814,11 +837,11 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
@@ -839,11 +862,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -897,13 +920,13 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
-      <tag>hashmap</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>two sum</tag>
       
