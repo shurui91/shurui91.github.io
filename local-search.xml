@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2824. Count Pairs Whose Sum is Less than Target</title>
+    <link href="/posts/1841508007.html"/>
+    <url>/posts/1841508007.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 &lt;&#x3D; i &lt; j &lt; n and nums[i] + nums[j] &lt; target.</p><p>Example 1:<br>Input: nums &#x3D; [-1,1,2,3,1], target &#x3D; 2<br>Output: 3<br>Explanation: There are 3 pairs of indices that satisfy the conditions in the statement:</p><ul><li>(0, 1) since 0 &lt; 1 and nums[0] + nums[1] &#x3D; 0 &lt; target</li><li>(0, 2) since 0 &lt; 2 and nums[0] + nums[2] &#x3D; 1 &lt; target </li><li>(0, 4) since 0 &lt; 4 and nums[0] + nums[4] &#x3D; 0 &lt; target<br>Note that (0, 3) is not counted since nums[0] + nums[3] is not strictly less than the target.</li></ul><p>Example 2:<br>Input: nums &#x3D; [-6,2,5,-2,-7,-1,3], target &#x3D; -2<br>Output: 10<br>Explanation: There are 10 pairs of indices that satisfy the conditions in the statement:</p><ul><li>(0, 1) since 0 &lt; 1 and nums[0] + nums[1] &#x3D; -4 &lt; target</li><li>(0, 3) since 0 &lt; 3 and nums[0] + nums[3] &#x3D; -8 &lt; target</li><li>(0, 4) since 0 &lt; 4 and nums[0] + nums[4] &#x3D; -13 &lt; target</li><li>(0, 5) since 0 &lt; 5 and nums[0] + nums[5] &#x3D; -7 &lt; target</li><li>(0, 6) since 0 &lt; 6 and nums[0] + nums[6] &#x3D; -3 &lt; target</li><li>(1, 4) since 1 &lt; 4 and nums[1] + nums[4] &#x3D; -5 &lt; target</li><li>(3, 4) since 3 &lt; 4 and nums[3] + nums[4] &#x3D; -9 &lt; target</li><li>(3, 5) since 3 &lt; 5 and nums[3] + nums[5] &#x3D; -3 &lt; target</li><li>(4, 5) since 4 &lt; 5 and nums[4] + nums[5] &#x3D; -8 &lt; target</li><li>(4, 6) since 4 &lt; 6 and nums[4] + nums[6] &#x3D; -4 &lt; target</li></ul><p>Constraints:<br>1 &lt;&#x3D; nums.length &#x3D;&#x3D; n &lt;&#x3D; 50<br>-50 &lt;&#x3D; nums[i], target &lt;&#x3D; 50</p><p>统计和小于目标的下标对数目。</p><blockquote><p>给你一个下标从 0 开始长度为 n 的整数数组 nums 和一个整数 target ，请你返回满足 0 &lt;&#x3D; i &lt; j &lt; n 且 nums[i] + nums[j] &lt; target 的下标对 (i, j) 的数目。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>对 input list 排序，然后用类似611题那种找三角形有效边的方法找下标对。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countPairs</span><span class="hljs-params">(List&lt;Integer&gt; nums, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Collections.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.size() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            <span class="hljs-keyword">if</span> (nums.get(left) + nums.get(right) &lt; target) &#123;<br>                res += right - left;<br>                left++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1410. HTML Entity Parser</title>
     <link href="/posts/2208021994.html"/>
     <url>/posts/2208021994.html</url>
@@ -39,9 +66,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -172,9 +199,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -251,9 +278,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -332,9 +359,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -359,9 +386,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>two sum</tag>
       
@@ -386,9 +413,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -469,9 +496,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -500,9 +527,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -517,7 +544,7 @@
     <link href="/posts/3398385201.html"/>
     <url>/posts/3398385201.html</url>
     
-    <content type="html"><![CDATA[<p>Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.<br>Example 1:<br>Input: nums &#x3D; [2,2,3,4]<br>Output: 3<br>Explanation: Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3<br>Example 2:<br>Input: nums &#x3D; [4,2,3,4]<br>Output: 4<br>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p><p>有效三角形的个数。</p><blockquote><p>给定一个包含非负整数的数组 nums ，返回其中可以组成三角形三条边的三元组个数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路有点类似 3sum。因为是要找能组成三角形的三条边，所以一定要满足 a + b &gt; c，其中两条边的和要大于第三条边。所以思路是先 sort input数组（a &lt; b &lt; c），然后从数组末端开始扫描，把当前遍历到的数字当做三角形的最长的边 c，然后再用 two pointer 找另外两条边 a 和 b。找的方式是，如果 a + b &gt; c 则说明当 c 是最长边的时候，abc 这个组合是满足题意的，res +&#x3D; b - a。为什么 a - b 之间的所有组合都能累加进去是因为这里我们考虑的是 b 和 c 不变的情况下，把 a 右移的情况，计算完这些情况之后 b 左移；如果 a + b &lt; c 的话，那么只能是 a 右移，因为长度不够。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - worst case<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">triangleNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-comment">// System.out.println(Arrays.toString(nums));</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">2</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>                <span class="hljs-keyword">if</span> (nums[left] + nums[right] &gt; nums[i]) &#123;<br>                    <span class="hljs-comment">// System.out.println(nums[left] + &quot;, &quot; + nums[right] + &quot;, &quot; + nums[i]);</span><br>                    count += right - left;<br>                    right--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    left++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>相关题目<br>259. 3Sum Smaller<br>611. Valid Triangle Number</p>]]></content>
+    <content type="html"><![CDATA[<p>Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.<br>Example 1:<br>Input: nums &#x3D; [2,2,3,4]<br>Output: 3<br>Explanation: Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3<br>Example 2:<br>Input: nums &#x3D; [4,2,3,4]<br>Output: 4<br>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p><p>有效三角形的个数。</p><blockquote><p>给定一个包含非负整数的数组 nums ，返回其中可以组成三角形三条边的三元组个数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路有点类似 3sum。因为是要找能组成三角形的三条边，所以一定要满足 a + b &gt; c，其中两条边的和要大于第三条边。所以思路是先 sort input数组（a &lt; b &lt; c），然后从数组末端开始扫描，把当前遍历到的数字当做三角形的最长的边 c，然后再用 two pointer 找另外两条边 a 和 b。找的方式是，如果 a + b &gt; c 则说明当 c 是最长边的时候，abc 这个组合是满足题意的，res +&#x3D; b - a。为什么 a - b 之间的所有组合都能累加进去是因为这里我们考虑的是 b 和 c 不变的情况下，把 a 右移的情况，计算完这些情况之后 b 左移；如果 a + b &lt; c 的话，那么只能是 a 右移，因为长度不够。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - worst case<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">triangleNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-comment">// System.out.println(Arrays.toString(nums));</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">2</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>                <span class="hljs-keyword">if</span> (nums[left] + nums[right] &gt; nums[i]) &#123;<br>                    <span class="hljs-comment">// System.out.println(nums[left] + &quot;, &quot; + nums[right] + &quot;, &quot; + nums[i]);</span><br>                    count += right - left;<br>                    right--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    left++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -527,9 +554,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -631,9 +658,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>dynamic programming</tag>
       
@@ -652,7 +679,7 @@
     <link href="/posts/1916472686.html"/>
     <url>/posts/1916472686.html</url>
     
-    <content type="html"><![CDATA[<p>Given an array of n integers nums and an integer target, find the number of index triplets i, j, k with 0 &lt;&#x3D; i &lt; j &lt; k &lt; n that satisfy the condition nums[i] + nums[j] + nums[k] &lt; target.<br>Example 1:<br>Input: nums &#x3D; [-2,0,1,3], target &#x3D; 2<br>Output: 2<br>Explanation: Because there are two triplets which sums are less than 2:<br>[-2,0,1]<br>[-2,0,3]</p><p>Example 2:<br>Input: nums &#x3D; [], target &#x3D; 0<br>Output: 0</p><p>Example 3:<br>Input: nums &#x3D; [0], target &#x3D; 0<br>Output: 0<br>Constraints:<br>n &#x3D;&#x3D; nums.length<br>0 &lt;&#x3D; n &lt;&#x3D; 3500<br>-100 &lt;&#x3D; nums[i] &lt;&#x3D; 100<br>-100 &lt;&#x3D; target &lt;&#x3D; 100</p><p>较小的三数之和。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路跟 3sum 差不多，但是这个题要找的是有多少种组合能满足三数之和小于 target。思路还是先固定一个数字，然后另两个数字是通过双指针逼近的方式做。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">threeSumSmaller</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>Arrays.sort(nums);<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length - <span class="hljs-number">2</span>; i++) &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br><span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; target) &#123;<br>res += right - left;<br>left++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>right--;<br>&#125;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>相关题目<br>259. 3Sum Smaller<br>611. Valid Triangle Number</p>]]></content>
+    <content type="html"><![CDATA[<p>Given an array of n integers nums and an integer target, find the number of index triplets i, j, k with 0 &lt;&#x3D; i &lt; j &lt; k &lt; n that satisfy the condition nums[i] + nums[j] + nums[k] &lt; target.<br>Example 1:<br>Input: nums &#x3D; [-2,0,1,3], target &#x3D; 2<br>Output: 2<br>Explanation: Because there are two triplets which sums are less than 2:<br>[-2,0,1]<br>[-2,0,3]</p><p>Example 2:<br>Input: nums &#x3D; [], target &#x3D; 0<br>Output: 0</p><p>Example 3:<br>Input: nums &#x3D; [0], target &#x3D; 0<br>Output: 0<br>Constraints:<br>n &#x3D;&#x3D; nums.length<br>0 &lt;&#x3D; n &lt;&#x3D; 3500<br>-100 &lt;&#x3D; nums[i] &lt;&#x3D; 100<br>-100 &lt;&#x3D; target &lt;&#x3D; 100</p><p>较小的三数之和。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路跟 3sum 差不多，但是这个题要找的是有多少种组合能满足三数之和小于 target。思路还是先固定一个数字，然后另两个数字是通过双指针逼近的方式做。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">threeSumSmaller</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>Arrays.sort(nums);<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length - <span class="hljs-number">2</span>; i++) &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br><span class="hljs-keyword">if</span> (nums[i] + nums[left] + nums[right] &lt; target) &#123;<br>res += right - left;<br>left++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>right--;<br>&#125;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -662,9 +689,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -710,9 +737,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -739,11 +766,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>two sum</tag>
       
@@ -810,11 +837,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -837,11 +864,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -862,11 +889,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -920,13 +947,13 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
