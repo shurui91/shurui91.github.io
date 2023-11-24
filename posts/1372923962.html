@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a 0-indexed integer array nums of size n and two integers lower and upper, return the number of fair pairs. A pair (i, j) is fair if:0 &lt;&#x3D; i &lt; j &lt; n, andlower &lt;&#x3D; nums[i] + n">
+    <meta name="description" content="A sequence of numbers is called arithmetic if it consists of at least two elements, and the difference between every two consecutive elements is the same. More formally, a sequence s is arithmetic if">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2563. Count the Number of Fair Pairs">
-<meta property="og:url" content="https://shurui91.github.io/posts/1345396682.html">
+<meta property="og:title" content="[LeetCode] 1630. Arithmetic Subarrays">
+<meta property="og:url" content="https://shurui91.github.io/posts/1372923962.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a 0-indexed integer array nums of size n and two integers lower and upper, return the number of fair pairs. A pair (i, j) is fair if:0 &lt;&#x3D; i &lt; j &lt; n, andlower &lt;&#x3D; nums[i] + n">
+<meta property="og:description" content="A sequence of numbers is called arithmetic if it consists of at least two elements, and the difference between every two consecutive elements is the same. More formally, a sequence s is arithmetic if">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-23T23:57:23.000Z">
-<meta property="article:modified_time" content="2023-11-24T00:04:44.136Z">
+<meta property="article:published_time" content="2023-11-24T00:45:59.000Z">
+<meta property="article:modified_time" content="2023-11-24T00:52:06.668Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2563. Count the Number of Fair Pairs - CNoodle</title>
+  <title>[LeetCode] 1630. Arithmetic Subarrays - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2563. Count the Number of Fair Pairs"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1630. Arithmetic Subarrays"></span>
           
         </div>
 
@@ -200,7 +199,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-23 15:57" pubdate>
+        <time datetime="2023-11-23 16:45" pubdate>
           November 23, 2023 pm
         </time>
       </span>
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          2.6k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          14 mins
+          23 mins
         
       </span>
     
@@ -260,27 +259,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2563. Count the Number of Fair Pairs</h1>
+            <h1 id="seo-header">[LeetCode] 1630. Arithmetic Subarrays</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a 0-indexed integer array nums of size n and two integers lower and upper, return the number of fair pairs.</p>
-<p>A pair (i, j) is fair if:<br>0 &lt;&#x3D; i &lt; j &lt; n, and<br>lower &lt;&#x3D; nums[i] + nums[j] &lt;&#x3D; upper</p>
-<p>Example 1:<br>Input: nums &#x3D; [0,1,7,4,4,5], lower &#x3D; 3, upper &#x3D; 6<br>Output: 6<br>Explanation: There are 6 fair pairs: (0,3), (0,4), (0,5), (1,3), (1,4), and (1,5).</p>
-<p>Example 2:<br>Input: nums &#x3D; [1,7,9,2,5], lower &#x3D; 11, upper &#x3D; 11<br>Output: 1<br>Explanation: There is a single fair pair: (2,3).</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>nums.length &#x3D;&#x3D; n<br>-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>-109 &lt;&#x3D; lower &lt;&#x3D; upper &lt;&#x3D; 109</p>
-<p>统计公平数对的数目。</p>
+                <p>A sequence of numbers is called arithmetic if it consists of at least two elements, and the difference between every two consecutive elements is the same. More formally, a sequence s is arithmetic if and only if s[i+1] - s[i] &#x3D;&#x3D; s[1] - s[0] for all valid i.</p>
+<p>For example, these are arithmetic sequences:<br>1, 3, 5, 7, 9<br>7, 7, 7, 7<br>3, -1, -5, -9</p>
+<p>The following sequence is not arithmetic:<br>1, 1, 2, 5, 7</p>
+<p>You are given an array of n integers, nums, and two arrays of m integers each, l and r, representing the m range queries, where the ith query is the range [l[i], r[i]]. All the arrays are 0-indexed.</p>
+<p>Return a list of boolean elements answer, where answer[i] is true if the subarray nums[l[i]], nums[l[i]+1], … , nums[r[i]] can be rearranged to form an arithmetic sequence, and false otherwise.</p>
+<p>Example 1:<br>Input: nums &#x3D; [4,6,5,9,3,7], l &#x3D; [0,0,2], r &#x3D; [2,3,5]<br>Output: [true,false,true]<br>Explanation:<br>In the 0th query, the subarray is [4,6,5]. This can be rearranged as [6,5,4], which is an arithmetic sequence.<br>In the 1st query, the subarray is [4,6,5,9]. This cannot be rearranged as an arithmetic sequence.<br>In the 2nd query, the subarray is [5,9,3,7]. This can be rearranged as [3,5,7,9], which is an arithmetic sequence.</p>
+<p>Example 2:<br>Input: nums &#x3D; [-12,-9,-3,-12,-6,15,20,-25,-20,-15,-10], l &#x3D; [0,1,6,4,8,7], r &#x3D; [4,4,9,7,9,10]<br>Output: [false,true,false,false,true,true]</p>
+<p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>m &#x3D;&#x3D; l.length<br>m &#x3D;&#x3D; r.length<br>2 &lt;&#x3D; n &lt;&#x3D; 500<br>1 &lt;&#x3D; m &lt;&#x3D; 500<br>0 &lt;&#x3D; l[i] &lt; r[i] &lt; n<br>-105 &lt;&#x3D; nums[i] &lt;&#x3D; 105</p>
+<p>等差子数组。</p>
 <blockquote>
-<p>给你一个下标从 0 开始、长度为 n 的整数数组 nums ，和两个整数 lower 和 upper ，返回 公平数对的数目 。<br>如果 (i, j) 数对满足以下情况，则认为它是一个 公平数对 ：<br>0 &lt;&#x3D; i &lt; j &lt; n，且<br>lower &lt;&#x3D; nums[i] + nums[j] &lt;&#x3D; upper</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意我们要找的 i 和 j 满足<code>lower &lt;= nums[i] + nums[j] &lt;= upper</code> 的数对的个数，而且是闭区间。那么我们可以把这个条件改写为找到 i 和 j 满足 <code>nums[i] + nums[j] &lt;= upper</code> 的个数减去 <code>nums[i] + nums[j] &lt;= lower - 1</code>的个数。</p>
-<p>这道题的思路跟 611 题，2824 题很像，可以先做这两题。做完这两题再做本题你就会发现我们还是可以对 input 数组排序，排序之后我们用一个 helper 函数分别去找 <code>nums[i] + nums[j] &lt;= upper</code> 的个数和<code>nums[i] + nums[j] &lt;= lower - 1</code>的个数。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">countFairPairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> lower, <span class="hljs-type">int</span> upper)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-keyword">return</span> helper(nums, upper) - helper(nums, lower - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> nums[left] + nums[right];<br>            <span class="hljs-keyword">if</span> (sum &lt;= target) &#123;<br>                res += right - left;<br>                left++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+如果一个数列由至少两个元素组成，且每两个连续元素之间的差值都相同，那么这个序列就是 等差数列 。更正式地，数列 s 是等差数列，只需要满足：对于每个有效的 i ， s[i+1] - s[i] == s[1] - s[0] 都成立。
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>
+<p>例如，下面这些都是 等差数列 ：<br>1, 3, 5, 7, 9<br>7, 7, 7, 7<br>3, -1, -5, -9</p>
+<p>下面的数列 不是等差数列 ：<br>1, 1, 2, 5, 7<br>给你一个由 n 个整数组成的数组 nums，和两个由 m 个整数组成的数组 l 和 r，后两个数组表示 m 组范围查询，其中第 i 个查询对应范围 [l[i], r[i]] 。所有数组的下标都是 从 0 开始 的。</p>
+<p>返回 boolean 元素构成的答案列表 answer 。如果子数组 nums[l[i]], nums[l[i]+1], … , nums[r[i]] 可以 重新排列 形成 等差数列 ，answer[i] 的值就是 true；否则answer[i] 的值就是 false 。</p>
+</blockquote>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>根据题意，我们可以从 nums 中挑出范围在 [l, r] 的元素，对这部分元素排序，然后判断这部分元素是否为等差数列，如果是则往结果集放入True，否则放入False。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m^2 * logm) - 假设 [l, r] 这一段元素长度为 m，对这一段元素排序是O(mlogm)，判断这一段元素是否为等差数列最差可以到达O(m)，所以整体是O(m^2 * logm)<br>空间O(n) - output list</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Boolean&gt; <span class="hljs-title function_">checkArithmeticSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span>[] l, <span class="hljs-type">int</span>[] r)</span> &#123;<br>        List&lt;Boolean&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> l.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> l[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> r[i];<br>            List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> start; j &lt;= end; j++) &#123;<br>                list.add(nums[j]);<br>            &#125;<br>            Collections.sort(list);<br>            <span class="hljs-keyword">if</span> (helper(list)) &#123;<br>                res.add(<span class="hljs-literal">true</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res.add(<span class="hljs-literal">false</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> list.size();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; size; i++) &#123;<br>            <span class="hljs-keyword">if</span> (list.get(i) - list.get(i - <span class="hljs-number">1</span>) != list.get(i - <span class="hljs-number">1</span>) - list.get(i - <span class="hljs-number">2</span>)) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -296,8 +300,6 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/sort/" class="print-no-link">#sort</a>
@@ -312,8 +314,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2563. Count the Number of Fair Pairs</div>
-      <div>https://shurui91.github.io/posts/1345396682.html</div>
+      <div>[LeetCode] 1630. Arithmetic Subarrays</div>
+      <div>https://shurui91.github.io/posts/1372923962.html</div>
     </div>
     <div class="license-meta">
       
@@ -357,18 +359,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1372923962.html" title="[LeetCode] 1630. Arithmetic Subarrays">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1630. Arithmetic Subarrays</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1841508007.html" title="[LeetCode] 2824. Count Pairs Whose Sum is Less than Target">
-                        <span class="hidden-mobile">[LeetCode] 2824. Count Pairs Whose Sum is Less than Target</span>
+                      <a href="/posts/1345396682.html" title="[LeetCode] 2563. Count the Number of Fair Pairs">
+                        <span class="hidden-mobile">[LeetCode] 2563. Count the Number of Fair Pairs</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +384,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1345396682.html';
-          this.page.identifier = '/posts/1345396682.html';
+          this.page.url = 'https://shurui91.github.io/posts/1372923962.html';
+          this.page.identifier = '/posts/1372923962.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
