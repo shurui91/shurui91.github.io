@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2563. Count the Number of Fair Pairs</title>
+    <link href="/posts/1345396682.html"/>
+    <url>/posts/1345396682.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a 0-indexed integer array nums of size n and two integers lower and upper, return the number of fair pairs.</p><p>A pair (i, j) is fair if:<br>0 &lt;&#x3D; i &lt; j &lt; n, and<br>lower &lt;&#x3D; nums[i] + nums[j] &lt;&#x3D; upper</p><p>Example 1:<br>Input: nums &#x3D; [0,1,7,4,4,5], lower &#x3D; 3, upper &#x3D; 6<br>Output: 6<br>Explanation: There are 6 fair pairs: (0,3), (0,4), (0,5), (1,3), (1,4), and (1,5).</p><p>Example 2:<br>Input: nums &#x3D; [1,7,9,2,5], lower &#x3D; 11, upper &#x3D; 11<br>Output: 1<br>Explanation: There is a single fair pair: (2,3).</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>nums.length &#x3D;&#x3D; n<br>-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>-109 &lt;&#x3D; lower &lt;&#x3D; upper &lt;&#x3D; 109</p><p>统计公平数对的数目。</p><blockquote><p>给你一个下标从 0 开始、长度为 n 的整数数组 nums ，和两个整数 lower 和 upper ，返回 公平数对的数目 。<br>如果 (i, j) 数对满足以下情况，则认为它是一个 公平数对 ：<br>0 &lt;&#x3D; i &lt; j &lt; n，且<br>lower &lt;&#x3D; nums[i] + nums[j] &lt;&#x3D; upper</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意我们要找的 i 和 j 满足<code>lower &lt;= nums[i] + nums[j] &lt;= upper</code> 的数对的个数，而且是闭区间。那么我们可以把这个条件改写为找到 i 和 j 满足 <code>nums[i] + nums[j] &lt;= upper</code> 的个数减去 <code>nums[i] + nums[j] &lt;= lower - 1</code>的个数。</p><p>这道题的思路跟 611 题，2824 题很像，可以先做这两题。做完这两题再做本题你就会发现我们还是可以对 input 数组排序，排序之后我们用一个 helper 函数分别去找 <code>nums[i] + nums[j] &lt;= upper</code> 的个数和<code>nums[i] + nums[j] &lt;= lower - 1</code>的个数。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">countFairPairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> lower, <span class="hljs-type">int</span> upper)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-keyword">return</span> helper(nums, upper) - helper(nums, lower - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> nums[left] + nums[right];<br>            <span class="hljs-keyword">if</span> (sum &lt;= target) &#123;<br>                res += right - left;<br>                left++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2824. Count Pairs Whose Sum is Less than Target</title>
     <link href="/posts/1841508007.html"/>
     <url>/posts/1841508007.html</url>
