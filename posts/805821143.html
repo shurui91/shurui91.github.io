@@ -16,27 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given an array nums that consists of non-negative integers. Let us define rev(x) as the reverse of the non-negative integer x. For example, rev(123) &#x3D; 321, and rev(120) &#x3D; 21. A pair">
+    <meta name="description" content="Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome. Ret">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1814. Count Nice Pairs in an Array">
-<meta property="og:url" content="https://shurui91.github.io/posts/861179681.html">
+<meta property="og:title" content="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/805821143.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given an array nums that consists of non-negative integers. Let us define rev(x) as the reverse of the non-negative integer x. For example, rev(123) &#x3D; 321, and rev(120) &#x3D; 21. A pair">
+<meta property="og:description" content="Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome. Ret">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-01-17T09:11:41.000Z">
-<meta property="article:modified_time" content="2023-11-21T22:31:53.016Z">
+<meta property="article:published_time" content="2020-12-30T09:48:00.000Z">
+<meta property="article:modified_time" content="2023-11-24T20:45:53.274Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="two sum">
-<meta property="article:tag" content="math">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="backtracking">
+<meta property="article:tag" content="preorder">
+<meta property="article:tag" content="tree">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1814. Count Nice Pairs in an Array - CNoodle</title>
+  <title>[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1814. Count Nice Pairs in an Array"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree"></span>
           
         </div>
 
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-17 01:11" pubdate>
-          January 17, 2023 am
+        <time datetime="2020-12-30 01:48" pubdate>
+          December 30, 2020 am
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2.3k words
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          16 mins
+          20 mins
         
       </span>
     
@@ -261,33 +261,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1814. Count Nice Pairs in an Array</h1>
+            <h1 id="seo-header">[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given an array nums that consists of non-negative integers. Let us define rev(x) as the reverse of the non-negative integer x. For example, rev(123) &#x3D; 321, and rev(120) &#x3D; 21. A pair of indices (i, j) is nice if it satisfies all of the following conditions:</p>
-<p>0 &lt;&#x3D; i &lt; j &lt; nums.length<br>nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])<br>Return the number of nice pairs of indices. Since that number can be too large, return it modulo 109 + 7.</p>
-<p>Example 1:<br>Input: nums &#x3D; [42,11,1,97]<br>Output: 2<br>Explanation: The two pairs are:</p>
-<ul>
-<li>(0,3) : 42 + rev(97) &#x3D; 42 + 79 &#x3D; 121, 97 + rev(42) &#x3D; 97 + 24 &#x3D; 121.</li>
-<li>(1,2) : 11 + rev(1) &#x3D; 11 + 1 &#x3D; 12, 1 + rev(11) &#x3D; 1 + 11 &#x3D; 12.</li>
-</ul>
-<p>Example 2:<br>Input: nums &#x3D; [13,10,35,24,76]<br>Output: 4</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 109</p>
-<p>统计一个数组中好对子的数目。</p>
+                <p>Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome.</p>
+<p>Return the number of pseudo-palindromic paths going from the root node to leaf nodes.</p>
+<p>Example 1:<br>Input: root &#x3D; [2,3,1,3,1,null,1]<br>Output: 2<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the red path [2,3,3], the green path [2,1,1], and the path [2,3,1]. Among these paths only red path and green path are pseudo-palindromic paths since the red path [2,3,3] can be rearranged in [3,2,3] (palindrome) and the green path [2,1,1] can be rearranged in [1,2,1] (palindrome).</p>
+<p>Example 2:<br>Input: root &#x3D; [2,1,1,1,3,null,null,null,null,null,1]<br>Output: 1<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the green path [2,1,1], the path [2,1,3,1], and the path [2,1]. Among these paths only the green path is pseudo-palindromic since [2,1,1] can be rearranged in [1,2,1] (palindrome).</p>
+<p>Example 3:<br>Input: root &#x3D; [9]<br>Output: 1</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [1, 105].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 9</p>
+<p>二叉树中的伪回文路径。</p>
 <blockquote>
-给你一个数组 nums ，数组中只包含非负整数。定义 rev(x) 的值为将整数 x 各个数字位反转得到的结果。比方说 rev(123) = 321 ， rev(120) = 21 。我们称满足下面条件的下标对 (i, j) 是 好的 ：
-
-<p>0 &lt;&#x3D; i &lt; j &lt; nums.length<br>nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])<br>请你返回好下标对的数目。由于结果可能会很大，请将结果对 109 + 7 取余 后返回。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-nice-pairs-in-an-array">https://leetcode.cn/problems/count-nice-pairs-in-an-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给你一棵二叉树，每个节点的值为 1 到 9 。我们称二叉树中的一条路径是 「伪回文」的，当它满足：路径经过的所有节点值的排列中，存在一个回文序列。<br>请你返回从根到叶子节点的所有路径中 伪回文 路径的数目。</p>
 </blockquote>
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题思路类似 two sum。注意题目描述，题目让你找的是有多少对下标（i, j）满足 nums[i] + rev(nums[j]) &#x3D;&#x3D; nums[j] + rev(nums[i])，其中 rev() 函数是把这个数字翻转过来。</p>
-<p>这个题目很像 two sum，也是找两数之和，只不过等号右边也是两数之和。我们可以把这个等式转换成 nums[i] - rev(nums[i]) &#x3D;&#x3D; nums[j] - rev(nums[j])，这样我们找的就是是否存在两个不同的下标，对应的两个数字的 nums[i] - rev(nums[i]) 相等。这里为了保险起见，计算结果我用了 long 型避免溢出。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n * logC) - rev()函数的复杂度是 logC<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>前序遍历 + 回溯。用前序遍历的方法遍历整棵树，在遍历的过程中记录用一个长度为 10 的数组记录每个不同 node.val 的出现次数。遍历到叶子节点的时候看一下数组里出现次数为奇数的元素有几个，如果有超过1个元素的出现次数为奇数，那么当前这条从根节点到叶子节点的路径就不是回文路径。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countNicePairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>) + <span class="hljs-number">7</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rev</span> <span class="hljs-operator">=</span> helper(num);<br>            <span class="hljs-keyword">if</span> (map.containsKey(num - rev)) &#123;<br>                count += map.get(num - rev);<br>            &#125;<br>            map.put(num - rev, map.getOrDefault(num - rev, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>) (count % MOD);<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (num != <span class="hljs-number">0</span>) &#123;<br>            res = res * <span class="hljs-number">10</span> + num % <span class="hljs-number">10</span>;<br>            num /= <span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">pseudoPalindromicPaths</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>		<span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>		helper(root, map);<br>		<span class="hljs-keyword">return</span> count;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span>[] map)</span> &#123;<br>		<span class="hljs-comment">// base case</span><br>		<span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		map[root.val]++;<br>		<span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span> &amp;&amp; root.right == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">if</span> (isPalindrome(map)) &#123;<br>				count++;<br>			&#125;<br>		&#125;<br>		helper(root.left, map);<br>		helper(root.right, map);<br>		map[root.val]--;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span>[] map)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">single</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>			<span class="hljs-keyword">if</span> (map[i] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>				single++;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> single &gt; <span class="hljs-number">1</span> ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -303,13 +295,13 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/backtracking/" class="print-no-link">#backtracking</a>
       
-        <a href="/tags/two-sum/" class="print-no-link">#two sum</a>
+        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
       
     </div>
   
@@ -321,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1814. Count Nice Pairs in an Array</div>
-      <div>https://shurui91.github.io/posts/861179681.html</div>
+      <div>[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</div>
+      <div>https://shurui91.github.io/posts/805821143.html</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 17, 2023</div>
+          <div>December 30, 2020</div>
         </div>
       
       
@@ -366,9 +358,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3837729252.html" title="[LeetCode] 2460. Apply Operations to an Array">
+                      <a href="/posts/3447756879.html" title="[LeetCode] 765. Couples Holding Hands">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2460. Apply Operations to an Array</span>
+                        <span class="hidden-mobile">[LeetCode] 765. Couples Holding Hands</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -376,8 +368,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/41030754.html" title="[LeetCode] 1244. Design A Leaderboard">
-                        <span class="hidden-mobile">[LeetCode] 1244. Design A Leaderboard</span>
+                      <a href="/posts/2419185708.html" title="[LeetCode] 720. Longest Word in Dictionary">
+                        <span class="hidden-mobile">[LeetCode] 720. Longest Word in Dictionary</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -397,8 +389,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/861179681.html';
-          this.page.identifier = '/posts/861179681.html';
+          this.page.url = 'https://shurui91.github.io/posts/805821143.html';
+          this.page.identifier = '/posts/805821143.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
