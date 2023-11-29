@@ -255,9 +255,9 @@
       
       <tag>java</tag>
       
-      <tag>graph</tag>
-      
       <tag>dynamic programming</tag>
+      
+      <tag>graph</tag>
       
       <tag>dijkstra</tag>
       
@@ -904,6 +904,31 @@
       <tag>java</tag>
       
       <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1277. Count Square Submatrices with All Ones</title>
+    <link href="/posts/1405682268.html"/>
+    <url>/posts/1405682268.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.</p><p>Example 1:<br>Input: matrix &#x3D;<br>[<br>  [0,1,1,1],<br>  [1,1,1,1],<br>  [0,1,1,1]<br>]<br>Output: 15<br>Explanation:<br>There are 10 squares of side 1.<br>There are 4 squares of side 2.<br>There is  1 square of side 3.<br>Total number of squares &#x3D; 10 + 4 + 1 &#x3D; 15.</p><p>Example 2:<br>Input: matrix &#x3D;<br>[<br>  [1,0,1],<br>  [1,1,0],<br>  [1,1,0]<br>]<br>Output: 7<br>Explanation:<br>There are 6 squares of side 1.<br>There is 1 square of side 2.<br>Total number of squares &#x3D; 6 + 1 &#x3D; 7.</p><p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 300<br>1 &lt;&#x3D; arr[0].length &lt;&#x3D; 300<br>0 &lt;&#x3D; arr[i][j] &lt;&#x3D; 1</p><p>统计全为1的正方形子矩阵。</p><blockquote><p>给你一个 m * n 的矩阵，矩阵中的元素不是 0 就是 1，请你统计并返回其中完全由 1 组成的 正方形 子矩阵的个数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意跟221题非常类似，给你一个只有 0 和 1 的二维矩阵，请你统计其中完全由 1 组成的正方形子矩阵的个数。思路是动态规划。动态规划的定义是 dp[i][j] 代表的是由 (i, j) 为右下角组成的矩形的个数。这个定义跟 221 题几乎一样，221 题的定义是以 (i, j) 为右下角组成的最大矩形的边长。为什么这个右下角的坐标也能定义能组成的矩形的个数呢，因为比如给你一个 2x2 的矩阵，如果矩阵内的 4 个位置都是 1 的话，右下角的坐标也是 1，这样由这个右下角的 1 能组成的矩形有两个，一个是 1x1 的，一个是 2x2 的。这一题的状态转移方程也是在看当前坐标的左边，右边和左上角的 dp 值，以决定当前坐标的 dp 值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1) - 因为是原地修改了矩阵的值</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countSquares</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; j &gt; <span class="hljs-number">0</span> &amp;&amp; matrix[i][j] &gt; <span class="hljs-number">0</span>) &#123;<br>                    matrix[i][j] = min(<br>                        matrix[i - <span class="hljs-number">1</span>][j],<br>                        matrix[i][j - <span class="hljs-number">1</span>],<br>                        matrix[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]<br>                    ) + <span class="hljs-number">1</span>;<br>                &#125;<br>                res += matrix[i][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">min</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> &#123;<br>        <span class="hljs-keyword">return</span> Math.min(a, Math.min(b, c));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>dynamic programming</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
