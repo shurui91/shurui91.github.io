@@ -16,30 +16,28 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order. Return the area of the largest submatrix within matrix where every element">
+    <meta name="description" content="You are given a 0-indexed integer array arr, and an m x n integer matrix mat. arr and mat both contain all the integers in the range [1, m * n]. Go through each index i in arr starting from index 0 an">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1727. Largest Submatrix With Rearrangements">
-<meta property="og:url" content="https://shurui91.github.io/posts/185281803.html">
+<meta property="og:title" content="[LeetCode] 2661. First Completely Painted Row or Column">
+<meta property="og:url" content="https://shurui91.github.io/posts/3543248498.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order. Return the area of the largest submatrix within matrix where every element">
+<meta property="og:description" content="You are given a 0-indexed integer array arr, and an m x n integer matrix mat. arr and mat both contain all the integers in the range [1, m * n]. Go through each index i in arr starting from index 0 an">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40852-pm.png">
-<meta property="article:published_time" content="2023-11-29T17:38:53.000Z">
-<meta property="article:modified_time" content="2023-11-29T17:49:36.045Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/01/18/grid1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/01/18/grid2.jpg">
+<meta property="article:published_time" content="2023-11-30T21:54:52.000Z">
+<meta property="article:modified_time" content="2023-11-30T22:01:26.472Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="matrix">
-<meta property="article:tag" content="sort">
-<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="hashmap">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2023/01/18/grid1.jpg">
   
   
   
-  <title>[LeetCode] 1727. Largest Submatrix With Rearrangements - CNoodle</title>
+  <title>[LeetCode] 2661. First Completely Painted Row or Column - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1727. Largest Submatrix With Rearrangements"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2661. First Completely Painted Row or Column"></span>
           
         </div>
 
@@ -204,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-29 09:38" pubdate>
-          November 29, 2023 am
+        <time datetime="2023-11-30 13:54" pubdate>
+          November 30, 2023 pm
         </time>
       </span>
     
@@ -216,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -227,7 +225,7 @@
         
         
         
-          15 mins
+          16 mins
         
       </span>
     
@@ -264,28 +262,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1727. Largest Submatrix With Rearrangements</h1>
+            <h1 id="seo-header">[LeetCode] 2661. First Completely Painted Row or Column</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order.</p>
-<p>Return the area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: matrix &#x3D; [[0,0,1],[1,1,1],[1,0,1]]<br>Output: 4<br>Explanation: You can rearrange the columns as shown above.<br>The largest submatrix of 1s, in bold, has an area of 4.</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40852-pm.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: matrix &#x3D; [[1,0,1,0,1]]<br>Output: 3<br>Explanation: You can rearrange the columns as shown above.<br>The largest submatrix of 1s, in bold, has an area of 3.</p>
-<p>Example 3:<br>Input: matrix &#x3D; [[1,1,0],[1,0,1]]<br>Output: 2<br>Explanation: Notice that you must rearrange entire columns, and there is no way to make a submatrix of 1s larger than an area of 2.</p>
-<p>Constraints:<br>m &#x3D;&#x3D; matrix.length<br>n &#x3D;&#x3D; matrix[i].length<br>1 &lt;&#x3D; m * n &lt;&#x3D; 105<br>matrix[i][j] is either 0 or 1.</p>
-<p>重新排列后的最大子矩阵。</p>
+                <p>You are given a 0-indexed integer array arr, and an m x n integer matrix mat. arr and mat both contain all the integers in the range [1, m * n].</p>
+<p>Go through each index i in arr starting from index 0 and paint the cell in mat containing the integer arr[i].</p>
+<p>Return the smallest index i at which either a row or a column will be completely painted in mat.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2023/01/18/grid1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>image explanation for example 1<br>Input: arr &#x3D; [1,3,4,2], mat &#x3D; [[1,4],[2,3]]<br>Output: 2<br>Explanation: The moves are shown in order, and both the first row and second column of the matrix become fully painted at arr[2].</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2023/01/18/grid2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>image explanation for example 2<br>Input: arr &#x3D; [2,8,7,4,1,3,5,6,9], mat &#x3D; [[3,2,5],[1,4,6],[8,7,9]]<br>Output: 3<br>Explanation: The second column becomes fully painted at arr[3].</p>
+<p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D; mat[i].length<br>arr.length &#x3D;&#x3D; m * n<br>1 &lt;&#x3D; m, n &lt;&#x3D; 105<br>1 &lt;&#x3D; m * n &lt;&#x3D; 105<br>1 &lt;&#x3D; arr[i], mat[r][c] &lt;&#x3D; m * n<br>All the integers of arr are unique.<br>All the integers of mat are unique.</p>
+<p>找出叠涂元素。</p>
 <blockquote>
-<p>给你一个二进制矩阵 matrix ，它的大小为 m x n ，你可以将 matrix 中的 列 按任意顺序重新排列。<br>请你返回最优方案下将 matrix 重新排列后，全是 1 的子矩阵面积。</p>
+<p>给你一个下标从 0 开始的整数数组 arr 和一个 m x n 的整数 矩阵 mat 。arr 和 mat 都包含范围 [1，m * n] 内的 所有 整数。<br>从下标 0 开始遍历 arr 中的每个下标 i ，并将包含整数 arr[i] 的 mat 单元格涂色。<br>请你找出 arr 中在 mat 的某一行或某一列上都被涂色且下标最小的元素，并返回其下标 i 。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>类似<a href="https://shurui91.github.io/posts/3456055979.html">85题</a>，我们先从上到下记录矩阵里每一列出现的连续的 1 的个数，比如第一个例子，matrix &#x3D; [[0,0,1],[1,1,1],[1,0,1]]，从上到下记录之后，矩阵变成<br>matrix &#x3D; [<br>    [0,0,1],<br>    [1,1,2],<br>    [2,0,3]<br>]</p>
-<p>然后我们对这个矩阵<code>逐行</code>扫描，看一下如果以当前行为结尾，能组成的最大子矩阵的面积是多少。这样一来这道题就跟85题很像了。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我创建了三个hashmap，一个记录坐标值和坐标的关系<code>&lt;mat[i][j], num&gt;</code>，一个记录每一行 row 上已经被访问过的坐标的个数，一个记录每一列 col 上已经被访问过的坐标的个数。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestSubmatrix</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (matrix[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    matrix[i][j] += matrix[i - <span class="hljs-number">1</span>][j];<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            Arrays.sort(matrix[i]);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> matrix[i][j] * (n - j);<br>                res = Math.max(res, area);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstCompleteIndex</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span>[][] mat)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        HashMap&lt;Integer, <span class="hljs-type">int</span>[]&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        HashMap&lt;Integer, Integer&gt; rowMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        HashMap&lt;Integer, Integer&gt; colMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> mat[i][j];<br>                map.put(num, <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; i, j &#125;);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> arr[i];<br>            <span class="hljs-type">int</span>[] pos = map.get(num);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> pos[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> pos[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (mat[x][y] == num) &#123;<br>                mat[x][y] = <span class="hljs-number">0</span>;<br>                rowMap.put(x, rowMap.getOrDefault(x, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                colMap.put(y, colMap.getOrDefault(y, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                <span class="hljs-keyword">if</span> (rowMap.get(x) == n || colMap.get(y) == m) &#123;<br>                    <span class="hljs-keyword">return</span> i;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr.length;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -303,11 +298,7 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
-      
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
-      
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
       
     </div>
   
@@ -319,8 +310,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1727. Largest Submatrix With Rearrangements</div>
-      <div>https://shurui91.github.io/posts/185281803.html</div>
+      <div>[LeetCode] 2661. First Completely Painted Row or Column</div>
+      <div>https://shurui91.github.io/posts/3543248498.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +323,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 29, 2023</div>
+          <div>November 30, 2023</div>
         </div>
       
       
@@ -364,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3543248498.html" title="[LeetCode] 2661. First Completely Painted Row or Column">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2661. First Completely Painted Row or Column</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/4006849877.html" title="[LeetCode] 1685. Sum of Absolute Differences in a Sorted Array">
-                        <span class="hidden-mobile">[LeetCode] 1685. Sum of Absolute Differences in a Sorted Array</span>
+                      <a href="/posts/185281803.html" title="[LeetCode] 1727. Largest Submatrix With Rearrangements">
+                        <span class="hidden-mobile">[LeetCode] 1727. Largest Submatrix With Rearrangements</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,8 +380,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/185281803.html';
-          this.page.identifier = '/posts/185281803.html';
+          this.page.url = 'https://shurui91.github.io/posts/3543248498.html';
+          this.page.identifier = '/posts/3543248498.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
