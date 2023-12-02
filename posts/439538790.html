@@ -16,27 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+    <meta name="description" content="You are given an array of strings words and a string chars. A string is good if it can be formed by characters from chars (each character can only be used once). Return the sum of lengths of all good">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique">
-<meta property="og:url" content="https://shurui91.github.io/posts/3172184168.html">
+<meta property="og:title" content="[LeetCode] 1160. Find Words That Can Be Formed by Characters">
+<meta property="og:url" content="https://shurui91.github.io/posts/439538790.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+<meta property="og:description" content="You are given an array of strings words and a string chars. A string is good if it can be formed by characters from chars (each character can only be used once). Return the sum of lengths of all good">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-21T23:00:43.000Z">
-<meta property="article:modified_time" content="2023-11-21T23:13:46.158Z">
+<meta property="article:published_time" content="2023-12-02T20:11:32.000Z">
+<meta property="article:modified_time" content="2023-12-02T20:15:10.030Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="sort">
 <meta property="article:tag" content="string">
-<meta property="article:tag" content="greedy">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique - CNoodle</title>
+  <title>[LeetCode] 1160. Find Words That Can Be Formed by Characters - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1160. Find Words That Can Be Formed by Characters"></span>
           
         </div>
 
@@ -201,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-21 15:00" pubdate>
-          November 21, 2023 pm
+        <time datetime="2023-12-02 12:11" pubdate>
+          December 2, 2023 pm
         </time>
       </span>
     
@@ -261,27 +259,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</h1>
+            <h1 id="seo-header">[LeetCode] 1160. Find Words That Can Be Formed by Characters</h1>
             
             
               <div class="markdown-body">
                 
-                <p>A string s is called good if there are no two different characters in s that have the same frequency.</p>
-<p>Given a string s, return the minimum number of characters you need to delete to make s good.</p>
-<p>The frequency of a character in a string is the number of times it appears in the string. For example, in the string “aab”, the frequency of ‘a’ is 2, while the frequency of ‘b’ is 1.</p>
-<p>Example 1:<br>Input: s &#x3D; “aab”<br>Output: 0<br>Explanation: s is already good.</p>
-<p>Example 2:<br>Input: s &#x3D; “aaabbbcc”<br>Output: 2<br>Explanation: You can delete two ‘b’s resulting in the good string “aaabcc”.<br>Another way it to delete one ‘b’ and one ‘c’ resulting in the good string “aaabbc”.</p>
-<p>Example 3:<br>Input: s &#x3D; “ceabaacb”<br>Output: 2<br>Explanation: You can delete both ‘c’s resulting in the good string “eabaab”.<br>Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s contains only lowercase English letters.</p>
-<p>字符频次唯一的最小删除次数。</p>
+                <p>You are given an array of strings words and a string chars.</p>
+<p>A string is good if it can be formed by characters from chars (each character can only be used once).</p>
+<p>Return the sum of lengths of all good strings in words.</p>
+<p>Example 1:<br>Input: words &#x3D; [“cat”,”bt”,”hat”,”tree”], chars &#x3D; “atach”<br>Output: 6<br>Explanation: The strings that can be formed are “cat” and “hat” so the answer is 3 + 3 &#x3D; 6.</p>
+<p>Example 2:<br>Input: words &#x3D; [“hello”,”world”,”leetcode”], chars &#x3D; “welldonehoneyr”<br>Output: 10<br>Explanation: The strings that can be formed are “hello” and “world” so the answer is 5 + 5 &#x3D; 10.</p>
+<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 1000<br>1 &lt;&#x3D; words[i].length, chars.length &lt;&#x3D; 100<br>words[i] and chars consist of lowercase English letters.</p>
+<p>拼写单词。</p>
 <blockquote>
-<p>如果字符串 s 中 不存在 两个不同字符 频次 相同的情况，就称 s 是 优质字符串 。<br>给你一个字符串 s，返回使 s 成为 优质字符串 需要删除的 最小 字符数。<br>字符串中字符的 频次 是该字符在字符串中的出现次数。例如，在字符串 “aab” 中，’a’ 的频次是 2，而 ‘b’ 的频次是 1 。</p>
+<p>给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。<br>假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。<br>注意：每次拼写（指拼写词汇表中的一个单词）时，chars 中的每个字母都只能用一次。<br>返回词汇表 words 中你掌握的所有单词的 长度之和。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历数组的时候，用一个长度为26的 <code>int[] map</code> 数组记录 input 字符串中每个不同字母的出现次数。</p>
-<p>接着我们再创建一个 hashset，去遍历这个长度为 26 的 int 数组，对于当前字母的出现次数 map[i]，如果他在 hashset 中出现过，那么他就不是一个 unique 的出现次数，那么我们就把这个出现次数减一，直到他变成一个 unique 的出现次数，再加入 hashset。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>用一个长度为26的 int array 统计字母表中每个不同字母的出现次数，然后遍历词汇表中的每个单词，看看字母表中的字母是否足够组成当前的单词，如果能组成，则将当前单词的长度累加到结果。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn) - m 个单词，单词平均长度为 n<br>空间O(m) - 要将长度为26的 int array复制 m 次</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletions</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] &gt; <span class="hljs-number">0</span> &amp;&amp; set.contains(map[i])) &#123;<br>                map[i]--;<br>                count++;<br>            &#125;<br>            set.add(map[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countCharacters</span><span class="hljs-params">(String[] words, String chars)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : chars.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (String word : words) &#123;<br>            <span class="hljs-type">int</span>[] letters = map.clone();<br>            <span class="hljs-keyword">if</span> (helper(word, letters)) &#123;<br>                count += word.length();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(String word, <span class="hljs-type">int</span>[] letters)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : word.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (letters[c - <span class="hljs-string">&#x27;a&#x27;</span>] &gt; <span class="hljs-number">0</span>) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// System.out.println(word);</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -299,11 +295,7 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
-      
         <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
     </div>
   
@@ -315,8 +307,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</div>
-      <div>https://shurui91.github.io/posts/3172184168.html</div>
+      <div>[LeetCode] 1160. Find Words That Can Be Formed by Characters</div>
+      <div>https://shurui91.github.io/posts/439538790.html</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +320,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 21, 2023</div>
+          <div>December 2, 2023</div>
         </div>
       
       
@@ -360,18 +352,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2208021994.html" title="[LeetCode] 1410. HTML Entity Parser">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1410. HTML Entity Parser</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
+                      <a href="/posts/3543248498.html" title="[LeetCode] 2661. First Completely Painted Row or Column">
+                        <span class="hidden-mobile">[LeetCode] 2661. First Completely Painted Row or Column</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -391,8 +377,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3172184168.html';
-          this.page.identifier = '/posts/3172184168.html';
+          this.page.url = 'https://shurui91.github.io/posts/439538790.html';
+          this.page.identifier = '/posts/439538790.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
