@@ -97,9 +97,9 @@
       
       <tag>array</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -253,9 +253,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>greedy</tag>
       
@@ -307,9 +307,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>counting sort</tag>
       
@@ -679,11 +679,11 @@
       
       <tag>sort</tag>
       
-      <tag>greedy</tag>
+      <tag>sliding window</tag>
       
       <tag>prefix sum</tag>
       
-      <tag>sliding window</tag>
+      <tag>greedy</tag>
       
     </tags>
     
@@ -771,6 +771,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1423. Maximum Points You Can Obtain from Cards</title>
+    <link href="/posts/4252400418.html"/>
+    <url>/posts/4252400418.html</url>
+    
+    <content type="html"><![CDATA[<p>There are several cards arranged in a row, and each card has an associated number of points. The points are given in the integer array cardPoints.</p><p>In one step, you can take one card from the beginning or from the end of the row. You have to take exactly k cards.</p><p>Your score is the sum of the points of the cards you have taken.</p><p>Given the integer array cardPoints and the integer k, return the maximum score you can obtain.</p><p>Example 1:<br>Input: cardPoints &#x3D; [1,2,3,4,5,6,1], k &#x3D; 3<br>Output: 12<br>Explanation: After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 &#x3D; 12.</p><p>Example 2:<br>Input: cardPoints &#x3D; [2,2,2], k &#x3D; 2<br>Output: 4<br>Explanation: Regardless of which two cards you take, your score will always be 4.</p><p>Example 3:<br>Input: cardPoints &#x3D; [9,7,7,9,7,7,9], k &#x3D; 7<br>Output: 55<br>Explanation: You have to take all the cards. Your score is the sum of points of all cards.</p><p>Example 4:<br>Input: cardPoints &#x3D; [1,1000,1], k &#x3D; 1<br>Output: 1<br>Explanation: You cannot take the card in the middle. Your best score is 1. </p><p>Example 5:<br>Input: cardPoints &#x3D; [1,79,80,1,1,1,200,1], k &#x3D; 3<br>Output: 202</p><p>Constraints:<br>1 &lt;&#x3D; cardPoints.length &lt;&#x3D; 105<br>1 &lt;&#x3D; cardPoints[i] &lt;&#x3D; 104<br>1 &lt;&#x3D; k &lt;&#x3D; cardPoints.length</p><p>可获得的最大点数。</p><blockquote><p>几张卡牌 排成一行，每张卡牌都有一个对应的点数。点数由整数数组 cardPoints 给出。<br>每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 k 张卡牌。<br>你的点数就是你拿到手中的所有卡牌的点数之和。<br>给你一个整数数组 cardPoints 和整数 k，请你返回可以获得的最大点数。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-points-you-can-obtain-from-cards">https://leetcode-cn.com/problems/maximum-points-you-can-obtain-from-cards</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题有两种做法，一种是前缀和 + 滑动窗口，另一种是动态规划，我这里暂时先提供前一种做法。动态规划的思路我自己想清楚了日后再补充。这道题滑动窗口的思路也可以应用到 1509 题。</p><p>题设说的拿掉卡牌的规则是一定要从数组的两端拿，一共拿 k 张牌。那么我一开始可以先从数组的左边拿 k 张牌，设这 k 张牌的点数之和为 sum，然后每次从数组左边靠中间的部分去掉一张牌并用一张数组右侧的牌替换，看看所有卡牌点数的加和是否能更大。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(k)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxScore</span><span class="hljs-params">(<span class="hljs-type">int</span>[] cardPoints, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cardPoints.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>sum += cardPoints[i];<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> sum;<br><span class="hljs-keyword">while</span> (index &lt; k) &#123;<br>sum -= cardPoints[k - <span class="hljs-number">1</span> - index];<br>sum += cardPoints[n - <span class="hljs-number">1</span> - index];<br>max = Math.max(max, sum);<br>index++;<br>&#125;<br><span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1657. Determine if Two Strings Are Close</title>
     <link href="/posts/1169337340.html"/>
     <url>/posts/1169337340.html</url>
@@ -841,9 +868,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>trie</tag>
       
