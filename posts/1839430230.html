@@ -23,13 +23,15 @@
 <meta property="og:site_name" content="CNoodle">
 <meta property="og:description" content="On a 2D plane, there are n points with integer coordinates points[i] &#x3D; [xi, yi]. Return the minimum time in seconds to visit all the points in the order given by points. You can move according to">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/11/14/1626_example_1.PNG">
 <meta property="article:published_time" content="2023-12-03T23:16:28.000Z">
-<meta property="article:modified_time" content="2023-12-03T23:30:16.278Z">
+<meta property="article:modified_time" content="2023-12-03T23:30:55.370Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2019/11/14/1626_example_1.PNG">
   
   
   
@@ -265,7 +267,7 @@
                 
                 <p>On a 2D plane, there are n points with integer coordinates points[i] &#x3D; [xi, yi]. Return the minimum time in seconds to visit all the points in the order given by points.</p>
 <p>You can move according to these rules:<br>In 1 second, you can either:<br>move vertically by one unit,<br>move horizontally by one unit, or<br>move diagonally sqrt(2) units (in other words, move one unit vertically then one unit horizontally in 1 second).<br>You have to visit the points in the same order as they appear in the array.<br>You are allowed to pass through points that appear later in the order, but these do not count as visits.</p>
-<p>Example 1:<br>Input: points &#x3D; [[1,1],[3,4],[-1,0]]<br>Output: 7<br>Explanation: One optimal path is [1,1] -&gt; [2,2] -&gt; [3,3] -&gt; [3,4] -&gt; [2,3] -&gt; [1,2] -&gt; [0,1] -&gt; [-1,0]<br>Time from [1,1] to [3,4] &#x3D; 3 seconds<br>Time from [3,4] to [-1,0] &#x3D; 4 seconds<br>Total time &#x3D; 7 seconds</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2019/11/14/1626_example_1.PNG" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: points &#x3D; [[1,1],[3,4],[-1,0]]<br>Output: 7<br>Explanation: One optimal path is [1,1] -&gt; [2,2] -&gt; [3,3] -&gt; [3,4] -&gt; [2,3] -&gt; [1,2] -&gt; [0,1] -&gt; [-1,0]<br>Time from [1,1] to [3,4] &#x3D; 3 seconds<br>Time from [3,4] to [-1,0] &#x3D; 4 seconds<br>Total time &#x3D; 7 seconds</p>
 <p>Example 2:<br>Input: points &#x3D; [[3,2],[-2,2]]<br>Output: 5</p>
 <p>Constraints:<br>points.length &#x3D;&#x3D; n<br>1 &lt;&#x3D; n &lt;&#x3D; 100<br>points[i].length &#x3D;&#x3D; 2<br>-1000 &lt;&#x3D; points[i][0], points[i][1] &lt;&#x3D; 1000</p>
 <p>访问所有点的最小时间。</p>
