@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1903. Largest Odd Number in String</title>
+    <link href="/posts/399132142.html"/>
+    <url>/posts/399132142.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a string num, representing a large integer. Return the largest-valued odd integer (as a string) that is a non-empty substring of num, or an empty string “” if no odd integer exists.</p><p>A substring is a contiguous sequence of characters within a string.</p><p>Example 1:<br>Input: num &#x3D; “52”<br>Output: “5”<br>Explanation: The only non-empty substrings are “5”, “2”, and “52”. “5” is the only odd number.</p><p>Example 2:<br>Input: num &#x3D; “4206”<br>Output: “”<br>Explanation: There are no odd numbers in “4206”.</p><p>Example 3:<br>Input: num &#x3D; “35427”<br>Output: “35427”<br>Explanation: “35427” is already an odd number.</p><p>Constraints:<br>1 &lt;&#x3D; num.length &lt;&#x3D; 105<br>num only consists of digits and does not contain any leading zeros.</p><p>字符串中的最大奇数。</p><blockquote><p>给你一个字符串 num ，表示一个大整数。请你在字符串 num 的所有 非空子字符串 中找出 值最大的奇数 ，并以字符串形式返回。如果不存在奇数，则返回一个空字符串 “” 。<br>子字符串 是字符串中的一个连续的字符序列。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。因为只允许删除字符，但是从左往右删除字符是无法改变数字的奇偶性的，所以思路是从右往左遍历 input 字符串，看看最右边一个字符串到底是奇数还是偶数。如果是奇数就可以直接返回了；如果是偶数，则删除当前字符，接着看左边的字符。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">largestOddNumber</span><span class="hljs-params">(String num)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> num.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">d</span> <span class="hljs-operator">=</span> num.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (d % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> num.substring(<span class="hljs-number">0</span>, i + <span class="hljs-number">1</span>);<br>                <span class="hljs-keyword">return</span> str;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>math</tag>
+      
+      <tag>greedy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1716. Calculate Money in Leetcode Bank</title>
     <link href="/posts/2716823774.html"/>
     <url>/posts/2716823774.html</url>
