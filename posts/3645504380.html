@@ -16,28 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an m x n binary matrix mat, return the number of special positions in mat. A position (i, j) is called special if mat[i][j] &#x3D;&#x3D; 1 and all other elements in row i and column j are 0 (row">
+    <meta name="description" content="You are given a string s consisting of lowercase English letters, and you are allowed to perform operations on it. In one operation, you can replace a character in s with another lowercase English let">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1582. Special Positions in a Binary Matrix">
-<meta property="og:url" content="https://shurui91.github.io/posts/1297775566.html">
+<meta property="og:title" content="[LeetCode] 2697. Lexicographically Smallest Palindrome">
+<meta property="og:url" content="https://shurui91.github.io/posts/3645504380.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an m x n binary matrix mat, return the number of special positions in mat. A position (i, j) is called special if mat[i][j] &#x3D;&#x3D; 1 and all other elements in row i and column j are 0 (row">
+<meta property="og:description" content="You are given a string s consisting of lowercase English letters, and you are allowed to perform operations on it. In one operation, you can replace a character in s with another lowercase English let">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/12/23/special1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/12/24/special-grid.jpg">
-<meta property="article:published_time" content="2020-11-14T08:58:07.000Z">
-<meta property="article:modified_time" content="2023-12-13T20:33:45.895Z">
+<meta property="article:published_time" content="2023-12-13T21:05:26.000Z">
+<meta property="article:modified_time" content="2023-12-13T21:09:15.047Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="two pointer">
+<meta property="article:tag" content="string">
+<meta property="article:tag" content="palindrome">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/12/23/special1.jpg">
   
   
   
-  <title>[LeetCode] 1582. Special Positions in a Binary Matrix - CNoodle</title>
+  <title>[LeetCode] 2697. Lexicographically Smallest Palindrome - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1582. Special Positions in a Binary Matrix"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2697. Lexicographically Smallest Palindrome"></span>
           
         </div>
 
@@ -202,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-11-14 00:58" pubdate>
-          November 14, 2020 am
+        <time datetime="2023-12-13 13:05" pubdate>
+          December 13, 2023 pm
         </time>
       </span>
     
@@ -214,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          1.9k words
         
       </span>
     
@@ -225,7 +222,7 @@
         
         
         
-          14 mins
+          16 mins
         
       </span>
     
@@ -262,25 +259,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1582. Special Positions in a Binary Matrix</h1>
+            <h1 id="seo-header">[LeetCode] 2697. Lexicographically Smallest Palindrome</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an m x n binary matrix mat, return the number of special positions in mat.</p>
-<p>A position (i, j) is called special if mat[i][j] &#x3D;&#x3D; 1 and all other elements in row i and column j are 0 (rows and columns are 0-indexed).</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/12/23/special1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: mat &#x3D; [[1,0,0],[0,0,1],[1,0,0]]<br>Output: 1<br>Explanation: (1, 2) is a special position because mat[1][2] &#x3D;&#x3D; 1 and all other elements in row 1 and column 2 are 0.</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/12/24/special-grid.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: mat &#x3D; [[1,0,0],[0,1,0],[0,0,1]]<br>Output: 3<br>Explanation: (0, 0), (1, 1) and (2, 2) are special positions.</p>
-<p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 100<br>mat[i][j] is either 0 or 1.</p>
-<p>二进制矩阵中的特殊位置。</p>
+                <p>You are given a string s consisting of lowercase English letters, and you are allowed to perform operations on it. In one operation, you can replace a character in s with another lowercase English letter.</p>
+<p>Your task is to make s a palindrome with the minimum number of operations possible. If there are multiple palindromes that can be made using the minimum number of operations, make the lexicographically smallest one.</p>
+<p>A string a is lexicographically smaller than a string b (of the same length) if in the first position where a and b differ, string a has a letter that appears earlier in the alphabet than the corresponding letter in b.</p>
+<p>Return the resulting palindrome string.</p>
+<p>Example 1:<br>Input: s &#x3D; “egcfe”<br>Output: “efcfe”<br>Explanation: The minimum number of operations to make “egcfe” a palindrome is 1, and the lexicographically smallest palindrome string we can get by modifying one character is “efcfe”, by changing ‘g’.</p>
+<p>Example 2:<br>Input: s &#x3D; “abcd”<br>Output: “abba”<br>Explanation: The minimum number of operations to make “abcd” a palindrome is 2, and the lexicographically smallest palindrome string we can get by modifying two characters is “abba”.</p>
+<p>Example 3:<br>Input: s &#x3D; “seven”<br>Output: “neven”<br>Explanation: The minimum number of operations to make “seven” a palindrome is 1, and the lexicographically smallest palindrome string we can get by modifying one character is “neven”.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 1000<br>s consists of only lowercase English letters.</p>
+<p>字典序最小回文串。</p>
 <blockquote>
-<p>给你一个大小为 rows x cols 的矩阵 mat，其中 mat[i][j] 是 0 或 1，请返回 矩阵 mat 中特殊位置的数目 。<br>特殊位置 定义：如果 mat[i][j] &#x3D;&#x3D; 1 并且第 i 行和第 j 列中的所有其他元素均为 0（行和列的下标均 从 0 开始 ），则位置 (i, j) 被称为特殊位置。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/special-positions-in-a-binary-matrix">https://leetcode.cn/problems/special-positions-in-a-binary-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给你一个由 小写英文字母 组成的字符串 s ，你可以对其执行一些操作。在一步操作中，你可以用其他小写英文字母 替换  s 中的一个字符。<br>请你执行 尽可能少的操作 ，使 s 变成一个 回文串 。如果执行 最少 操作次数的方案不止一种，则只需选取 字典序最小 的方案。<br>对于两个长度相同的字符串 a 和 b ，在 a 和 b 出现不同的第一个位置，如果该位置上 a 中对应字母比 b 中对应字母在字母表中出现顺序更早，则认为 a 的字典序比 b 的字典序要小。<br>返回最终的回文字符串。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是找二进制矩阵中的特殊位置。这个特殊位置的定义是如果当前坐标值是1且他是当前行和当前列唯一的1，则当前位置就是一个特殊位置。</p>
-<p>这道题不涉及算法，思路是需要扫描两遍矩阵。第一遍扫描的时候我们需要额外创建两个数组，一个记录当前行有多少个1，一个记录当前列有多少个1。第二遍扫描的时候，再碰到1的时候，我们就去看这个位置所在的行和所在的列是不是都只有一个1，如果是，则说明这是一个满足题意的特殊位置。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题就是处理回文串那一类的题，唯一需要留意的是当左右指针指向的元素不一样的时候，把字典序较大的那一个字母替换成字典序较小的那一个。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSpecial</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] mat)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; rowMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        HashMap&lt;Integer, Integer&gt; colMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (mat[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    rowMap.put(i, rowMap.getOrDefault(i, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                    colMap.put(j, colMap.getOrDefault(j, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (mat[i][j] == <span class="hljs-number">1</span> &amp;&amp; rowMap.get(i) == <span class="hljs-number">1</span> &amp;&amp; colMap.get(j) == <span class="hljs-number">1</span>) &#123;<br>                    count++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">makeSmallestPalindrome</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] letters = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> s.length() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> letters[left];<br>            <span class="hljs-type">char</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> letters[right];<br>            <span class="hljs-keyword">if</span> (l &gt; r) &#123;<br>                letters[left] = r;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                letters[right] = l;<br>            &#125;<br>            left++;<br>            right--;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(letters);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -294,11 +294,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
-        <a href="/tags/java/" class="print-no-link">#java</a>
+        <a href="/tags/palindrome/" class="print-no-link">#palindrome</a>
       
     </div>
   
@@ -310,8 +310,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1582. Special Positions in a Binary Matrix</div>
-      <div>https://shurui91.github.io/posts/1297775566.html</div>
+      <div>[LeetCode] 2697. Lexicographically Smallest Palindrome</div>
+      <div>https://shurui91.github.io/posts/3645504380.html</div>
     </div>
     <div class="license-meta">
       
@@ -323,7 +323,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 14, 2020</div>
+          <div>December 13, 2023</div>
         </div>
       
       
@@ -355,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/805821143.html" title="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2419185708.html" title="[LeetCode] 720. Longest Word in Dictionary">
-                        <span class="hidden-mobile">[LeetCode] 720. Longest Word in Dictionary</span>
+                      <a href="/posts/399132142.html" title="[LeetCode] 1903. Largest Odd Number in String">
+                        <span class="hidden-mobile">[LeetCode] 1903. Largest Odd Number in String</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -386,8 +380,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1297775566.html';
-          this.page.identifier = '/posts/1297775566.html';
+          this.page.url = 'https://shurui91.github.io/posts/3645504380.html';
+          this.page.identifier = '/posts/3645504380.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
