@@ -973,6 +973,31 @@
   
   
   <entry>
+    <title>[LeetCode] 1582. Special Positions in a Binary Matrix</title>
+    <link href="/posts/1297775566.html"/>
+    <url>/posts/1297775566.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an m x n binary matrix mat, return the number of special positions in mat.</p><p>A position (i, j) is called special if mat[i][j] &#x3D;&#x3D; 1 and all other elements in row i and column j are 0 (rows and columns are 0-indexed).</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/12/23/special1.jpg" alt="Example 1"><br>Input: mat &#x3D; [[1,0,0],[0,0,1],[1,0,0]]<br>Output: 1<br>Explanation: (1, 2) is a special position because mat[1][2] &#x3D;&#x3D; 1 and all other elements in row 1 and column 2 are 0.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/12/24/special-grid.jpg" alt="Example 2"><br>Input: mat &#x3D; [[1,0,0],[0,1,0],[0,0,1]]<br>Output: 3<br>Explanation: (0, 0), (1, 1) and (2, 2) are special positions.</p><p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 100<br>mat[i][j] is either 0 or 1.</p><p>二进制矩阵中的特殊位置。</p><blockquote><p>给你一个大小为 rows x cols 的矩阵 mat，其中 mat[i][j] 是 0 或 1，请返回 矩阵 mat 中特殊位置的数目 。<br>特殊位置 定义：如果 mat[i][j] &#x3D;&#x3D; 1 并且第 i 行和第 j 列中的所有其他元素均为 0（行和列的下标均 从 0 开始 ），则位置 (i, j) 被称为特殊位置。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/special-positions-in-a-binary-matrix">https://leetcode.cn/problems/special-positions-in-a-binary-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是找二进制矩阵中的特殊位置。这个特殊位置的定义是如果当前坐标值是1且他是当前行和当前列唯一的1，则当前位置就是一个特殊位置。</p><p>这道题不涉及算法，思路是需要扫描两遍矩阵。第一遍扫描的时候我们需要额外创建两个数组，一个记录当前行有多少个1，一个记录当前列有多少个1。第二遍扫描的时候，再碰到1的时候，我们就去看这个位置所在的行和所在的列是不是都只有一个1，如果是，则说明这是一个满足题意的特殊位置。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSpecial</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] mat)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; rowMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        HashMap&lt;Integer, Integer&gt; colMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (mat[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    rowMap.put(i, rowMap.getOrDefault(i, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                    colMap.put(j, colMap.getOrDefault(j, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (mat[i][j] == <span class="hljs-number">1</span> &amp;&amp; rowMap.get(i) == <span class="hljs-number">1</span> &amp;&amp; colMap.get(j) == <span class="hljs-number">1</span>) &#123;<br>                    count++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 720. Longest Word in Dictionary</title>
     <link href="/posts/2419185708.html"/>
     <url>/posts/2419185708.html</url>
