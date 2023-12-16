@@ -16,29 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a 0-indexed m x n binary matrix grid. A 0-indexed m x n difference matrix diff is created with the following procedure:Let the number of ones in the ith row be onesRowi.Let the number of">
+    <meta name="description" content="Given the root of a perfect binary tree, reverse the node values at each odd level of the tree. For example, suppose the node values at level 3 are [2,1,3,4,7,11,29,18], then it should become [18,29,1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column">
-<meta property="og:url" content="https://shurui91.github.io/posts/1054293803.html">
+<meta property="og:title" content="[LeetCode] 2415. Reverse Odd Levels of Binary Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/2438119101.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a 0-indexed m x n binary matrix grid. A 0-indexed m x n difference matrix diff is created with the following procedure:Let the number of ones in the ith row be onesRowi.Let the number of">
+<meta property="og:description" content="Given the root of a perfect binary tree, reverse the node values at each odd level of the tree. For example, suppose the node values at level 3 are [2,1,3,4,7,11,29,18], then it should become [18,29,1">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/11/06/image-20221106171729-5.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/11/06/image-20221106171747-6.png">
-<meta property="article:published_time" content="2023-12-16T01:18:02.000Z">
-<meta property="article:modified_time" content="2023-12-16T01:22:11.598Z">
+<meta property="article:published_time" content="2023-12-16T21:48:38.000Z">
+<meta property="article:modified_time" content="2023-12-16T21:55:03.624Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="matrix">
-<meta property="article:tag" content="simulation">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="bfs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2022/11/06/image-20221106171729-5.png">
   
   
   
-  <title>[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column - CNoodle</title>
+  <title>[LeetCode] 2415. Reverse Odd Levels of Binary Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2415. Reverse Odd Levels of Binary Tree"></span>
           
         </div>
 
@@ -203,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-15 17:18" pubdate>
-          December 15, 2023 pm
+        <time datetime="2023-12-16 13:48" pubdate>
+          December 16, 2023 pm
         </time>
       </span>
     
@@ -215,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          2k words
         
       </span>
     
@@ -226,7 +223,7 @@
         
         
         
-          22 mins
+          18 mins
         
       </span>
     
@@ -263,43 +260,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column</h1>
+            <h1 id="seo-header">[LeetCode] 2415. Reverse Odd Levels of Binary Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a 0-indexed m x n binary matrix grid.</p>
-<p>A 0-indexed m x n difference matrix diff is created with the following procedure:<br>Let the number of ones in the ith row be onesRowi.<br>Let the number of ones in the jth column be onesColj.<br>Let the number of zeros in the ith row be zerosRowi.<br>Let the number of zeros in the jth column be zerosColj.<br>diff[i][j] &#x3D; onesRowi + onesColj - zerosRowi - zerosColj<br>Return the difference matrix diff.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/11/06/image-20221106171729-5.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: grid &#x3D; [[0,1,1],[1,0,1],[0,0,1]]<br>Output: [[0,0,4],[0,0,4],[-2,-2,2]]<br>Explanation:</p>
-<ul>
-<li>diff[0][0] &#x3D; onesRow0 + onesCol0 - zerosRow0 - zerosCol0 &#x3D; 2 + 1 - 1 - 2 &#x3D; 0 </li>
-<li>diff[0][1] &#x3D; onesRow0 + onesCol1 - zerosRow0 - zerosCol1 &#x3D; 2 + 1 - 1 - 2 &#x3D; 0 </li>
-<li>diff[0][2] &#x3D; onesRow0 + onesCol2 - zerosRow0 - zerosCol2 &#x3D; 2 + 3 - 1 - 0 &#x3D; 4 </li>
-<li>diff[1][0] &#x3D; onesRow1 + onesCol0 - zerosRow1 - zerosCol0 &#x3D; 2 + 1 - 1 - 2 &#x3D; 0 </li>
-<li>diff[1][1] &#x3D; onesRow1 + onesCol1 - zerosRow1 - zerosCol1 &#x3D; 2 + 1 - 1 - 2 &#x3D; 0 </li>
-<li>diff[1][2] &#x3D; onesRow1 + onesCol2 - zerosRow1 - zerosCol2 &#x3D; 2 + 3 - 1 - 0 &#x3D; 4 </li>
-<li>diff[2][0] &#x3D; onesRow2 + onesCol0 - zerosRow2 - zerosCol0 &#x3D; 1 + 1 - 2 - 2 &#x3D; -2</li>
-<li>diff[2][1] &#x3D; onesRow2 + onesCol1 - zerosRow2 - zerosCol1 &#x3D; 1 + 1 - 2 - 2 &#x3D; -2</li>
-<li>diff[2][2] &#x3D; onesRow2 + onesCol2 - zerosRow2 - zerosCol2 &#x3D; 1 + 3 - 2 - 0 &#x3D; 2</li>
-</ul>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/11/06/image-20221106171747-6.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: grid &#x3D; [[1,1,1],[1,1,1]]<br>Output: [[5,5,5],[5,5,5]]<br>Explanation:</p>
-<ul>
-<li>diff[0][0] &#x3D; onesRow0 + onesCol0 - zerosRow0 - zerosCol0 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-<li>diff[0][1] &#x3D; onesRow0 + onesCol1 - zerosRow0 - zerosCol1 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-<li>diff[0][2] &#x3D; onesRow0 + onesCol2 - zerosRow0 - zerosCol2 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-<li>diff[1][0] &#x3D; onesRow1 + onesCol0 - zerosRow1 - zerosCol0 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-<li>diff[1][1] &#x3D; onesRow1 + onesCol1 - zerosRow1 - zerosCol1 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-<li>diff[1][2] &#x3D; onesRow1 + onesCol2 - zerosRow1 - zerosCol2 &#x3D; 3 + 2 - 0 - 0 &#x3D; 5</li>
-</ul>
-<p>Constraints:<br>m &#x3D;&#x3D; grid.length<br>n &#x3D;&#x3D; grid[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 105<br>1 &lt;&#x3D; m * n &lt;&#x3D; 105<br>grid[i][j] is either 0 or 1.</p>
-<p>行和列中一和零的差值。</p>
+                <p>Given the root of a perfect binary tree, reverse the node values at each odd level of the tree.</p>
+<p>For example, suppose the node values at level 3 are [2,1,3,4,7,11,29,18], then it should become [18,29,11,7,4,3,1,2].<br>Return the root of the reversed tree.</p>
+<p>A binary tree is perfect if all parent nodes have two children and all leaves are on the same level.</p>
+<p>The level of a node is the number of edges along the path between it and the root node.</p>
+<p>Example 1:<br>Input: root &#x3D; [2,3,5,8,13,21,34]<br>Output: [2,5,3,8,13,21,34]<br>Explanation:<br>The tree has only one odd level.<br>The nodes at level 1 are 3, 5 respectively, which are reversed and become 5, 3.</p>
+<p>Example 2:<br>Input: root &#x3D; [7,13,11]<br>Output: [7,11,13]<br>Explanation:<br>The nodes at level 1 are 13, 11, which are reversed and become 11, 13.</p>
+<p>Example 3:<br>Input: root &#x3D; [0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]<br>Output: [0,2,1,0,0,0,0,2,2,2,2,1,1,1,1]<br>Explanation:<br>The odd levels have non-zero values.<br>The nodes at level 1 were 1, 2, and are 2, 1 after the reversal.<br>The nodes at level 3 were 1, 1, 1, 1, 2, 2, 2, 2, and are 2, 2, 2, 2, 1, 1, 1, 1 after the reversal.</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [1, 214].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 105<br>root is a perfect binary tree.</p>
+<p>反转二叉树的奇数层。</p>
 <blockquote>
-<p>给你一个下标从 0 开始的 m x n 二进制矩阵 grid 。<br>我们按照如下过程，定义一个下标从 0 开始的 m x n 差值矩阵 diff ：<br>令第 i 行一的数目为 onesRowi 。<br>令第 j 列一的数目为 onesColj 。<br>令第 i 行零的数目为 zerosRowi 。<br>令第 j 列零的数目为 zerosColj 。<br>diff[i][j] &#x3D; onesRowi + onesColj - zerosRowi - zerosColj<br>请你返回差值矩阵 diff 。</p>
+<p>给你一棵 完美 二叉树的根节点 root ，请你反转这棵树中每个 奇数 层的节点值。<br>例如，假设第 3 层的节点值是 [2,1,3,4,7,11,29,18] ，那么反转后它应该变成 [18,29,11,7,4,3,1,2] 。<br>反转后，返回树的根节点。<br>完美 二叉树需满足：二叉树的所有父节点都有两个子节点，且所有叶子节点都在同一层。<br>节点的 层数 等于该节点到根节点之间的边数。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>创建两个hashmap分别记录每一行和每一列上 1 的个数，然后按照题目给的公式返回二维数组。这里我用数组代替 hashmap 加快速度。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn) - output matrix</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这里我提供一个 前序遍历&#x2F;DFS 的思路，我需要一个 helper 函数，因为需要统计当前层的深度。如果遇到奇数层，则需要交换当前层的左右两个节点。这个 helper 函数是从第二层开始的因为第一层只有 root 一个节点。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] onesMinusZeros(<span class="hljs-type">int</span>[][] grid) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] rowMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        <span class="hljs-type">int</span>[] colMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    rowMap[i]++;<br>                    colMap[j]++;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span>[][] diff = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                diff[i][j] = rowMap[i] + colMap[j] - (m - rowMap[i]) - (n - colMap[j]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> diff;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">reverseOddLevels</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        helper(root.left, root.right, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode left, TreeNode right, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (left == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (depth % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> left.val;<br>            left.val = right.val;<br>            right.val = temp;<br>        &#125;<br>        helper(left.right, right.left, depth + <span class="hljs-number">1</span>);<br>        helper(left.left, right.right, depth + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -313,13 +295,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
-        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
+      
+        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
       
     </div>
   
@@ -331,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column</div>
-      <div>https://shurui91.github.io/posts/1054293803.html</div>
+      <div>[LeetCode] 2415. Reverse Odd Levels of Binary Tree</div>
+      <div>https://shurui91.github.io/posts/2438119101.html</div>
     </div>
     <div class="license-meta">
       
@@ -344,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 15, 2023</div>
+          <div>December 16, 2023</div>
         </div>
       
       
@@ -376,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2438119101.html" title="[LeetCode] 2415. Reverse Odd Levels of Binary Tree">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2415. Reverse Odd Levels of Binary Tree</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3645504380.html" title="[LeetCode] 2697. Lexicographically Smallest Palindrome">
-                        <span class="hidden-mobile">[LeetCode] 2697. Lexicographically Smallest Palindrome</span>
+                      <a href="/posts/1054293803.html" title="[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column">
+                        <span class="hidden-mobile">[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -407,8 +383,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1054293803.html';
-          this.page.identifier = '/posts/1054293803.html';
+          this.page.url = 'https://shurui91.github.io/posts/2438119101.html';
+          this.page.identifier = '/posts/2438119101.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

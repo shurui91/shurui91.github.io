@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2415. Reverse Odd Levels of Binary Tree</title>
+    <link href="/posts/2438119101.html"/>
+    <url>/posts/2438119101.html</url>
+    
+    <content type="html"><![CDATA[<p>Given the root of a perfect binary tree, reverse the node values at each odd level of the tree.</p><p>For example, suppose the node values at level 3 are [2,1,3,4,7,11,29,18], then it should become [18,29,11,7,4,3,1,2].<br>Return the root of the reversed tree.</p><p>A binary tree is perfect if all parent nodes have two children and all leaves are on the same level.</p><p>The level of a node is the number of edges along the path between it and the root node.</p><p>Example 1:<br>Input: root &#x3D; [2,3,5,8,13,21,34]<br>Output: [2,5,3,8,13,21,34]<br>Explanation:<br>The tree has only one odd level.<br>The nodes at level 1 are 3, 5 respectively, which are reversed and become 5, 3.</p><p>Example 2:<br>Input: root &#x3D; [7,13,11]<br>Output: [7,11,13]<br>Explanation:<br>The nodes at level 1 are 13, 11, which are reversed and become 11, 13.</p><p>Example 3:<br>Input: root &#x3D; [0,1,2,0,0,0,0,1,1,1,1,2,2,2,2]<br>Output: [0,2,1,0,0,0,0,2,2,2,2,1,1,1,1]<br>Explanation:<br>The odd levels have non-zero values.<br>The nodes at level 1 were 1, 2, and are 2, 1 after the reversal.<br>The nodes at level 3 were 1, 1, 1, 1, 2, 2, 2, 2, and are 2, 2, 2, 2, 1, 1, 1, 1 after the reversal.</p><p>Constraints:<br>The number of nodes in the tree is in the range [1, 214].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 105<br>root is a perfect binary tree.</p><p>反转二叉树的奇数层。</p><blockquote><p>给你一棵 完美 二叉树的根节点 root ，请你反转这棵树中每个 奇数 层的节点值。<br>例如，假设第 3 层的节点值是 [2,1,3,4,7,11,29,18] ，那么反转后它应该变成 [18,29,11,7,4,3,1,2] 。<br>反转后，返回树的根节点。<br>完美 二叉树需满足：二叉树的所有父节点都有两个子节点，且所有叶子节点都在同一层。<br>节点的 层数 等于该节点到根节点之间的边数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这里我提供一个 前序遍历&#x2F;DFS 的思路，我需要一个 helper 函数，因为需要统计当前层的深度。如果遇到奇数层，则需要交换当前层的左右两个节点。这个 helper 函数是从第二层开始的因为第一层只有 root 一个节点。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">reverseOddLevels</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        helper(root.left, root.right, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode left, TreeNode right, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (left == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (depth % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> left.val;<br>            left.val = right.val;<br>            right.val = temp;<br>        &#125;<br>        helper(left.right, right.left, depth + <span class="hljs-number">1</span>);<br>        helper(left.left, right.right, depth + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>dfs</tag>
+      
+      <tag>tree</tag>
+      
+      <tag>bfs</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2482. Difference Between Ones and Zeros in Row and Column</title>
     <link href="/posts/1054293803.html"/>
     <url>/posts/1054293803.html</url>
@@ -1500,9 +1527,9 @@
       
       <tag>javascript</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
