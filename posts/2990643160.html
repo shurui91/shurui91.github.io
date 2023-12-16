@@ -16,28 +16,30 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not">
+    <meta name="description" content="Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise. A subtree of a binary tree tree">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1. Two Sum">
-<meta property="og:url" content="https://shurui91.github.io/posts/4117090286.html">
+<meta property="og:title" content="[LeetCode] 572. Subtree of Another Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/2990643160.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not">
+<meta property="og:description" content="Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise. A subtree of a binary tree tree">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-10-08T16:21:34.000Z">
-<meta property="article:modified_time" content="2023-11-06T17:30:11.139Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/28/subtree1-tree.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/28/subtree2-tree.jpg">
+<meta property="article:published_time" content="2020-03-12T20:38:22.000Z">
+<meta property="article:modified_time" content="2023-12-16T23:03:29.671Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="javascript">
-<meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="two sum">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="recursion">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/04/28/subtree1-tree.jpg">
   
   
   
-  <title>[LeetCode] 1. Two Sum - CNoodle</title>
+  <title>[LeetCode] 572. Subtree of Another Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1. Two Sum"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 572. Subtree of Another Tree"></span>
           
         </div>
 
@@ -202,8 +204,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2019-10-08 09:21" pubdate>
-          October 8, 2019 am
+        <time datetime="2020-03-12 13:38" pubdate>
+          March 12, 2020 pm
         </time>
       </span>
     
@@ -214,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2.7k words
         
       </span>
     
@@ -225,7 +227,7 @@
         
         
         
-          17 mins
+          23 mins
         
       </span>
     
@@ -262,21 +264,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1. Two Sum</h1>
+            <h1 id="seo-header">[LeetCode] 572. Subtree of Another Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.<br>You may assume that each input would have exactly one solution, and you may not use the same element twice.<br>You can return the answer in any order.<br>Example 1:Input: nums &#x3D; [2,7,11,15], target &#x3D; 9Output: [0,1]Explanation: Because nums[0] + nums[1] &#x3D;&#x3D; 9, we return [0, 1].<br>Example 2:Input: nums &#x3D; [3,2,4], target &#x3D; 6Output: [1,2]<br>Example 3:Input: nums &#x3D; [3,3], target &#x3D; 6Output: [0,1]<br>Constraints:<br>2 &lt;&#x3D; nums.length &lt;&#x3D; 104<br>-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>-109 &lt;&#x3D; target &lt;&#x3D; 109<br>Only one valid answer exists.<br>Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?</p>
-<p>两数之和。</p>
+                <p>Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.</p>
+<p>A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node’s descendants. The tree tree could also be considered as a subtree of itself.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/04/28/subtree1-tree.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [3,4,5,1,2], subRoot &#x3D; [4,1,2]<br>Output: true</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/04/28/subtree2-tree.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [3,4,5,1,2,null,null,null,null,0], subRoot &#x3D; [4,1,2]<br>Output: false</p>
+<p>Constraints:<br>The number of nodes in the root tree is in the range [1, 2000].<br>The number of nodes in the subRoot tree is in the range [1, 1000].<br>-104 &lt;&#x3D; root.val &lt;&#x3D; 104<br>-104 &lt;&#x3D; subRoot.val &lt;&#x3D; 104</p>
+<p>另一个树的子树。</p>
 <blockquote>
-<p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 的那 两个 整数，并返回它们的数组下标。<br>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br>你可以按任意顺序返回答案。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum">https://leetcode-cn.com/problems/two-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给你两棵二叉树 root 和 subRoot 。检验 root 中是否包含和 subRoot 具有相同结构和节点值的子树。如果存在，返回 true ；否则，返回 false 。<br>二叉树 tree 的一棵子树包括 tree 的某个节点和这个节点的所有后代节点。tree 也可以看做它自身的一棵子树。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subtree-of-another-tree">https://leetcode.cn/problems/subtree-of-another-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>暴力解是O(n^2)级别的复杂度，一定会超时。为了不超时，我们使用 hashmap 记录每个元素和他的下标。找的时候是在找 hashmap 里是否存在能组成 target 的另一个数字 target - nums[i]。<br>LC里面有一部分题目也是需要通过 hashmap 或者 two pointer 来加快运行速度的。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给两个树 root 和 subRoot，判断 subRoot 是否是 root 的子树。如果两者相同，也可以视为 subRoot 是 root 的子树。<br>这个题的思路跟100题same tree非常像。既然是问  subRoot 是否是 root 的子树，那也就意味着 root 这棵树比 subRoot 要大，或者最多相同，所以就可以按照100题的思路递归比较</p>
+<ul>
+<li>root 的左子树和右子树是否分别和 subRoot 一样</li>
+<li>root 是否和 subRoot 是相同的树</li>
+</ul>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h4 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) &#123;<br>		<span class="hljs-comment">// corner case</span><br>		<span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length &lt; <span class="hljs-number">2</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>		&#125;<br><br>		<span class="hljs-comment">// normal case</span><br>		<span class="hljs-comment">// &lt;element, index&gt;</span><br>		HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">complement</span> <span class="hljs-operator">=</span> target - nums[i];<br>			<span class="hljs-keyword">if</span> (map.containsKey(complement)) &#123;<br>				<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; map.get(complement), i &#125;;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				map.put(nums[i], i);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSubtree</span><span class="hljs-params">(TreeNode root, TreeNode subRoot)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (subRoot == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot) || helper(root, subRoot);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode p, TreeNode q)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p == <span class="hljs-literal">null</span> &amp;&amp; q == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (p == <span class="hljs-literal">null</span> || q == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (p.val != q.val) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(p.left, q.left) &amp;&amp; helper(p.right, q.right);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h4 id="JavaScript实现"><a href="#JavaScript实现" class="headerlink" title="JavaScript实现"></a>JavaScript实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">target</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> twoSum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, target</span>) &#123;<br>	<span class="hljs-keyword">let</span> map = &#123;&#125;;<br>	<span class="hljs-keyword">const</span> len = nums.<span class="hljs-property">length</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>		<span class="hljs-keyword">let</span> cur = nums[i];<br>		<span class="hljs-keyword">let</span> complement = target - cur;<br>		<span class="hljs-keyword">if</span> (map[complement] !== <span class="hljs-literal">undefined</span>) &#123;<br>			<span class="hljs-keyword">return</span> [map[complement], i];<br>		&#125;<br>		map[cur] = i;<br>	&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * function TreeNode(val) &#123;</span><br><span class="hljs-comment"> *     this.val = val;</span><br><span class="hljs-comment"> *     this.left = this.right = null;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">t</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">boolean</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> isSubtree = <span class="hljs-keyword">function</span> (<span class="hljs-params">s, t</span>) &#123;<br>	<span class="hljs-keyword">if</span> (s === <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (t === <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-title function_">isSameTree</span>(s, t)) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-title function_">isSubtree</span>(s.<span class="hljs-property">left</span>, t) || <span class="hljs-title function_">isSubtree</span>(s.<span class="hljs-property">right</span>, t) || <span class="hljs-title function_">isSameTree</span>(s, t);<br>&#125;;<br><br><span class="hljs-keyword">var</span> isSameTree = <span class="hljs-keyword">function</span> (<span class="hljs-params">s, t</span>) &#123;<br>	<span class="hljs-keyword">if</span> (s === <span class="hljs-literal">null</span> &amp;&amp; t === <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (s === <span class="hljs-literal">null</span> || t === <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (s.<span class="hljs-property">val</span> != t.<span class="hljs-property">val</span>) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-title function_">isSameTree</span>(s.<span class="hljs-property">left</span>, t.<span class="hljs-property">left</span>) &amp;&amp; <span class="hljs-title function_">isSameTree</span>(s.<span class="hljs-property">right</span>, t.<span class="hljs-property">right</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -291,17 +303,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
-        <a href="/tags/two-sum/" class="print-no-link">#two sum</a>
+        <a href="/tags/recursion/" class="print-no-link">#recursion</a>
       
     </div>
   
@@ -313,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1. Two Sum</div>
-      <div>https://shurui91.github.io/posts/4117090286.html</div>
+      <div>[LeetCode] 572. Subtree of Another Tree</div>
+      <div>https://shurui91.github.io/posts/2990643160.html</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 8, 2019</div>
+          <div>March 12, 2020</div>
         </div>
       
       
@@ -358,15 +368,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1448283896.html" title="[LeetCode] 334. Increasing Triplet Subsequence">
+                      <a href="/posts/939082724.html" title="LeetCode 题目总结">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 334. Increasing Triplet Subsequence</span>
+                        <span class="hidden-mobile">LeetCode 题目总结</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/posts/3904628621.html" title="[LeetCode] 498. Diagonal Traverse">
+                        <span class="hidden-mobile">[LeetCode] 498. Diagonal Traverse</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -383,8 +399,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/4117090286.html';
-          this.page.identifier = '/posts/4117090286.html';
+          this.page.url = 'https://shurui91.github.io/posts/2990643160.html';
+          this.page.identifier = '/posts/2990643160.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
