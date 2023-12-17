@@ -24,7 +24,7 @@
 <meta property="og:description" content="A peak element is an element that is strictly greater than its neighbors. Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-04T20:41:08.000Z">
-<meta property="article:modified_time" content="2023-12-17T22:02:03.875Z">
+<meta property="article:modified_time" content="2023-12-17T22:02:55.929Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
@@ -211,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2k words
         
       </span>
     
@@ -282,6 +282,8 @@
 
 <p>JavaScript实现</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findPeakElement = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) &#123;<br>	<span class="hljs-keyword">let</span> start = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">let</span> end = nums.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span> (start + <span class="hljs-number">1</span> &lt; end) &#123;<br>		<span class="hljs-keyword">let</span> mid = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(start + (end - start) / <span class="hljs-number">2</span>);<br>		<span class="hljs-keyword">if</span> (nums[mid] &gt; nums[mid + <span class="hljs-number">1</span>]) &#123;<br>			end = mid;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			start = mid;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">if</span> (nums[start] &gt; nums[end]) &#123;<br>		<span class="hljs-keyword">return</span> start;<br>	&#125;<br>	<span class="hljs-keyword">return</span> end;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">162. Find Peak Element<br>852. Peak Index in a Mountain Array<br>1095. Find in Mountain Array<br></code></pre></td></tr></table></figure>
 
                 
               </div>
