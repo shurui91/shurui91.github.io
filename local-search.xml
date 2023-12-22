@@ -103,9 +103,9 @@
       
       <tag>string</tag>
       
-      <tag>math</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -274,11 +274,11 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
-      <tag>greedy</tag>
+      <tag>sort</tag>
       
     </tags>
     
@@ -328,9 +328,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -459,9 +459,9 @@
       
       <tag>string</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -721,9 +721,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -865,6 +865,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1053. Previous Permutation With One Swap</title>
+    <link href="/posts/2013378145.html"/>
+    <url>/posts/2013378145.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an array of positive integers arr (not necessarily distinct), return the<br>lexicographically largest permutation that is smaller than arr, that can be made with exactly one swap. If it cannot be done, then return the same array.</p><p>Note that a swap exchanges the positions of two numbers arr[i] and arr[j]</p><p>Example 1:<br>Input: arr &#x3D; [3,2,1]<br>Output: [3,1,2]<br>Explanation: Swapping 2 and 1.</p><p>Example 2:<br>Input: arr &#x3D; [1,1,5]<br>Output: [1,1,5]<br>Explanation: This is already the smallest permutation.</p><p>Example 3:<br>Input: arr &#x3D; [1,9,4,6,7]<br>Output: [1,7,4,6,9]<br>Explanation: Swapping 9 and 7.</p><p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 104<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 104</p><p>交换一次的先前排列。</p><blockquote><p>给你一个正整数数组 arr（可能存在重复的元素），请你返回可在 一次交换（交换两数字 arr[i] 和 arr[j] 的位置）后得到的、按字典序排列小于 arr 的最大排列。<br>如果无法这么操作，就请返回原数组。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/previous-permutation-with-one-swap">https://leetcode.cn/problems/previous-permutation-with-one-swap</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一，treemap"><a href="#思路一，treemap" class="headerlink" title="思路一，treemap"></a>思路一，treemap</h2><p>这道题有两种思路，一种会利用到 treemap，一种是线性解法。这道题是在找比当前 input 给的 permutation 小的所有 permutation 里面最大的那个。</p><p>这道题的核心在于必须从右往左扫描 input 数组，从左往右是不行的。至于到底是哪两个数字 swap，其中一个一定是找一个下降的位置中较大的那个数字，另一个数字则视情况而定。这一类的题可以有多种变化。</p><p>首先 treemap 的做法，对于当前的 input 数组给的 permutation，如果我们要找一个比他小的 permutation，我们首先需要找到一个下降的地方，比如第一个例子里的3 - 2，然后我们将 2 替换成比 2 小的数字里最大的那个（如果有的话）。按照这个例子就是 1。</p><p>所以我们可以反过来思考，我们从右往左扫描，对于当前的数字，如果 treemap 里存在一个 lowerKey，那么就把当前数字和 lowerKey 进行 swap 即可。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] prevPermOpt1(<span class="hljs-type">int</span>[] arr) &#123;<br>        TreeMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> arr.length;<br>        map.put(arr[len - <span class="hljs-number">1</span>], len - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> arr.length - <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">lower</span> <span class="hljs-operator">=</span> map.lowerKey(arr[i]);<br>            <span class="hljs-keyword">if</span> (lower != <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> map.get(lower);<br>                swap(arr, i, j);<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            map.put(arr[i], i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> arr[i];<br>        arr[i] = arr[j];<br>        arr[j] = temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二，类似next-permutation"><a href="#思路二，类似next-permutation" class="headerlink" title="思路二，类似next permutation"></a>思路二，类似next permutation</h2><p>treemap 的解法是利用到 treemap 自动排序的特点。这里我们线性的解法则可以省去这个排序的步骤。还是从右往左扫描，按照题意我们需要找一个拐点。如果从右往左扫描下去一直是下坡的话（arr[i - 1] &lt; arr[i]），则一直往左走；当我们找到一个拐点的时候，则停下，此时的 arr[i - 1] 是参与 swap 的元素之一。此时我们再次从右往左扫描，找到的第一个比 arr[i - 1] 小的元素是参与 swap 的另一个元素。把两者 swap 即可。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="Java实现-1"><a href="#Java实现-1" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] prevPermOpt1(<span class="hljs-type">int</span>[] arr) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">1</span>; i--) &#123;<br>            <span class="hljs-keyword">if</span> (arr[i - <span class="hljs-number">1</span>] &gt; arr[i]) &#123;<br>                a = i - <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">1</span>; i--) &#123;<br>            <span class="hljs-keyword">if</span> (arr[i] == arr[i - <span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (arr[i] &lt; arr[a]) &#123;<br>                b = i;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        swap(arr, a, b);<br>        <span class="hljs-keyword">return</span> arr;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> arr[i];<br>arr[i] = arr[j];<br>arr[j] = temp;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>treemap</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1962. Remove Stones to Minimize the Total</title>
     <link href="/posts/3274119760.html"/>
     <url>/posts/3274119760.html</url>
@@ -908,9 +935,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>sort</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -933,13 +960,13 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
+      <tag>greedy</tag>
       
       <tag>sliding window</tag>
       
       <tag>prefix sum</tag>
       
-      <tag>greedy</tag>
+      <tag>sort</tag>
       
     </tags>
     
@@ -989,9 +1016,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1014,9 +1041,9 @@
       
       <tag>java</tag>
       
-      <tag>graph</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>graph</tag>
       
       <tag>union find</tag>
       
@@ -1207,9 +1234,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1311,9 +1338,9 @@
       
       <tag>java</tag>
       
-      <tag>dynamic programming</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>dynamic programming</tag>
       
       <tag>binary search</tag>
       
