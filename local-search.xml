@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2660. Determine the Winner of a Bowling Game</title>
+    <link href="/posts/969600274.html"/>
+    <url>/posts/969600274.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two 0-indexed integer arrays player1 and player2, that represent the number of pins that player 1 and player 2 hit in a bowling game, respectively.</p><p>The bowling game consists of n turns, and the number of pins in each turn is exactly 10.</p><p>Assume a player hit xi pins in the ith turn. The value of the ith turn for the player is:</p><p>2xi if the player hit 10 pins in any of the previous two turns.<br>Otherwise, It is xi.<br>The score of the player is the sum of the values of their n turns.</p><p>Return<br>1 if the score of player 1 is more than the score of player 2,<br>2 if the score of player 2 is more than the score of player 1, and<br>0 in case of a draw.</p><p>Example 1:<br>Input: player1 &#x3D; [4,10,7,9], player2 &#x3D; [6,5,2,3]<br>Output: 1<br>Explanation: The score of player1 is 4 + 10 + 2<em>7 + 2</em>9 &#x3D; 46.<br>The score of player2 is 6 + 5 + 2 + 3 &#x3D; 16.<br>Score of player1 is more than the score of player2, so, player1 is the winner, and the answer is 1.</p><p>Example 2:<br>Input: player1 &#x3D; [3,5,7,6], player2 &#x3D; [8,10,10,2]<br>Output: 2<br>Explanation: The score of player1 is 3 + 5 + 7 + 6 &#x3D; 21.<br>The score of player2 is 8 + 10 + 2<em>10 + 2</em>2 &#x3D; 42.<br>Score of player2 is more than the score of player1, so, player2 is the winner, and the answer is 2.</p><p>Example 3:<br>Input: player1 &#x3D; [2,3], player2 &#x3D; [4,1]<br>Output: 0<br>Explanation: The score of player1 is 2 + 3 &#x3D; 5<br>The score of player2 is 4 + 1 &#x3D; 5<br>The score of player1 equals to the score of player2, so, there is a draw, and the answer is 0.</p><p>Constraints:<br>n &#x3D;&#x3D; player1.length &#x3D;&#x3D; player2.length<br>1 &lt;&#x3D; n &lt;&#x3D; 1000<br>0 &lt;&#x3D; player1[i], player2[i] &lt;&#x3D; 10</p><p>保龄球游戏的获胜者。</p><blockquote>给你两个下标从 0 开始的整数数组 player1 和 player2 ，分别表示玩家 1 和玩家 2 击中的瓶数。<p>保龄球比赛由 n 轮组成，每轮的瓶数恰好为 10 。</p><p>假设玩家在第 i 轮中击中 xi 个瓶子。玩家第 i 轮的价值为：</p><p>如果玩家在该轮的前两轮的任何一轮中击中了 10 个瓶子，则为 2xi 。<br>否则，为 xi 。<br>玩家的得分是其 n 轮价值的总和。</p><p>返回</p><p>如果玩家 1 的得分高于玩家 2 的得分，则为 1 ；<br>如果玩家 2 的得分高于玩家 1 的得分，则为 2 ；<br>如果平局，则为 0 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照题目的定义，我们计算一下每个玩家的得分。对于某一轮的分数，如果往前看一轮（或者两轮）是合法的且前一轮（或者前两轮）的分数是 10 分，那么当前轮的分数可以乘以 2。比较两个 player 谁的分数更高。简单模拟题意即可。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">isWinner</span><span class="hljs-params">(<span class="hljs-type">int</span>[] player1, <span class="hljs-type">int</span>[] player2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> player1.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">score1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; player1[i - <span class="hljs-number">1</span>] == <span class="hljs-number">10</span>) &#123;<br>                score1 += <span class="hljs-number">2</span> * player1[i];<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; player1[i - <span class="hljs-number">2</span>] == <span class="hljs-number">10</span>) &#123;<br>                score1 += <span class="hljs-number">2</span> * player1[i];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                score1 += player1[i];<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">score2</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; player2[i - <span class="hljs-number">1</span>] == <span class="hljs-number">10</span>) &#123;<br>                score2 += <span class="hljs-number">2</span> * player2[i];<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i - <span class="hljs-number">2</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; player2[i - <span class="hljs-number">2</span>] == <span class="hljs-number">10</span>) &#123;<br>                score2 += <span class="hljs-number">2</span> * player2[i];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                score2 += player2[i];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (score1 &gt; score2) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score1 &lt; score2) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1496. Path Crossing</title>
     <link href="/posts/1525497990.html"/>
     <url>/posts/1525497990.html</url>
@@ -126,9 +151,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -482,9 +507,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -854,9 +879,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
