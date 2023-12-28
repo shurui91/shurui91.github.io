@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1578. Minimum Time to Make Rope Colorful</title>
+    <link href="/posts/3452602333.html"/>
+    <url>/posts/3452602333.html</url>
+    
+    <content type="html"><![CDATA[<p>Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon.</p><p>Alice wants the rope to be colorful. She does not want two consecutive balloons to be of the same color, so she asks Bob for help. Bob can remove some balloons from the rope to make it colorful. You are given a 0-indexed integer array neededTime where neededTime[i] is the time (in seconds) that Bob needs to remove the ith balloon from the rope.</p><p>Return the minimum time Bob needs to make the rope colorful.</p><p>Example 1:<br>Input: colors &#x3D; “abaac”, neededTime &#x3D; [1,2,3,4,5]<br>Output: 3<br>Explanation: In the above image, ‘a’ is blue, ‘b’ is red, and ‘c’ is green.<br>Bob can remove the blue balloon at index 2. This takes 3 seconds.<br>There are no longer two consecutive balloons of the same color. Total time &#x3D; 3.</p><p>Example 2:<br>Input: colors &#x3D; “abc”, neededTime &#x3D; [1,2,3]<br>Output: 0<br>Explanation: The rope is already colorful. Bob does not need to remove any balloons from the rope.</p><p>Example 3:<br>Input: colors &#x3D; “aabaa”, neededTime &#x3D; [1,2,3,4,1]<br>Output: 2<br>Explanation: Bob will remove the ballons at indices 0 and 4. Each ballon takes 1 second to remove.<br>There are no longer two consecutive balloons of the same color. Total time &#x3D; 1 + 1 &#x3D; 2.</p><p>Constraints:<br>n &#x3D;&#x3D; colors.length &#x3D;&#x3D; neededTime.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>1 &lt;&#x3D; neededTime[i] &lt;&#x3D; 104<br>colors contains only lowercase English letters.</p><p>使绳子变成彩色的最短时间。</p><blockquote><p>Alice 把 n 个气球排列在一根绳子上。给你一个下标从 0 开始的字符串 colors ，其中 colors[i] 是第 i 个气球的颜色。<br>Alice 想要把绳子装扮成 彩色 ，且她不希望两个连续的气球涂着相同的颜色，所以她喊来 Bob 帮忙。Bob 可以从绳子上移除一些气球使绳子变成 彩色 。给你一个下标从 0 开始的整数数组 neededTime ，其中 neededTime[i] 是 Bob 从绳子上移除第 i 个气球需要的时间（以秒为单位）。<br>返回 Bob 使绳子变成 彩色 需要的 最少时间 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。对于任何两个连续的气球，如果他们的颜色相同，则需要去除 neededTime 更多的那个。<br>具体的实现上，对于任何两个连续的气球 i 和 i + 1，如果 i 的 neededTime 更多，则我们在累加 i + 1 的 neededTime 的同时，将 i 和 i + 1 的位置 swap 一下，这样就能使 i 可以跟后面的 i + 2 继续比较了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCost</span><span class="hljs-params">(String colors, <span class="hljs-type">int</span>[] neededTime)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> colors.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (colors.charAt(i) == colors.charAt(i + <span class="hljs-number">1</span>)) &#123;<br>                res += Math.min(neededTime[i], neededTime[i + <span class="hljs-number">1</span>]);<br>                <span class="hljs-keyword">if</span> (neededTime[i] &gt; neededTime[i + <span class="hljs-number">1</span>]) &#123;<br>                    swap(neededTime, i, i + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> nums[i];<br>        nums[i] = nums[j];<br>        nums[j] = temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2660. Determine the Winner of a Bowling Game</title>
     <link href="/posts/969600274.html"/>
     <url>/posts/969600274.html</url>
@@ -151,9 +178,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>math</tag>
       
@@ -507,9 +534,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>sort</tag>
       
@@ -879,9 +906,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     

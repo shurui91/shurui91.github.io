@@ -16,27 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+    <meta name="description" content="Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon. Alice wants the rope to be colorful. She does not want two consecutive">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique">
-<meta property="og:url" content="https://shurui91.github.io/posts/3172184168.html">
+<meta property="og:title" content="[LeetCode] 1578. Minimum Time to Make Rope Colorful">
+<meta property="og:url" content="https://shurui91.github.io/posts/3452602333.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+<meta property="og:description" content="Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon. Alice wants the rope to be colorful. She does not want two consecutive">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-21T23:00:43.000Z">
-<meta property="article:modified_time" content="2023-11-21T23:13:46.158Z">
+<meta property="article:published_time" content="2023-12-28T00:29:44.000Z">
+<meta property="article:modified_time" content="2023-12-28T00:34:23.202Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="greedy">
 <meta property="article:tag" content="string">
-<meta property="article:tag" content="sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique - CNoodle</title>
+  <title>[LeetCode] 1578. Minimum Time to Make Rope Colorful - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1578. Minimum Time to Make Rope Colorful"></span>
           
         </div>
 
@@ -201,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-21 15:00" pubdate>
-          November 21, 2023 pm
+        <time datetime="2023-12-27 16:29" pubdate>
+          December 27, 2023 pm
         </time>
       </span>
     
@@ -213,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          2.1k words
         
       </span>
     
@@ -224,7 +223,7 @@
         
         
         
-          14 mins
+          18 mins
         
       </span>
     
@@ -261,27 +260,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</h1>
+            <h1 id="seo-header">[LeetCode] 1578. Minimum Time to Make Rope Colorful</h1>
             
             
               <div class="markdown-body">
                 
-                <p>A string s is called good if there are no two different characters in s that have the same frequency.</p>
-<p>Given a string s, return the minimum number of characters you need to delete to make s good.</p>
-<p>The frequency of a character in a string is the number of times it appears in the string. For example, in the string “aab”, the frequency of ‘a’ is 2, while the frequency of ‘b’ is 1.</p>
-<p>Example 1:<br>Input: s &#x3D; “aab”<br>Output: 0<br>Explanation: s is already good.</p>
-<p>Example 2:<br>Input: s &#x3D; “aaabbbcc”<br>Output: 2<br>Explanation: You can delete two ‘b’s resulting in the good string “aaabcc”.<br>Another way it to delete one ‘b’ and one ‘c’ resulting in the good string “aaabbc”.</p>
-<p>Example 3:<br>Input: s &#x3D; “ceabaacb”<br>Output: 2<br>Explanation: You can delete both ‘c’s resulting in the good string “eabaab”.<br>Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s contains only lowercase English letters.</p>
-<p>字符频次唯一的最小删除次数。</p>
+                <p>Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon.</p>
+<p>Alice wants the rope to be colorful. She does not want two consecutive balloons to be of the same color, so she asks Bob for help. Bob can remove some balloons from the rope to make it colorful. You are given a 0-indexed integer array neededTime where neededTime[i] is the time (in seconds) that Bob needs to remove the ith balloon from the rope.</p>
+<p>Return the minimum time Bob needs to make the rope colorful.</p>
+<p>Example 1:<br>Input: colors &#x3D; “abaac”, neededTime &#x3D; [1,2,3,4,5]<br>Output: 3<br>Explanation: In the above image, ‘a’ is blue, ‘b’ is red, and ‘c’ is green.<br>Bob can remove the blue balloon at index 2. This takes 3 seconds.<br>There are no longer two consecutive balloons of the same color. Total time &#x3D; 3.</p>
+<p>Example 2:<br>Input: colors &#x3D; “abc”, neededTime &#x3D; [1,2,3]<br>Output: 0<br>Explanation: The rope is already colorful. Bob does not need to remove any balloons from the rope.</p>
+<p>Example 3:<br>Input: colors &#x3D; “aabaa”, neededTime &#x3D; [1,2,3,4,1]<br>Output: 2<br>Explanation: Bob will remove the ballons at indices 0 and 4. Each ballon takes 1 second to remove.<br>There are no longer two consecutive balloons of the same color. Total time &#x3D; 1 + 1 &#x3D; 2.</p>
+<p>Constraints:<br>n &#x3D;&#x3D; colors.length &#x3D;&#x3D; neededTime.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>1 &lt;&#x3D; neededTime[i] &lt;&#x3D; 104<br>colors contains only lowercase English letters.</p>
+<p>使绳子变成彩色的最短时间。</p>
 <blockquote>
-<p>如果字符串 s 中 不存在 两个不同字符 频次 相同的情况，就称 s 是 优质字符串 。<br>给你一个字符串 s，返回使 s 成为 优质字符串 需要删除的 最小 字符数。<br>字符串中字符的 频次 是该字符在字符串中的出现次数。例如，在字符串 “aab” 中，’a’ 的频次是 2，而 ‘b’ 的频次是 1 。</p>
+<p>Alice 把 n 个气球排列在一根绳子上。给你一个下标从 0 开始的字符串 colors ，其中 colors[i] 是第 i 个气球的颜色。<br>Alice 想要把绳子装扮成 彩色 ，且她不希望两个连续的气球涂着相同的颜色，所以她喊来 Bob 帮忙。Bob 可以从绳子上移除一些气球使绳子变成 彩色 。给你一个下标从 0 开始的整数数组 neededTime ，其中 neededTime[i] 是 Bob 从绳子上移除第 i 个气球需要的时间（以秒为单位）。<br>返回 Bob 使绳子变成 彩色 需要的 最少时间 。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历数组的时候，用一个长度为26的 <code>int[] map</code> 数组记录 input 字符串中每个不同字母的出现次数。</p>
-<p>接着我们再创建一个 hashset，去遍历这个长度为 26 的 int 数组，对于当前字母的出现次数 map[i]，如果他在 hashset 中出现过，那么他就不是一个 unique 的出现次数，那么我们就把这个出现次数减一，直到他变成一个 unique 的出现次数，再加入 hashset。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。对于任何两个连续的气球，如果他们的颜色相同，则需要去除 neededTime 更多的那个。<br>具体的实现上，对于任何两个连续的气球 i 和 i + 1，如果 i 的 neededTime 更多，则我们在累加 i + 1 的 neededTime 的同时，将 i 和 i + 1 的位置 swap 一下，这样就能使 i 可以跟后面的 i + 2 继续比较了。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletions</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] &gt; <span class="hljs-number">0</span> &amp;&amp; set.contains(map[i])) &#123;<br>                map[i]--;<br>                count++;<br>            &#125;<br>            set.add(map[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minCost</span><span class="hljs-params">(String colors, <span class="hljs-type">int</span>[] neededTime)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> colors.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (colors.charAt(i) == colors.charAt(i + <span class="hljs-number">1</span>)) &#123;<br>                res += Math.min(neededTime[i], neededTime[i + <span class="hljs-number">1</span>]);<br>                <span class="hljs-keyword">if</span> (neededTime[i] &gt; neededTime[i + <span class="hljs-number">1</span>]) &#123;<br>                    swap(neededTime, i, i + <span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> nums[i];<br>        nums[i] = nums[j];<br>        nums[j] = temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -295,15 +294,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
       
     </div>
   
@@ -315,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</div>
-      <div>https://shurui91.github.io/posts/3172184168.html</div>
+      <div>[LeetCode] 1578. Minimum Time to Make Rope Colorful</div>
+      <div>https://shurui91.github.io/posts/3452602333.html</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 21, 2023</div>
+          <div>December 27, 2023</div>
         </div>
       
       
@@ -360,18 +357,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2208021994.html" title="[LeetCode] 1410. HTML Entity Parser">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1410. HTML Entity Parser</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
+                      <a href="/posts/969600274.html" title="[LeetCode] 2660. Determine the Winner of a Bowling Game">
+                        <span class="hidden-mobile">[LeetCode] 2660. Determine the Winner of a Bowling Game</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -391,8 +382,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3172184168.html';
-          this.page.identifier = '/posts/3172184168.html';
+          this.page.url = 'https://shurui91.github.io/posts/3452602333.html';
+          this.page.identifier = '/posts/3452602333.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
