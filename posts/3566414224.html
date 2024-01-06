@@ -16,27 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given two strings s and t, return true if s is a subsequence of t, or false otherwise. A subsequence of a string is a new string that is formed from the original string by deleting some (can be none)">
+    <meta name="description" content="For two strings s and t, we say “t divides s” if and only if s &#x3D; t + … + t (i.e., t is concatenated with itself one or more times). Given two strings str1 and str2, return the largest string x su">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 392. Is Subsequence">
-<meta property="og:url" content="https://shurui91.github.io/posts/2699056563.html">
+<meta property="og:title" content="[LeetCode] 1071. Greatest Common Divisor of Strings">
+<meta property="og:url" content="https://shurui91.github.io/posts/3566414224.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given two strings s and t, return true if s is a subsequence of t, or false otherwise. A subsequence of a string is a new string that is formed from the original string by deleting some (can be none)">
+<meta property="og:description" content="For two strings s and t, we say “t divides s” if and only if s &#x3D; t + … + t (i.e., t is concatenated with itself one or more times). Given two strings str1 and str2, return the largest string x su">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-10T12:09:14.000Z">
-<meta property="article:modified_time" content="2023-11-08T07:17:41.198Z">
+<meta property="article:published_time" content="2023-06-27T21:44:31.000Z">
+<meta property="article:modified_time" content="2024-01-06T21:20:59.586Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="dynamic programming">
-<meta property="article:tag" content="binary search">
+<meta property="article:tag" content="math">
+<meta property="article:tag" content="gcd">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 392. Is Subsequence - CNoodle</title>
+  <title>[LeetCode] 1071. Greatest Common Divisor of Strings - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 392. Is Subsequence"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1071. Greatest Common Divisor of Strings"></span>
           
         </div>
 
@@ -201,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-06-10 05:09" pubdate>
-          June 10, 2020 am
+        <time datetime="2023-06-27 14:44" pubdate>
+          June 27, 2023 pm
         </time>
       </span>
     
@@ -213,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          1.4k words
         
       </span>
     
@@ -224,7 +223,7 @@
         
         
         
-          19 mins
+          12 mins
         
       </span>
     
@@ -261,31 +260,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 392. Is Subsequence</h1>
+            <h1 id="seo-header">[LeetCode] 1071. Greatest Common Divisor of Strings</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given two strings s and t, return true if s is a subsequence of t, or false otherwise.</p>
-<p>A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., “ace” is a subsequence of “abcde” while “aec” is not).</p>
-<p>Example 1:<br>Input: s &#x3D; “abc”, t &#x3D; “ahbgdc”<br>Output: true</p>
-<p>Example 2:<br>Input: s &#x3D; “axc”, t &#x3D; “ahbgdc”<br>Output: false</p>
-<p>Constraints:<br>0 &lt;&#x3D; s.length &lt;&#x3D; 100<br>0 &lt;&#x3D; t.length &lt;&#x3D; 104<br>s and t consist only of lowercase English letters.<br>Follow up: Suppose there are lots of incoming s, say s1, s2, …, sk where k &gt;&#x3D; 109, and you want to check one by one to see if t has its subsequence. In this scenario, how would you change your code?</p>
-<p>判断子序列。</p>
+                <p>For two strings s and t, we say “t divides s” if and only if s &#x3D; t + … + t (i.e., t is concatenated with itself one or more times).</p>
+<p>Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.</p>
+<p>Example 1:<br>Input: str1 &#x3D; “ABCABC”, str2 &#x3D; “ABC”<br>Output: “ABC”</p>
+<p>Example 2:<br>Input: str1 &#x3D; “ABABAB”, str2 &#x3D; “ABAB”<br>Output: “AB”</p>
+<p>Example 3:<br>Input: str1 &#x3D; “LEET”, str2 &#x3D; “CODE”<br>Output: “”</p>
+<p>Constraints:<br>1 &lt;&#x3D; str1.length, str2.length &lt;&#x3D; 1000<br>str1 and str2 consist of English uppercase letters.</p>
+<p>字符串的最大公因子。</p>
 <blockquote>
-<p>给定字符串 s 和 t ，判断 s 是否为 t 的子序列。<br>字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，”ace”是”abcde”的一个子序列，而”aec”不是）。<br>进阶：<br>如果有大量输入的 S，称作 S1, S2, … , Sk 其中 k &gt;&#x3D; 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？<br>致谢：<br>特别感谢 @pbrother 添加此问题并且创建所有测试用例。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence">https://leetcode.cn/problems/is-subsequence</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>对于字符串 s 和 t，只有在 s &#x3D; t + … + t（t 自身连接 1 次或多次）时，我们才认定 “t 能除尽 s”。<br>给定两个字符串 str1 和 str2 。返回 最长字符串 x，要求满足 x 能除尽 str1 且 x 能除尽 str2 。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/greatest-common-divisor-of-strings">https://leetcode.cn/problems/greatest-common-divisor-of-strings</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路一，双指针"><a href="#思路一，双指针" class="headerlink" title="思路一，双指针"></a>思路一，双指针</h2><p>双指针，一个扫描 s，一个扫描 t。如果碰到同样的字母则两个指针都++，否则只移动 t 的指针。t 扫描完毕之后如果 s 没有到末尾则 return false。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(t.length())<br>空间O(1)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道数学题，说是求字符串的最大公因子，其实是需要先求出两个字符串长度的最大公约数然后得到子串。其中求最大公约数 gcd 的函数需要背下来。</p>
+<p>注意题目的 corner case，如果两个字符串 A + B !&#x3D; B + A 的话，说明两者是没有公共子串的。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(log min(a, b))<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSubsequence</span><span class="hljs-params">(String s, String t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.length() &amp;&amp; j &lt; t.length()) &#123;<br>            <span class="hljs-keyword">if</span> (s.charAt(i) == t.charAt(j)) &#123;<br>                i++;<br>            &#125;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> i == s.length();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="思路二，动态规划"><a href="#思路二，动态规划" class="headerlink" title="思路二，动态规划"></a>思路二，动态规划</h2><p>设 dp[i][j] 为 s 以 i 结尾的子串是否是 t 以 j 结尾的子串的 subsequence。首先 corner case 是当 s 为空的时候，dp[0][j] &#x3D; true。其次开始扫描，如果匹配（s[i] &#x3D;&#x3D; t[j]），则 DP 值跟之前一位的 DP 值相同（dp[i][j] &#x3D;&#x3D; dp[i - 1][j - 1]）；如果不匹配，则 dp[i][j] &#x3D; dp[i][j - 1]。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSubsequence</span><span class="hljs-params">(String s, String t)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">sLen</span> <span class="hljs-operator">=</span> s.length();<br>		<span class="hljs-type">int</span> <span class="hljs-variable">tLen</span> <span class="hljs-operator">=</span> t.length();<br>		<span class="hljs-keyword">if</span> (sLen &gt; tLen) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (sLen == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-type">boolean</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[sLen + <span class="hljs-number">1</span>][tLen + <span class="hljs-number">1</span>];<br>		<span class="hljs-comment">// 初始化</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; tLen; j++) &#123;<br>			dp[<span class="hljs-number">0</span>][j] = <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-comment">// dp</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= sLen; i++) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= tLen; j++) &#123;<br>				<span class="hljs-keyword">if</span> (s.charAt(i - <span class="hljs-number">1</span>) == t.charAt(j - <span class="hljs-number">1</span>)) &#123;<br>					dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>				&#125; <span class="hljs-keyword">else</span> &#123;<br>					dp[i][j] = dp[i][j - <span class="hljs-number">1</span>];<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> dp[sLen][tLen];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">392. Is Subsequence<br>524. Longest Word in Dictionary through Deleting<br>720. Longest Word in Dictionary<br></code></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">gcdOfStrings</span><span class="hljs-params">(String str1, String str2)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (!str1.concat(str2).equals(str2.concat(str1))) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">gcdLength</span> <span class="hljs-operator">=</span> helper(str1.length(), str2.length());<br>        <span class="hljs-keyword">return</span> str1.substring(<span class="hljs-number">0</span>, gcdLength);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> b;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a == b) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>            <span class="hljs-keyword">return</span> helper(a % b, b);<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(b, a % b);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// gcd, 辗转相除法</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -299,15 +293,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/math/" class="print-no-link">#math</a>
       
-        <a href="/tags/dynamic-programming/" class="print-no-link">#dynamic programming</a>
+        <a href="/tags/gcd/" class="print-no-link">#gcd</a>
       
-        <a href="/tags/binary-search/" class="print-no-link">#binary search</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
     </div>
   
@@ -319,8 +311,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 392. Is Subsequence</div>
-      <div>https://shurui91.github.io/posts/2699056563.html</div>
+      <div>[LeetCode] 1071. Greatest Common Divisor of Strings</div>
+      <div>https://shurui91.github.io/posts/3566414224.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +324,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 10, 2020</div>
+          <div>June 27, 2023</div>
         </div>
       
       
@@ -364,9 +356,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2946513692.html" title="[LeetCode] 38. Count and Say">
+                      <a href="/posts/1880376029.html" title="[LeetCode] 1921. Eliminate Maximum Number of Monsters">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 38. Count and Say</span>
+                        <span class="hidden-mobile">[LeetCode] 1921. Eliminate Maximum Number of Monsters</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -374,8 +366,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1916472686.html" title="[LeetCode] 259. 3Sum Smaller">
-                        <span class="hidden-mobile">[LeetCode] 259. 3Sum Smaller</span>
+                      <a href="/posts/3837729252.html" title="[LeetCode] 2460. Apply Operations to an Array">
+                        <span class="hidden-mobile">[LeetCode] 2460. Apply Operations to an Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,8 +387,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2699056563.html';
-          this.page.identifier = '/posts/2699056563.html';
+          this.page.url = 'https://shurui91.github.io/posts/3566414224.html';
+          this.page.identifier = '/posts/3566414224.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
