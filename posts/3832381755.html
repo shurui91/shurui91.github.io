@@ -16,29 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the head of a linked list head, in which each node contains an integer value. Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them. R">
+    <meta name="description" content="Given an integer array nums, return the greatest common divisor of the smallest number and largest number in nums. The greatest common divisor of two numbers is the largest positive integer that evenl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2807. Insert Greatest Common Divisors in Linked List">
-<meta property="og:url" content="https://shurui91.github.io/posts/985411869.html">
+<meta property="og:title" content="[LeetCode] 1979. Find Greatest Common Divisor of Array">
+<meta property="og:url" content="https://shurui91.github.io/posts/3832381755.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the head of a linked list head, in which each node contains an integer value. Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them. R">
+<meta property="og:description" content="Given an integer array nums, return the greatest common divisor of the smallest number and largest number in nums. The greatest common divisor of two numbers is the largest positive integer that evenl">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/07/18/ex1_copy.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/07/18/ex2_copy1.png">
-<meta property="article:published_time" content="2024-01-05T16:45:31.000Z">
-<meta property="article:modified_time" content="2024-01-05T16:49:04.514Z">
+<meta property="article:published_time" content="2024-01-06T21:39:51.000Z">
+<meta property="article:modified_time" content="2024-01-06T21:46:09.826Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="math">
 <meta property="article:tag" content="gcd">
-<meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2023/07/18/ex1_copy.png">
   
   
   
-  <title>[LeetCode] 2807. Insert Greatest Common Divisors in Linked List - CNoodle</title>
+  <title>[LeetCode] 1979. Find Greatest Common Divisor of Array - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2807. Insert Greatest Common Divisors in Linked List"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1979. Find Greatest Common Divisor of Array"></span>
           
         </div>
 
@@ -203,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-05 08:45" pubdate>
-          January 5, 2024 am
+        <time datetime="2024-01-06 13:39" pubdate>
+          January 6, 2024 pm
         </time>
       </span>
     
@@ -215,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          1.2k words
         
       </span>
     
@@ -226,7 +222,7 @@
         
         
         
-          18 mins
+          10 mins
         
       </span>
     
@@ -263,28 +259,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2807. Insert Greatest Common Divisors in Linked List</h1>
+            <h1 id="seo-header">[LeetCode] 1979. Find Greatest Common Divisor of Array</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the head of a linked list head, in which each node contains an integer value.</p>
-<p>Between every pair of adjacent nodes, insert a new node with a value equal to the greatest common divisor of them.</p>
-<p>Return the linked list after insertion.</p>
+                <p>Given an integer array nums, return the greatest common divisor of the smallest number and largest number in nums.</p>
 <p>The greatest common divisor of two numbers is the largest positive integer that evenly divides both numbers.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2023/07/18/ex1_copy.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: head &#x3D; [18,6,10,3]<br>Output: [18,6,6,2,10,1,3]<br>Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes (nodes in blue are the inserted nodes).</p>
-<ul>
-<li>We insert the greatest common divisor of 18 and 6 &#x3D; 6 between the 1st and the 2nd nodes.</li>
-<li>We insert the greatest common divisor of 6 and 10 &#x3D; 2 between the 2nd and the 3rd nodes.</li>
-<li>We insert the greatest common divisor of 10 and 3 &#x3D; 1 between the 3rd and the 4th nodes.<br>There are no more adjacent nodes, so we return the linked list.</li>
-</ul>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2023/07/18/ex2_copy1.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: head &#x3D; [7]<br>Output: [7]<br>Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.<br>There are no pairs of adjacent nodes, so we return the initial linked list.</p>
-<p>Constraints:<br>The number of nodes in the list is in the range [1, 5000].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p>
-<p>在链表中插入最大公约数。<br>给你一个链表的头 head ，每个结点包含一个整数值。<br>在相邻结点之间，请你插入一个新的结点，结点值为这两个相邻结点值的 最大公约数 。<br>请你返回插入之后的链表。<br>两个数的 最大公约数 是可以被两个数字整除的最大正整数。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照题意，在每两个相邻的 node 之间再插入一个新的 node。注意求最大公约数的做法，需要时常复习。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<p>Example 1:<br>Input: nums &#x3D; [2,5,6,9,10]<br>Output: 2<br>Explanation:<br>The smallest number in nums is 2.<br>The largest number in nums is 10.<br>The greatest common divisor of 2 and 10 is 2.</p>
+<p>Example 2:<br>Input: nums &#x3D; [7,5,6,8,3]<br>Output: 1<br>Explanation:<br>The smallest number in nums is 3.<br>The largest number in nums is 8.<br>The greatest common divisor of 3 and 8 is 1.</p>
+<p>Example 3:<br>Input: nums &#x3D; [3,3]<br>Output: 3<br>Explanation:<br>The smallest number in nums is 3.<br>The largest number in nums is 3.<br>The greatest common divisor of 3 and 3 is 3.</p>
+<p>Constraints:<br>2 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p>
+<p>找出数组的最大公约数。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>与其他求最大公约数的题目类似。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - 需要用O(n)的时间找到最大的数字和最小的数字，然后再去求二者的最大公约数。<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">insertGreatestCommonDivisors</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> cur.val;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">second</span> <span class="hljs-operator">=</span> cur.next.val;<br>            <span class="hljs-type">ListNode</span> <span class="hljs-variable">newNode</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(gcd(first, second));<br>            newNode.next = cur.next;<br>            cur.next = newNode;<br>            cur = cur.next.next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> b;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a == b) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>            <span class="hljs-keyword">return</span> gcd(a - b, b);<br>        &#125;<br>        <span class="hljs-keyword">return</span> gcd(b - a, a);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findGCD</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            min = Math.min(min, num);<br>            max = Math.max(max, num);<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(min, max);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> b;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (a == b) &#123;<br>            <span class="hljs-keyword">return</span> a;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(b, a % b);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -305,8 +295,6 @@
       
         <a href="/tags/gcd/" class="print-no-link">#gcd</a>
       
-        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
-      
     </div>
   
 </div>
@@ -317,8 +305,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2807. Insert Greatest Common Divisors in Linked List</div>
-      <div>https://shurui91.github.io/posts/985411869.html</div>
+      <div>[LeetCode] 1979. Find Greatest Common Divisor of Array</div>
+      <div>https://shurui91.github.io/posts/3832381755.html</div>
     </div>
     <div class="license-meta">
       
@@ -330,7 +318,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 5, 2024</div>
+          <div>January 6, 2024</div>
         </div>
       
       
@@ -362,18 +350,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3832381755.html" title="[LeetCode] 1979. Find Greatest Common Divisor of Array">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1979. Find Greatest Common Divisor of Array</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3452602333.html" title="[LeetCode] 1578. Minimum Time to Make Rope Colorful">
-                        <span class="hidden-mobile">[LeetCode] 1578. Minimum Time to Make Rope Colorful</span>
+                      <a href="/posts/985411869.html" title="[LeetCode] 2807. Insert Greatest Common Divisors in Linked List">
+                        <span class="hidden-mobile">[LeetCode] 2807. Insert Greatest Common Divisors in Linked List</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -393,8 +375,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/985411869.html';
-          this.page.identifier = '/posts/985411869.html';
+          this.page.url = 'https://shurui91.github.io/posts/3832381755.html';
+          this.page.identifier = '/posts/3832381755.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
