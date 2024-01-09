@@ -16,30 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome. Ret">
+    <meta name="description" content="You are given a string s consisting only of uppercase English letters. You can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings “AB”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree">
-<meta property="og:url" content="https://shurui91.github.io/posts/805821143.html">
+<meta property="og:title" content="[LeetCode] 2696. Minimum String Length After Removing Substrings">
+<meta property="og:url" content="https://shurui91.github.io/posts/4203426242.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome. Ret">
+<meta property="og:description" content="You are given a string s consisting only of uppercase English letters. You can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings “AB”">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/05/06/palindromic_paths_1.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/05/07/palindromic_paths_2.png">
-<meta property="article:published_time" content="2020-12-30T09:48:00.000Z">
-<meta property="article:modified_time" content="2023-11-24T20:52:01.901Z">
+<meta property="article:published_time" content="2024-01-09T18:03:06.000Z">
+<meta property="article:modified_time" content="2024-01-09T18:12:47.063Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="preorder">
-<meta property="article:tag" content="backtracking">
+<meta property="article:tag" content="string">
+<meta property="article:tag" content="stack">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/05/06/palindromic_paths_1.png">
   
   
   
-  <title>[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree - CNoodle</title>
+  <title>[LeetCode] 2696. Minimum String Length After Removing Substrings - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2696. Minimum String Length After Removing Substrings"></span>
           
         </div>
 
@@ -204,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-12-30 01:48" pubdate>
-          December 30, 2020 am
+        <time datetime="2024-01-09 10:03" pubdate>
+          January 9, 2024 am
         </time>
       </span>
     
@@ -216,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          1.6k words
         
       </span>
     
@@ -227,7 +222,7 @@
         
         
         
-          20 mins
+          14 mins
         
       </span>
     
@@ -264,25 +259,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</h1>
+            <h1 id="seo-header">[LeetCode] 2696. Minimum String Length After Removing Substrings</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a binary tree where node values are digits from 1 to 9. A path in the binary tree is said to be pseudo-palindromic if at least one permutation of the node values in the path is a palindrome.</p>
-<p>Return the number of pseudo-palindromic paths going from the root node to leaf nodes.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/05/06/palindromic_paths_1.png" srcset="/img/loading.gif" lazyload alt="image"><br>Input: root &#x3D; [2,3,1,3,1,null,1]<br>Output: 2<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the red path [2,3,3], the green path [2,1,1], and the path [2,3,1]. Among these paths only red path and green path are pseudo-palindromic paths since the red path [2,3,3] can be rearranged in [3,2,3] (palindrome) and the green path [2,1,1] can be rearranged in [1,2,1] (palindrome).</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/05/07/palindromic_paths_2.png" srcset="/img/loading.gif" lazyload alt="image"><br>Input: root &#x3D; [2,1,1,1,3,null,null,null,null,null,1]<br>Output: 1<br>Explanation: The figure above represents the given binary tree. There are three paths going from the root node to leaf nodes: the green path [2,1,1], the path [2,1,3,1], and the path [2,1]. Among these paths only the green path is pseudo-palindromic since [2,1,1] can be rearranged in [1,2,1] (palindrome).</p>
-<p>Example 3:<br>Input: root &#x3D; [9]<br>Output: 1</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 105].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 9</p>
-<p>二叉树中的伪回文路径。</p>
+                <p>You are given a string s consisting only of uppercase English letters.</p>
+<p>You can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings “AB” or “CD” from s.</p>
+<p>Return the minimum possible length of the resulting string that you can obtain.</p>
+<p>Note that the string concatenates after removing the substring and could produce new “AB” or “CD” substrings.</p>
+<p>Example 1:<br>Input: s &#x3D; “ABFCACDB”<br>Output: 2<br>Explanation: We can do the following operations:</p>
+<ul>
+<li>Remove the substring “ABFCACDB”, so s &#x3D; “FCACDB”.</li>
+<li>Remove the substring “FCACDB”, so s &#x3D; “FCAB”.</li>
+<li>Remove the substring “FCAB”, so s &#x3D; “FC”.<br>So the resulting length of the string is 2.<br>It can be shown that it is the minimum length that we can obtain.</li>
+</ul>
+<p>Example 2:<br>Input: s &#x3D; “ACBBD”<br>Output: 5<br>Explanation: We cannot do any operations on the string so the length remains the same.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of uppercase English letters.</p>
+<p>删除子串后的字符串最小长度。</p>
 <blockquote>
-<p>给你一棵二叉树，每个节点的值为 1 到 9 。我们称二叉树中的一条路径是 「伪回文」的，当它满足：路径经过的所有节点值的排列中，存在一个回文序列。<br>请你返回从根到叶子节点的所有路径中 伪回文 路径的数目。</p>
+<p>给你一个仅由 大写 英文字符组成的字符串 s 。<br>你可以对此字符串执行一些操作，在每一步操作中，你可以从 s 中删除 任一个 “AB” 或 “CD” 子字符串。<br>通过执行操作，删除所有 “AB” 和 “CD” 子串，返回可获得的最终字符串的 最小 可能长度。<br>注意，删除子串后，重新连接出的字符串可能会产生新的 “AB” 或 “CD” 子串。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>前序遍历 + 回溯。用前序遍历的方法遍历整棵树，在遍历的过程中记录用一个长度为 10 的数组记录每个不同 node.val 的出现次数。遍历到叶子节点的时候看一下数组里出现次数为奇数的元素有几个，如果有超过1个元素的出现次数为奇数，那么当前这条从根节点到叶子节点的路径就不是回文路径。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历字符串中的每一个字母，将每个字母入栈。如果当前字母是 B，检查栈顶元素是否为 A，如果是则把 A 弹出；如果当前字母是 D，检查栈顶元素是否为 C，如果是则把 C 弹出。最后返回栈内元素个数。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">pseudoPalindromicPaths</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>		<span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>];<br>		helper(root, map);<br>		<span class="hljs-keyword">return</span> count;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span>[] map)</span> &#123;<br>		<span class="hljs-comment">// base case</span><br>		<span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		map[root.val]++;<br>		<span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span> &amp;&amp; root.right == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">if</span> (isPalindrome(map)) &#123;<br>				count++;<br>			&#125;<br>		&#125;<br>		helper(root.left, map);<br>		helper(root.right, map);<br>		map[root.val]--;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(<span class="hljs-type">int</span>[] map)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">single</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>			<span class="hljs-keyword">if</span> (map[i] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>				single++;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> single &gt; <span class="hljs-number">1</span> ? <span class="hljs-literal">false</span> : <span class="hljs-literal">true</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minLength</span><span class="hljs-params">(String s)</span> &#123;<br>        Deque&lt;Character&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;B&#x27;</span> &amp;&amp; !stack.isEmpty() &amp;&amp; stack.peekLast() == <span class="hljs-string">&#x27;A&#x27;</span>) &#123;<br>                stack.pollLast();<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;D&#x27;</span> &amp;&amp; !stack.isEmpty() &amp;&amp; stack.peekLast() == <span class="hljs-string">&#x27;C&#x27;</span>) &#123;<br>                stack.pollLast();<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                stack.offerLast(c);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stack.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -298,13 +300,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
-      
-        <a href="/tags/backtracking/" class="print-no-link">#backtracking</a>
+        <a href="/tags/stack/" class="print-no-link">#stack</a>
       
     </div>
   
@@ -316,8 +314,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</div>
-      <div>https://shurui91.github.io/posts/805821143.html</div>
+      <div>[LeetCode] 2696. Minimum String Length After Removing Substrings</div>
+      <div>https://shurui91.github.io/posts/4203426242.html</div>
     </div>
     <div class="license-meta">
       
@@ -329,7 +327,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 30, 2020</div>
+          <div>January 9, 2024</div>
         </div>
       
       
@@ -361,18 +359,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1169337340.html" title="[LeetCode] 1657. Determine if Two Strings Are Close">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1657. Determine if Two Strings Are Close</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1297775566.html" title="[LeetCode] 1582. Special Positions in a Binary Matrix">
-                        <span class="hidden-mobile">[LeetCode] 1582. Special Positions in a Binary Matrix</span>
+                      <a href="/posts/3832381755.html" title="[LeetCode] 1979. Find Greatest Common Divisor of Array">
+                        <span class="hidden-mobile">[LeetCode] 1979. Find Greatest Common Divisor of Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -392,8 +384,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/805821143.html';
-          this.page.identifier = '/posts/805821143.html';
+          this.page.url = 'https://shurui91.github.io/posts/4203426242.html';
+          this.page.identifier = '/posts/4203426242.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
