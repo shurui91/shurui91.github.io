@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>2744. Find Maximum Number of String Pairs</title>
+    <link href="/posts/2279246855.html"/>
+    <url>/posts/2279246855.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed array words consisting of distinct strings.</p><p>The string words[i] can be paired with the string words[j] if:</p><p>The string words[i] is equal to the reversed string of words[j].<br>0 &lt;&#x3D; i &lt; j &lt; words.length.<br>Return the maximum number of pairs that can be formed from the array words.</p><p>Note that each string can belong in at most one pair.</p><p>Example 1:<br>Input: words &#x3D; [“cd”,”ac”,”dc”,”ca”,”zz”]<br>Output: 2<br>Explanation: In this example, we can form 2 pair of strings in the following way:</p><ul><li>We pair the 0th string with the 2nd string, as the reversed string of word[0] is “dc” and is equal to words[2].</li><li>We pair the 1st string with the 3rd string, as the reversed string of word[1] is “ca” and is equal to words[3].<br>It can be proven that 2 is the maximum number of pairs that can be formed.</li></ul><p>Example 2:<br>Input: words &#x3D; [“ab”,”ba”,”cc”]<br>Output: 1<br>Explanation: In this example, we can form 1 pair of strings in the following way:</p><ul><li>We pair the 0th string with the 1st string, as the reversed string of words[1] is “ab” and is equal to words[0].<br>It can be proven that 1 is the maximum number of pairs that can be formed.</li></ul><p>Example 3:<br>Input: words &#x3D; [“aa”,”ab”]<br>Output: 0<br>Explanation: In this example, we are unable to form any pair of strings.</p><p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 50<br>words[i].length &#x3D;&#x3D; 2<br>words consists of distinct strings.<br>words[i] contains only lowercase English letters.</p><p>最大字符串配对数目。</p><blockquote><p>给你一个下标从 0 开始的数组 words ，数组中包含 互不相同 的字符串。<br>如果字符串 words[i] 与字符串 words[j] 满足以下条件，我们称它们可以匹配：<br>字符串 words[i] 等于 words[j] 的反转字符串。<br>0 &lt;&#x3D; i &lt; j &lt; words.length<br>请你返回数组 words 中的 最大 匹配数目。<br>注意，每个字符串最多匹配一次。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目给的是一些互不相同的字符串，所以一开始我用一个 hashset 把所有字符串存起来。因为题目要我们找的匹配字符串其实是找两个互为回文的字符串，所以这里我写一个 reverse 函数判断回文，对于某个单词，我得到他的回文之后去 hashset 判断这个回文是否存在于 hashset。注意这里有一个 corner case 是如果是类似 aaa 或者 zz 这种本身就是回文的单词，我们需要忽略。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumNumberOfStringPairs</span><span class="hljs-params">(String[] words)</span> &#123;<br>Set&lt;String&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br><span class="hljs-keyword">for</span> (String word : words) &#123;<br><span class="hljs-keyword">if</span> (!word.equals(reverse(word))) &#123;<br>set.add(word);<br>&#125;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (String word : words) &#123;<br><span class="hljs-keyword">if</span> (set.contains(word) &amp;&amp; set.contains(reverse(word))) &#123;<br>count++;<br>set.remove(word);<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> count;<br>&#125;<br><br><span class="hljs-keyword">private</span> String <span class="hljs-title function_">reverse</span><span class="hljs-params">(String s)</span> &#123;<br><span class="hljs-type">char</span>[] letters = s.toCharArray();<br><span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> s.length() - <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (left &lt; right) &#123;<br><span class="hljs-type">char</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> letters[left];<br>letters[left] = letters[right];<br>letters[right] = temp;<br>left++;<br>right--;<br>&#125;<br><span class="hljs-keyword">return</span> String.valueOf(letters);<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>palindrome</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2085. Count Common Words With One Occurrence</title>
     <link href="/posts/2678313631.html"/>
     <url>/posts/2678313631.html</url>
