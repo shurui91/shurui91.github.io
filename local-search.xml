@@ -172,11 +172,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>array</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -332,11 +332,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -503,13 +503,13 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
       
-      <tag>matrix</tag>
+      <tag>array</tag>
       
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -559,9 +559,9 @@
       
       <tag>array</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -686,11 +686,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>hashmap</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -715,9 +715,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -769,9 +769,9 @@
       
       <tag>java</tag>
       
-      <tag>graph</tag>
-      
       <tag>dynamic programming</tag>
+      
+      <tag>graph</tag>
       
       <tag>dijkstra</tag>
       
@@ -950,9 +950,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>array</tag>
       
       <tag>sort</tag>
       
@@ -1112,9 +1112,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -1187,9 +1187,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>array</tag>
       
       <tag>treemap</tag>
       
@@ -1214,9 +1214,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>array</tag>
       
       <tag>heap</tag>
       
@@ -1266,9 +1266,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>array</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>array</tag>
       
       <tag>sort</tag>
       
@@ -1345,11 +1345,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>greedy</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1428,9 +1428,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
     </tags>
     
@@ -1586,11 +1586,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1692,9 +1692,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>dynamic programming</tag>
       
@@ -2214,7 +2214,7 @@
     <link href="/posts/2691339022.html"/>
     <url>/posts/2691339022.html</url>
     
-    <content type="html"><![CDATA[<p>Write a function that takes an unsigned integer and returns the number of ‘1’ bits it has (also known as the Hamming weight).</p><p>Note:<br>Note that in some languages, such as Java, there is no unsigned integer type. In this case, the input will be given as a signed integer type. It should not affect your implementation, as the integer’s internal binary representation is the same, whether it is signed or unsigned.<br>In Java, the compiler represents the signed integers using 2’s complement notation. Therefore, in Example 3, the input represents the signed integer. -3.</p><p>Example 1:<br>Input: n &#x3D; 00000000000000000000000000001011<br>Output: 3<br>Explanation: The input binary string 00000000000000000000000000001011 has a total of three ‘1’ bits.</p><p>Example 2:<br>Input: n &#x3D; 00000000000000000000000010000000<br>Output: 1<br>Explanation: The input binary string 00000000000000000000000010000000 has a total of one ‘1’ bit.</p><p>Example 3:<br>Input: n &#x3D; 11111111111111111111111111111101<br>Output: 31<br>Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one ‘1’ bits.</p><p>Constraints:<br>The input must be a binary string of length 32.<br>Follow up: If this function is called many times, how would you optimize it?</p><p>位1的个数。</p><blockquote><p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。<br>提示：<br>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。<br>在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 3 中，输入表示有符号整数 -3。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/number-of-1-bits">https://leetcode-cn.com/problems/number-of-1-bits</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个二进制的数字，求出其中1的个数。这题需要用到一个位运算的特性，建议背下来，就是 n &amp; (n-1) 会让 n 最右边的 1 变为 0。所以只要记一个 count，然后看看这个 &amp; 的操作做几次，数字整个变为 0，就说明过程中有几个 1 被变为 0 了。例子，<br><img src="https://img2018.cnblogs.com/i-beta/1821153/202001/1821153-20200103141418121-1713659063.png" alt="Image"></p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1) - 因为是位运算，再怎么样都只有32位<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">// you need to treat n as an unsigned value</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>            n &amp;= n - <span class="hljs-number">1</span>;<br>            res++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span> - a positive integer</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> hammingWeight = <span class="hljs-keyword">function</span>(<span class="hljs-params">n</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n !== <span class="hljs-number">0</span>) &#123;<br>        n &amp;= n - <span class="hljs-number">1</span>;<br>        res++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">191. Number of 1 Bits<br>2859. Sum of Values at Indices With K Set Bits<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Write a function that takes an unsigned integer and returns the number of ‘1’ bits it has (also known as the Hamming weight).</p><p>Note:<br>Note that in some languages, such as Java, there is no unsigned integer type. In this case, the input will be given as a signed integer type. It should not affect your implementation, as the integer’s internal binary representation is the same, whether it is signed or unsigned.<br>In Java, the compiler represents the signed integers using 2’s complement notation. Therefore, in Example 3, the input represents the signed integer. -3.</p><p>Example 1:<br>Input: n &#x3D; 00000000000000000000000000001011<br>Output: 3<br>Explanation: The input binary string 00000000000000000000000000001011 has a total of three ‘1’ bits.</p><p>Example 2:<br>Input: n &#x3D; 00000000000000000000000010000000<br>Output: 1<br>Explanation: The input binary string 00000000000000000000000010000000 has a total of one ‘1’ bit.</p><p>Example 3:<br>Input: n &#x3D; 11111111111111111111111111111101<br>Output: 31<br>Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one ‘1’ bits.</p><p>Constraints:<br>The input must be a binary string of length 32.<br>Follow up: If this function is called many times, how would you optimize it?</p><p>位1的个数。</p><blockquote><p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。<br>提示：<br>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。<br>在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 3 中，输入表示有符号整数 -3。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/number-of-1-bits">https://leetcode-cn.com/problems/number-of-1-bits</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个二进制的数字，求出其中1的个数。这题需要用到一个位运算的特性，建议背下来，就是 n &amp; (n-1) 会让 n 最右边的 1 变为 0。所以只要记一个 count，然后看看这个 &amp; 的操作做几次，数字整个变为 0，就说明过程中有几个 1 被变为 0 了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1) - 因为是位运算，再怎么样都只有32位<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">// you need to treat n as an unsigned value</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hammingWeight</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;<br>            n &amp;= n - <span class="hljs-number">1</span>;<br>            res++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span> - a positive integer</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> hammingWeight = <span class="hljs-keyword">function</span>(<span class="hljs-params">n</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (n !== <span class="hljs-number">0</span>) &#123;<br>        n &amp;= n - <span class="hljs-number">1</span>;<br>        res++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">191. Number of 1 Bits<br>2859. Sum of Values at Indices With K Set Bits<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
