@@ -8,7 +8,7 @@
     <link href="/posts/2013326185.html"/>
     <url>/posts/2013326185.html</url>
     
-    <content type="html"><![CDATA[<p>You are given an integer array nums of size n and a positive integer k.</p><p>Divide the array into one or more arrays of size 3 satisfying the following conditions:</p><p>Each element of nums should be in exactly one array.<br>The difference between any two elements in one array is less than or equal to k.<br>Return a 2D array containing all the arrays. If it is impossible to satisfy the conditions, return an empty array. And if there are multiple answers, return any of them.</p><p>Example 1:<br>Input: nums &#x3D; [1,3,4,8,7,9,3,5,1], k &#x3D; 2<br>Output: [[1,1,3],[3,4,5],[7,8,9]]<br>Explanation: We can divide the array into the following arrays: [1,1,3], [3,4,5] and [7,8,9].<br>The difference between any two elements in each array is less than or equal to 2.<br>Note that the order of elements is not important.</p><p>Example 2:<br>Input: nums &#x3D; [1,3,3,2,7,3], k &#x3D; 3<br>Output: []<br>Explanation: It is not possible to divide the array satisfying all the conditions.</p><p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>n is a multiple of 3.<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p><p>划分数组并满足最大差限制。</p><blockquote><p>给你一个长度为 n 的整数数组 nums，以及一个正整数 k 。<br>将这个数组划分为一个或多个长度为 3 的子数组，并满足以下条件：<br>nums 中的 每个 元素都必须 恰好 存在于某个子数组中。<br>子数组中 任意 两个元素的差必须小于或等于 k 。<br>返回一个 二维数组 ，包含所有的子数组。如果不可能满足条件，就返回一个空数组。如果有多个答案，返回 任意一个 即可。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目只问是否可以划分，并不在意数组元素的是否需要保持不变，所以这里我选择对 input 数组排序。排序过后，可以每次看三个元素 nums[i], nums[i + 1], nums[i + 2]。如果 nums[i + 2] - nums[i] &gt; k，说明当前这一行的最大元素和最小元素的差不满足题意，直接返回一个空的二维数组。如果满足题意，则还是每次看三个元素直到填满最后的二维数组。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(3n) - O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] divideArray(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-type">int</span>[][] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length / <span class="hljs-number">3</span>][<span class="hljs-number">3</span>];<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; nums.length; i += <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] - nums[i - <span class="hljs-number">2</span>] &lt;= k) &#123;<br>                res[m] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; nums[i - <span class="hljs-number">2</span>], nums[i - <span class="hljs-number">1</span>], nums[i] &#125;;<br>                m++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>You are given an integer array nums of size n and a positive integer k.</p><p>Divide the array into one or more arrays of size 3 satisfying the following conditions:</p><p>Each element of nums should be in exactly one array.<br>The difference between any two elements in one array is less than or equal to k.<br>Return a 2D array containing all the arrays. If it is impossible to satisfy the conditions, return an empty array. And if there are multiple answers, return any of them.</p><p>Example 1:<br>Input: nums &#x3D; [1,3,4,8,7,9,3,5,1], k &#x3D; 2<br>Output: [[1,1,3],[3,4,5],[7,8,9]]<br>Explanation: We can divide the array into the following arrays: [1,1,3], [3,4,5] and [7,8,9].<br>The difference between any two elements in each array is less than or equal to 2.<br>Note that the order of elements is not important.</p><p>Example 2:<br>Input: nums &#x3D; [1,3,3,2,7,3], k &#x3D; 3<br>Output: []<br>Explanation: It is not possible to divide the array satisfying all the conditions.</p><p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>n is a multiple of 3.<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p><p>划分数组并满足最大差限制。</p><blockquote><p>给你一个长度为 n 的整数数组 nums，以及一个正整数 k 。<br>将这个数组划分为一个或多个长度为 3 的子数组，并满足以下条件：<br>nums 中的 每个 元素都必须 恰好 存在于某个子数组中。<br>子数组中 任意 两个元素的差必须小于或等于 k 。<br>返回一个 二维数组 ，包含所有的子数组。如果不可能满足条件，就返回一个空数组。如果有多个答案，返回 任意一个 即可。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目只问是否可以划分，并不在意数组元素的是否需要保持不变，所以这里我选择对 input 数组排序。排序过后，可以每次看三个元素 nums[i], nums[i + 1], nums[i + 2]。如果 nums[i + 2] - nums[i] &gt; k，说明当前这一行的最大元素和最小元素的差不满足题意，直接返回一个空的二维数组。如果满足题意，则还是每次看三个元素直到填满最后的二维数组。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(3n) - O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] divideArray(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-type">int</span>[][] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length / <span class="hljs-number">3</span>][<span class="hljs-number">3</span>];<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; nums.length; i += <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] - nums[i - <span class="hljs-number">2</span>] &lt;= k) &#123;<br>                res[m] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; nums[i - <span class="hljs-number">2</span>], nums[i - <span class="hljs-number">1</span>], nums[i] &#125;;<br>                m++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -16,11 +16,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>sort</tag>
       
@@ -43,9 +43,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>bit manipulation</tag>
       
@@ -68,11 +68,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>palindrome</tag>
       
@@ -95,11 +95,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -197,11 +197,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>string</tag>
       
@@ -224,9 +224,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -249,11 +249,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -303,9 +303,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -330,11 +330,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>palindrome</tag>
       
@@ -478,11 +478,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -503,11 +503,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -528,11 +528,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>sort</tag>
       
@@ -582,9 +582,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -609,9 +609,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -634,11 +634,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -661,11 +661,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -711,13 +711,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -740,11 +740,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -844,11 +844,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -896,9 +896,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -921,11 +921,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -948,9 +948,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -975,11 +975,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>sort</tag>
       
@@ -1029,11 +1029,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1056,9 +1056,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -1083,15 +1083,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
-      
-      <tag>math</tag>
       
       <tag>hashmap</tag>
       
+      <tag>java</tag>
+      
       <tag>two sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -1112,11 +1112,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -1162,11 +1162,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -1187,11 +1187,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -1212,11 +1212,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>treemap</tag>
       
@@ -1239,11 +1239,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>array</tag>
       
       <tag>heap</tag>
       
@@ -1266,9 +1266,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -1293,9 +1293,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1347,11 +1347,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
@@ -1372,11 +1372,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1426,9 +1426,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -1453,11 +1453,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -1530,11 +1530,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -1555,11 +1555,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -1584,11 +1584,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -1611,13 +1611,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>greedy</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1692,9 +1692,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -1744,11 +1744,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>greedy</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>dynamic programming</tag>
       
@@ -1773,11 +1773,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -1825,9 +1825,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -1877,9 +1877,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -1906,11 +1906,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -1958,13 +1958,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -1987,13 +1987,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>bfs</tag>
+      <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>bfs</tag>
       
       <tag>flood fill</tag>
       
@@ -2039,15 +2039,15 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
       
       <tag>string</tag>
-      
-      <tag>two pointer</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -2091,11 +2091,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>javascript</tag>
       
       <tag>recursion</tag>
       
@@ -2118,9 +2118,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -2174,13 +2174,13 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>javascript</tag>
       
     </tags>
     
@@ -2226,13 +2226,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -2253,13 +2253,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -2280,13 +2280,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
       
       <tag>string</tag>
-      
-      <tag>hashmap</tag>
       
     </tags>
     
@@ -2332,9 +2332,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -2361,15 +2361,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
-      
-      <tag>javascript</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
