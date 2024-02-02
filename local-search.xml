@@ -174,9 +174,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -332,11 +332,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -507,9 +507,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -559,9 +559,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -688,9 +688,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1112,9 +1112,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1243,9 +1243,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>sort</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -1270,11 +1270,11 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
       
       <tag>prefix sum</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1593,6 +1593,33 @@
       <tag>greedy</tag>
       
       <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1291. Sequential Digits</title>
+    <link href="/posts/1079351292.html"/>
+    <url>/posts/1079351292.html</url>
+    
+    <content type="html"><![CDATA[<p>An integer has sequential digits if and only if each digit in the number is one more than the previous digit.</p><p>Return a sorted list of all the integers in the range [low, high] inclusive that have sequential digits.</p><p>Example 1:<br>Input: low &#x3D; 100, high &#x3D; 300<br>Output: [123,234]</p><p>Example 2:<br>Input: low &#x3D; 1000, high &#x3D; 13000<br>Output: [1234,2345,3456,4567,5678,6789,12345]</p><p>Constraints:<br>10 &lt;&#x3D; low &lt;&#x3D; high &lt;&#x3D; 10^9</p><p>顺次数。</p><blockquote><p>我们定义「顺次数」为：每一位上的数字都比前一位上的数字大 1 的整数。<br>请你返回由 [low, high] 范围内所有顺次数组成的 有序 列表（从小到大排序）。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个下限 low 和一个上限 high，请输出一个有序的 list，list 里面是所有介于 low 和 high 之间的数字，同时数字满足每一位上的数字都比前一位上的数字大 1 。这道题有三种做法。暴力枚举，DFS和BFS。因为数据量的关系，所以这道题我觉得无论是什么做法，时间复杂度都是O(1)，空间复杂度都是O(n)，因为要输出的是一个list。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1) - 因为在 low 和 high 之间的数字个数是有限的<br>空间O(1) - 因为在 low 和 high 之间的数字个数是有限的</p><h2 id="思路一-暴力枚举"><a href="#思路一-暴力枚举" class="headerlink" title="思路一 - 暴力枚举"></a>思路一 - 暴力枚举</h2><p>枚举虽然是暴力，但是由于最后答案本身就不是很多，所以代码也能过。具体的思路是，首先创建一个字符串“123456789”，按位遍历这个字符串，以在指针i上的数字作为开头，并尝试生成后面更大的数字。如果生成的数字大于high了就停止。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">class</span> Solution &#123;<br>    <span class="hljs-built_in">public</span> List&lt;<span class="hljs-type">Integer</span>&gt; sequentialDigits(<span class="hljs-type">int</span> low, <span class="hljs-type">int</span> high) &#123;<br>        String s = &quot;123456789&quot;;<br>        List&lt;<span class="hljs-type">Integer</span>&gt; res = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; s.length() - i + <span class="hljs-number">1</span>; j++) &#123;<br>                <span class="hljs-type">int</span> num = <span class="hljs-type">Integer</span>.parseInt(s.substring(j, j + i));<br>                <span class="hljs-keyword">if</span> (num &gt; high) &#123;<br>                    <span class="hljs-keyword">return</span> res;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (num &gt;= low) &#123;<br>                    res.<span class="hljs-keyword">add</span>(num);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-DFS"><a href="#思路二-DFS" class="headerlink" title="思路二 - DFS"></a>思路二 - DFS</h2><p>DFS的做法也是从1到9开始确定第一位上的数字。同时需要一个变量target记录已经生成的数字，那么下一个要被生成的数字就是target * 10 + start。举例，假设第一位start &#x3D; 1，此时的target也是1；当遍历到下一层的时候，start &#x3D; 2，target &#x3D; 10 + 2 &#x3D; 12；再下一层的时候，start &#x3D; 3，target &#x3D; 120 + 3 &#x3D; 123。以此类推。</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; sequentialDigits(<span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high) &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i++) &#123;<br>            dfs(res, i, <span class="hljs-number">0</span>, low, high);<br>        &#125;<br>        Collections.sort(res);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(List&lt;Integer&gt; res, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> <span class="hljs-keyword">target</span>, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>        <span class="hljs-comment">// base case</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &gt;= low &amp;&amp; <span class="hljs-keyword">target</span> &lt;= high) &#123;<br>            res.add(<span class="hljs-keyword">target</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (start &gt; <span class="hljs-number">9</span> || <span class="hljs-keyword">target</span> &gt; high) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        dfs(res, start + <span class="hljs-number">1</span>, <span class="hljs-keyword">target</span> * <span class="hljs-number">10</span> + start, low, high);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路三-BFS"><a href="#思路三-BFS" class="headerlink" title="思路三 - BFS"></a>思路三 - BFS</h2><p>BFS的做法跟DFS类似，也是先拿到第一个数字，用queue去筛一遍，如果在范围内就加到结果集。</p><h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">class</span> Solution &#123;<br>    <span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">Integer</span>&gt; sequentialDigits(<span class="hljs-built_in">int</span> low, <span class="hljs-built_in">int</span> high) &#123;<br>        List&lt;<span class="hljs-keyword">Integer</span>&gt; res = new ArrayList&lt;&gt;();<br>        Queue&lt;<span class="hljs-keyword">Integer</span>&gt; queue = new LinkedList&lt;&gt;();<br>        for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i++) &#123;<br>            queue.offer(i);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-comment">!queue.isEmpty()) &#123;</span><br>            <span class="hljs-built_in">int</span> <span class="hljs-keyword">target</span> = queue.poll();<br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">target</span> &gt;= low &amp;&amp; <span class="hljs-keyword">target</span> &lt;= high) &#123;<br>                res.add(<span class="hljs-keyword">target</span>);<br>            &#125;<br>            <span class="hljs-built_in">int</span> tail = <span class="hljs-keyword">target</span> % <span class="hljs-number">10</span>;<br>            <span class="hljs-keyword">if</span> (tail &lt; <span class="hljs-number">9</span> &amp;&amp; <span class="hljs-keyword">target</span> &lt;= high) &#123;<br>                queue.offer(<span class="hljs-keyword">target</span> * <span class="hljs-number">10</span> + tail + <span class="hljs-number">1</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>bfs</tag>
+      
+      <tag>dfs</tag>
+      
+      <tag>enumeration</tag>
       
     </tags>
     
