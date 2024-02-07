@@ -16,30 +16,30 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an array of integers heights representing the histogram’s bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram. Example 1:Input: heights &#x3D;">
+    <meta name="description" content="Given the root of a binary tree with unique values and the values of two different nodes of the tree x and y, return true if the nodes corresponding to the values x and y in the tree are cousins, or f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 84. Largest Rectangle in Histogram">
-<meta property="og:url" content="https://shurui91.github.io/posts/3520737794.html">
+<meta property="og:title" content="[LeetCode] 993. Cousins in Binary Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/4130356496.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an array of integers heights representing the histogram’s bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram. Example 1:Input: heights &#x3D;">
+<meta property="og:description" content="Given the root of a binary tree with unique values and the values of two different nodes of the tree x and y, return true if the nodes corresponding to the values x and y in the tree are cousins, or f">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg">
-<meta property="article:published_time" content="2020-05-08T18:13:55.000Z">
-<meta property="article:modified_time" content="2023-11-29T17:48:58.649Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/02/12/q1248-01.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/02/12/q1248-02.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/02/13/q1248-03.png">
+<meta property="article:published_time" content="2020-05-08T11:58:37.000Z">
+<meta property="article:modified_time" content="2024-02-07T06:21:26.652Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="stack">
-<meta property="article:tag" content="monotonic stack">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="bfs">
+<meta property="article:tag" content="dfs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2019/02/12/q1248-01.png">
   
   
   
-  <title>[LeetCode] 84. Largest Rectangle in Histogram - CNoodle</title>
+  <title>[LeetCode] 993. Cousins in Binary Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 84. Largest Rectangle in Histogram"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 993. Cousins in Binary Tree"></span>
           
         </div>
 
@@ -204,7 +204,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-05-08 11:13" pubdate>
+        <time datetime="2020-05-08 04:58" pubdate>
           May 8, 2020 am
         </time>
       </span>
@@ -216,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          3.1k words
         
       </span>
     
@@ -227,7 +227,7 @@
         
         
         
-          22 mins
+          26 mins
         
       </span>
     
@@ -264,33 +264,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 84. Largest Rectangle in Histogram</h1>
+            <h1 id="seo-header">[LeetCode] 993. Cousins in Binary Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an array of integers heights representing the histogram’s bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: heights &#x3D; [2,1,5,6,2,3]<br>Output: 10<br>Explanation: The above is a histogram where width of each bar is 1.<br>The largest rectangle is shown in the red area, which has an area &#x3D; 10 units.</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: heights &#x3D; [2,4]<br>Output: 4</p>
-<p>Constraints:<br>1 &lt;&#x3D; heights.length &lt;&#x3D; 105<br>0 &lt;&#x3D; heights[i] &lt;&#x3D; 104</p>
-<p>柱状图中最大的矩形。</p>
+                <p>Given the root of a binary tree with unique values and the values of two different nodes of the tree x and y, return true if the nodes corresponding to the values x and y in the tree are cousins, or false otherwise.</p>
+<p>Two nodes of a binary tree are cousins if they have the same depth with different parents.</p>
+<p>Note that in a binary tree, the root node is at the depth 0, and children of each depth k node are at the depth k + 1.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2019/02/12/q1248-01.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,2,3,4], x &#x3D; 4, y &#x3D; 3<br>Output: false</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2019/02/12/q1248-02.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,2,3,null,4,null,5], x &#x3D; 5, y &#x3D; 4<br>Output: true</p>
+<p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2019/02/13/q1248-03.png" srcset="/img/loading.gif" lazyload alt="Example 3"><br>Input: root &#x3D; [1,2,3,null,4], x &#x3D; 2, y &#x3D; 3<br>Output: false</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [2, 100].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>Each node has a unique value.<br>x !&#x3D; y<br>x and y are exist in the tree.</p>
+<p>二叉树的堂兄弟节点。</p>
 <blockquote>
-<p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p>在二叉树中，根节点位于深度 0 处，每个深度为 k 的节点的子节点位于深度 k+1 处。<br>如果二叉树的两个节点深度相同，但 父节点不同 ，则它们是一对堂兄弟节点。<br>我们给出了具有唯一值的二叉树的根节点 root ，以及树中两个不同节点的值 x 和 y 。<br>只有与值 x 和 y 对应的节点是堂兄弟节点时，才返回 true 。否则，返回 false。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个数组表示一些非负整数，代表一些 bars，请你返回由这些 bar 组成的最大矩形的面积。</p>
-<p>思路是单调栈。这个题可以用别的方法，但是复杂度都不如单调栈的思路。关于这个题本身，我参考了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lichen782/p/leetcode_Largest_Rectangle_in_Histogram.html">这个帖子</a>，他讲的非常好，起码帮助我理解了这道题单调栈的做法。至于代码，你只要看懂这个帖子的讲解，代码一定看得懂。唯一需要注意的是为什么 for loop 要遍历完 input 数组之后再多走一步，是为了让遍历完 input 之后有一个机会停下来结算由最后一个 bar 组成的矩形的最大面积，否则如果是一直递增的 bars，遍历完是没有机会停下来结算的。</p>
-<p>这个题为什么可以用单调栈做，并且单调栈的思想适用于什么样的题目，我觉得是比如你在一堆单调增或者单调减的数据里面突然找一个拐点，就可以尝试利用单调栈。这个还是需要多做才有感觉。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道树的遍历的基础题，这里我提供 BFS 和 DFS 两种解决办法。</p>
+<p>BFS 的做法，我们从 queue 中弹出每个元素 cur 的时候，我们要去看 cur 的左右孩子的节点值是否等于 x 和 y，如果等于，则不满足<strong>父节点不同</strong>这个条件；如果 x 和 y 在同一层被找到但是父节点不一样，则说明它们是一对堂兄弟节点。</p>
+<p>DFS 的做法是我需要以前序遍历的方式遍历整棵树，并用几个全局变量记录 x 和 y 的深度和他们各自的父节点。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-keyword">if</span> (heights == <span class="hljs-literal">null</span> || heights.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= heights.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> i == heights.length ? <span class="hljs-number">0</span> : heights[i];<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; h &lt; heights[stack.peek()]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> heights[stack.pop()];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> stack.isEmpty() ? -<span class="hljs-number">1</span> : stack.peek();<br>                <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> height * (i - start - <span class="hljs-number">1</span>);<br>                res = Math.max(res, area);<br>            &#125;<br>            stack.push(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="BFS代码"><a href="#BFS代码" class="headerlink" title="BFS代码"></a>BFS代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isCousins</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>		<span class="hljs-comment">// corner case</span><br>		<span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>		&#125;<br><br>		<span class="hljs-comment">// normal case</span><br>		Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>		queue.offer(root);<br>		<span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>			<span class="hljs-type">boolean</span> <span class="hljs-variable">xflag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>			<span class="hljs-type">boolean</span> <span class="hljs-variable">yflag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> queue.size();<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++) &#123;<br>				<span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.poll();<br>				<span class="hljs-keyword">if</span> (cur.val == x) &#123;<br>					xflag = <span class="hljs-literal">true</span>;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (cur.val == y) &#123;<br>					yflag = <span class="hljs-literal">true</span>;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span> &amp;&amp; cur.right != <span class="hljs-literal">null</span>) &#123;<br>					<span class="hljs-keyword">if</span> (cur.left.val == x &amp;&amp; cur.right.val == y) &#123;<br>						<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>					&#125;<br>					<span class="hljs-keyword">if</span> (cur.left.val == y &amp;&amp; cur.right.val == x) &#123;<br>						<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>					&#125;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>					queue.offer(cur.left);<br>				&#125;<br>				<span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>					queue.offer(cur.right);<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">if</span> (xflag &amp;&amp; yflag) &#123;<br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">heights</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> largestRectangleArea = <span class="hljs-keyword">function</span>(<span class="hljs-params">heights</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (heights == <span class="hljs-literal">null</span> || heights.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> stack = [];<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= heights.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">let</span> h = i == heights.<span class="hljs-property">length</span> ? <span class="hljs-number">0</span> : heights[i];<br>        <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span> &amp;&amp; h &lt; heights[stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]]) &#123;<br>            <span class="hljs-keyword">let</span> height = heights[stack.<span class="hljs-title function_">pop</span>()];<br>            <span class="hljs-keyword">let</span> start = !stack.<span class="hljs-property">length</span> ? -<span class="hljs-number">1</span> : stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">let</span> area = height * (i - start - <span class="hljs-number">1</span>);<br>            res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, area);<br>        &#125;<br>        stack.<span class="hljs-title function_">push</span>(i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="DFS代码"><a href="#DFS代码" class="headerlink" title="DFS代码"></a>DFS代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">TreeNode</span> <span class="hljs-variable">xParent</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>    <span class="hljs-type">TreeNode</span> <span class="hljs-variable">yParent</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">xDepth</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">yDepth</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isCousins</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        helper(root, x, y, <span class="hljs-number">0</span>, <span class="hljs-literal">null</span>);<br>        <span class="hljs-keyword">return</span> xDepth == yDepth &amp;&amp; xParent != yParent;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> depth, TreeNode parent)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == x) &#123;<br>            xParent = parent;<br>            xDepth = depth;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == y) &#123;<br>            yParent = parent;<br>            yDepth = depth;<br>        &#125;<br>        helper(root.left, x, y, depth + <span class="hljs-number">1</span>, root);<br>        helper(root.right, x, y, depth + <span class="hljs-number">1</span>, root);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="其他思路"><a href="#其他思路" class="headerlink" title="其他思路"></a>其他思路</h2><p>暴力解，O(n^2)，OA也勉强能过，不会超时<br>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 枚举左边界</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; left &lt; len; left++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">minHeight</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>            <span class="hljs-comment">// 枚举右边界</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left; right &lt; len; right++) &#123;<br>                <span class="hljs-comment">// 确定高度，我们要最小的高度</span><br>                minHeight = Math.min(minHeight, heights[right]);<br>                <span class="hljs-comment">// 计算面积，我们要保留计算过的最大的面积</span><br>                area = Math.max(area, (right - left + <span class="hljs-number">1</span>) * minHeight);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> area;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -306,13 +303,11 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
       
-        <a href="/tags/stack/" class="print-no-link">#stack</a>
-      
-        <a href="/tags/monotonic-stack/" class="print-no-link">#monotonic stack</a>
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
     </div>
   
@@ -324,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 84. Largest Rectangle in Histogram</div>
-      <div>https://shurui91.github.io/posts/3520737794.html</div>
+      <div>[LeetCode] 993. Cousins in Binary Tree</div>
+      <div>https://shurui91.github.io/posts/4130356496.html</div>
     </div>
     <div class="license-meta">
       
@@ -369,9 +364,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2354514140.html" title="[LeetCode] 1441. Build an Array With Stack Operations">
+                      <a href="/posts/3520737794.html" title="[LeetCode] 84. Largest Rectangle in Histogram">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1441. Build an Array With Stack Operations</span>
+                        <span class="hidden-mobile">[LeetCode] 84. Largest Rectangle in Histogram</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -379,8 +374,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/4130356496.html" title="[LeetCode] 993. Cousins in Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 993. Cousins in Binary Tree</span>
+                      <a href="/posts/3409524787.html" title="[LeetCode] 443. String Compression">
+                        <span class="hidden-mobile">[LeetCode] 443. String Compression</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -400,8 +395,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3520737794.html';
-          this.page.identifier = '/posts/3520737794.html';
+          this.page.url = 'https://shurui91.github.io/posts/4130356496.html';
+          this.page.identifier = '/posts/4130356496.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
