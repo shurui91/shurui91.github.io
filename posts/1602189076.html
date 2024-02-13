@@ -16,25 +16,29 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a string s consisting only of the characters ‘0’ and ‘1’. In one operation, you can change any ‘0’ to ‘1’ or vice versa. The string is called alternating if no two adjacent characters ar">
+    <meta name="description" content="You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists. Return the">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1758. Minimum Changes To Make Alternating Binary String">
-<meta property="og:url" content="https://shurui91.github.io/posts/1170446735.html">
+<meta property="og:title" content="[LeetCode] 21. Merge Two Sorted Lists">
+<meta property="og:url" content="https://shurui91.github.io/posts/1602189076.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a string s consisting only of the characters ‘0’ and ‘1’. In one operation, you can change any ‘0’ to ‘1’ or vice versa. The string is called alternating if no two adjacent characters ar">
+<meta property="og:description" content="You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists. Return the">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-11-29T20:41:34.000Z">
-<meta property="article:modified_time" content="2023-12-24T05:54:43.117Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg">
+<meta property="article:published_time" content="2019-11-10T16:01:40.000Z">
+<meta property="article:modified_time" content="2024-02-13T17:46:17.514Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="sort">
+<meta property="article:tag" content="linked list">
+<meta property="article:tag" content="merge sort">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg">
   
   
   
-  <title>[LeetCode] 1758. Minimum Changes To Make Alternating Binary String - CNoodle</title>
+  <title>[LeetCode] 21. Merge Two Sorted Lists - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1758. Minimum Changes To Make Alternating Binary String"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 21. Merge Two Sorted Lists"></span>
           
         </div>
 
@@ -199,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-29 12:41" pubdate>
-          November 29, 2022 pm
+        <time datetime="2019-11-10 08:01" pubdate>
+          November 10, 2019 am
         </time>
       </span>
     
@@ -211,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          1.7k words
         
       </span>
     
@@ -222,7 +226,7 @@
         
         
         
-          20 mins
+          15 mins
         
       </span>
     
@@ -259,36 +263,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1758. Minimum Changes To Make Alternating Binary String</h1>
+            <h1 id="seo-header">[LeetCode] 21. Merge Two Sorted Lists</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a string s consisting only of the characters ‘0’ and ‘1’. In one operation, you can change any ‘0’ to ‘1’ or vice versa.</p>
-<p>The string is called alternating if no two adjacent characters are equal. For example, the string “010” is alternating, while the string “0100” is not.</p>
-<p>Return the minimum number of operations needed to make s alternating.</p>
-<p>Example 1:<br>Input: s &#x3D; “0100”<br>Output: 1<br>Explanation: If you change the last character to ‘1’, s will be “0101”, which is alternating.</p>
-<p>Example 2:<br>Input: s &#x3D; “10”<br>Output: 0<br>Explanation: s is already alternating.</p>
-<p>Example 3:<br>Input: s &#x3D; “1111”<br>Output: 2<br>Explanation: You need two operations to reach “0101” or “1010”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 104<br>s[i] is either ‘0’ or ‘1’.</p>
-<p>生成交替二进制字符串的最少操作数.</p>
+                <p>You are given the heads of two sorted linked lists list1 and list2.</p>
+<p>Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.</p>
+<p>Return the head of the merged linked list.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: list1 &#x3D; [1,2,4], list2 &#x3D; [1,3,4]<br>Output: [1,1,2,3,4,4]</p>
+<p>Example 2:<br>Input: list1 &#x3D; [], list2 &#x3D; []<br>Output: []</p>
+<p>Example 3:<br>Input: list1 &#x3D; [], list2 &#x3D; [0]<br>Output: [0]</p>
+<p>Constraints:<br>The number of nodes in both lists is in the range [0, 50].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>Both list1 and list2 are sorted in non-decreasing order.</p>
+<p>合并两个有序链表。</p>
 <blockquote>
-<p>给你一个仅由字符 ‘0’ 和 ‘1’ 组成的字符串 s 。一步操作中，你可以将任一 ‘0’ 变成 ‘1’ ，或者将 ‘1’ 变成 ‘0’ 。<br>交替字符串 定义为：如果字符串中不存在相邻两个字符相等的情况，那么该字符串就是交替字符串。例如，字符串 “010” 是交替字符串，而字符串 “0100” 不是。<br>返回使 s 变成 交替字符串 所需的 最少 操作数。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string">https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
 </blockquote>
-<h2 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h2><p>这道题算是字符串类型的题目。我自己做的时候一开始没有想到太简洁的方法，所以分别模拟了 0101 和 1010 两种字符串，然后和 input 字符串比较，看看 diff1 小还是 diff2 小，小的那个就是最少操作数。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是用一个 dummy node 去遍历两个链表，对于来自两个链表上的 node，谁的 val 小谁就在前。直接上代码。</p>
+<p>这题的 followup 会是 merge K 个链表，参见 23 题。影子题 148，做法几乎一模一样。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m + n)，两个链表的长度<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minOperations</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">char</span>[] inputArray = s.toCharArray();<br>        <span class="hljs-type">char</span>[] first = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n];<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (zero) &#123;<br>                first[i] = <span class="hljs-string">&#x27;0&#x27;</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                first[i] = <span class="hljs-string">&#x27;1&#x27;</span>;<br>            &#125;<br>            zero = !zero;<br>        &#125;<br><br><br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-type">char</span>[] second = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (one) &#123;<br>                second[i] = <span class="hljs-string">&#x27;1&#x27;</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                second[i] = <span class="hljs-string">&#x27;0&#x27;</span>;<br>            &#125;<br>            one = !one;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count2</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (inputArray[i] != first[i]) &#123;<br>                count1++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (inputArray[i] != second[i]) &#123;<br>                count2++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> Math.min(count1, count2);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">mergeTwoLists</span><span class="hljs-params">(ListNode l1, ListNode l2)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-keyword">while</span> (l1 != <span class="hljs-literal">null</span> &amp;&amp; l2 != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (l1.val &lt; l2.val) &#123;<br>                cur.next = l1;<br>                l1 = l1.next;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                cur.next = l2;<br>                l2 = l2.next;<br>            &#125;<br>            cur = cur.next;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (l1 != <span class="hljs-literal">null</span>) &#123;<br>            cur.next = l1;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (l2 != <span class="hljs-literal">null</span>) &#123;<br>            cur.next = l2;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">l1</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">l2</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> mergeTwoLists = <span class="hljs-keyword">function</span>(<span class="hljs-params">l1, l2</span>) &#123;<br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">let</span> cur = dummy;<br>    <span class="hljs-keyword">while</span> (l1 !== <span class="hljs-literal">null</span> &amp;&amp; l2 !== <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (l1.<span class="hljs-property">val</span> &lt; l2.<span class="hljs-property">val</span>) &#123;<br>            cur.<span class="hljs-property">next</span> = l1;<br>            l1 = l1.<span class="hljs-property">next</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            cur.<span class="hljs-property">next</span> = l2;<br>            l2 = l2.<span class="hljs-property">next</span>;<br>        &#125;<br>        cur = cur.<span class="hljs-property">next</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (l1 !== <span class="hljs-literal">null</span>) &#123;<br>        cur.<span class="hljs-property">next</span> = l1;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (l2 !== <span class="hljs-literal">null</span>) &#123;<br>        cur.<span class="hljs-property">next</span> = l2;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h2><p>看了评论区的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-changes-to-make-alternating-binary-string/solutions/1996808/by-ac_oier-gclh/">这个帖子</a>，感觉最近还是题刷少了。他的思路是，最理想情况下，字符串应该是类似 01010101 这样的排列。在这种排列中，每个位置上的字符串与其下标 index 有如下关系，</p>
-<blockquote>
-<p>index  &#x3D; 0, 1, 2, 3, 4 % 2<br>char   &#x3D; 0, 1, 0, 1, 0</p>
-</blockquote>
-<p>所以我们可以遍历一遍 input 字符串，看一下每个位置的下标 index % 2 之后是否等于同位置上的字符串，记录全局不同的个数 diff。注意因为字符串可以是 0101 类型，也可以是 1010 类型的，所以我们需要看两种情况哪一种情况最优。假如 0101 类型需要操作的次数是 diff 的话，那么 1010 类型需要操作的次数 &#x3D; 字符串长度 len - diff。比较这两者谁更小即可。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minOperations</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>		<span class="hljs-type">int</span> <span class="hljs-variable">diff</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>			<span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span> != s.charAt(i) - <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>				diff++;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> Math.min(diff, n - diff);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">21. Merge Two Sorted Lists<br>23. Merge k Sorted Lists<br>148. Sort List<br>1634. Add Two Polynomials Represented as Linked Lists<br>1940. Longest Common Subsequence Between Sorted Arrays<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -304,9 +305,13 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
+      
+        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
+      
+        <a href="/tags/merge-sort/" class="print-no-link">#merge sort</a>
       
     </div>
   
@@ -318,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1758. Minimum Changes To Make Alternating Binary String</div>
-      <div>https://shurui91.github.io/posts/1170446735.html</div>
+      <div>[LeetCode] 21. Merge Two Sorted Lists</div>
+      <div>https://shurui91.github.io/posts/1602189076.html</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 29, 2022</div>
+          <div>November 10, 2019</div>
         </div>
       
       
@@ -363,9 +368,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1634991093.html" title="[LeetCode] 1207. Unique Number of Occurrences">
+                      <a href="/posts/3110873426.html" title="[LeetCode] 144. Binary Tree Preorder Traversal">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1207. Unique Number of Occurrences</span>
+                        <span class="hidden-mobile">[LeetCode] 144. Binary Tree Preorder Traversal</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -373,8 +378,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3993687843.html" title="[LeetCode] 828. Count Unique Characters of All Substrings of a Given String">
-                        <span class="hidden-mobile">[LeetCode] 828. Count Unique Characters of All Substrings of a Given String</span>
+                      <a href="/posts/2917377662.html" title="[LeetCode] 162. Find Peak Element">
+                        <span class="hidden-mobile">[LeetCode] 162. Find Peak Element</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -394,8 +399,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1170446735.html';
-          this.page.identifier = '/posts/1170446735.html';
+          this.page.url = 'https://shurui91.github.io/posts/1602189076.html';
+          this.page.identifier = '/posts/1602189076.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
