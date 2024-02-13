@@ -24,13 +24,14 @@
 <meta property="og:description" content="Given the root of a binary tree, return the postorder traversal of its nodes’ values. Example 1:Input: root &#x3D; [1,null,2,3]Output: [3,2,1] Example 2:Input: root &#x3D; []Output: [] Example 3:Input">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/08/28/pre1.jpg">
+<meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png">
 <meta property="article:published_time" content="2020-01-10T11:48:46.000Z">
-<meta property="article:modified_time" content="2024-02-12T03:53:55.430Z">
+<meta property="article:modified_time" content="2024-02-13T17:38:27.922Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
 <meta property="article:tag" content="tree">
 <meta property="article:tag" content="dfs">
+<meta property="article:tag" content="java">
 <meta property="article:tag" content="postorder">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/08/28/pre1.jpg">
@@ -276,7 +277,8 @@
 <blockquote>
 <p>给你一棵二叉树的根节点 root ，返回其节点值的 后序遍历 。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>依然是迭代和递归两种做法，两种做法的时间复杂度均是O(n)，空间复杂度均是O(h)。<br>递归没什么好讲的，直接上代码。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>依然是迭代和递归两种做法，两种做法的时间复杂度均是O(n)，空间复杂度均是O(h)。<br>递归没什么好讲的，直接上代码。还是用这个<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/">更完整的例子</a>参考。</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png" srcset="/img/loading.gif" lazyload alt="Tree Traversal"></p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(h)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">return</span> res;<br>		&#125;<br>        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> stack.pop();<br>            res.addFirst(cur.val);<br>            <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>				stack.push(cur.left);<br>			&#125;<br>            <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>				stack.push(cur.right);<br>			&#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -297,11 +299,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
         <a href="/tags/tree/" class="print-no-link">#tree</a>
       
         <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+      
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/postorder/" class="print-no-link">#postorder</a>
       

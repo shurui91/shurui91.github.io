@@ -24,13 +24,14 @@
 <meta property="og:description" content="Given the root of a binary tree, return the preorder traversal of its nodes’ values. Example 1:Input: root &#x3D; [1,null,2,3]Output: [1,2,3] Example 2:Input: root &#x3D; []Output: [] Example 3:Input:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg">
+<meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png">
 <meta property="article:published_time" content="2019-12-16T20:47:02.000Z">
-<meta property="article:modified_time" content="2024-02-12T02:21:53.541Z">
+<meta property="article:modified_time" content="2024-02-13T17:40:45.063Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
 <meta property="article:tag" content="tree">
 <meta property="article:tag" content="dfs">
+<meta property="article:tag" content="java">
 <meta property="article:tag" content="preorder">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg">
@@ -278,6 +279,7 @@
 <p>给你二叉树的根节点 root ，返回它节点值的 前序 遍历。</p>
 </blockquote>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>树的几种遍历，网上有一个不错的<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/">例子</a>，一个树给了多种遍历的结果。</p>
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png" srcset="/img/loading.gif" lazyload alt="Tree Traversal"></p>
 <p>二叉树的遍历有多种方式，此题是要求用先序遍历。先序遍历的特点是根 - 左 - 右。即如果只有一个根节点和两个子节点的情形下（比如[1, 2, 3]），输出结果应该也是[1, 2, 3]。这题迭代和递归都需要掌握。遍历的时候会用到栈，因为栈是先进后出，所以放进栈的时候记得要逆向，先放右孩子再放左孩子，这样弹出的时候就会先弹出左孩子，再弹出右孩子。两种做法的时间复杂度是O(n)，空间复杂度是O(h)。h是树的高度。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(h)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>Java实现</p>
@@ -299,11 +301,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
         <a href="/tags/tree/" class="print-no-link">#tree</a>
       
         <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+      
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/preorder/" class="print-no-link">#preorder</a>
       
