@@ -16,25 +16,28 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Two strings are considered close if you can attain one from the other using the following operations: Operation 1: Swap any two existing characters.For example, abcde -&gt; aecdbOperation 2: Transform">
+    <meta name="description" content="Given an array of integers arr and an integer k. Find the least number of unique integers after removing exactly k elements. Example 1:Input: arr &#x3D; [5,5,4], k &#x3D; 1Output: 1Explanation: Remove">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1657. Determine if Two Strings Are Close">
-<meta property="og:url" content="https://shurui91.github.io/posts/1169337340.html">
+<meta property="og:title" content="[LeetCode] 1481. Least Number of Unique Integers after K Removals">
+<meta property="og:url" content="https://shurui91.github.io/posts/2929899458.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Two strings are considered close if you can attain one from the other using the following operations: Operation 1: Swap any two existing characters.For example, abcde -&gt; aecdbOperation 2: Transform">
+<meta property="og:description" content="Given an array of integers arr and an integer k. Find the least number of unique integers after removing exactly k elements. Example 1:Input: arr &#x3D; [5,5,4], k &#x3D; 1Output: 1Explanation: Remove">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-25T23:45:27.000Z">
-<meta property="article:modified_time" content="2023-11-29T19:36:33.248Z">
+<meta property="article:published_time" content="2024-02-16T03:05:48.000Z">
+<meta property="article:modified_time" content="2024-02-16T03:11:10.675Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="greedy">
+<meta property="article:tag" content="sort">
+<meta property="article:tag" content="heap">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1657. Determine if Two Strings Are Close - CNoodle</title>
+  <title>[LeetCode] 1481. Least Number of Unique Integers after K Removals - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1657. Determine if Two Strings Are Close"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1481. Least Number of Unique Integers after K Removals"></span>
           
         </div>
 
@@ -199,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-01-25 15:45" pubdate>
-          January 25, 2021 pm
+        <time datetime="2024-02-15 19:05" pubdate>
+          February 15, 2024 pm
         </time>
       </span>
     
@@ -211,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          2.1k words
         
       </span>
     
@@ -222,7 +225,7 @@
         
         
         
-          22 mins
+          18 mins
         
       </span>
     
@@ -259,28 +262,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1657. Determine if Two Strings Are Close</h1>
+            <h1 id="seo-header">[LeetCode] 1481. Least Number of Unique Integers after K Removals</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Two strings are considered close if you can attain one from the other using the following operations:</p>
-<p>Operation 1: Swap any two existing characters.<br>For example, abcde -&gt; aecdb<br>Operation 2: Transform every occurrence of one existing character into another existing character, and do the same with the other character.<br>For example, aacabb -&gt; bbcbaa (all a’s turn into b’s, and all b’s turn into a’s)<br>You can use the operations on either string as many times as necessary.</p>
-<p>Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.</p>
-<p>Example 1:<br>Input: word1 &#x3D; “abc”, word2 &#x3D; “bca”<br>Output: true<br>Explanation: You can attain word2 from word1 in 2 operations.<br>Apply Operation 1: “abc” -&gt; “acb”<br>Apply Operation 1: “acb” -&gt; “bca”</p>
-<p>Example 2:<br>Input: word1 &#x3D; “a”, word2 &#x3D; “aa”<br>Output: false<br>Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.</p>
-<p>Example 3:<br>Input: word1 &#x3D; “cabbba”, word2 &#x3D; “abbccc”<br>Output: true<br>Explanation: You can attain word2 from word1 in 3 operations.<br>Apply Operation 1: “cabbba” -&gt; “caabbb”<br>Apply Operation 2: “caabbb” -&gt; “baaccc”<br>Apply Operation 2: “baaccc” -&gt; “abbccc”</p>
-<p>Constraints:<br>1 &lt;&#x3D; word1.length, word2.length &lt;&#x3D; 105<br>word1 and word2 contain only lowercase English letters.</p>
-<p>确定两个字符串是否接近。</p>
+                <p>Given an array of integers <code>arr</code> and an integer <code>k</code>. Find the <em>least number of unique integers</em> after removing exactly <code>k</code> elements.</p>
+<p>Example 1:<br>Input: arr &#x3D; [5,5,4], k &#x3D; 1<br>Output: 1<br>Explanation: Remove the single 4, only 5 is left.</p>
+<p>Example 2:<br>Input: arr &#x3D; [4,3,1,1,3,3,2], k &#x3D; 3<br>Output: 2<br>Explanation: Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.</p>
+<p>Constraints:</p>
+<ul>
+<li><code>1 &lt;= arr.length &lt;= 10^5</code></li>
+<li><code>1 &lt;= arr[i] &lt;= 10^9</code></li>
+<li><code>0 &lt;= k &lt;= arr.length</code></li>
+</ul>
+<p>不同整数的最少数目。</p>
 <blockquote>
-<p>如果可以使用以下操作从一个字符串得到另一个字符串，则认为两个字符串 接近 ：<br>操作 1：交换任意两个 现有 字符。<br>例如，abcde -&gt; aecdb<br>操作 2：将一个 现有 字符的每次出现转换为另一个 现有 字符，并对另一个字符执行相同的操作。<br>例如，aacabb -&gt; bbcbaa（所有 a 转化为 b ，而所有的 b 转换为 a ）<br>你可以根据需要对任意一个字符串多次使用这两种操作。<br>给你两个字符串，word1 和 word2 。如果 word1 和 word2 接近 ，就返回 true ；否则，返回 false 。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/determine-if-two-strings-are-close">https://leetcode-cn.com/problems/determine-if-two-strings-are-close</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给你一个整数数组 <code>arr</code> 和一个整数 <code>k</code> 。现需要从数组中恰好移除 <code>k</code> 个元素，请找出移除后数组中不同整数的最少数目。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。这道题按照给的两种操作来判断，注意标红的条件，这两种操作可以被执行多次。</p>
-<p>先说操作 1，如果要满足交换任意两个字符 char，使得 A 变成 B，那么这两个被交换的字符的出现次数一定要相同才行，也就是说在字符串 A 中如果你要替换某个字母 x，那么在字符串 B 中相同 index 位置上的那个字母 y 的出现次数要跟 x 相同才行。</p>
-<p>对于操作 2，如果要满足将一个现有字符替换成另一个现有字符，比如题目给的例子，那么需要满足第一个字符串中 a 的数量 &#x3D; 第二个字符串中 b 的数量，同时第一个字符串中 b 的数量 &#x3D; 第二个字符串中 a 的数量。这两个条件转化成代码就是检查两个字符串中所有出现过的字母的数量是不是能一一对应（字母不一定相同）。参见<a target="_blank" rel="noopener" href="https://leetcode.com/problems/determine-if-two-strings-are-close/discuss/935920/C++-Short-and-Simple-oror-O(-N-)-solution">这个例子</a>，如果所有出现的字母的次数在排序后能对的上，则执行操作 2 就能满足题意。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是先用 hashmap 记录每个不同元素的出现次数，然后按照每个元素出现次数从小到大开始删除，直到删除掉K个元素为止。如果当把某个元素全都删掉之后 K &lt; 0，则说明最后这个元素的出现次数不需要全部删除，只需要删除一部分。我这里提供两种实现，一种是最小堆；另一种是通过数组记录不同元素的出现次数，但是需要排序。两种做法都需要用到 hashmap。</p>
+<h2 id="思路一-最小堆"><a href="#思路一-最小堆" class="headerlink" title="思路一 - 最小堆"></a>思路一 - 最小堆</h2><p>用hashmap统计完数字的出现次数之后，我们把hashmap中所有的元素都放入一个最小堆，堆顶是[出现次数最少的元素，出现次数]。这样每次被pop出来的都是出现次数最少的元素。这样做我们可以尽可能多地删掉 unique key，使得最后剩下的部分里 unique key 更少。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">closeStrings</span><span class="hljs-params">(String word1, String word2)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (word1.length() != word2.length()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> word1.length();<br>        <span class="hljs-type">int</span>[] count1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span>[] count2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            count1[word1.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            count2[word2.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (count1[i] &gt; <span class="hljs-number">0</span> &amp;&amp; count2[i] == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count2[i] &gt; <span class="hljs-number">0</span> &amp;&amp; count1[i] == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        Arrays.sort(count1);<br>        Arrays.sort(count2);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (count1[i] != count2[i]) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> map.get(key);<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; key, val &#125;);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span> &amp;&amp; !queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] top = queue.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> top[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (k &lt; count) &#123;<br>                <span class="hljs-keyword">return</span> queue.size() + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                k -= count;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="思路二-hashmap-排序"><a href="#思路二-hashmap-排序" class="headerlink" title="思路二 - hashmap + 排序"></a>思路二 - hashmap + 排序</h2><p>我们需要一个 int 数组，长度为 size，size 记录的是map.size()。我们把 hashmap 里每个 entrySet 放入 count 数组。这样当 count 数组被排序之后，因为 count[i] 表示的是当前某个元素的出现次数，所以还是出现次数较小的在前。其余部分的思路跟第一种做法类似。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>		HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>			map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>		&#125;<br><br>		<span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> map.size();<br>		<span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[size];<br>		<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>			count[i] = map.get(key);<br>			i++;<br>		&#125;<br>		Arrays.sort(count);<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> c : count) &#123;<br>			<span class="hljs-keyword">if</span> (k &gt;= c) &#123;<br>				k -= c;<br>				size--;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				<span class="hljs-keyword">break</span>;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> size;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,9 +306,15 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
       
         <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+      
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
+      
+        <a href="/tags/heap/" class="print-no-link">#heap</a>
       
     </div>
   
@@ -311,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1657. Determine if Two Strings Are Close</div>
-      <div>https://shurui91.github.io/posts/1169337340.html</div>
+      <div>[LeetCode] 1481. Least Number of Unique Integers after K Removals</div>
+      <div>https://shurui91.github.io/posts/2929899458.html</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 25, 2021</div>
+          <div>February 15, 2024</div>
         </div>
       
       
@@ -356,18 +371,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/4252400418.html" title="[LeetCode] 1423. Maximum Points You Can Obtain from Cards">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1423. Maximum Points You Can Obtain from Cards</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3220296722.html" title="[LeetCode] 二分查找模板 binary search">
-                        <span class="hidden-mobile">[LeetCode] 二分查找模板 binary search</span>
+                      <a href="/posts/2527744301.html" title="[LeetCode] 2108. Find First Palindromic String in the Array">
+                        <span class="hidden-mobile">[LeetCode] 2108. Find First Palindromic String in the Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -387,8 +396,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1169337340.html';
-          this.page.identifier = '/posts/1169337340.html';
+          this.page.url = 'https://shurui91.github.io/posts/2929899458.html';
+          this.page.identifier = '/posts/2929899458.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
