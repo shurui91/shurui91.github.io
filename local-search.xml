@@ -4,37 +4,6 @@
   
   
   <entry>
-    <title>[LeetCode] 1481. Least Number of Unique Integers after K Removals</title>
-    <link href="/posts/2929899458.html"/>
-    <url>/posts/2929899458.html</url>
-    
-    <content type="html"><![CDATA[<p>Given an array of integers <code>arr</code> and an integer <code>k</code>. Find the <em>least number of unique integers</em> after removing exactly <code>k</code> elements.</p><p>Example 1:<br>Input: arr &#x3D; [5,5,4], k &#x3D; 1<br>Output: 1<br>Explanation: Remove the single 4, only 5 is left.</p><p>Example 2:<br>Input: arr &#x3D; [4,3,1,1,3,3,2], k &#x3D; 3<br>Output: 2<br>Explanation: Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.</p><p>Constraints:</p><ul><li><code>1 &lt;= arr.length &lt;= 10^5</code></li><li><code>1 &lt;= arr[i] &lt;= 10^9</code></li><li><code>0 &lt;= k &lt;= arr.length</code></li></ul><p>不同整数的最少数目。</p><blockquote><p>给你一个整数数组 <code>arr</code> 和一个整数 <code>k</code> 。现需要从数组中恰好移除 <code>k</code> 个元素，请找出移除后数组中不同整数的最少数目。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是先用 hashmap 记录每个不同元素的出现次数，然后按照每个元素出现次数从小到大开始删除，直到删除掉K个元素为止。如果当把某个元素全都删掉之后 K &lt; 0，则说明最后这个元素的出现次数不需要全部删除，只需要删除一部分。我这里提供两种实现，一种是最小堆；另一种是通过数组记录不同元素的出现次数，但是需要排序。两种做法都需要用到 hashmap。</p><h2 id="思路一-最小堆"><a href="#思路一-最小堆" class="headerlink" title="思路一 - 最小堆"></a>思路一 - 最小堆</h2><p>用hashmap统计完数字的出现次数之后，我们把hashmap中所有的元素都放入一个最小堆，堆顶是[出现次数最少的元素，出现次数]。这样每次被pop出来的都是出现次数最少的元素。这样做我们可以尽可能多地删掉 unique key，使得最后剩下的部分里 unique key 更少。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> map.get(key);<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; key, val &#125;);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span> &amp;&amp; !queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] top = queue.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> top[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (k &lt; count) &#123;<br>                <span class="hljs-keyword">return</span> queue.size() + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                k -= count;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-hashmap-排序"><a href="#思路二-hashmap-排序" class="headerlink" title="思路二 - hashmap + 排序"></a>思路二 - hashmap + 排序</h2><p>我们需要一个 int 数组，长度为 size，size 记录的是map.size()。我们把 hashmap 里每个 entrySet 放入 count 数组。这样当 count 数组被排序之后，因为 count[i] 表示的是当前某个元素的出现次数，所以还是出现次数较小的在前。其余部分的思路跟第一种做法类似。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> map.size();<br><span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[size];<br><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>count[i] = map.get(key);<br>i++;<br>&#125;<br>Arrays.sort(count);<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> c : count) &#123;<br><span class="hljs-keyword">if</span> (k &gt;= c) &#123;<br>k -= c;<br>size--;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> size;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>leetcode</tag>
-      
-      <tag>java</tag>
-      
-      <tag>array</tag>
-      
-      <tag>hashmap</tag>
-      
-      <tag>greedy</tag>
-      
-      <tag>sort</tag>
-      
-      <tag>heap</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>[LeetCode] 2108. Find First Palindromic String in the Array</title>
     <link href="/posts/2527744301.html"/>
     <url>/posts/2527744301.html</url>
@@ -338,9 +307,9 @@
       
       <tag>array</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -496,11 +465,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -671,9 +640,9 @@
       
       <tag>greedy</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -723,9 +692,9 @@
       
       <tag>array</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -852,9 +821,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>sort</tag>
       
@@ -1089,9 +1058,9 @@
       
       <tag>array</tag>
       
-      <tag>heap</tag>
-      
       <tag>simulation</tag>
+      
+      <tag>heap</tag>
       
     </tags>
     
@@ -1276,9 +1245,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -1489,6 +1458,37 @@
       <tag>two pointer</tag>
       
       <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1481. Least Number of Unique Integers after K Removals</title>
+    <link href="/posts/2929899458.html"/>
+    <url>/posts/2929899458.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an array of integers <code>arr</code> and an integer <code>k</code>. Find the <em>least number of unique integers</em> after removing exactly <code>k</code> elements.</p><p>Example 1:<br>Input: arr &#x3D; [5,5,4], k &#x3D; 1<br>Output: 1<br>Explanation: Remove the single 4, only 5 is left.</p><p>Example 2:<br>Input: arr &#x3D; [4,3,1,1,3,3,2], k &#x3D; 3<br>Output: 2<br>Explanation: Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.</p><p>Constraints:</p><ul><li><code>1 &lt;= arr.length &lt;= 10^5</code></li><li><code>1 &lt;= arr[i] &lt;= 10^9</code></li><li><code>0 &lt;= k &lt;= arr.length</code></li></ul><p>不同整数的最少数目。</p><blockquote><p>给你一个整数数组 <code>arr</code> 和一个整数 <code>k</code> 。现需要从数组中恰好移除 <code>k</code> 个元素，请找出移除后数组中不同整数的最少数目。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是先用 hashmap 记录每个不同元素的出现次数，然后按照每个元素出现次数从小到大开始删除，直到删除掉K个元素为止。如果当把某个元素全都删掉之后 K &lt; 0，则说明最后这个元素的出现次数不需要全部删除，只需要删除一部分。我这里提供两种实现，一种是最小堆；另一种是通过数组记录不同元素的出现次数，但是需要排序。两种做法都需要用到 hashmap。</p><h2 id="思路一-最小堆"><a href="#思路一-最小堆" class="headerlink" title="思路一 - 最小堆"></a>思路一 - 最小堆</h2><p>用hashmap统计完数字的出现次数之后，我们把hashmap中所有的元素都放入一个最小堆，堆顶是[出现次数最少的元素，出现次数]。这样每次被pop出来的都是出现次数最少的元素。这样做我们可以尽可能多地删掉 unique key，使得最后剩下的部分里 unique key 更少。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> map.get(key);<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; key, val &#125;);<br>        &#125;<br>        <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span> &amp;&amp; !queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] top = queue.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> top[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (k &lt; count) &#123;<br>                <span class="hljs-keyword">return</span> queue.size() + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                k -= count;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-hashmap-排序"><a href="#思路二-hashmap-排序" class="headerlink" title="思路二 - hashmap + 排序"></a>思路二 - hashmap + 排序</h2><p>我们需要一个 int 数组，长度为 size，size 记录的是map.size()。我们把 hashmap 里每个 entrySet 放入 count 数组。这样当 count 数组被排序之后，因为 count[i] 表示的是当前某个元素的出现次数，所以还是出现次数较小的在前。其余部分的思路跟第一种做法类似。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findLeastNumOfUniqueInts</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> map.size();<br><span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[size];<br><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>count[i] = map.get(key);<br>i++;<br>&#125;<br>Arrays.sort(count);<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> c : count) &#123;<br><span class="hljs-keyword">if</span> (k &gt;= c) &#123;<br>k -= c;<br>size--;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> size;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>heap</tag>
       
     </tags>
     
