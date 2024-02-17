@@ -16,28 +16,29 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins’ values. Two nodes of a binary tree are cousins if they have the same depth with different p">
+    <meta name="description" content="Given the root of an n-ary tree, return the postorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated b">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2641. Cousins in Binary Tree II">
-<meta property="og:url" content="https://shurui91.github.io/posts/2162354682.html">
+<meta property="og:title" content="590. N-ary Tree Postorder Traversal">
+<meta property="og:url" content="https://shurui91.github.io/posts/3703104611.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins’ values. Two nodes of a binary tree are cousins if they have the same depth with different p">
+<meta property="og:description" content="Given the root of an n-ary tree, return the postorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated b">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/01/11/example11.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/01/11/diagram33.png">
-<meta property="article:published_time" content="2024-02-08T00:49:18.000Z">
-<meta property="article:modified_time" content="2024-02-08T01:06:56.923Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png">
+<meta property="article:published_time" content="2020-08-13T12:56:30.000Z">
+<meta property="article:modified_time" content="2024-02-17T19:00:34.709Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="tree">
-<meta property="article:tag" content="bfs">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="postorder">
+<meta property="article:tag" content="n-ary tree">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2023/01/11/example11.png">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
   
   
   
-  <title>[LeetCode] 2641. Cousins in Binary Tree II - CNoodle</title>
+  <title>590. N-ary Tree Postorder Traversal - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2641. Cousins in Binary Tree II"></span>
+            <span id="subtitle" data-typed-text="590. N-ary Tree Postorder Traversal"></span>
           
         </div>
 
@@ -202,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-07 16:49" pubdate>
-          February 7, 2024 pm
+        <time datetime="2020-08-13 05:56" pubdate>
+          August 13, 2020 am
         </time>
       </span>
     
@@ -214,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k words
+          1.7k words
         
       </span>
     
@@ -225,7 +226,7 @@
         
         
         
-          24 mins
+          14 mins
         
       </span>
     
@@ -262,48 +263,28 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2641. Cousins in Binary Tree II</h1>
+            <h1 id="seo-header">590. N-ary Tree Postorder Traversal</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins’ values.</p>
-<p>Two nodes of a binary tree are cousins if they have the same depth with different parents.</p>
-<p>Return the root of the modified tree.</p>
-<p>Note that the depth of a node is the number of edges in the path from the root node to it.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2023/01/11/example11.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [5,4,9,1,10,null,7]<br>Output: [0,0,0,7,7,null,11]<br>Explanation: The diagram above shows the initial binary tree and the binary tree after changing the value of each node.</p>
-<ul>
-<li>Node with value 5 does not have any cousins so its sum is 0.</li>
-<li>Node with value 4 does not have any cousins so its sum is 0.</li>
-<li>Node with value 9 does not have any cousins so its sum is 0.</li>
-<li>Node with value 1 has a cousin with value 7 so its sum is 7.</li>
-<li>Node with value 10 has a cousin with value 7 so its sum is 7.</li>
-<li>Node with value 7 has cousins with values 1 and 10 so its sum is 11.</li>
-</ul>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2023/01/11/diagram33.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [3,1,2]<br>Output: [0,0,0]<br>Explanation: The diagram above shows the initial binary tree and the binary tree after changing the value of each node.</p>
-<ul>
-<li>Node with value 3 does not have any cousins so its sum is 0.</li>
-<li>Node with value 1 does not have any cousins so its sum is 0.</li>
-<li>Node with value 2 does not have any cousins so its sum is 0.</li>
-</ul>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 105].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 104</p>
-<p>二叉树的堂兄弟节点 II。</p>
+                <p>Given the root of an n-ary tree, return the postorder traversal of its nodes’ values.</p>
+<p>Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,null,3,2,4,null,5,6]<br>Output: [5,6,3,2,4,1]</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>Output: [2,6,14,11,7,3,12,8,4,13,9,10,5,1]</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [0, 104].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 104<br>The height of the n-ary tree is less than or equal to 1000.</p>
+<p>Follow up: Recursive solution is trivial, could you do it iteratively?</p>
+<p>N 叉树的后序遍历。</p>
 <blockquote>
-<p>给你一棵二叉树的根 root ，请你将每个节点的值替换成该节点的所有 堂兄弟节点值的和 。<br>如果两个节点在树中有相同的深度且它们的父节点不同，那么它们互为 堂兄弟 。<br>请你返回修改值之后，树的根 root 。<br>注意，一个节点的深度指的是从树根节点到这个节点经过的边数。</p>
+<p>给定一个 n 叉树的根节点 root ，返回 其节点值的 后序遍历 。<br>n 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 null 分隔（请参见示例）。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题跟 <a href="https://shurui91.github.io/posts/4130356496.html">993 题</a>版本一类似，节点值的修改规则也涉及到判断两个节点是否互为堂兄弟节点。同时因为堂兄弟节点的其中一个先决条件是两个节点的深度要一样，所以思路会往 BFS 上靠。</p>
-<p>这道题的 BFS 做法有些特殊，一般情况下我们只需要用一个 queue 即可做到 BFS。但是这道题我们需要用到两个 list 实现 queue 的功能，一个记录当前层的节点，另一个记录下一层的节点；同时对于树的每一层，我们需要遍历两遍。</p>
-<p>当我们遍历当前层的节点的时候，我们需要同时累加下一层的所有节点值的和，记为 nextLevelSum</p>
-<ul>
-<li>第一遍遍历当前层的时候，我们是为了计算 nextLevelSum</li>
-<li>第二遍遍历当前层的时候，我们是为了站在当前层去修改下一层的节点值</li>
-</ul>
-<p>这个站在当前层去修改下一层的节点值的做法有点类似 117 题。117 题的最优解也是用 BFS 遍历一棵树，站在某一层上去处理下一层的节点的链接。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">replaceValueInTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        root.val = <span class="hljs-number">0</span>;<br>		List&lt;TreeNode&gt; q = List.of(root);<br>		<span class="hljs-keyword">while</span> (!q.isEmpty()) &#123;<br>			List&lt;TreeNode&gt; temp = q;<br>			q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>			<span class="hljs-type">int</span> <span class="hljs-variable">nextLevelSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-comment">// 站在当前层统计 nextLevelSum</span><br>			<span class="hljs-keyword">for</span> (TreeNode node : temp) &#123;<br>				<span class="hljs-keyword">if</span> (node.left != <span class="hljs-literal">null</span>) &#123;<br>					q.add(node.left);<br>					nextLevelSum += node.left.val;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (node.right != <span class="hljs-literal">null</span>) &#123;<br>					q.add(node.right);<br>					nextLevelSum += node.right.val;<br>				&#125;<br>			&#125;<br><br>            <span class="hljs-comment">// 站在当前层去修改下一层的节点值</span><br>			<span class="hljs-keyword">for</span> (TreeNode node : temp) &#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">childrenSum</span> <span class="hljs-operator">=</span> (node.left != <span class="hljs-literal">null</span> ? node.left.val : <span class="hljs-number">0</span>) + (node.right != <span class="hljs-literal">null</span> ? node.right.val : <span class="hljs-number">0</span>);<br>				<span class="hljs-keyword">if</span> (node.left != <span class="hljs-literal">null</span>) &#123;<br>					node.left.val = nextLevelSum - childrenSum;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (node.right != <span class="hljs-literal">null</span>) &#123;<br>					node.right.val = nextLevelSum - childrenSum;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目的 followup 依然是问是否能用迭代的做法实现。我这里把迭代和递归的做法都练习了一下。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>迭代和递归的做法复杂度一样<br>时间O(n)<br>空间O(n)</p>
+<h2 id="迭代代码"><a href="#迭代代码" class="headerlink" title="迭代代码"></a>迭代代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Stack&lt;Node&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> stack.pop();<br>            res.add(<span class="hljs-number">0</span>, cur.val);<br>            <span class="hljs-keyword">if</span> (cur.children != <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-keyword">for</span> (Node child : cur.children) &#123;<br>                    stack.push(child);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">993. Cousins in Binary Tree<br>2641. Cousins in Binary Tree II<br></code></pre></td></tr></table></figure>
+<h2 id="递归代码"><a href="#递归代码" class="headerlink" title="递归代码"></a>递归代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">postorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        helper(res, root);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(List&lt;Integer&gt; res, Node root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (Node child : root.children) &#123;<br>            helper(res, child);<br>        &#125;<br>        res.add(root.val);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -320,9 +301,11 @@
       
         <a href="/tags/tree/" class="print-no-link">#tree</a>
       
-        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
+      
+        <a href="/tags/postorder/" class="print-no-link">#postorder</a>
+      
+        <a href="/tags/n-ary-tree/" class="print-no-link">#n-ary tree</a>
       
     </div>
   
@@ -334,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2641. Cousins in Binary Tree II</div>
-      <div>https://shurui91.github.io/posts/2162354682.html</div>
+      <div>590. N-ary Tree Postorder Traversal</div>
+      <div>https://shurui91.github.io/posts/3703104611.html</div>
     </div>
     <div class="license-meta">
       
@@ -347,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 7, 2024</div>
+          <div>August 13, 2020</div>
         </div>
       
       
@@ -379,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2527744301.html" title="[LeetCode] 2108. Find First Palindromic String in the Array">
+                      <a href="/posts/4008872034.html" title="[LeetCode] 429. N-ary Tree Level Order Traversal">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2108. Find First Palindromic String in the Array</span>
+                        <span class="hidden-mobile">[LeetCode] 429. N-ary Tree Level Order Traversal</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -389,8 +372,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/36345806.html" title="[LeetCode] LCP 30. 魔塔游戏">
-                        <span class="hidden-mobile">[LeetCode] LCP 30. 魔塔游戏</span>
+                      <a href="/posts/2043097135.html" title="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank">
+                        <span class="hidden-mobile">[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -410,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2162354682.html';
-          this.page.identifier = '/posts/2162354682.html';
+          this.page.url = 'https://shurui91.github.io/posts/3703104611.html';
+          this.page.identifier = '/posts/3703104611.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
