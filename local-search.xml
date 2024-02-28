@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>[LeetCode] 104. Maximum Depth of Binary Tree</title>
+    <link href="/posts/861348967.html"/>
+    <url>/posts/861348967.html</url>
+    
+    <content type="html"><![CDATA[<p>Given the root of a binary tree, return its maximum depth.</p><p>A binary tree’s maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p><p>Example 1:<br>Input: root &#x3D; [3,9,20,null,null,15,7]<br>Output: 3</p><p>Example 2:<br>Input: root &#x3D; [1,null,2]<br>Output: 2</p><p>Constraints:<br>The number of nodes in the tree is in the range [0, 104].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100</p><p>二叉树的最大深度。</p><blockquote><p>给定一个二叉树 root ，返回其最大深度。<br>二叉树的 最大深度 是指从根节点到最远叶子节点的最长路径上的节点数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是后序遍历的基础题，直接上代码。影子题 543。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(h) - 树的高度</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxDepth</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">leftMax</span> <span class="hljs-operator">=</span> maxDepth(root.left);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rightMax</span> <span class="hljs-operator">=</span> maxDepth(root.right);<br>        <span class="hljs-keyword">return</span> Math.max(leftMax, rightMax) + <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">104. Maximum Depth of Binary Tree<br>110. Balanced Binary Tree<br>366. Find Leaves of Binary Tree<br>543. Diameter of Binary Tree<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2476. Closest Nodes Queries in a Binary Search Tree</title>
     <link href="/posts/3398880083.html"/>
     <url>/posts/3398880083.html</url>
@@ -417,9 +430,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1698,9 +1711,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -2809,9 +2822,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -2921,9 +2934,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2977,9 +2990,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
