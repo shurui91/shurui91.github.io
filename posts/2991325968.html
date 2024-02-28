@@ -16,28 +16,29 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, return its maximum depth. A binary tree’s maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Example 1:Inpu">
+    <meta name="description" content="You are given the root of a binary tree and a positive integer k. The level sum in the tree is the sum of the values of the nodes that are on the same level. Return the kth largest level sum in the tr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 104. Maximum Depth of Binary Tree">
-<meta property="og:url" content="https://shurui91.github.io/posts/861348967.html">
+<meta property="og:title" content="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/2991325968.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, return its maximum depth. A binary tree’s maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Example 1:Inpu">
+<meta property="og:description" content="You are given the root of a binary tree and a positive integer k. The level sum in the tree is the sum of the values of the nodes that are on the same level. Return the kth largest level sum in the tr">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg">
-<meta property="article:published_time" content="2024-02-27T23:13:59.000Z">
-<meta property="article:modified_time" content="2024-02-28T00:21:06.111Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/12/14/binaryytreeedrawio-2.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/12/14/treedrawio-3.png">
+<meta property="article:published_time" content="2024-02-28T01:29:57.000Z">
+<meta property="article:modified_time" content="2024-02-28T01:40:58.848Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="tree">
-<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="bfs">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="postorder">
+<meta property="article:tag" content="sort">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2022/12/14/binaryytreeedrawio-2.png">
   
   
   
-  <title>[LeetCode] 104. Maximum Depth of Binary Tree - CNoodle</title>
+  <title>[LeetCode] 2583. Kth Largest Sum in a Binary Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 104. Maximum Depth of Binary Tree"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2583. Kth Largest Sum in a Binary Tree"></span>
           
         </div>
 
@@ -202,7 +203,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-27 15:13" pubdate>
+        <time datetime="2024-02-27 17:29" pubdate>
           February 27, 2024 pm
         </time>
       </span>
@@ -214,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k words
+          1.8k words
         
       </span>
     
@@ -225,7 +226,7 @@
         
         
         
-          9 mins
+          16 mins
         
       </span>
     
@@ -262,26 +263,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 104. Maximum Depth of Binary Tree</h1>
+            <h1 id="seo-header">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, return its maximum depth.</p>
-<p>A binary tree’s maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [3,9,20,null,null,15,7]<br>Output: 3</p>
-<p>Example 2:<br>Input: root &#x3D; [1,null,2]<br>Output: 2</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [0, 104].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100</p>
-<p>二叉树的最大深度。</p>
+                <p>You are given the root of a binary tree and a positive integer k.</p>
+<p>The level sum in the tree is the sum of the values of the nodes that are on the same level.</p>
+<p>Return the kth largest level sum in the tree (not necessarily distinct). If there are fewer than k levels in the tree, return -1.</p>
+<p>Note that two nodes are on the same level if they have the same distance from the root.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/12/14/binaryytreeedrawio-2.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [5,8,9,2,1,3,7,4,6], k &#x3D; 2<br>Output: 13<br>Explanation: The level sums are the following:</p>
+<ul>
+<li>Level 1: 5.</li>
+<li>Level 2: 8 + 9 &#x3D; 17.</li>
+<li>Level 3: 2 + 1 + 3 + 7 &#x3D; 13.</li>
+<li>Level 4: 4 + 6 &#x3D; 10.<br>The 2nd largest level sum is 13.</li>
+</ul>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/12/14/treedrawio-3.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,2,null,3], k &#x3D; 1<br>Output: 3<br>Explanation: The largest level sum is 3.</p>
+<p>Constraints:<br>The number of nodes in the tree is n.<br>2 &lt;&#x3D; n &lt;&#x3D; 105<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 106<br>1 &lt;&#x3D; k &lt;&#x3D; n</p>
+<p>二叉树中的第 K 大层和。</p>
 <blockquote>
-<p>给定一个二叉树 root ，返回其最大深度。<br>二叉树的 最大深度 是指从根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>给你一棵二叉树的根节点 root 和一个正整数 k 。<br>树中的 层和 是指 同一层 上节点值的总和。<br>返回树中第 k 大的层和（不一定不同）。如果树少于 k 层，则返回 -1 。<br>注意，如果两个节点与根节点的距离相同，则认为它们在同一层。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是后序遍历的基础题，直接上代码。影子题 543。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(h) - 树的高度</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>简单 BFS 题，用一个 list 存每一层的节点值的和，然后返回第 k 大的，如果树少于 k 层，则返回 -1 。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxDepth</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">leftMax</span> <span class="hljs-operator">=</span> maxDepth(root.left);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rightMax</span> <span class="hljs-operator">=</span> maxDepth(root.right);<br>        <span class="hljs-keyword">return</span> Math.max(leftMax, rightMax) + <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">104. Maximum Depth of Binary Tree<br>110. Balanced Binary Tree<br>366. Find Leaves of Binary Tree<br>543. Diameter of Binary Tree<br>1522. Diameter of N-Ary Tree<br>1245. Tree Diameter<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">kthLargestLevelSum</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> k)</span> &#123;<br>        List&lt;Long&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(root);<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> queue.size();<br>            <span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; size; i++) &#123;<br>                <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.poll();<br>                sum += cur.val;<br>                <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>                    queue.offer(cur.left);<br>                &#125;<br>                <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>                    queue.offer(cur.right);<br>                &#125;<br>            &#125;<br>            list.add(sum);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (list.size() &lt; k) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> list.size();<br>        Collections.sort(list);<br>        <span class="hljs-keyword">return</span> list.get(n - k);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -298,11 +305,11 @@
       
         <a href="/tags/tree/" class="print-no-link">#tree</a>
       
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/postorder/" class="print-no-link">#postorder</a>
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
       
     </div>
   
@@ -314,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 104. Maximum Depth of Binary Tree</div>
-      <div>https://shurui91.github.io/posts/861348967.html</div>
+      <div>[LeetCode] 2583. Kth Largest Sum in a Binary Tree</div>
+      <div>https://shurui91.github.io/posts/2991325968.html</div>
     </div>
     <div class="license-meta">
       
@@ -359,18 +366,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3398880083.html" title="[LeetCode] 2476. Closest Nodes Queries in a Binary Search Tree">
-                        <span class="hidden-mobile">[LeetCode] 2476. Closest Nodes Queries in a Binary Search Tree</span>
+                      <a href="/posts/861348967.html" title="[LeetCode] 104. Maximum Depth of Binary Tree">
+                        <span class="hidden-mobile">[LeetCode] 104. Maximum Depth of Binary Tree</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -390,8 +391,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/861348967.html';
-          this.page.identifier = '/posts/861348967.html';
+          this.page.url = 'https://shurui91.github.io/posts/2991325968.html';
+          this.page.identifier = '/posts/2991325968.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
