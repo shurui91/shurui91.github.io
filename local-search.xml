@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2864. Maximum Odd Binary Number</title>
+    <link href="/posts/3856055272.html"/>
+    <url>/posts/3856055272.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a binary string s that contains at least one ‘1’.</p><p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p><p>Return a string representing the maximum odd binary number that can be created from the given combination.</p><p>Note that the resulting string can have leading zeros.</p><p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p><p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p><p>最大二进制奇数。</p><blockquote><p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>math</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2583. Kth Largest Sum in a Binary Tree</title>
     <link href="/posts/2991325968.html"/>
     <url>/posts/2991325968.html</url>
@@ -130,9 +157,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -182,9 +209,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -363,9 +390,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -694,9 +721,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -877,9 +904,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -906,9 +933,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>stack</tag>
       
@@ -960,9 +987,9 @@
       
       <tag>java</tag>
       
-      <tag>graph</tag>
-      
       <tag>dynamic programming</tag>
+      
+      <tag>graph</tag>
       
       <tag>dijkstra</tag>
       
@@ -1141,9 +1168,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1378,9 +1405,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>treemap</tag>
       
@@ -1405,9 +1432,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -1482,9 +1509,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1563,11 +1590,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1592,11 +1619,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1675,9 +1702,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1858,11 +1885,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -2097,9 +2124,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>dynamic programming</tag>
       
