@@ -22,9 +22,9 @@
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -502,9 +502,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -1097,9 +1097,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -1972,9 +1972,9 @@
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>enumeration</tag>
       
@@ -2377,9 +2377,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2735,6 +2735,33 @@
   
   
   <entry>
+    <title>[LeetCode] 977. Squares of a Sorted Array</title>
+    <link href="/posts/1991592077.html"/>
+    <url>/posts/1991592077.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.</p><p>Example 1:<br>Input: nums &#x3D; [-4,-1,0,3,10]<br>Output: [0,1,9,16,100]<br>Explanation: After squaring, the array becomes [16,1,0,9,100].<br>After sorting, it becomes [0,1,9,16,100].</p><p>Example 2:<br>Input: nums &#x3D; [-7,-3,2,3,11]<br>Output: [4,9,9,49,121]</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 104<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104<br>nums is sorted in non-decreasing order.</p><p>Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?</p><p>有序数组的平方。</p><blockquote><p>给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是 two pointer 夹逼。创建一个跟 input 同样长度的数组。因为 input 里面存在负数，而且很有可能存在一个绝对值非常大的负数，导致其平方值最大，所以需要 two pointer 左右指针比较哪个数字的绝对值大。细节实现参见代码。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] sortedSquares(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-keyword">if</span> (Math.abs(nums[left]) &gt; Math.abs(nums[right])) &#123;<br>                res[index--] = nums[left] * nums[left];<br>                left++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res[index--] = nums[right] * nums[right];<br>                right--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">A</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> sortedSquares = <span class="hljs-keyword">function</span> (<span class="hljs-params">A</span>) &#123;<br>    <span class="hljs-keyword">let</span> n = A.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">let</span> res = [n];<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> j = n - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> p = n - <span class="hljs-number">1</span>; p &gt;= <span class="hljs-number">0</span>; p--) &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(A[i]) &gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(A[j])) &#123;<br>            res[p] = A[i] * A[i];<br>            i++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            res[p] = A[j] * A[j];<br>            j--;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 498. Diagonal Traverse</title>
     <link href="/posts/3904628621.html"/>
     <url>/posts/3904628621.html</url>
@@ -2977,9 +3004,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -3033,9 +3060,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -3087,9 +3114,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -3118,9 +3145,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3145,9 +3172,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
