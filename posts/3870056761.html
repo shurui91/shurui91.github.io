@@ -16,15 +16,15 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed). Your goal is to maximize your total score by potentially playing e">
+    <meta name="description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 948. Bag of Tokens">
 <meta property="og:url" content="https://shurui91.github.io/posts/3870056761.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed). Your goal is to maximize your total score by potentially playing e">
+<meta property="og:description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-26T11:27:58.000Z">
-<meta property="article:modified_time" content="2024-03-04T07:49:35.569Z">
+<meta property="article:modified_time" content="2024-03-04T07:52:21.043Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="two pointer">
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          2.4k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          19 mins
+          20 mins
         
       </span>
     
@@ -265,19 +265,13 @@
             
               <div class="markdown-body">
                 
-                <p>You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed).</p>
-<p>Your goal is to maximize your total score by potentially playing each token in one of two ways:<br>If your current power is at least tokens[i], you may play the ith token face up, losing tokens[i] power and gaining 1 score.<br>If your current score is at least 1, you may play the ith token face down, gaining tokens[i] power and losing 1 score.<br>Each token may be played at most once and in any order. You do not have to play all the tokens.</p>
-<p>Return the largest possible score you can achieve after playing any number of tokens.</p>
-<p>Example 1:<br>Input: tokens &#x3D; [100], P &#x3D; 50<br>Output: 0<br>Explanation: Playing the only token in the bag is impossible because you either have too little power or too little score.</p>
-<p>Example 2:<br>Input: tokens &#x3D; [100,200], P &#x3D; 150<br>Output: 1<br>Explanation: Play the 0th token (100) face up, your power becomes 50 and score becomes 1.<br>There is no need to play the 1st token since you cannot play it face up to add to your score.</p>
-<p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], P &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:</p>
-<ol>
-<li>Play the 0th token (100) face up, your power becomes 100 and score becomes 1.</li>
-<li>Play the 3rd token (400) face down, your power becomes 500 and score becomes 0.</li>
-<li>Play the 1st token (200) face up, your power becomes 300 and score becomes 1.</li>
-<li>Play the 2nd token (300) face up, your power becomes 0 and score becomes 2.</li>
-</ol>
-<p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], P &lt; 104</p>
+                <p>You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni.</p>
+<p>Your goal is to maximize the total score by strategically playing these tokens. In one move, you can play an unplayed token in one of the two ways (but not both for the same token):</p>
+<p>Face-up: If your current power is at least tokens[i], you may play tokeni, losing tokens[i] power and gaining 1 score.<br>Face-down: If your current score is at least 1, you may play tokeni, gaining tokens[i] power and losing 1 score.<br>Return the maximum possible score you can achieve after playing any number of tokens.</p>
+<p>Example 1:<br>Input: tokens &#x3D; [100], power &#x3D; 50<br>Output: 0<br>Explanation: Since your score is 0 initially, you cannot play the token face-down. You also cannot play it face-up since your power (50) is less than tokens[0] (100).</p>
+<p>Example 2:<br>Input: tokens &#x3D; [200,100], power &#x3D; 150<br>Output: 1<br>Explanation: Play token1 (100) face-up, reducing your power to 50 and increasing your score to 1.<br>There is no need to play token0, since you cannot play it face-up to add to your score. The maximum score achievable is 1.</p>
+<p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], power &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:<br>Play token0 (100) face-up, reducing power to 100 and increasing score to 1.<br>Play token3 (400) face-down, increasing power to 500 and reducing score to 0.<br>Play token1 (200) face-up, reducing power to 300 and increasing score to 1.<br>Play token2 (300) face-up, reducing power to 0 and increasing score to 2.<br>The maximum score achievable is 2.</p>
+<p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], power &lt; 104</p>
 <p>令牌放置。</p>
 <blockquote>
 <p>给你一堆令牌，规则是令牌上tokens[i] 代表一个能量值P，每个令牌最多使用一次，使用的方法如下<br>如果你至少有 token[i] 点能量，可以将令牌置为正面朝上，失去 token[i] 点能量，并得到 1 分。<br>如果我们至少有 1 分，可以将令牌置为反面朝上，获得 token[i] 点能量，并失去 1 分。<br>在使用任意数量的令牌后，返回我们可以得到的最大分数。</p>
