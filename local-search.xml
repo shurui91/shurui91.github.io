@@ -1904,6 +1904,33 @@
   
   
   <entry>
+    <title>[LeetCode] 948. Bag of Tokens</title>
+    <link href="/posts/3870056761.html"/>
+    <url>/posts/3870056761.html</url>
+    
+    <content type="html"><![CDATA[<p>You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed).</p><p>Your goal is to maximize your total score by potentially playing each token in one of two ways:<br>If your current power is at least tokens[i], you may play the ith token face up, losing tokens[i] power and gaining 1 score.<br>If your current score is at least 1, you may play the ith token face down, gaining tokens[i] power and losing 1 score.<br>Each token may be played at most once and in any order. You do not have to play all the tokens.</p><p>Return the largest possible score you can achieve after playing any number of tokens.</p><p>Example 1:<br>Input: tokens &#x3D; [100], P &#x3D; 50<br>Output: 0<br>Explanation: Playing the only token in the bag is impossible because you either have too little power or too little score.</p><p>Example 2:<br>Input: tokens &#x3D; [100,200], P &#x3D; 150<br>Output: 1<br>Explanation: Play the 0th token (100) face up, your power becomes 50 and score becomes 1.<br>There is no need to play the 1st token since you cannot play it face up to add to your score.</p><p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], P &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:</p><ol><li>Play the 0th token (100) face up, your power becomes 100 and score becomes 1.</li><li>Play the 3rd token (400) face down, your power becomes 500 and score becomes 0.</li><li>Play the 1st token (200) face up, your power becomes 300 and score becomes 1.</li><li>Play the 2nd token (300) face up, your power becomes 0 and score becomes 2.</li></ol><p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], P &lt; 104</p><p>令牌放置。</p><blockquote><p>给你一堆令牌，规则是令牌上tokens[i] 代表一个能量值P，每个令牌最多使用一次，使用的方法如下<br>如果你至少有 token[i] 点能量，可以将令牌置为正面朝上，失去 token[i] 点能量，并得到 1 分。<br>如果我们至少有 1 分，可以将令牌置为反面朝上，获得 token[i] 点能量，并失去 1 分。<br>在使用任意数量的令牌后，返回我们可以得到的最大分数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序 + 双指针。注意题目，因为无论 token 的值是多少，得分都是 1；当你需要用分数兑换能量的时候，每次只需要消耗一个分数，但是得到的 token 数量是可大可小的。由此想到需要对 tokens 数组排序。</p><p>将 input 排序，这样 token 值最小的会在数组最左边，token 值最大的会在最右边。设置两个指针从两边往中间逼近，如果当前你的能量 power &gt;&#x3D; tokens[left]，说明你有多余的能量，可以拿来换分数；如果不满足这个条件，则需要看看手里目前分数是否 &gt; 0，来换取一个当前最大的能量 power（在 right 指针那里）；如果这两个条件都不满足则退出 while 循环，返回你的分数。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bagOfTokensScore</span><span class="hljs-params">(<span class="hljs-type">int</span>[] tokens, <span class="hljs-type">int</span> power)</span> &#123;<br>        Arrays.sort(tokens);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> tokens.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-keyword">if</span> (power &gt;= tokens[left]) &#123;<br>                power -= tokens[left++];<br>                score++;<br>                res = Math.max(res, score);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">1</span>) &#123;<br>                power += tokens[right--];<br>                score--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 611. Valid Triangle Number</title>
     <link href="/posts/3398385201.html"/>
     <url>/posts/3398385201.html</url>

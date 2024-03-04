@@ -16,18 +16,17 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.Example 1:Input: nums &#x3D; [2,2,3,4]Output: 3Ex">
+    <meta name="description" content="You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed). Your goal is to maximize your total score by potentially playing e">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 611. Valid Triangle Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3398385201.html">
+<meta property="og:title" content="[LeetCode] 948. Bag of Tokens">
+<meta property="og:url" content="https://shurui91.github.io/posts/3870056761.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.Example 1:Input: nums &#x3D; [2,2,3,4]Output: 3Ex">
+<meta property="og:description" content="You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed). Your goal is to maximize your total score by potentially playing e">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-02T09:08:03.000Z">
-<meta property="article:modified_time" content="2024-02-15T02:25:47.316Z">
+<meta property="article:published_time" content="2020-10-26T11:27:58.000Z">
+<meta property="article:modified_time" content="2024-03-04T07:49:35.569Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="greedy">
@@ -36,7 +35,7 @@
   
   
   
-  <title>[LeetCode] 611. Valid Triangle Number - CNoodle</title>
+  <title>[LeetCode] 948. Bag of Tokens - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 611. Valid Triangle Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 948. Bag of Tokens"></span>
           
         </div>
 
@@ -201,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-10-02 02:08" pubdate>
-          October 2, 2020 am
+        <time datetime="2020-10-26 04:27" pubdate>
+          October 26, 2020 am
         </time>
       </span>
     
@@ -213,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          2.2k words
         
       </span>
     
@@ -224,7 +223,7 @@
         
         
         
-          11 mins
+          19 mins
         
       </span>
     
@@ -261,22 +260,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 611. Valid Triangle Number</h1>
+            <h1 id="seo-header">[LeetCode] 948. Bag of Tokens</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.<br>Example 1:<br>Input: nums &#x3D; [2,2,3,4]<br>Output: 3<br>Explanation: Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3<br>Example 2:<br>Input: nums &#x3D; [4,2,3,4]<br>Output: 4<br>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p>
-<p>有效三角形的个数。</p>
+                <p>You have an initial power of P, an initial score of 0, and a bag of tokens where tokens[i] is the value of the ith token (0-indexed).</p>
+<p>Your goal is to maximize your total score by potentially playing each token in one of two ways:<br>If your current power is at least tokens[i], you may play the ith token face up, losing tokens[i] power and gaining 1 score.<br>If your current score is at least 1, you may play the ith token face down, gaining tokens[i] power and losing 1 score.<br>Each token may be played at most once and in any order. You do not have to play all the tokens.</p>
+<p>Return the largest possible score you can achieve after playing any number of tokens.</p>
+<p>Example 1:<br>Input: tokens &#x3D; [100], P &#x3D; 50<br>Output: 0<br>Explanation: Playing the only token in the bag is impossible because you either have too little power or too little score.</p>
+<p>Example 2:<br>Input: tokens &#x3D; [100,200], P &#x3D; 150<br>Output: 1<br>Explanation: Play the 0th token (100) face up, your power becomes 50 and score becomes 1.<br>There is no need to play the 1st token since you cannot play it face up to add to your score.</p>
+<p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], P &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:</p>
+<ol>
+<li>Play the 0th token (100) face up, your power becomes 100 and score becomes 1.</li>
+<li>Play the 3rd token (400) face down, your power becomes 500 and score becomes 0.</li>
+<li>Play the 1st token (200) face up, your power becomes 300 and score becomes 1.</li>
+<li>Play the 2nd token (300) face up, your power becomes 0 and score becomes 2.</li>
+</ol>
+<p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], P &lt; 104</p>
+<p>令牌放置。</p>
 <blockquote>
-<p>给定一个包含非负整数的数组 nums ，返回其中可以组成三角形三条边的三元组个数。</p>
+<p>给你一堆令牌，规则是令牌上tokens[i] 代表一个能量值P，每个令牌最多使用一次，使用的方法如下<br>如果你至少有 token[i] 点能量，可以将令牌置为正面朝上，失去 token[i] 点能量，并得到 1 分。<br>如果我们至少有 1 分，可以将令牌置为反面朝上，获得 token[i] 点能量，并失去 1 分。<br>在使用任意数量的令牌后，返回我们可以得到的最大分数。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路有点类似 3sum。因为是要找能组成三角形的三条边，所以一定要满足 a + b &gt; c，其中两条边的和要大于第三条边。所以思路是先 sort input数组（a &lt; b &lt; c），然后从数组末端开始扫描，把当前遍历到的数字当做三角形的最长的边 c，然后再用 two pointer 找另外两条边 a 和 b。找的方式是，如果 a + b &gt; c 则说明当 c 是最长边的时候，abc 这个组合是满足题意的，res +&#x3D; b - a。为什么 a - b 之间的所有组合都能累加进去是因为这里我们考虑的是 b 和 c 不变的情况下，把 a 右移的情况，计算完这些情况之后 b 左移；如果 a + b &lt; c 的话，那么只能是 a 右移，因为长度不够。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - worst case<br>空间O(1)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序 + 双指针。注意题目，因为无论 token 的值是多少，得分都是 1；当你需要用分数兑换能量的时候，每次只需要消耗一个分数，但是得到的 token 数量是可大可小的。由此想到需要对 tokens 数组排序。</p>
+<p>将 input 排序，这样 token 值最小的会在数组最左边，token 值最大的会在最右边。设置两个指针从两边往中间逼近，如果当前你的能量 power &gt;&#x3D; tokens[left]，说明你有多余的能量，可以拿来换分数；如果不满足这个条件，则需要看看手里目前分数是否 &gt; 0，来换取一个当前最大的能量 power（在 right 指针那里）；如果这两个条件都不满足则退出 while 循环，返回你的分数。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">triangleNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length &lt; <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">2</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>                <span class="hljs-keyword">if</span> (nums[left] + nums[right] &gt; nums[i]) &#123;<br>                    count += right - left;<br>                    right--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    left++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bagOfTokensScore</span><span class="hljs-params">(<span class="hljs-type">int</span>[] tokens, <span class="hljs-type">int</span> power)</span> &#123;<br>        Arrays.sort(tokens);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> tokens.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-keyword">if</span> (power &gt;= tokens[left]) &#123;<br>                power -= tokens[left++];<br>                score++;<br>                res = Math.max(res, score);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">1</span>) &#123;<br>                power += tokens[right--];<br>                score--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -289,8 +300,6 @@
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
-      
-        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
@@ -310,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 611. Valid Triangle Number</div>
-      <div>https://shurui91.github.io/posts/3398385201.html</div>
+      <div>[LeetCode] 948. Bag of Tokens</div>
+      <div>https://shurui91.github.io/posts/3870056761.html</div>
     </div>
     <div class="license-meta">
       
@@ -323,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 2, 2020</div>
+          <div>October 26, 2020</div>
         </div>
       
       
@@ -355,9 +364,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3870056761.html" title="[LeetCode] 948. Bag of Tokens">
+                      <a href="/posts/2214751183.html" title="[LeetCode] 524. Longest Word in Dictionary through Deleting">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 948. Bag of Tokens</span>
+                        <span class="hidden-mobile">[LeetCode] 524. Longest Word in Dictionary through Deleting</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -365,8 +374,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3803898530.html" title="[LeetCode] 229. Majority Element II">
-                        <span class="hidden-mobile">[LeetCode] 229. Majority Element II</span>
+                      <a href="/posts/3398385201.html" title="[LeetCode] 611. Valid Triangle Number">
+                        <span class="hidden-mobile">[LeetCode] 611. Valid Triangle Number</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -386,8 +395,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3398385201.html';
-          this.page.identifier = '/posts/3398385201.html';
+          this.page.url = 'https://shurui91.github.io/posts/3870056761.html';
+          this.page.identifier = '/posts/3870056761.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
