@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i]. The product of any prefix or suffix of nums is guaranteed to">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 238. Product of Array Except Self">
+<meta property="og:url" content="https://shurui91.github.io/posts/2592651913.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i]. The product of any prefix or suffix of nums is guaranteed to">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2020-03-20T08:26:46.000Z">
+<meta property="article:modified_time" content="2024-03-15T18:46:13.626Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="prefix sum">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 238. Product of Array Except Self - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 238. Product of Array Except Self"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2020-03-20 01:26" pubdate>
+          March 20, 2020 am
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.7k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          12 mins
+          15 mins
         
       </span>
     
@@ -260,26 +260,36 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 238. Product of Array Except Self</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].</p>
+<p>The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.</p>
+<p>You must write an algorithm that runs in O(n) time and without using the division operation.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,2,3,4]<br>Output: [24,12,8,6]</p>
+<p>Example 2:<br>Input: nums &#x3D; [-1,1,0,-3,3]<br>Output: [0,0,9,0,0]</p>
+<p>Constraints:<br>2 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>-30 &lt;&#x3D; nums[i] &lt;&#x3D; 30<br>The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.</p>
+<p>Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)</p>
+<p>除自身以外数组的乘积。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
+给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积 。
+
+<p>题目数据 保证 数组 nums之中任意元素的全部前缀元素和后缀的乘积都在  32 位 整数范围内。</p>
+<p>请不要使用除法，且在 O(n) 时间复杂度内完成此题。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/product-of-array-except-self">https://leetcode.cn/problems/product-of-array-except-self</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个数组，请输出一个等长的数组，res[i] 位上存的是 input 数组除了 i 位其他所有数字的乘积。</p>
+<p>注意这个题不能用除法，如果用除法会很简单。思路是我们创建一个和 input 数组等长的 res 数组记录结果，对于在 i 位上的数字，在 res[i] 上存住从左往右把之前每个数字相乘的乘积 * 从右向左在 i 之后每个数字相乘的乘积。注意左边和右边的代码稍有不同，需要多体会。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - output</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] productExceptSelf(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            res[i] = left;<br>            left *= nums[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            res[i] *= right;<br>            right *= nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> productExceptSelf = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) &#123;<br>	<span class="hljs-keyword">var</span> left = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">var</span> product = [];<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> num <span class="hljs-keyword">of</span> nums) &#123;<br>		product.<span class="hljs-title function_">push</span>(left);<br>		left = left * num;<br>	&#125;<br><br>	<span class="hljs-keyword">var</span> right = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = nums.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>		product[i] *= right;<br>		right = right * nums[i];<br>	&#125;<br>	<span class="hljs-keyword">return</span> product;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -294,13 +304,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
-      
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
     </div>
   
@@ -312,8 +322,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 238. Product of Array Except Self</div>
+      <div>https://shurui91.github.io/posts/2592651913.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>March 20, 2020</div>
         </div>
       
       
@@ -357,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
+                      <a href="/posts/946488007.html" title="[LeetCode] 876. Middle of the Linked List">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
+                        <span class="hidden-mobile">[LeetCode] 876. Middle of the Linked List</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -367,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/939082724.html" title="LeetCode 题目总结">
+                        <span class="hidden-mobile">LeetCode 题目总结</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +398,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/2592651913.html';
+          this.page.identifier = '/posts/2592651913.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
