@@ -120,13 +120,13 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -604,11 +604,11 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1197,11 +1197,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1939,13 +1939,36 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1669. Merge In Between Linked Lists</title>
+    <link href="/posts/3338124454.html"/>
+    <url>/posts/3338124454.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two linked lists: list1 and list2 of sizes n and m respectively.</p><p>Remove list1’s nodes from the ath node to the bth node, and put list2 in their place.</p><p>The blue edges and nodes in the following figure indicate the result:</p><p><img src="https://assets.leetcode.com/uploads/2020/11/05/fig1.png" alt="Example"><br>Build the result list and return its head.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2024/03/01/ll.png" alt="Example 1"><br>Input: list1 &#x3D; [10,1,13,6,9,5], a &#x3D; 3, b &#x3D; 4, list2 &#x3D; [1000000,1000001,1000002]<br>Output: [10,1,13,1000000,1000001,1000002,5]<br>Explanation: We remove the nodes 3 and 4 and put the entire list2 in their place. The blue edges and nodes in the above figure indicate the result.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/11/05/merge_linked_list_ex2.png" alt="Example 2"><br>Input: list1 &#x3D; [0,1,2,3,4,5,6], a &#x3D; 2, b &#x3D; 5, list2 &#x3D; [1000000,1000001,1000002,1000003,1000004]<br>Output: [0,1,1000000,1000001,1000002,1000003,1000004,6]<br>Explanation: The blue edges and nodes in the above figure indicate the result.</p><p>Constraints:</p><p>3 &lt;&#x3D; list1.length &lt;&#x3D; 104<br>1 &lt;&#x3D; a &lt;&#x3D; b &lt; list1.length - 1<br>1 &lt;&#x3D; list2.length &lt;&#x3D; 104</p><p>合并两个链表。</p><blockquote>给你两个链表 list1 和 list2 ，它们包含的元素分别为 n 个和 m 个。<p>请你将 list1 中第 a 个节点到第 b 个节点删除，并将list2 接在被删除节点的位置。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/merge-in-between-linked-lists">https://leetcode-cn.com/problems/merge-in-between-linked-lists</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>图示应该表示的很清楚了，唯一需要注意的是 a 和 b 表示的是 list 中的节点 index + 1。其他都是常规操作了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">mergeInBetween</span><span class="hljs-params">(ListNode list1, <span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, ListNode list2)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> list1;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span> &amp;&amp; count &lt; b) &#123;<br>            <span class="hljs-keyword">if</span> (count == a - <span class="hljs-number">1</span>) &#123;<br>                start = cur;<br>            &#125;<br>            cur = cur.next;<br>            count++;<br>        &#125;<br>        start.next = list2;<br>        <span class="hljs-comment">// 注意如果list2只有一个node怎么办</span><br>        <span class="hljs-keyword">while</span> (list2.next != <span class="hljs-literal">null</span>) &#123;<br>            list2 = list2.next;<br>        &#125;<br>        list2.next = cur.next;<br>        cur.next = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">return</span> list1;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
@@ -2130,9 +2153,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -2155,9 +2178,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
+      
+      <tag>dfs</tag>
       
       <tag>enumeration</tag>
       
@@ -2259,9 +2282,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>brainteaser</tag>
       
@@ -2421,9 +2444,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>stack</tag>
       
@@ -2481,9 +2504,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -2529,9 +2552,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>stack</tag>
       
@@ -2560,9 +2583,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2664,11 +2687,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -2695,9 +2718,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>flood fill</tag>
       
@@ -2745,11 +2768,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
       <tag>string</tag>
       
@@ -2801,9 +2824,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
       <tag>linked list</tag>
       
@@ -2828,9 +2851,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>prefix sum</tag>
       
@@ -2899,11 +2922,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -2928,11 +2951,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -3067,11 +3090,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -3171,11 +3194,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
       <tag>math</tag>
       
@@ -3200,11 +3223,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
       <tag>counting sort</tag>
       
@@ -3260,9 +3283,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
       <tag>math</tag>
       
@@ -3289,11 +3312,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -3320,13 +3343,13 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
       <tag>javascript</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3351,9 +3374,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -3376,11 +3399,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3403,9 +3426,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
+      
+      <tag>dfs</tag>
       
       <tag>inorder</tag>
       
@@ -3432,11 +3455,11 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3461,11 +3484,11 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3488,11 +3511,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3515,11 +3538,11 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>java</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3596,11 +3619,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -3648,11 +3671,11 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -3675,9 +3698,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
       <tag>string</tag>
       
@@ -3765,9 +3788,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>counting sort</tag>
       
@@ -3792,9 +3815,9 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
+      
+      <tag>javascript</tag>
       
       <tag>selection sort</tag>
       
@@ -3846,13 +3869,13 @@
       
       <tag>java</tag>
       
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
