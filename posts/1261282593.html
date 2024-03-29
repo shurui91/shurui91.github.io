@@ -16,30 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of an n-ary tree, return the preorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by">
+    <meta name="description" content="You are given an integer array nums and a positive integer k. Return the number of subarrays where the maximum element of nums appears at least k times in that subarray. A subarray is a contiguous seq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 589. N-ary Tree Preorder Traversal">
-<meta property="og:url" content="https://shurui91.github.io/posts/999659702.html">
+<meta property="og:title" content="[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times">
+<meta property="og:url" content="https://shurui91.github.io/posts/1261282593.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of an n-ary tree, return the preorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by">
+<meta property="og:description" content="You are given an integer array nums and a positive integer k. Return the number of subarrays where the maximum element of nums appears at least k times in that subarray. A subarray is a contiguous seq">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png">
-<meta property="article:published_time" content="2020-01-15T09:16:46.000Z">
-<meta property="article:modified_time" content="2024-02-17T18:25:11.873Z">
+<meta property="article:published_time" content="2024-03-29T22:11:04.000Z">
+<meta property="article:modified_time" content="2024-03-29T22:25:03.893Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="dfs">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="preorder">
-<meta property="article:tag" content="n-ary tree">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="sliding window">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
   
   
   
-  <title>[LeetCode] 589. N-ary Tree Preorder Traversal - CNoodle</title>
+  <title>[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 589. N-ary Tree Preorder Traversal"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times"></span>
           
         </div>
 
@@ -204,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-15 01:16" pubdate>
-          January 15, 2020 am
+        <time datetime="2024-03-29 15:11" pubdate>
+          March 29, 2024 pm
         </time>
       </span>
     
@@ -216,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          1.2k words
         
       </span>
     
@@ -227,7 +222,7 @@
         
         
         
-          21 mins
+          11 mins
         
       </span>
     
@@ -264,36 +259,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 589. N-ary Tree Preorder Traversal</h1>
+            <h1 id="seo-header">[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of an n-ary tree, return the preorder traversal of its nodes’ values.</p>
-<p>Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,null,3,2,4,null,5,6]<br>Output: [1,3,5,6,2,4]</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>Output: [1,2,3,6,7,11,14,4,8,12,5,9,13,10]</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [0, 104].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 104<br>The height of the n-ary tree is less than or equal to 1000.</p>
-<p>Follow up: Recursive solution is trivial, could you do it iteratively?</p>
-<p>N叉树的前序遍历。</p>
+                <p>You are given an integer array nums and a positive integer k.</p>
+<p>Return the number of subarrays where the maximum element of nums appears at least k times in that subarray.</p>
+<p>A subarray is a contiguous sequence of elements within an array.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,3,2,3,3], k &#x3D; 2<br>Output: 6<br>Explanation: The subarrays that contain the element 3 at least 2 times are: [1,3,2,3], [1,3,2,3,3], [3,2,3], [3,2,3,3], [2,3,3] and [3,3].</p>
+<p>Example 2:<br>Input: nums &#x3D; [1,4,2,1], k &#x3D; 3<br>Output: 0<br>Explanation: No subarray contains the element 4 at least 3 times.</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 106<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p>
+<p>统计最大元素出现至少 K 次的子数组。</p>
 <blockquote>
-<p>给定一个 n 叉树的根节点  root ，返回 其节点值的 前序遍历 。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal">https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+给你一个整数数组 nums 和一个 正整数 k 。
+
+<p>请你统计有多少满足 「 nums 中的 最大 元素」至少出现 k 次的子数组，并返回满足这一条件的子数组的数目。</p>
+<p>子数组是数组中的一个连续元素序列。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目的 followup 问能不能用迭代的做法做。我这里给出迭代和递归的两种不同做法。其中迭代是 DFS 做的。</p>
-<h2 id="迭代复杂度"><a href="#迭代复杂度" class="headerlink" title="迭代复杂度"></a>迭代复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="迭代代码"><a href="#迭代代码" class="headerlink" title="迭代代码"></a>迭代代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Stack&lt;Node&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> stack.pop();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> cur.children.size() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>                stack.push(cur.children.get(i));<br>            &#125;<br>            res.add(cur.val);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Node</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> preorder = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> stack = [root];<br>    <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = stack.<span class="hljs-title function_">pop</span>();<br>        <span class="hljs-keyword">let</span> size = cur.<span class="hljs-property">children</span>.<span class="hljs-property">length</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = size - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            stack.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">children</span>[i]);<br>        &#125;<br>        res.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">val</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="递归复杂度"><a href="#递归复杂度" class="headerlink" title="递归复杂度"></a>递归复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="递归代码"><a href="#递归代码" class="headerlink" title="递归代码"></a>递归代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        helper(root, res);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(Node root, List&lt;Integer&gt; res)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        res.add(root.val);<br>        <span class="hljs-keyword">for</span> (Node child : root.children) &#123;<br>            helper(child, res);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Node</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> preorder = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-title function_">helper</span>(res, root);<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br><br><span class="hljs-keyword">var</span> helper = <span class="hljs-keyword">function</span> (<span class="hljs-params">res, root</span>) &#123;<br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    res.<span class="hljs-title function_">push</span>(root.<span class="hljs-property">val</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> child <span class="hljs-keyword">of</span> root.<span class="hljs-property">children</span>) &#123;<br>        <span class="hljs-title function_">helper</span>(res, child);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>不难想到是滑动窗口。但是注意这道题问的是最大元素出现<strong>至少 k 次</strong>的子数组，而不是恰好 k 次。如果问的是恰好 k 次的话，当右指针遇到第 k 个最大元素的时候，左指针就可以开始动了，类似76题那种形式。但是这道题当右指针移动到第 k 个最大元素的时候，因为左右指针中间包含了 k 个最大元素，所以左指针及其左边，都是合法的子数组，都包含了起码 k 个最大元素。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">countSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Arrays.stream(nums).max().orElseThrow();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> nums[end++];<br>            <span class="hljs-keyword">if</span> (cur == max) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">while</span> (count &gt;= k) &#123;<br>                <span class="hljs-keyword">if</span> (nums[start++] == max) &#123;<br>                    count--;<br>                &#125;<br>            &#125;<br>            res += start;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -307,15 +296,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/n-ary-tree/" class="print-no-link">#n-ary tree</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
     </div>
   
@@ -327,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 589. N-ary Tree Preorder Traversal</div>
-      <div>https://shurui91.github.io/posts/999659702.html</div>
+      <div>[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times</div>
+      <div>https://shurui91.github.io/posts/1261282593.html</div>
     </div>
     <div class="license-meta">
       
@@ -340,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 15, 2020</div>
+          <div>March 29, 2024</div>
         </div>
       
       
@@ -372,18 +357,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3054235392.html" title="[LeetCode] 9. Palindrome Number">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 9. Palindrome Number</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1856795069.html" title="[LeetCode] 513. Find Bottom Left Tree Value">
-                        <span class="hidden-mobile">[LeetCode] 513. Find Bottom Left Tree Value</span>
+                      <a href="/posts/495996551.html" title="[LeetCode] 2789. Largest Element in an Array after Merge Operations">
+                        <span class="hidden-mobile">[LeetCode] 2789. Largest Element in an Array after Merge Operations</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -403,8 +382,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/999659702.html';
-          this.page.identifier = '/posts/999659702.html';
+          this.page.url = 'https://shurui91.github.io/posts/1261282593.html';
+          this.page.identifier = '/posts/1261282593.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

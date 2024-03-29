@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2962. Count Subarrays Where Max Element Appears at Least K Times</title>
+    <link href="/posts/1261282593.html"/>
+    <url>/posts/1261282593.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array nums and a positive integer k.</p><p>Return the number of subarrays where the maximum element of nums appears at least k times in that subarray.</p><p>A subarray is a contiguous sequence of elements within an array.</p><p>Example 1:<br>Input: nums &#x3D; [1,3,2,3,3], k &#x3D; 2<br>Output: 6<br>Explanation: The subarrays that contain the element 3 at least 2 times are: [1,3,2,3], [1,3,2,3,3], [3,2,3], [3,2,3,3], [2,3,3] and [3,3].</p><p>Example 2:<br>Input: nums &#x3D; [1,4,2,1], k &#x3D; 3<br>Output: 0<br>Explanation: No subarray contains the element 4 at least 3 times.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 106<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p><p>统计最大元素出现至少 K 次的子数组。</p><blockquote>给你一个整数数组 nums 和一个 正整数 k 。<p>请你统计有多少满足 「 nums 中的 最大 元素」至少出现 k 次的子数组，并返回满足这一条件的子数组的数目。</p><p>子数组是数组中的一个连续元素序列。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>不难想到是滑动窗口。但是注意这道题问的是最大元素出现<strong>至少 k 次</strong>的子数组，而不是恰好 k 次。如果问的是恰好 k 次的话，当右指针遇到第 k 个最大元素的时候，左指针就可以开始动了，类似76题那种形式。但是这道题当右指针移动到第 k 个最大元素的时候，因为左右指针中间包含了 k 个最大元素，所以左指针及其左边，都是合法的子数组，都包含了起码 k 个最大元素。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">countSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Arrays.stream(nums).max().orElseThrow();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> nums[end++];<br>            <span class="hljs-keyword">if</span> (cur == max) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">while</span> (count &gt;= k) &#123;<br>                <span class="hljs-keyword">if</span> (nums[start++] == max) &#123;<br>                    count--;<br>                &#125;<br>            &#125;<br>            res += start;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>sliding window</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2789. Largest Element in an Array after Merge Operations</title>
     <link href="/posts/495996551.html"/>
     <url>/posts/495996551.html</url>
@@ -68,9 +93,9 @@
       
       <tag>array</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
       <tag>MOD</tag>
       
@@ -120,13 +145,13 @@
       
       <tag>bfs</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>array</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -155,9 +180,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -604,11 +629,11 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -687,9 +712,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -1197,11 +1222,11 @@
       
       <tag>tree</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>postorder</tag>
-      
-      <tag>dfs</tag>
       
     </tags>
     
@@ -1330,11 +1355,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>math</tag>
       
       <tag>gcd</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -1939,11 +1964,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -2153,9 +2178,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
     </tags>
     
@@ -2178,9 +2203,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>enumeration</tag>
       
@@ -2282,9 +2307,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>brainteaser</tag>
       
@@ -2444,9 +2469,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -2504,9 +2529,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>hashmap</tag>
       
     </tags>
     
@@ -2552,9 +2577,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -2583,9 +2608,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -2687,11 +2712,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -2718,9 +2743,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>flood fill</tag>
       
@@ -2768,11 +2793,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>javascript</tag>
       
       <tag>string</tag>
       
@@ -2824,9 +2849,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>linked list</tag>
       
@@ -2851,9 +2876,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>prefix sum</tag>
       
@@ -2922,11 +2947,11 @@
       
       <tag>tree</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -2951,11 +2976,11 @@
       
       <tag>tree</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -3090,11 +3115,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>javascript</tag>
       
     </tags>
     
@@ -3194,11 +3219,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>javascript</tag>
       
       <tag>math</tag>
       
@@ -3223,11 +3248,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>javascript</tag>
       
       <tag>counting sort</tag>
       
@@ -3283,9 +3308,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>math</tag>
       
@@ -3312,11 +3337,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -3343,13 +3368,13 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
       <tag>javascript</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3374,9 +3399,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>java</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3399,11 +3424,11 @@
       
       <tag>tree</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>postorder</tag>
-      
-      <tag>dfs</tag>
       
     </tags>
     
@@ -3426,9 +3451,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>inorder</tag>
       
@@ -3455,11 +3480,11 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3484,11 +3509,11 @@
       
       <tag>bfs</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>dfs</tag>
       
     </tags>
     
@@ -3511,11 +3536,11 @@
       
       <tag>tree</tag>
       
+      <tag>dfs</tag>
+      
       <tag>java</tag>
       
       <tag>postorder</tag>
-      
-      <tag>dfs</tag>
       
     </tags>
     
@@ -3538,11 +3563,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3619,11 +3644,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>javascript</tag>
       
     </tags>
     
@@ -3671,11 +3696,11 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
-      
-      <tag>javascript</tag>
       
     </tags>
     
@@ -3698,9 +3723,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -3788,9 +3813,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>counting sort</tag>
       
@@ -3815,9 +3840,9 @@
       
       <tag>java</tag>
       
-      <tag>array</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>array</tag>
       
       <tag>selection sort</tag>
       
@@ -3869,13 +3894,13 @@
       
       <tag>java</tag>
       
+      <tag>javascript</tag>
+      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
-      
-      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
