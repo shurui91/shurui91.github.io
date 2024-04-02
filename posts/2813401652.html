@@ -24,7 +24,7 @@
 <meta property="og:description" content="Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings. Machine 1 (sender) has the function:">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-05T14:43:06.000Z">
-<meta property="article:modified_time" content="2024-04-02T16:17:14.785Z">
+<meta property="article:modified_time" content="2024-04-02T16:20:07.617Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k words
+          3.2k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          26 mins
+          28 mins
         
       </span>
     
@@ -301,6 +301,8 @@
 
 <p>JavaScript实现</p>
 <figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Encodes a list of strings to a single string.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;string[]&#125; strs</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;string&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> encode = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(strs)</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> sb = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> str of strs) &#123;<br>        sb.push(str.length);<br>        sb.push(<span class="hljs-string">&#x27;/&#x27;</span>);<br>        sb.push(str);<br>    &#125;<br>    <span class="hljs-keyword">return</span> sb.join(<span class="hljs-string">&#x27;&#x27;</span>);<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Decodes a single string to a list of strings.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;string&#125; s</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;string[]&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> decode = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(s)</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> slash = s.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>, i);<br>        <span class="hljs-keyword">let</span> len = parseInt(s.substring(i, slash));<br>        <span class="hljs-keyword">let</span> str = s.substring(slash + <span class="hljs-number">1</span>, slash + <span class="hljs-number">1</span> + len);<br>        res.push(str);<br>        i = slash + <span class="hljs-number">1</span> + len;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your functions will be called as such:</span><br><span class="hljs-comment"> * decode(encode(strs));</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">38. Count and Say<br>271. Encode and Decode Strings<br>443. String Compression<br>604. Design Compressed String Iterator<br>1313. Decompress Run-Length Encoded List<br></code></pre></td></tr></table></figure>
 
                 
               </div>
