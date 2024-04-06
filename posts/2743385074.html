@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
+    <meta name="description" content="Given a string s of ‘(‘ , ‘)’ and lowercase English characters. Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is va">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 948. Bag of Tokens">
-<meta property="og:url" content="https://shurui91.github.io/posts/3870056761.html">
+<meta property="og:title" content="[LeetCode] 1249. Minimum Remove to Make Valid Parentheses">
+<meta property="og:url" content="https://shurui91.github.io/posts/2743385074.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
+<meta property="og:description" content="Given a string s of ‘(‘ , ‘)’ and lowercase English characters. Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is va">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-26T11:27:58.000Z">
-<meta property="article:modified_time" content="2024-03-04T07:52:21.043Z">
+<meta property="article:published_time" content="2020-05-08T19:13:10.000Z">
+<meta property="article:modified_time" content="2024-04-06T20:11:10.064Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="string">
+<meta property="article:tag" content="stack">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 948. Bag of Tokens - CNoodle</title>
+  <title>[LeetCode] 1249. Minimum Remove to Make Valid Parentheses - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 948. Bag of Tokens"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1249. Minimum Remove to Make Valid Parentheses"></span>
           
         </div>
 
@@ -200,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-10-26 04:27" pubdate>
-          October 26, 2020 am
+        <time datetime="2020-05-08 12:13" pubdate>
+          May 8, 2020 pm
         </time>
       </span>
     
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          1.9k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          20 mins
+          17 mins
         
       </span>
     
@@ -260,27 +259,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 948. Bag of Tokens</h1>
+            <h1 id="seo-header">[LeetCode] 1249. Minimum Remove to Make Valid Parentheses</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni.</p>
-<p>Your goal is to maximize the total score by strategically playing these tokens. In one move, you can play an unplayed token in one of the two ways (but not both for the same token):</p>
-<p>Face-up: If your current power is at least tokens[i], you may play tokeni, losing tokens[i] power and gaining 1 score.<br>Face-down: If your current score is at least 1, you may play tokeni, gaining tokens[i] power and losing 1 score.<br>Return the maximum possible score you can achieve after playing any number of tokens.</p>
-<p>Example 1:<br>Input: tokens &#x3D; [100], power &#x3D; 50<br>Output: 0<br>Explanation: Since your score is 0 initially, you cannot play the token face-down. You also cannot play it face-up since your power (50) is less than tokens[0] (100).</p>
-<p>Example 2:<br>Input: tokens &#x3D; [200,100], power &#x3D; 150<br>Output: 1<br>Explanation: Play token1 (100) face-up, reducing your power to 50 and increasing your score to 1.<br>There is no need to play token0, since you cannot play it face-up to add to your score. The maximum score achievable is 1.</p>
-<p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], power &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:<br>Play token0 (100) face-up, reducing power to 100 and increasing score to 1.<br>Play token3 (400) face-down, increasing power to 500 and reducing score to 0.<br>Play token1 (200) face-up, reducing power to 300 and increasing score to 1.<br>Play token2 (300) face-up, reducing power to 0 and increasing score to 2.<br>The maximum score achievable is 2.</p>
-<p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], power &lt; 104</p>
-<p>令牌放置。</p>
+                <p>Given a string s of ‘(‘ , ‘)’ and lowercase English characters.</p>
+<p>Your task is to remove the minimum number of parentheses ( ‘(‘ or ‘)’, in any positions ) so that the resulting parentheses string is valid and return any valid string.</p>
+<p>Formally, a parentheses string is valid if and only if:<br>It is the empty string, contains only lowercase characters, or<br>It can be written as AB (A concatenated with B), where A and B are valid strings, or<br>It can be written as (A), where A is a valid string.</p>
+<p>Example 1:<br>Input: s &#x3D; “lee(t(c)o)de)”<br>Output: “lee(t(c)o)de”<br>Explanation: “lee(t(co)de)” , “lee(t(c)ode)” would also be accepted.</p>
+<p>Example 2:<br>Input: s &#x3D; “a)b(c)d”<br>Output: “ab(c)d”</p>
+<p>Example 3:<br>Input: s &#x3D; “))((“<br>Output: “”<br>Explanation: An empty string is also valid.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s[i] is either’(‘ , ‘)’, or lowercase English letter.</p>
+<p>移除无效的括号。</p>
 <blockquote>
-<p>给你一堆令牌，规则是令牌上tokens[i] 代表一个能量值P，每个令牌最多使用一次，使用的方法如下<br>如果你至少有 token[i] 点能量，可以将令牌置为正面朝上，失去 token[i] 点能量，并得到 1 分。<br>如果我们至少有 1 分，可以将令牌置为反面朝上，获得 token[i] 点能量，并失去 1 分。<br>在使用任意数量的令牌后，返回我们可以得到的最大分数。</p>
+给你一个由 '('、')' 和小写字母组成的字符串 s。
+你需要从字符串中删除最少数目的 '(' 或者 ')' （可以删除任意位置的括号)，使得剩下的「括号字符串」有效。
+请返回任意一个合法字符串。
+
+<p>有效「括号字符串」应当符合以下 任意一条 要求：<br>空字符串或只包含小写字母的字符串<br>可以被写作 AB（A 连接 B）的字符串，其中 A 和 B 都是有效「括号字符串」<br>可以被写作 (A) 的字符串，其中 A 是一个有效的「括号字符串」</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-remove-to-make-valid-parentheses">https://leetcode.cn/problems/minimum-remove-to-make-valid-parentheses</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序 + 双指针。注意题目，因为无论 token 的值是多少，得分都是 1；当你需要用分数兑换能量的时候，每次只需要消耗一个分数，但是得到的 token 数量是可大可小的。由此想到需要对 tokens 数组排序。</p>
-<p>将 input 排序，这样 token 值最小的会在数组最左边，token 值最大的会在最右边。设置两个指针从两边往中间逼近，如果当前你的能量 power &gt;&#x3D; tokens[left]，说明你有多余的能量，可以拿来换分数；如果不满足这个条件，则需要看看手里目前分数是否 &gt; 0，来换取一个当前最大的能量 power（在 right 指针那里）；如果这两个条件都不满足则退出 while 循环，返回你的分数。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是 stack 但是这个题跟20题 valid parenthesis 还不太一样，因为不光是判断，而是最后需要返回一个有效的结果。这个题我没有用到 stack 但是用到了 stack 的思想，用一个 open 变量判断到底是左括号多还是右括号多，如果 open 小于0（右括号多）就一定不要再放右括号了。</p>
+<p>第一次扫描 input，从左往右，append 其他字符的同时，注意不要多 append 右括号即可，也就是说如果左括号都被抵消完之后又出现右括号，则不要放入结果；第二次从右往左 scan 第一次的结果，但是因为第一次扫描的时候只是控制不能让右括号多于左括号，这时有可能左括号是有多余的，所以在第二次从右往左扫描的时候需要判断如果左括号 left 多了，就不要再加入结果集了。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bagOfTokensScore</span><span class="hljs-params">(<span class="hljs-type">int</span>[] tokens, <span class="hljs-type">int</span> power)</span> &#123;<br>        Arrays.sort(tokens);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> tokens.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-keyword">if</span> (power &gt;= tokens[left]) &#123;<br>                power -= tokens[left++];<br>                score++;<br>                res = Math.max(res, score);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">1</span>) &#123;<br>                power += tokens[right--];<br>                score--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">minRemoveToMakeValid</span><span class="hljs-params">(String s)</span> &#123;<br>		<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>		<span class="hljs-type">int</span> <span class="hljs-variable">open</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>			<span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>				open++;<br>			&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>				<span class="hljs-keyword">if</span> (open == <span class="hljs-number">0</span>) &#123;<br>					<span class="hljs-keyword">continue</span>;<br>				&#125;<br>				open--;<br>			&#125;<br>			sb.append(c);<br>		&#125;<br><br>		<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> sb.length() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>			<span class="hljs-keyword">if</span> (sb.charAt(i) == <span class="hljs-string">&#x27;(&#x27;</span> &amp;&amp; open-- &gt; <span class="hljs-number">0</span>) &#123;<br>				<span class="hljs-keyword">continue</span>;<br>			&#125;<br>			res.append(sb.charAt(i));<br>		&#125;<br>		<span class="hljs-keyword">return</span> res.reverse().toString();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -295,13 +301,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/stack/" class="print-no-link">#stack</a>
       
     </div>
   
@@ -313,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 948. Bag of Tokens</div>
-      <div>https://shurui91.github.io/posts/3870056761.html</div>
+      <div>[LeetCode] 1249. Minimum Remove to Make Valid Parentheses</div>
+      <div>https://shurui91.github.io/posts/2743385074.html</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 26, 2020</div>
+          <div>May 8, 2020</div>
         </div>
       
       
@@ -358,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2214751183.html" title="[LeetCode] 524. Longest Word in Dictionary through Deleting">
+                      <a href="/posts/2354514140.html" title="[LeetCode] 1441. Build an Array With Stack Operations">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 524. Longest Word in Dictionary through Deleting</span>
+                        <span class="hidden-mobile">[LeetCode] 1441. Build an Array With Stack Operations</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -368,8 +372,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3398385201.html" title="[LeetCode] 611. Valid Triangle Number">
-                        <span class="hidden-mobile">[LeetCode] 611. Valid Triangle Number</span>
+                      <a href="/posts/3520737794.html" title="[LeetCode] 84. Largest Rectangle in Histogram">
+                        <span class="hidden-mobile">[LeetCode] 84. Largest Rectangle in Histogram</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3870056761.html';
-          this.page.identifier = '/posts/3870056761.html';
+          this.page.url = 'https://shurui91.github.io/posts/2743385074.html';
+          this.page.identifier = '/posts/2743385074.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
