@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="There are n people in a line queuing to buy tickets, where the 0th person is at the front of the line and the (n - 1)th person is at the back of the line. You are given a 0-indexed integer array ticke">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 2073. Time Needed to Buy Tickets">
+<meta property="og:url" content="https://shurui91.github.io/posts/674239195.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="There are n people in a line queuing to buy tickets, where the 0th person is at the front of the line and the (n - 1)th person is at the back of the line. You are given a 0-indexed integer array ticke">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2024-04-09T19:36:00.000Z">
+<meta property="article:modified_time" content="2024-04-09T19:47:57.252Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="simulation">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 2073. Time Needed to Buy Tickets - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2073. Time Needed to Buy Tickets"></span>
           
         </div>
 
@@ -200,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2024-04-09 12:36" pubdate>
+          April 9, 2024 pm
         </time>
       </span>
     
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          12 mins
+          17 mins
         
       </span>
     
@@ -260,26 +259,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 2073. Time Needed to Buy Tickets</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>There are n people in a line queuing to buy tickets, where the 0th person is at the front of the line and the (n - 1)th person is at the back of the line.</p>
+<p>You are given a 0-indexed integer array tickets of length n where the number of tickets that the ith person would like to buy is tickets[i].</p>
+<p>Each person takes exactly 1 second to buy a ticket. A person can only buy 1 ticket at a time and has to go back to the end of the line (which happens instantaneously) in order to buy more tickets. If a person does not have any tickets left to buy, the person will leave the line.</p>
+<p>Return the time taken for the person at position k (0-indexed) to finish buying tickets.</p>
+<p>Example 1:<br>Input: tickets &#x3D; [2,3,2], k &#x3D; 2<br>Output: 6<br>Explanation: </p>
+<ul>
+<li>In the first pass, everyone in the line buys a ticket and the line becomes [1, 2, 1].</li>
+<li>In the second pass, everyone in the line buys a ticket and the line becomes [0, 1, 0].<br>The person at position 2 has successfully bought 2 tickets and it took 3 + 3 &#x3D; 6 seconds.</li>
+</ul>
+<p>Example 2:<br>Input: tickets &#x3D; [5,1,1,1], k &#x3D; 0<br>Output: 8<br>Explanation:</p>
+<ul>
+<li>In the first pass, everyone in the line buys a ticket and the line becomes [4, 0, 0, 0].</li>
+<li>In the next 4 passes, only the person in position 0 is buying tickets.<br>The person at position 0 has successfully bought 5 tickets and it took 4 + 1 + 1 + 1 + 1 &#x3D; 8 seconds.</li>
+</ul>
+<p>Constraints:<br>n &#x3D;&#x3D; tickets.length<br>1 &lt;&#x3D; n &lt;&#x3D; 100<br>1 &lt;&#x3D; tickets[i] &lt;&#x3D; 100<br>0 &lt;&#x3D; k &lt; n</p>
+<p>买票需要的时间。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
+有 n 个人前来排队买票，其中第 0 人站在队伍 最前方 ，第 (n - 1) 人站在队伍 最后方 。
+
+<p>给你一个下标从 0 开始的整数数组 tickets ，数组长度为 n ，其中第 i 人想要购买的票数为 tickets[i] 。</p>
+<p>每个人买票都需要用掉 恰好 1 秒 。一个人 一次只能买一张票 ，如果需要购买更多票，他必须走到  队尾 重新排队（瞬间 发生，不计时间）。如果一个人没有剩下需要买的票，那他将会 离开 队伍。</p>
+<p>返回位于位置 k（下标从 0 开始）的人完成买票需要的时间（以秒为单位）。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的暴力解是用一个队列，把所有人需要购买的票数放进去，然后开始遍历每一个元素。但是如果人数太多（n 太大）就一定会超时。</p>
+<p>这里我提供一个次优解，不需要用队列，就是简单的模拟。当第 k 个人还未完成购票的时候，就一直遍历整个 input 数组。因为每个人一次只能购买一张票，一次购买的动作耗时一秒钟，所以我们一直遍历整个数组直到第 k 个人完成购票，才把循环 break，返回结果。</p>
+<p>这里同时我提供一个网上看到的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/time-needed-to-buy-tickets/solutions/1102684/mai-piao-xu-yao-de-shi-jian-by-leetcode-jnfxx">最优解</a>，时间复杂度为O(n)，但是很难想到。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n * k)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">timeRequiredToBuy</span><span class="hljs-params">(<span class="hljs-type">int</span>[] tickets, <span class="hljs-type">int</span> k)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> tickets.length;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span> (tickets[k] &gt; <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>				<span class="hljs-keyword">if</span> (tickets[i] &gt; <span class="hljs-number">0</span>) &#123;<br>					tickets[i]--;<br>					time++;<br>					<span class="hljs-keyword">if</span> (i == k &amp;&amp; tickets[k] == <span class="hljs-number">0</span>) &#123;<br>						<span class="hljs-keyword">return</span> time;<br>					&#125;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> time;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -294,13 +309,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
-      
-        <a href="/tags/math/" class="print-no-link">#math</a>
-      
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
       
     </div>
   
@@ -312,8 +325,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 2073. Time Needed to Buy Tickets</div>
+      <div>https://shurui91.github.io/posts/674239195.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +338,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>April 9, 2024</div>
         </div>
       
       
@@ -357,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/2413990597.html" title="[LeetCode] 2192. All Ancestors of a Node in a Directed Acyclic Graph">
+                        <span class="hidden-mobile">[LeetCode] 2192. All Ancestors of a Node in a Directed Acyclic Graph</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +395,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/674239195.html';
+          this.page.identifier = '/posts/674239195.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
