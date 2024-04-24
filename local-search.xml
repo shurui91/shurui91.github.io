@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>[LeetCode] 2739. Total Distance Traveled</title>
+    <link href="/posts/414539670.html"/>
+    <url>/posts/414539670.html</url>
+    
+    <content type="html"><![CDATA[<p>A truck has two fuel tanks. You are given two integers, mainTank representing the fuel present in the main tank in liters and additionalTank representing the fuel present in the additional tank in liters.</p><p>The truck has a mileage of 10 km per liter. Whenever 5 liters of fuel get used up in the main tank, if the additional tank has at least 1 liters of fuel, 1 liters of fuel will be transferred from the additional tank to the main tank.</p><p>Return the maximum distance which can be traveled.</p><p>Note: Injection from the additional tank is not continuous. It happens suddenly and immediately for every 5 liters consumed.</p><p>Example 1:<br>Input: mainTank &#x3D; 5, additionalTank &#x3D; 10<br>Output: 60<br>Explanation:<br>After spending 5 litre of fuel, fuel remaining is (5 - 5 + 1) &#x3D; 1 litre and distance traveled is 50km.<br>After spending another 1 litre of fuel, no fuel gets injected in the main tank and the main tank becomes empty.<br>Total distance traveled is 60km.</p><p>Example 2:<br>Input: mainTank &#x3D; 1, additionalTank &#x3D; 2<br>Output: 10<br>Explanation:<br>After spending 1 litre of fuel, the main tank becomes empty.<br>Total distance traveled is 10km.</p><p>Constraints:<br>1 &lt;&#x3D; mainTank, additionalTank &lt;&#x3D; 100</p><p>总行驶距离。</p><blockquote>卡车有两个油箱。给你两个整数，mainTank 表示主油箱中的燃料（以升为单位），additionalTank 表示副油箱中的燃料（以升为单位）。<p>该卡车每耗费 1 升燃料都可以行驶 10 km。每当主油箱使用了 5 升燃料时，如果副油箱至少有 1 升燃料，则会将 1 升燃料从副油箱转移到主油箱。</p><p>返回卡车可以行驶的最大距离。</p><p>注意：从副油箱向主油箱注入燃料不是连续行为。这一事件会在每消耗 5 升燃料时突然且立即发生。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意不难理解，但是这道题通过率很低，我想是因为很多人忽略了一个细节，就是当 mainTank 烧了 5 升燃料的时候，会获得 1 升燃料的补偿，此时虽然跑了 50 km，但是对于 mainTank 来说，实际只消耗了 4 升燃料。所以为了求我们从 additionalTank 获得了多少燃料的补偿，并不是简单用 mainTank &#x2F; 5 即可。</p><p>这里我注意到，在 mainTank 初始值在一定范围内的时候，他获得补偿的次数是有规律的。比如<br>mainTank 在 1 - 4 之间的时候，补偿了 0 次<br>mainTank 在 5 - 9 之间的时候，补偿了 1 次<br>mainTank 在 10 - 14 之间的时候，补偿了 2 次<br>mainTank 在 15 - 19 之间的时候，补偿了 3 次</p><p>所以卡车一共可以获得的补偿次数 &#x3D; (mainTank - 1) &#x2F; 4。想通了这一点，剩下的内容就很简单了。当然这道题也可以用 while 循环做，但是如果数据量太大容易超时。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">distanceTraveled</span><span class="hljs-params">(<span class="hljs-type">int</span> mainTank, <span class="hljs-type">int</span> additionalTank)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">times</span> <span class="hljs-operator">=</span> (mainTank - <span class="hljs-number">1</span>) / <span class="hljs-number">4</span>;<br>        mainTank += Math.min(additionalTank, times);<br>        res = <span class="hljs-number">10</span> * mainTank;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>math</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2073. Time Needed to Buy Tickets</title>
     <link href="/posts/674239195.html"/>
     <url>/posts/674239195.html</url>
@@ -43,9 +66,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>graph</tag>
       
@@ -199,9 +222,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>array</tag>
       
@@ -232,11 +255,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -606,9 +629,9 @@
       
       <tag>array</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -683,11 +706,11 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -764,11 +787,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -1120,9 +1143,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>sort</tag>
       
@@ -1276,9 +1299,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -1544,9 +1567,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2074,11 +2097,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -2313,9 +2336,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>enumeration</tag>
       
@@ -2770,9 +2793,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -3109,9 +3132,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -3138,9 +3161,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -3499,11 +3522,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -3530,13 +3553,13 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>javascript</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3561,9 +3584,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>java</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3586,9 +3609,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -3613,9 +3636,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>inorder</tag>
       
@@ -3642,11 +3665,11 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3671,9 +3694,9 @@
       
       <tag>bfs</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -3698,9 +3721,9 @@
       
       <tag>tree</tag>
       
-      <tag>java</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -3725,11 +3748,11 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
+      <tag>dfs</tag>
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
+      <tag>preorder</tag>
       
     </tags>
     
