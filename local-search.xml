@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>[LeetCode] 2487. Remove Nodes From Linked List</title>
+    <link href="/posts/2002398807.html"/>
+    <url>/posts/2002398807.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given the head of a linked list.</p><p>Remove every node which has a node with a greater value anywhere to the right side of it.</p><p>Return the head of the modified linked list.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/10/02/drawio.png" alt="Example 1"><br>Input: head &#x3D; [5,2,13,3,8]<br>Output: [13,8]<br>Explanation: The nodes that should be removed are 5, 2 and 3.</p><ul><li>Node 13 is to the right of node 5.</li><li>Node 13 is to the right of node 2.</li><li>Node 8 is to the right of node 3.</li></ul><p>Example 2:<br>Input: head &#x3D; [1,1,1,1]<br>Output: [1,1,1,1]<br>Explanation: Every node has value 1, so no nodes are removed.</p><p>Constraints:<br>The number of the nodes in the given list is in the range [1, 105].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 105</p><p>从链表中移除节点。</p><blockquote>给你一个链表的头节点 head 。移除每个右侧有一个更大数值的节点。返回修改后链表的头节点 head 。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>根据题意，如果某个 node 的右侧有一个比他 val 更大的 node，需要把这个 node 删除。那么这里我们可以反过来思考，如果我们从右往左遍历整个链表，我们可以先把第一个节点的 val 当做最大值，记为 max，再往左遍历的时候，如果当前节点值比 max 小，则把当前节点移除；否则把当前节点的节点值记为 max，继续往左遍历。这样做的好处是，我们只需要遍历一次链表，就可以把所有需要删除的节点都删除掉。不过我们需要将 input 链表整个反转一次，遍历一次，再反转回去。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNodes</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        head = reverse(head);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummy.next = head;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur.next.val &lt; max) &#123;<br>                cur.next = cur.next.next;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                max = cur.next.val;<br>                cur = cur.next;<br>            &#125;<br>        &#125;<br>        head = reverse(head);<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> ListNode <span class="hljs-title function_">reverse</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">ListNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur.next;<br>            cur.next = pre;<br>            pre = cur;<br>            cur = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> pre;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>stack</tag>
+      
+      <tag>linked list</tag>
+      
+      <tag>recursion</tag>
+      
+      <tag>monotonic stack</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2739. Total Distance Traveled</title>
     <link href="/posts/414539670.html"/>
     <url>/posts/414539670.html</url>
