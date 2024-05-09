@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>2960. Count Tested Devices After Test Operations</title>
+    <link href="/posts/2783829724.html"/>
+    <url>/posts/2783829724.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array batteryPercentages having length n, denoting the battery percentages of n 0-indexed devices.</p><p>Your task is to test each device i in order from 0 to n - 1, by performing the following test operations:<br>If batteryPercentages[i] is greater than 0:<br>Increment the count of tested devices.<br>Decrease the battery percentage of all devices with indices j in the range [i + 1, n - 1] by 1, ensuring their battery percentage never goes below 0, i.e, batteryPercentages[j] &#x3D; max(0, batteryPercentages[j] - 1).<br>Move to the next device.<br>Otherwise, move to the next device without performing any test.<br>Return an integer denoting the number of devices that will be tested after performing the test operations in order.</p><p>Example 1:<br>Input: batteryPercentages &#x3D; [1,1,2,1,3]<br>Output: 3<br>Explanation: Performing the test operations in order starting from device 0:<br>At device 0, batteryPercentages[0] &gt; 0, so there is now 1 tested device, and batteryPercentages becomes [1,0,1,0,2].<br>At device 1, batteryPercentages[1] &#x3D;&#x3D; 0, so we move to the next device without testing.<br>At device 2, batteryPercentages[2] &gt; 0, so there are now 2 tested devices, and batteryPercentages becomes [1,0,1,0,1].<br>At device 3, batteryPercentages[3] &#x3D;&#x3D; 0, so we move to the next device without testing.<br>At device 4, batteryPercentages[4] &gt; 0, so there are now 3 tested devices, and batteryPercentages stays the same.<br>So, the answer is 3.</p><p>Example 2:<br>Input: batteryPercentages &#x3D; [0,1,2]<br>Output: 2<br>Explanation: Performing the test operations in order starting from device 0:<br>At device 0, batteryPercentages[0] &#x3D;&#x3D; 0, so we move to the next device without testing.<br>At device 1, batteryPercentages[1] &gt; 0, so there is now 1 tested device, and batteryPercentages becomes [0,1,1].<br>At device 2, batteryPercentages[2] &gt; 0, so there are now 2 tested devices, and batteryPercentages stays the same.<br>So, the answer is 2.</p><p>Constraints:<br>1 &lt;&#x3D; n &#x3D;&#x3D; batteryPercentages.length &lt;&#x3D; 100<br>0 &lt;&#x3D; batteryPercentages[i] &lt;&#x3D; 100</p><p>统计已测试设备。</p><blockquote>给你一个长度为 n 、下标从 0 开始的整数数组 batteryPercentages ，表示 n 个设备的电池百分比。<p>你的任务是按照顺序测试每个设备 i，执行以下测试操作：</p><p>如果 batteryPercentages[i] 大于 0：<br>增加 已测试设备的计数。<br>将下标在 [i + 1, n - 1] 的所有设备的电池百分比减少 1，确保它们的电池百分比 不会低于 0 ，即 batteryPercentages[j] &#x3D; max(0, batteryPercentages[j] - 1)。<br>移动到下一个设备。<br>否则，移动到下一个设备而不执行任何测试。<br>返回一个整数，表示按顺序执行测试操作后 已测试设备 的数量。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是差分数组。暴力解就不展示了，思路是需要一个两层 for 循环，第一层 for 是去遍历每个设备，如果当前设备电量大于 0，则第二层 for 循环需要去遍历剩下的设备并对每个剩下的设备的电池百分比 - 1。</p><p>这道题的最优解是差分数组。还是需要遍历一遍 input 数组，遍历的时候，如果当前设备的电量大于 0，则 count++，count 记录的是已测试过的设备的数量。接着往之后的设备看，如果当前设备在按规则（电池百分比减少 1）减去电量之后，电量仍然大于 0，则 count++。最后返回的是 count。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countTestedDevices</span><span class="hljs-params">(<span class="hljs-type">int</span>[] batteryPercentages)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> batteryPercentages.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>batteryPercentages[i] = Math.max(<span class="hljs-number">0</span>, batteryPercentages[i] - count);<br><span class="hljs-keyword">if</span> (batteryPercentages[i] &gt; <span class="hljs-number">0</span>) &#123;<br>count++;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2105. Watering Plants II</title>
     <link href="/posts/1725533005.html"/>
     <url>/posts/1725533005.html</url>
@@ -338,11 +363,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -712,9 +737,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -791,9 +816,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -870,11 +895,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1226,9 +1251,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -1463,9 +1488,9 @@
       
       <tag>java</tag>
       
-      <tag>simulation</tag>
-      
       <tag>heap</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -1675,9 +1700,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2284,9 +2309,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -3736,9 +3761,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -3796,9 +3821,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3906,9 +3931,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3989,9 +4014,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
