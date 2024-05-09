@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 506. Relative Ranks</title>
+    <link href="/posts/3961220199.html"/>
+    <url>/posts/3961220199.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array score of size n, where score[i] is the score of the ith athlete in a competition. All the scores are guaranteed to be unique.</p><p>The athletes are placed based on their scores, where the 1st place athlete has the highest score, the 2nd place athlete has the 2nd highest score, and so on. The placement of each athlete determines their rank:<br>The 1st place athlete’s rank is “Gold Medal”.<br>The 2nd place athlete’s rank is “Silver Medal”.<br>The 3rd place athlete’s rank is “Bronze Medal”.<br>For the 4th place to the nth place athlete, their rank is their placement number (i.e., the xth place athlete’s rank is “x”).<br>Return an array answer of size n where answer[i] is the rank of the ith athlete.</p><p>Example 1:<br>Input: score &#x3D; [5,4,3,2,1]<br>Output: [“Gold Medal”,”Silver Medal”,”Bronze Medal”,”4”,”5”]<br>Explanation: The placements are [1st, 2nd, 3rd, 4th, 5th].</p><p>Example 2:<br>Input: score &#x3D; [10,3,8,9,4]<br>Output: [“Gold Medal”,”5”,”Bronze Medal”,”Silver Medal”,”4”]<br>Explanation: The placements are [1st, 5th, 3rd, 2nd, 4th].</p><p>Constraints:<br>n &#x3D;&#x3D; score.length<br>1 &lt;&#x3D; n &lt;&#x3D; 104<br>0 &lt;&#x3D; score[i] &lt;&#x3D; 106<br>All the values in score are unique.</p><p>相对名次。</p><blockquote>给你一个长度为 n 的整数数组 score ，其中 score[i] 是第 i 位运动员在比赛中的得分。所有得分都 互不相同 。<p>运动员将根据得分 决定名次 ，其中名次第 1 的运动员得分最高，名次第 2 的运动员得分第 2 高，依此类推。运动员的名次决定了他们的获奖情况：</p><p>名次第 1 的运动员获金牌 “Gold Medal” 。<br>名次第 2 的运动员获银牌 “Silver Medal” 。<br>名次第 3 的运动员获铜牌 “Bronze Medal” 。<br>从名次第 4 到第 n 的运动员，只能获得他们的名次编号（即，名次第 x 的运动员获得编号 “x”）。<br>使用长度为 n 的数组 answer 返回获奖，其中 answer[i] 是第 i 位运动员的获奖情况。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/relative-ranks">https://leetcode-cn.com/problems/relative-ranks</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一-bucket-sort"><a href="#思路一-bucket-sort" class="headerlink" title="思路一 - bucket sort"></a>思路一 - bucket sort</h2><p>首先找到 input 中最大的元素，这个最大的元素是最大的 score 分数，这样才能知道桶排序里面到底需要多少个桶。创建了桶之后，可以从右往左扫描桶，也就是从高分往低分扫，如果找到某个 index，他在原数组的相同 index 里面是有数字的，则给他 assign medal 或者数字。注意前三个人分配到奖牌之后，从第四高的分数开始，我们是分配一个相对的名次。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] findRelativeRanks(<span class="hljs-type">int</span>[] score) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> s : score) &#123;<br>            max = Math.max(max, s);<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> score.length;<br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[n];<br>        <span class="hljs-type">int</span>[] bucket = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[max + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            bucket[score[i]] = i + <span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">rank</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> bucket.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">if</span> (bucket[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">1</span>) &#123;<br>                    res[bucket[i] - <span class="hljs-number">1</span>] = <span class="hljs-string">&quot;Gold Medal&quot;</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">2</span>) &#123;<br>                    res[bucket[i] - <span class="hljs-number">1</span>] = <span class="hljs-string">&quot;Silver Medal&quot;</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">3</span>) &#123;<br>                    res[bucket[i] - <span class="hljs-number">1</span>] = <span class="hljs-string">&quot;Bronze Medal&quot;</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    res[bucket[i] - <span class="hljs-number">1</span>] = String.valueOf(rank);<br>                &#125;<br>                rank++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-堆"><a href="#思路二-堆" class="headerlink" title="思路二 - 堆"></a>思路二 - 堆</h2><p>创建一个最大堆，把 input 数组里的每个 index 和 score 做成 [index, score] 放入最大堆，堆里的元素是按照 score 降序排列的。然后从堆中开始取出元素，取出的前三个元素就是得金银铜牌的运动员。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] findRelativeRanks(<span class="hljs-type">int</span>[] score) &#123;<br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; b[<span class="hljs-number">1</span>] - a[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> score.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; i, score[i] &#125;);<br>        &#125;<br><br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rank</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] cur = queue.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">1</span>) &#123;<br>                res[index] = <span class="hljs-string">&quot;Gold Medal&quot;</span>;<br>                rank++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">2</span>) &#123;<br>                res[index] = <span class="hljs-string">&quot;Silver Medal&quot;</span>;<br>                rank++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank == <span class="hljs-number">3</span>) &#123;<br>                res[index] = <span class="hljs-string">&quot;Bronze Medal&quot;</span>;<br>                rank++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res[index] = String.valueOf(rank);<br>                rank++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>heap</tag>
+      
+      <tag>bucket sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2079. Watering Plants</title>
     <link href="/posts/1731658428.html"/>
     <url>/posts/1731658428.html</url>
@@ -311,11 +338,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -504,9 +531,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -685,9 +712,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -843,11 +870,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1016,9 +1043,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
@@ -1199,11 +1226,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
       
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1463,9 +1490,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1490,9 +1517,9 @@
       
       <tag>math</tag>
       
-      <tag>string</tag>
-      
       <tag>gcd</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -1648,9 +1675,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1704,9 +1731,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1991,9 +2018,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sliding window</tag>
       
@@ -2074,9 +2101,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -2128,9 +2155,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2415,9 +2442,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2444,9 +2471,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2708,9 +2735,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>dynamic programming</tag>
+      
+      <tag>greedy</tag>
       
       <tag>binary search</tag>
       
@@ -3377,9 +3404,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -3404,9 +3431,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
