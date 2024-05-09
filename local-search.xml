@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 3075. Maximize Happiness of Selected Children</title>
+    <link href="/posts/1338501949.html"/>
+    <url>/posts/1338501949.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an array happiness of length n, and a positive integer k.</p><p>There are n children standing in a queue, where the ith child has happiness value happiness[i]. You want to select k children from these n children in k turns.</p><p>In each turn, when you select a child, the happiness value of all the children that have not been selected till now decreases by 1. Note that the happiness value cannot become negative and gets decremented only if it is positive.</p><p>Return the maximum sum of the happiness values of the selected children you can achieve by selecting k children.</p><p>Example 1:<br>Input: happiness &#x3D; [1,2,3], k &#x3D; 2<br>Output: 4<br>Explanation: We can pick 2 children in the following way:</p><ul><li>Pick the child with the happiness value &#x3D;&#x3D; 3. The happiness value of the remaining children becomes [0,1].</li><li>Pick the child with the happiness value &#x3D;&#x3D; 1. The happiness value of the remaining child becomes [0]. Note that the happiness value cannot become less than 0.<br>The sum of the happiness values of the selected children is 3 + 1 &#x3D; 4.</li></ul><p>Example 2:<br>Input: happiness &#x3D; [1,1,1,1], k &#x3D; 2<br>Output: 1<br>Explanation: We can pick 2 children in the following way:</p><ul><li>Pick any child with the happiness value &#x3D;&#x3D; 1. The happiness value of the remaining children becomes [0,0,0].</li><li>Pick the child with the happiness value &#x3D;&#x3D; 0. The happiness value of the remaining child becomes [0,0].<br>The sum of the happiness values of the selected children is 1 + 0 &#x3D; 1.</li></ul><p>Example 3:<br>Input: happiness &#x3D; [2,3,4,5], k &#x3D; 1<br>Output: 5<br>Explanation: We can pick 1 child in the following way:</p><ul><li>Pick the child with the happiness value &#x3D;&#x3D; 5. The happiness value of the remaining children becomes [1,2,3].<br>The sum of the happiness values of the selected children is 5.</li></ul><p>Constraints:<br>1 &lt;&#x3D; n &#x3D;&#x3D; happiness.length &lt;&#x3D; 2 * 105<br>1 &lt;&#x3D; happiness[i] &lt;&#x3D; 108<br>1 &lt;&#x3D; k &lt;&#x3D; n</p><p>幸福值最大化的选择方案。</p><blockquote>给你一个长度为 n 的数组 happiness ，以及一个 正整数 k 。<p>n 个孩子站成一队，其中第 i 个孩子的 幸福值 是 happiness[i] 。你计划组织 k 轮筛选从这 n 个孩子中选出 k 个孩子。</p><p>在每一轮选择一个孩子时，所有 尚未 被选中的孩子的 幸福值 将减少 1 。注意，幸福值 不能 变成负数，且只有在它是正数的情况下才会减少。</p><p>选择 k 个孩子，并使你选中的孩子幸福值之和最大，返回你能够得到的 最大值 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序。把 input 数组排序，之后按照从大到小开始扫描数组。每遇到一个孩子的时候，先按照规则将他的幸福值减去相应的数值，比如之前已经选择了 X 个孩子，就需要把当前孩子的幸福值 - X。做过这个减法之后，如果当前孩子的幸福值还大于 0 的话，就把当前孩子的幸福值累加到结果里。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">maximumHappinessSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] happiness, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Arrays.sort(happiness);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">deduct</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> happiness.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span> &amp;&amp; k &gt; <span class="hljs-number">0</span>; i--) &#123;<br>            happiness[i] = Math.max(<span class="hljs-number">0</span>, happiness[i] - deduct);<br>            res += happiness[i];<br>            deduct++;<br>            k--;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2960. Count Tested Devices After Test Operations</title>
     <link href="/posts/2783829724.html"/>
     <url>/posts/2783829724.html</url>
@@ -363,11 +390,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -737,9 +764,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -895,11 +922,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -1251,9 +1278,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>sort</tag>
       
@@ -1700,9 +1727,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
