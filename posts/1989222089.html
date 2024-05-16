@@ -16,25 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="There are n projects numbered from 0 to n - 1. You are given an integer array milestones where each milestones[i] denotes the number of milestones the ith project has. You can work on the projects fol">
+    <meta name="description" content="You are given the root of a full binary tree with the following properties:Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.Non-leaf nodes have either the value">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work">
-<meta property="og:url" content="https://shurui91.github.io/posts/3427306978.html">
+<meta property="og:title" content="[LeetCode] 2331. Evaluate Boolean Binary Tree">
+<meta property="og:url" content="https://shurui91.github.io/posts/1989222089.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="There are n projects numbered from 0 to n - 1. You are given an integer array milestones where each milestones[i] denotes the number of milestones the ith project has. You can work on the projects fol">
+<meta property="og:description" content="You are given the root of a full binary tree with the following properties:Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.Non-leaf nodes have either the value">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-05-15T22:54:32.000Z">
-<meta property="article:modified_time" content="2024-05-15T23:09:34.414Z">
+<meta property="article:published_time" content="2023-02-06T14:16:26.000Z">
+<meta property="article:modified_time" content="2024-05-16T02:23:25.374Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="postorder">
+<meta property="article:tag" content="recursion">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work - CNoodle</title>
+  <title>[LeetCode] 2331. Evaluate Boolean Binary Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2331. Evaluate Boolean Binary Tree"></span>
           
         </div>
 
@@ -199,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-15 15:54" pubdate>
-          May 15, 2024 pm
+        <time datetime="2023-02-06 06:16" pubdate>
+          February 6, 2023 am
         </time>
       </span>
     
@@ -211,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k words
+          3k words
         
       </span>
     
@@ -222,7 +224,7 @@
         
         
         
-          24 mins
+          26 mins
         
       </span>
     
@@ -259,54 +261,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work</h1>
+            <h1 id="seo-header">[LeetCode] 2331. Evaluate Boolean Binary Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>There are n projects numbered from 0 to n - 1. You are given an integer array milestones where each milestones[i] denotes the number of milestones the ith project has.</p>
-<p>You can work on the projects following these two rules:<br>Every week, you will finish exactly one milestone of one project. You must work every week.<br>You cannot work on two milestones from the same project for two consecutive weeks.</p>
-<p>Once all the milestones of all the projects are finished, or if the only milestones that you can work on will cause you to violate the above rules, you will stop working. Note that you may not be able to finish every project’s milestones due to these constraints.</p>
-<p>Return the maximum number of weeks you would be able to work on the projects without violating the rules mentioned above.</p>
-<p>Example 1:<br>Input: milestones &#x3D; [1,2,3]<br>Output: 6<br>Explanation: One possible scenario is:<br>​​​​- During the 1st week, you will work on a milestone of project 0.</p>
-<ul>
-<li>During the 2nd week, you will work on a milestone of project 2.</li>
-<li>During the 3rd week, you will work on a milestone of project 1.</li>
-<li>During the 4th week, you will work on a milestone of project 2.</li>
-<li>During the 5th week, you will work on a milestone of project 1.</li>
-<li>During the 6th week, you will work on a milestone of project 2.<br>The total number of weeks is 6.</li>
-</ul>
-<p>Example 2:<br>Input: milestones &#x3D; [5,2,1]<br>Output: 7<br>Explanation: One possible scenario is:</p>
-<ul>
-<li>During the 1st week, you will work on a milestone of project 0.</li>
-<li>During the 2nd week, you will work on a milestone of project 1.</li>
-<li>During the 3rd week, you will work on a milestone of project 0.</li>
-<li>During the 4th week, you will work on a milestone of project 1.</li>
-<li>During the 5th week, you will work on a milestone of project 0.</li>
-<li>During the 6th week, you will work on a milestone of project 2.</li>
-<li>During the 7th week, you will work on a milestone of project 0.<br>The total number of weeks is 7.<br>Note that you cannot work on the last milestone of project 0 on 8th week because it would violate the rules.<br>Thus, one milestone in project 0 will remain unfinished.</li>
-</ul>
-<p>Constraints:<br>n &#x3D;&#x3D; milestones.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>1 &lt;&#x3D; milestones[i] &lt;&#x3D; 109</p>
-<p>你可以工作的最大周数。</p>
+                <p>You are given the root of a full binary tree with the following properties:<br>Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.<br>Non-leaf nodes have either the value 2 or 3, where 2 represents the boolean OR and 3 represents the boolean AND.</p>
+<p>The evaluation of a node is as follows:<br>If the node is a leaf node, the evaluation is the value of the node, i.e. True or False.<br>Otherwise, evaluate the node’s two children and apply the boolean operation of its value with the children’s evaluations.</p>
+<p>Return the boolean result of evaluating the root node.</p>
+<p>A full binary tree is a binary tree where each node has either 0 or 2 children.</p>
+<p>A leaf node is a node that has zero children.</p>
+<p>Example 1:<br>Input: root &#x3D; [2,1,3,null,null,0,1]<br>Output: true<br>Explanation: The above diagram illustrates the evaluation process.<br>The AND node evaluates to False AND True &#x3D; False.<br>The OR node evaluates to True OR False &#x3D; True.<br>The root node evaluates to True, so we return true.</p>
+<p>Example 2:<br>Input: root &#x3D; [0]<br>Output: false<br>Explanation: The root node is a leaf node and it evaluates to false, so we return false.</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [1, 1000].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 3<br>Every node has either 0 or 2 children.<br>Leaf nodes have a value of 0 or 1.<br>Non-leaf nodes have a value of 2 or 3.</p>
+<p>计算布尔二叉树的值。</p>
 <blockquote>
-给你 n 个项目，编号从 0 到 n - 1 。同时给你一个整数数组 milestones ，其中每个 milestones[i] 表示第 i 个项目中的阶段任务数量。
+给你一棵 完整二叉树 的根，这棵树有以下特征：
 
-<p>你可以按下面两个规则参与项目中的工作：</p>
-<ul>
-<li>每周，你将会完成 某一个 项目中的 恰好一个 阶段任务。你每周都 必须 工作。</li>
-<li>在 连续的 两周中，你 不能 参与并完成同一个项目中的两个阶段任务。</li>
-</ul>
-<p>一旦所有项目中的全部阶段任务都完成，或者仅剩余一个阶段任务都会导致你违反上面的规则，那么你将 停止工作 。注意，由于这些条件的限制，你可能无法完成所有阶段任务。</p>
-<p>返回在不违反上面规则的情况下你 最多 能工作多少周。</p>
+<p>叶子节点 要么值为 0 要么值为 1 ，其中 0 表示 False ，1 表示 True 。<br>非叶子节点 要么值为 2 要么值为 3 ，其中 2 表示逻辑或 OR ，3 表示逻辑与 AND 。<br>计算 一个节点的值方式如下：</p>
+<p>如果节点是个叶子节点，那么节点的 值 为它本身，即 True 或者 False 。<br>否则，计算 两个孩子的节点值，然后将该节点的运算符对两个孩子值进行 运算 。<br>返回根节点 root 的布尔运算值。</p>
+<p>完整二叉树 是每个节点有 0 个或者 2 个孩子的二叉树。</p>
+<p>叶子节点 是没有孩子的节点。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-boolean-binary-tree">https://leetcode.cn/problems/evaluate-boolean-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。题目要求我们尽可能多地完成任务且每两个连续的任务不能是同样的。为了尽可能多地完成任务，一个不难想到的思路是我们能否先找到任务量最多的任务，如果我们能完成这个任务量最多的任务，那么我们不就可以把剩下的任务穿插在这个最多的任务中间了吗？这样也满足题目不能连续两周做同一个任务的要求。</p>
-<p>想到这个思路不难，这里我们说明一下这个思路的可行性。我们遍历一遍 input 数组，找到任务数量最多的任务，记为 longest。同时我们累加每一个任务，把全局所有任务数量的总和记为 sum，那么除 longest 之外的其他任务的数量 rest &#x3D; sum - longest。假设我们能跑完 longest 的所有任务，那么我们至少需要 rest &gt;&#x3D; longest - 1。举例，比如 longest &#x3D; 10，那么我们要让 rest 不小于 9 才行，因为 10 个任务中间有 9 个空隙可以插进去。</p>
-<p>因此，当我们找到 longest 之后，我们可以直接判断，如果 rest &gt;&#x3D; longest - 1，那么可以完成所有任务；反之如果不满足这个条件，那么我们只能满足 2 * rest + 1 个任务。在剩下的 rest 个任务中间插入 rest + 1 个最多类型的任务。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="思路一-后序遍历"><a href="#思路一-后序遍历" class="headerlink" title="思路一 - 后序遍历"></a>思路一 - 后序遍历</h2><p>因为最后判断整个树的布尔值是看根节点的布尔值，而根节点的布尔值是由下面的孩子节点的布尔值得来的，所以一个不难想到的思路就是后序遍历，从这棵树的叶子节点开始往上统计布尔值。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">numberOfWeeks</span><span class="hljs-params">(<span class="hljs-type">int</span>[] milestones)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">longest</span> <span class="hljs-operator">=</span> milestones[<span class="hljs-number">0</span>];<br>		<span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> milestone : milestones) &#123;<br>			longest = Math.max(longest, milestone);<br>			sum += milestone;<br>		&#125;<br><br>		<span class="hljs-type">long</span> <span class="hljs-variable">rest</span> <span class="hljs-operator">=</span> sum - longest;<br>		<span class="hljs-keyword">if</span> (rest &lt; longest - <span class="hljs-number">1</span>) &#123;<br>			<span class="hljs-keyword">return</span> rest * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">evaluateTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(root);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> helper(root.left);<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> helper(root.right);<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> left || right;<br>        &#125;<br>        <span class="hljs-keyword">return</span> left &amp;&amp; right;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路二-递归"><a href="#思路二-递归" class="headerlink" title="思路二 - 递归"></a>思路二 - 递归</h2><p>我直接给代码。时间空间复杂度同思路一。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">evaluateTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> root.val == <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> evaluateTree(root.left) || evaluateTree(root.right);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> evaluateTree(root.left) &amp;&amp; evaluateTree(root.right);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -321,11 +310,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
+      
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+      
+        <a href="/tags/postorder/" class="print-no-link">#postorder</a>
+      
+        <a href="/tags/recursion/" class="print-no-link">#recursion</a>
       
     </div>
   
@@ -337,8 +330,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work</div>
-      <div>https://shurui91.github.io/posts/3427306978.html</div>
+      <div>[LeetCode] 2331. Evaluate Boolean Binary Tree</div>
+      <div>https://shurui91.github.io/posts/1989222089.html</div>
     </div>
     <div class="license-meta">
       
@@ -350,7 +343,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 15, 2024</div>
+          <div>February 6, 2023</div>
         </div>
       
       
@@ -382,12 +375,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/676651753.html" title="[LeetCode] 2336. Smallest Number in Infinite Set">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[LeetCode] 2336. Smallest Number in Infinite Set</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1338501949.html" title="[LeetCode] 3075. Maximize Happiness of Selected Children">
-                        <span class="hidden-mobile">[LeetCode] 3075. Maximize Happiness of Selected Children</span>
+                      <a href="/posts/861179681.html" title="[LeetCode] 1814. Count Nice Pairs in an Array">
+                        <span class="hidden-mobile">[LeetCode] 1814. Count Nice Pairs in an Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -407,8 +406,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3427306978.html';
-          this.page.identifier = '/posts/3427306978.html';
+          this.page.url = 'https://shurui91.github.io/posts/1989222089.html';
+          this.page.identifier = '/posts/1989222089.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
