@@ -16,26 +16,30 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
+    <meta name="description" content="Given a binary tree root and an integer target, delete all the leaf nodes with value target. Note that once you delete a leaf node with value target, if its parent node becomes a leaf node and has the">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 948. Bag of Tokens">
-<meta property="og:url" content="https://shurui91.github.io/posts/3870056761.html">
+<meta property="og:title" content="[LeetCode] 1325. Delete Leaves With a Given Value">
+<meta property="og:url" content="https://shurui91.github.io/posts/1215096328.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni. Your goal is to maximize the to">
+<meta property="og:description" content="Given a binary tree root and an integer target, delete all the leaf nodes with value target. Note that once you delete a leaf node with value target, if its parent node becomes a leaf node and has the">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-26T11:27:58.000Z">
-<meta property="article:modified_time" content="2024-03-04T07:52:21.043Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/01/09/sample_1_1684.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/01/09/sample_2_1684.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/01/15/sample_3_1684.png">
+<meta property="article:published_time" content="2024-05-17T17:55:24.000Z">
+<meta property="article:modified_time" content="2024-05-17T18:18:36.361Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="tree">
+<meta property="article:tag" content="postorder">
+<meta property="article:tag" content="recursion">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/01/09/sample_1_1684.png">
   
   
   
-  <title>[LeetCode] 948. Bag of Tokens - CNoodle</title>
+  <title>[LeetCode] 1325. Delete Leaves With a Given Value - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 948. Bag of Tokens"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1325. Delete Leaves With a Given Value"></span>
           
         </div>
 
@@ -200,8 +204,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-10-26 04:27" pubdate>
-          October 26, 2020 am
+        <time datetime="2024-05-17 10:55" pubdate>
+          May 17, 2024 am
         </time>
       </span>
     
@@ -212,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          2.5k words
         
       </span>
     
@@ -223,7 +227,7 @@
         
         
         
-          20 mins
+          21 mins
         
       </span>
     
@@ -260,27 +264,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 948. Bag of Tokens</h1>
+            <h1 id="seo-header">[LeetCode] 1325. Delete Leaves With a Given Value</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] donates the value of tokeni.</p>
-<p>Your goal is to maximize the total score by strategically playing these tokens. In one move, you can play an unplayed token in one of the two ways (but not both for the same token):</p>
-<p>Face-up: If your current power is at least tokens[i], you may play tokeni, losing tokens[i] power and gaining 1 score.<br>Face-down: If your current score is at least 1, you may play tokeni, gaining tokens[i] power and losing 1 score.<br>Return the maximum possible score you can achieve after playing any number of tokens.</p>
-<p>Example 1:<br>Input: tokens &#x3D; [100], power &#x3D; 50<br>Output: 0<br>Explanation: Since your score is 0 initially, you cannot play the token face-down. You also cannot play it face-up since your power (50) is less than tokens[0] (100).</p>
-<p>Example 2:<br>Input: tokens &#x3D; [200,100], power &#x3D; 150<br>Output: 1<br>Explanation: Play token1 (100) face-up, reducing your power to 50 and increasing your score to 1.<br>There is no need to play token0, since you cannot play it face-up to add to your score. The maximum score achievable is 1.</p>
-<p>Example 3:<br>Input: tokens &#x3D; [100,200,300,400], power &#x3D; 200<br>Output: 2<br>Explanation: Play the tokens in this order to get a score of 2:<br>Play token0 (100) face-up, reducing power to 100 and increasing score to 1.<br>Play token3 (400) face-down, increasing power to 500 and reducing score to 0.<br>Play token1 (200) face-up, reducing power to 300 and increasing score to 1.<br>Play token2 (300) face-up, reducing power to 0 and increasing score to 2.<br>The maximum score achievable is 2.</p>
-<p>Constraints:<br>0 &lt;&#x3D; tokens.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; tokens[i], power &lt; 104</p>
-<p>令牌放置。</p>
+                <p>Given a binary tree root and an integer target, delete all the leaf nodes with value target.</p>
+<p>Note that once you delete a leaf node with value target, if its parent node becomes a leaf node and has the value target, it should also be deleted (you need to continue doing that until you cannot).</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/01/09/sample_1_1684.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,2,3,2,null,2,4], target &#x3D; 2<br>Output: [1,null,3,null,4]<br>Explanation: Leaf nodes in green with value (target &#x3D; 2) are removed (Picture in left).<br>After removing, new nodes become leaf nodes with value (target &#x3D; 2) (Picture in center).</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/01/09/sample_2_1684.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,3,3,3,2], target &#x3D; 3<br>Output: [1,3,null,null,2]</p>
+<p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2020/01/15/sample_3_1684.png" srcset="/img/loading.gif" lazyload alt="Example 3"><br>Input: root &#x3D; [1,2,null,2,null,2], target &#x3D; 2<br>Output: [1]<br>Explanation: Leaf nodes in green with value (target &#x3D; 2) are removed at each step.</p>
+<p>Constraints:<br>The number of nodes in the tree is in the range [1, 3000].<br>1 &lt;&#x3D; Node.val, target &lt;&#x3D; 1000</p>
+<p>删除给定值的叶子节点。</p>
 <blockquote>
-<p>给你一堆令牌，规则是令牌上tokens[i] 代表一个能量值P，每个令牌最多使用一次，使用的方法如下<br>如果你至少有 token[i] 点能量，可以将令牌置为正面朝上，失去 token[i] 点能量，并得到 1 分。<br>如果我们至少有 1 分，可以将令牌置为反面朝上，获得 token[i] 点能量，并失去 1 分。<br>在使用任意数量的令牌后，返回我们可以得到的最大分数。</p>
+给你一棵以 root 为根的二叉树和一个整数 target ，请你删除所有值为 target 的 叶子节点 。
+
+<p>注意，一旦删除值为 target 的叶子节点，它的父节点就可能变成叶子节点；如果新叶子节点的值恰好也是 target ，那么这个节点也应该被删除。</p>
+<p>也就是说，你需要重复此过程直到不能继续删除。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序 + 双指针。注意题目，因为无论 token 的值是多少，得分都是 1；当你需要用分数兑换能量的时候，每次只需要消耗一个分数，但是得到的 token 数量是可大可小的。由此想到需要对 tokens 数组排序。</p>
-<p>将 input 排序，这样 token 值最小的会在数组最左边，token 值最大的会在最右边。设置两个指针从两边往中间逼近，如果当前你的能量 power &gt;&#x3D; tokens[left]，说明你有多余的能量，可以拿来换分数；如果不满足这个条件，则需要看看手里目前分数是否 &gt; 0，来换取一个当前最大的能量 power（在 right 指针那里）；如果这两个条件都不满足则退出 while 循环，返回你的分数。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - sort<br>空间O(1)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bagOfTokensScore</span><span class="hljs-params">(<span class="hljs-type">int</span>[] tokens, <span class="hljs-type">int</span> power)</span> &#123;<br>        Arrays.sort(tokens);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> tokens.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-keyword">if</span> (power &gt;= tokens[left]) &#123;<br>                power -= tokens[left++];<br>                score++;<br>                res = Math.max(res, score);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (score &gt;= <span class="hljs-number">1</span>) &#123;<br>                power += tokens[right--];<br>                score--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路一-递归"><a href="#思路一-递归" class="headerlink" title="思路一 - 递归"></a>思路一 - 递归</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">removeLeafNodes</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> target)</span> &#123;<br>		<span class="hljs-comment">// corner case</span><br>		<span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>		&#125;<br>		root.left = removeLeafNodes(root.left, target);<br>		root.right = removeLeafNodes(root.right, target);<br>		<span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span> &amp;&amp; root.right == <span class="hljs-literal">null</span> &amp;&amp; root.val == target) &#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> root;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路二-后序遍历"><a href="#思路二-后序遍历" class="headerlink" title="思路二 - 后序遍历"></a>思路二 - 后序遍历</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">removeLeafNodes</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> root;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(root, target);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> TreeNode <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> helper(root.left, target);<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> helper(root.right, target);<br>        root.left = left;<br>        root.right = right;<br>        <span class="hljs-keyword">if</span> (left == <span class="hljs-literal">null</span> &amp;&amp; right == <span class="hljs-literal">null</span> &amp;&amp; root.val == target) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 
                 
               </div>
@@ -295,13 +306,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/tree/" class="print-no-link">#tree</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/postorder/" class="print-no-link">#postorder</a>
+      
+        <a href="/tags/recursion/" class="print-no-link">#recursion</a>
       
     </div>
   
@@ -313,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 948. Bag of Tokens</div>
-      <div>https://shurui91.github.io/posts/3870056761.html</div>
+      <div>[LeetCode] 1325. Delete Leaves With a Given Value</div>
+      <div>https://shurui91.github.io/posts/1215096328.html</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 26, 2020</div>
+          <div>May 17, 2024</div>
         </div>
       
       
@@ -358,18 +369,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2214751183.html" title="[LeetCode] 524. Longest Word in Dictionary through Deleting">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 524. Longest Word in Dictionary through Deleting</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3398385201.html" title="[LeetCode] 611. Valid Triangle Number">
-                        <span class="hidden-mobile">[LeetCode] 611. Valid Triangle Number</span>
+                      <a href="/posts/3427306978.html" title="[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work">
+                        <span class="hidden-mobile">[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3870056761.html';
-          this.page.identifier = '/posts/3870056761.html';
+          this.page.url = 'https://shurui91.github.io/posts/1215096328.html';
+          this.page.identifier = '/posts/1215096328.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
