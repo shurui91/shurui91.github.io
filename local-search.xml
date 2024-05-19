@@ -151,9 +151,9 @@
       
       <tag>stack</tag>
       
-      <tag>linked list</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>linked list</tag>
       
       <tag>monotonic stack</tag>
       
@@ -868,9 +868,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1476,7 +1476,7 @@
     <link href="/posts/1740553697.html"/>
     <url>/posts/1740553697.html</url>
     
-    <content type="html"><![CDATA[<p>Given an integer array arr of distinct integers and an integer k.</p><p>A game will be played between the first two elements of the array (i.e. arr[0] and arr[1]). In each round of the game, we compare arr[0] with arr[1], the larger integer wins and remains at position 0, and the smaller integer moves to the end of the array. The game ends when an integer wins k consecutive rounds.</p><p>Return the integer which will win the game.</p><p>It is guaranteed that there will be a winner of the game.</p><p>Example 1:<br>Input: arr &#x3D; [2,1,3,5,4,6,7], k &#x3D; 2<br>Output: 5<br>Explanation: Let’s see the rounds of the game:<br>Round |       arr       | winner | win_count<br>  1   | [2,1,3,5,4,6,7] | 2      | 1<br>  2   | [2,3,5,4,6,7,1] | 3      | 1<br>  3   | [3,5,4,6,7,1,2] | 5      | 1<br>  4   | [5,4,6,7,1,2,3] | 5      | 2<br>So we can see that 4 rounds will be played and 5 is the winner because it wins 2 consecutive games.</p><p>Example 2:<br>Input: arr &#x3D; [3,2,1], k &#x3D; 10<br>Output: 3<br>Explanation: 3 will win the first 10 rounds consecutively.</p><p>Constraints:<br>2 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 106<br>arr contains distinct integers.<br>1 &lt;&#x3D; k &lt;&#x3D; 109</p><p>按符号重排数组。</p><blockquote><p>给你一个由 不同 整数组成的整数数组 arr 和一个整数 k 。<br>每回合游戏都在数组的前两个元素（即 arr[0] 和 arr[1] ）之间进行。比较 arr[0] 与 arr[1] 的大小，较大的整数将会取得这一回合的胜利并保留在位置 0 ，较小的整数移至数组的末尾。当一个整数赢得 k 个连续回合时，游戏结束，该整数就是比赛的 赢家 。<br>返回赢得比赛的整数。<br>题目数据 保证 游戏存在赢家。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是模拟。这里有两个 corner case 需要处理，如果 input 数组只有两个数字，那么赢家就是这两个值中间较大的那一个。另一个 case 是如果遍历一次之后，整个数组中未出现赢得 k 次游戏的数字，那么全局最大的数字是赢家，因为这个数字有可能排在 input 数组很后面的位置导致 index 比他大的数字的个数不足 k 个。</p><p>一般的情况是，我们比较了头两个元素之后，从第三个元素开始，就只和第一个元素（赢家）比较并记录连续赢得比赛的回合数，如果有任何一个数字连续赢得比赛的回合数 &#x3D;&#x3D; k 则返回这个数字。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getWinner</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> Math.max(arr[<span class="hljs-number">0</span>], arr[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> prev;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> prev;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; arr.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> arr[i];<br>            <span class="hljs-keyword">if</span> (prev &gt; cur) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                prev = cur;<br>                count = <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count == k) &#123;<br>                <span class="hljs-keyword">return</span> prev;<br>            &#125;<br>            max = Math.max(max, arr[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given an integer array arr of distinct integers and an integer k.</p><p>A game will be played between the first two elements of the array (i.e. arr[0] and arr[1]). In each round of the game, we compare arr[0] with arr[1], the larger integer wins and remains at position 0, and the smaller integer moves to the end of the array. The game ends when an integer wins k consecutive rounds.</p><p>Return the integer which will win the game.</p><p>It is guaranteed that there will be a winner of the game.</p><p>Example 1:<br>Input: arr &#x3D; [2,1,3,5,4,6,7], k &#x3D; 2<br>Output: 5<br>Explanation: Let’s see the rounds of the game:<br>Round |       arr       | winner | win_count<br>  1   | [2,1,3,5,4,6,7] | 2      | 1<br>  2   | [2,3,5,4,6,7,1] | 3      | 1<br>  3   | [3,5,4,6,7,1,2] | 5      | 1<br>  4   | [5,4,6,7,1,2,3] | 5      | 2<br>So we can see that 4 rounds will be played and 5 is the winner because it wins 2 consecutive games.</p><p>Example 2:<br>Input: arr &#x3D; [3,2,1], k &#x3D; 10<br>Output: 3<br>Explanation: 3 will win the first 10 rounds consecutively.</p><p>Constraints:<br>2 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 106<br>arr contains distinct integers.<br>1 &lt;&#x3D; k &lt;&#x3D; 109</p><p>按符号重排数组。</p><blockquote>给你一个由 不同 整数组成的整数数组 arr 和一个整数 k 。每回合游戏都在数组的前两个元素（即 arr[0] 和 arr[1] ）之间进行。比较 arr[0] 与 arr[1] 的大小，较大的整数将会取得这一回合的胜利并保留在位置 0 ，较小的整数移至数组的末尾。当一个整数赢得 k 个连续回合时，游戏结束，该整数就是比赛的 赢家 。返回赢得比赛的整数。题目数据 保证 游戏存在赢家。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是模拟。这里有两个 corner case 需要处理，如果如果回合数 k &#x3D;&#x3D; 1，那么返回的就是前两个数字里较大的那个。另一个 case 是如果遍历一次之后，整个数组中未出现赢得 k 次游戏的数字，那么全局最大的数字是赢家，因为这个数字有可能排在 input 数组很后面的位置导致 index 比他大的数字的个数不足 k 个。</p><p>一般的情况是，我们比较了头两个元素之后，从第三个元素开始，就只和第一个元素（赢家）比较并记录连续赢得比赛的回合数，如果有任何一个数字连续赢得比赛的回合数 &#x3D;&#x3D; k 则返回这个数字。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getWinner</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> arr[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">second</span> <span class="hljs-operator">=</span> arr[<span class="hljs-number">1</span>];<br><span class="hljs-comment">// 前两个数字的较大者</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Math.max(first, second);<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> max;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; arr.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">bigger</span> <span class="hljs-operator">=</span> Math.max(max, arr[i]);<br><span class="hljs-comment">// 如果比较之后还是max大，则count++</span><br><span class="hljs-comment">// 反之max要更新为当前更大的数字，count重置为1</span><br>            <span class="hljs-keyword">if</span> (max == bigger) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                max = bigger;<br>                count = <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count == k) &#123;<br>                <span class="hljs-keyword">return</span> max;<br>            &#125;<br>            max = Math.max(max, bigger);<br>        &#125;<br>        <span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -2477,9 +2477,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -4033,9 +4033,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -4093,9 +4093,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4203,9 +4203,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4286,9 +4286,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4521,9 +4521,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
