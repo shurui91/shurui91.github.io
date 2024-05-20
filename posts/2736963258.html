@@ -16,31 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+    <meta name="description" content="The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty. For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 &#x3D; 1.Given an array nums,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 513. Find Bottom Left Tree Value">
-<meta property="og:url" content="https://shurui91.github.io/posts/1856795069.html">
+<meta property="og:title" content="[LeetCode] 1863. Sum of All Subset XOR Totals">
+<meta property="og:url" content="https://shurui91.github.io/posts/2736963258.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+<meta property="og:description" content="The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty. For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 &#x3D; 1.Given an array nums,">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg">
-<meta property="article:published_time" content="2020-01-14T09:44:10.000Z">
-<meta property="article:modified_time" content="2024-02-28T17:47:31.610Z">
+<meta property="article:published_time" content="2024-05-20T05:32:19.000Z">
+<meta property="article:modified_time" content="2024-05-20T05:36:26.325Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="bfs">
 <meta property="article:tag" content="dfs">
-<meta property="article:tag" content="preorder">
+<meta property="article:tag" content="backtracking">
+<meta property="article:tag" content="bit manipulation">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
   
   
   
-  <title>[LeetCode] 513. Find Bottom Left Tree Value - CNoodle</title>
+  <title>[LeetCode] 1863. Sum of All Subset XOR Totals - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 513. Find Bottom Left Tree Value"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1863. Sum of All Subset XOR Totals"></span>
           
         </div>
 
@@ -205,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-14 01:44" pubdate>
-          January 14, 2020 am
+        <time datetime="2024-05-19 22:32" pubdate>
+          May 19, 2024 pm
         </time>
       </span>
     
@@ -217,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          1.7k words
         
       </span>
     
@@ -228,7 +224,7 @@
         
         
         
-          21 mins
+          15 mins
         
       </span>
     
@@ -265,31 +261,49 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 513. Find Bottom Left Tree Value</h1>
+            <h1 id="seo-header">[LeetCode] 1863. Sum of All Subset XOR Totals</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, return the leftmost value in the last row of the tree.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [2,1,3]<br>Output: 1</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]<br>Output: 7</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 104].<br>-231 &lt;&#x3D; Node.val &lt;&#x3D; 231 - 1</p>
-<p>找树左下角的值。</p>
+                <p>The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.</p>
+<p>For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 &#x3D; 1.<br>Given an array nums, return the sum of all XOR totals for every subset of nums. </p>
+<p>Note: Subsets with the same elements should be counted multiple times.</p>
+<p>An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,3]<br>Output: 6<br>Explanation: The 4 subsets of [1,3] are:</p>
+<ul>
+<li>The empty subset has an XOR total of 0.</li>
+<li>[1] has an XOR total of 1.</li>
+<li>[3] has an XOR total of 3.</li>
+<li>[1,3] has an XOR total of 1 XOR 3 &#x3D; 2.<br>0 + 1 + 3 + 2 &#x3D; 6</li>
+</ul>
+<p>Example 2:<br>Input: nums &#x3D; [5,1,6]<br>Output: 28<br>Explanation: The 8 subsets of [5,1,6] are:</p>
+<ul>
+<li>The empty subset has an XOR total of 0.</li>
+<li>[5] has an XOR total of 5.</li>
+<li>[1] has an XOR total of 1.</li>
+<li>[6] has an XOR total of 6.</li>
+<li>[5,1] has an XOR total of 5 XOR 1 &#x3D; 4.</li>
+<li>[5,6] has an XOR total of 5 XOR 6 &#x3D; 3.</li>
+<li>[1,6] has an XOR total of 1 XOR 6 &#x3D; 7.</li>
+<li>[5,1,6] has an XOR total of 5 XOR 1 XOR 6 &#x3D; 2.<br>0 + 5 + 1 + 6 + 4 + 3 + 7 + 2 &#x3D; 28</li>
+</ul>
+<p>Example 3:<br>Input: nums &#x3D; [3,4,5,6,7,8]<br>Output: 480<br>Explanation: The sum of all XOR totals for every subset is 480.</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 12<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 20</p>
+<p>找出所有子集的异或总和再求和。</p>
 <blockquote>
-<p>给定一个二叉树的 根节点 root，请找出该二叉树的 最底层 最左边 节点的值。<br>假设二叉树中至少有一个节点。</p>
+一个数组的 异或总和 定义为数组中所有元素按位 XOR 的结果；如果数组为 空 ，则异或总和为 0 。
+
+<p>例如，数组 [2,5,6] 的 异或总和 为 2 XOR 5 XOR 6 &#x3D; 1 。<br>给你一个数组 nums ，请你求出 nums 中每个 子集 的 异或总和 ，计算并返回这些值相加之 和 。</p>
+<p>注意：在本题中，元素 相同 的不同子集应 多次 计数。</p>
+<p>数组 a 是数组 b 的一个 子集 的前提条件是：从 b 删除几个（也可能不删除）元素能够得到 a 。</p>
 </blockquote>
-<h2 id="思路-BFS"><a href="#思路-BFS" class="headerlink" title="思路 - BFS"></a>思路 - BFS</h2><p>首先 BFS 比较直观，只要按层序遍历的做法一层层把 node 塞进 queue。当遍历到最底层的时候，输出第一个塞进去的节点值即可。注意每层节点在塞入 queue 的时候应该是先塞右孩子再塞左孩子，原因是BFS的解法不看当前遍历到了第几层，只能通过这种方式才能保证最底层最靠左的叶子节点是最后被塞入 queue 的。如果按照第一个例子跑一遍，结果就是2 - 3 - 1而不是2 - 1 - 3.</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>按照求 subset 的方式，枚举每个元素参与和不参与 XOR 运算的情况，然后把所有情况的结果累加起来。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(2^n) - 这里的 n 是 12<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(root);<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.poll();<br>            res = cur.val;<br>            <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.right);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.left);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findBottomLeftValue = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> res = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">let</span> queue = [root];<br>    <span class="hljs-keyword">while</span> (queue.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = queue.<span class="hljs-title function_">shift</span>();<br>        res = cur.<span class="hljs-property">val</span>;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">right</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">right</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">left</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">left</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="思路-DFS"><a href="#思路-DFS" class="headerlink" title="思路 - DFS"></a>思路 - DFS</h2><p>用DFS做的思路就稍微复杂一些。DFS 的做法会用到先序遍历，同时我们需要两个变量，height 记录当前遍历到的节点的深度，depth 记录当前遍历到的最大深度。当我们遍历到某个节点的时候，如果当前这个节点的深度 height 小于 depth，则说明当前这个节点一定不在最深层；否则这个节点是在最深层。同时因为我们是先遍历左子树的关系，所以当我们往某个左子树上走的时候，会记录第一个 height 被更新的左子树，这样深度最大的左孩子就会被记录下来了。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node. public class TreeNode &#123; int val; TreeNode</span><br><span class="hljs-comment"> * left; TreeNode right; TreeNode(int x) &#123; val = x; &#125; &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        helper(root, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (height &lt; depth) &#123;<br>            res = root.val;<br>            height = dpeth;<br>        &#125;<br>        helper(root.left, depth + <span class="hljs-number">1</span>);<br>        helper(root.right, depth + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">subsetXORSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">if</span> (nums.length == <span class="hljs-number">1</span>) &#123;<br>			<span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>];<br>		&#125;<br>		helper(nums, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>		<span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> index, <span class="hljs-type">int</span> xor)</span> &#123;<br>		<span class="hljs-keyword">if</span> (index == nums.length) &#123;<br>			res += xor;<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		<span class="hljs-comment">// 当前元素参与XOR</span><br>		helper(nums, index + <span class="hljs-number">1</span>, xor ^ nums[index]);<br>		<span class="hljs-comment">// 当前元素不参与XOR</span><br>		helper(nums, index + <span class="hljs-number">1</span>, xor);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -304,17 +318,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
-      
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
       
         <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
+        <a href="/tags/backtracking/" class="print-no-link">#backtracking</a>
+      
+        <a href="/tags/bit-manipulation/" class="print-no-link">#bit manipulation</a>
       
     </div>
   
@@ -326,8 +338,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 513. Find Bottom Left Tree Value</div>
-      <div>https://shurui91.github.io/posts/1856795069.html</div>
+      <div>[LeetCode] 1863. Sum of All Subset XOR Totals</div>
+      <div>https://shurui91.github.io/posts/2736963258.html</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +351,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 14, 2020</div>
+          <div>May 19, 2024</div>
         </div>
       
       
@@ -371,18 +383,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3961220199.html" title="[LeetCode] 506. Relative Ranks">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 506. Relative Ranks</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3757411780.html" title="[LeetCode] 102. Binary Tree Level Order Traversal">
-                        <span class="hidden-mobile">[LeetCode] 102. Binary Tree Level Order Traversal</span>
+                      <a href="/posts/3427306978.html" title="[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work">
+                        <span class="hidden-mobile">[LeetCode] 1953. Maximum Number of Weeks for Which You Can Work</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,8 +408,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1856795069.html';
-          this.page.identifier = '/posts/1856795069.html';
+          this.page.url = 'https://shurui91.github.io/posts/2736963258.html';
+          this.page.identifier = '/posts/2736963258.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
