@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2831. Find the Longest Equal Subarray</title>
+    <link href="/posts/874156265.html"/>
+    <url>/posts/874156265.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array nums and an integer k.</p><p>A subarray is called equal if all of its elements are equal. Note that the empty subarray is an equal subarray.</p><p>Return the length of the longest possible equal subarray after deleting at most k elements from nums.</p><p>A subarray is a contiguous, possibly empty sequence of elements within an array.</p><p>Example 1:<br>Input: nums &#x3D; [1,3,2,3,1,3], k &#x3D; 3<br>Output: 3<br>Explanation: It’s optimal to delete the elements at index 2 and index 4.<br>After deleting them, nums becomes equal to [1, 3, 3, 3].<br>The longest equal subarray starts at i &#x3D; 1 and ends at j &#x3D; 3 with length equal to 3.<br>It can be proven that no longer equal subarrays can be created.</p><p>Example 2:<br>Input: nums &#x3D; [1,1,2,2,1,1], k &#x3D; 2<br>Output: 4<br>Explanation: It’s optimal to delete the elements at index 2 and index 3.<br>After deleting them, nums becomes equal to [1, 1, 1, 1].<br>The array itself is an equal subarray, so the answer is 4.<br>It can be proven that no longer equal subarrays can be created.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; nums.length<br>0 &lt;&#x3D; k &lt;&#x3D; nums.length</p><p>找出最长等值子数组。</p><blockquote>给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。<p>如果子数组中所有元素都相等，则认为子数组是一个 等值子数组 。注意，空数组是 等值子数组 。</p><p>从 nums 中删除最多 k 个元素后，返回可能的最长等值子数组的长度。</p><p>子数组 是数组中一个连续且可能为空的元素序列。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口。题目的最终目标是让我们找到一个最长的等值子数组。准确地说与其说是子数组，不如说是子序列，因为最终题目要求的最长的子数组里面的元素的下标并不是连续的。</p><p>这里我们需要一个 hashmap，key 是每个不同元素，value 是一个 queue，存储的是当前元素在 input 数组内出现的下标。然后我们开始遍历 input 数组，根据遇到的不同元素，把他们的下标都放到各自对应的 queue 中。每当放入一个下标的时候，我们判断，如果当前这个元素能组成最长的等值子数组，那么他第一次出现的下标（假设为 i）和最后一次出现的下标（假设为 j）之间的距离一定要满足 i + k &lt;&#x3D; j。如果不满足这个条件，说明 i 和 j 距离太远，需要从 i 开始删除一些元素，直到满足题目条件为止。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestEqualSubarray</span><span class="hljs-params">(List&lt;Integer&gt; nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Deque&lt;Integer&gt;&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.size(); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums.get(i);<br>            <span class="hljs-keyword">if</span> (!map.containsKey(num)) &#123;<br>                map.put(num, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;());<br>            &#125;<br>            map.get(num).offerLast(i);<br>            Deque&lt;Integer&gt; q = map.get(num);<br>            <span class="hljs-keyword">while</span> (!q.isEmpty() &amp;&amp; i - q.peekFirst() + <span class="hljs-number">1</span> &gt; q.size() + k) &#123;<br>                q.pollFirst();<br>            &#125;<br>            res = Math.max(res, q.size());<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1863. Sum of All Subset XOR Totals</title>
     <link href="/posts/2736963258.html"/>
     <url>/posts/2736963258.html</url>
@@ -178,9 +205,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>stack</tag>
+      
+      <tag>recursion</tag>
       
       <tag>linked list</tag>
       
