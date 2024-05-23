@@ -1935,6 +1935,31 @@
   
   
   <entry>
+    <title>[LeetCode] 100. Same Tree</title>
+    <link href="/posts/493219565.html"/>
+    <url>/posts/493219565.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.</p><p>Return the merged string.</p><p>Example 1:<br>Input: word1 &#x3D; “abc”, word2 &#x3D; “pqr”<br>Output: “apbqcr”<br>Explanation: The merged string will be merged as so:<br>word1:  a   b   c<br>word2:    p   q   r<br>merged: a p b q c r</p><p>Example 2:<br>Input: word1 &#x3D; “ab”, word2 &#x3D; “pqrs”<br>Output: “apbqrs”<br>Explanation: Notice that as word2 is longer, “rs” is appended to the end.<br>word1:  a   b<br>word2:    p   q   r   s<br>merged: a p b q   r   s</p><p>Example 3:<br>Input: word1 &#x3D; “abcd”, word2 &#x3D; “pq”<br>Output: “apbqcd”<br>Explanation: Notice that as word1 is longer, “cd” is appended to the end.<br>word1:  a   b   c   d<br>word2:    p   q<br>merged: a p b q c   d</p><p>Constraints:<br>1 &lt;&#x3D; word1.length, word2.length &lt;&#x3D; 100<br>word1 and word2 consist of lowercase English letters.</p><p>交替合并字符串。</p><blockquote>给你两个字符串 word1 和 word2 。请你从 word1 开始，通过交替添加字母来合并字符串。如果一个字符串比另一个字符串长，就将多出来的字母追加到合并后字符串的末尾。<p>返回 合并后的字符串。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/merge-strings-alternately">https://leetcode.cn/problems/merge-strings-alternately</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题考察字符串的基本操作。我直接给代码。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m+n) - 需要合并两个字符串<br>空间O(m+n) - 最后返回的字符串长度</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">mergeAlternately</span><span class="hljs-params">(String word1, String word2)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (word1 == <span class="hljs-literal">null</span> || word1.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> word2;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (word2 == <span class="hljs-literal">null</span> || word2.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> word1;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> word1.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> word2.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m || j &lt; n) &#123;<br>            <span class="hljs-keyword">if</span> (i &lt; m) &#123;<br>                sb.append(word1.charAt(i++));<br>            &#125;<br>            <span class="hljs-keyword">if</span> (j &lt; n) &#123;<br>                sb.append(word2.charAt(j++));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1700. Number of Students Unable to Eat Lunch</title>
     <link href="/posts/3320885080.html"/>
     <url>/posts/3320885080.html</url>
