@@ -8,7 +8,7 @@
     <link href="/posts/2736396816.html"/>
     <url>/posts/2736396816.html</url>
     
-    <content type="html"><![CDATA[<p>You have observations of n + m 6-sided dice rolls with each face numbered from 1 to 6. n of the observations went missing, and you only have the observations of m rolls. Fortunately, you have also calculated the average value of the n + m rolls.</p><p>You are given an integer array rolls of length m where rolls[i] is the value of the ith observation. You are also given the two integers mean and n.</p><p>Return an array of length n containing the missing observations such that the average value of the n + m rolls is exactly mean. If there are multiple valid answers, return any of them. If no such array exists, return an empty array.</p><p>The average value of a set of k numbers is the sum of the numbers divided by k.</p><p>Note that mean is an integer, so the sum of the n + m rolls should be divisible by n + m.</p><p>Example 1:<br>Input: rolls &#x3D; [3,2,4,3], mean &#x3D; 4, n &#x3D; 2<br>Output: [6,6]<br>Explanation: The mean of all n + m rolls is (3 + 2 + 4 + 3 + 6 + 6) &#x2F; 6 &#x3D; 4.</p><p>Example 2:<br>Input: rolls &#x3D; [1,5,6], mean &#x3D; 3, n &#x3D; 4<br>Output: [2,3,2,2]<br>Explanation: The mean of all n + m rolls is (1 + 5 + 6 + 2 + 3 + 2 + 2) &#x2F; 7 &#x3D; 3.</p><p>Example 3:<br>Input: rolls &#x3D; [1,2,3,4], mean &#x3D; 6, n &#x3D; 4<br>Output: []<br>Explanation: It is impossible for the mean to be 6 no matter what the 4 missing rolls are.</p><p>Constraints:<br>m &#x3D;&#x3D; rolls.length<br>1 &lt;&#x3D; n, m &lt;&#x3D; 105<br>1 &lt;&#x3D; rolls[i], mean &lt;&#x3D; 6</p><p>找出缺失的观测数据。</p><blockquote>现有一份 n + m 次投掷单个 六面 骰子的观测数据，骰子的每个面从 1 到 6 编号。观测数据中缺失了 n 份，你手上只拿到剩余 m 次投掷的数据。幸好你有之前计算过的这 n + m 次投掷数据的 平均值 。<p>给你一个长度为 m 的整数数组 rolls ，其中 rolls[i] 是第 i 次观测的值。同时给你两个整数 mean 和 n 。</p><p>返回一个长度为 n 的数组，包含所有缺失的观测数据，且满足这 n + m 次投掷的 平均值 是 mean 。如果存在多组符合要求的答案，只需要返回其中任意一组即可。如果不存在答案，返回一个空数组。</p><p>k 个数字的 平均值 为这些数字求和后再除以 k 。</p><p>注意 mean 是一个整数，所以 n + m 次投掷的总和需要被 n + m 整除。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道数学题。已知 m 次的投掷数据和 n + m 次投掷数据的平均值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] missingRolls(<span class="hljs-type">int</span>[] rolls, <span class="hljs-type">int</span> mean, <span class="hljs-type">int</span> n) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> rolls.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">totalSum</span> <span class="hljs-operator">=</span> mean * (n + m);<br><span class="hljs-type">int</span> <span class="hljs-variable">curSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> roll : rolls) &#123;<br>curSum += roll;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-variable">restSum</span> <span class="hljs-operator">=</span> totalSum - curSum;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (restSum &lt; n || restSum &gt; <span class="hljs-number">6</span> * n) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>];<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br><span class="hljs-type">int</span> <span class="hljs-variable">quotient</span> <span class="hljs-operator">=</span> restSum / n;<br><span class="hljs-type">int</span> <span class="hljs-variable">remainder</span> <span class="hljs-operator">=</span> restSum % n;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>res[i] = quotient + (i &lt; remainder ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>You have observations of n + m 6-sided dice rolls with each face numbered from 1 to 6. n of the observations went missing, and you only have the observations of m rolls. Fortunately, you have also calculated the average value of the n + m rolls.</p><p>You are given an integer array rolls of length m where rolls[i] is the value of the ith observation. You are also given the two integers mean and n.</p><p>Return an array of length n containing the missing observations such that the average value of the n + m rolls is exactly mean. If there are multiple valid answers, return any of them. If no such array exists, return an empty array.</p><p>The average value of a set of k numbers is the sum of the numbers divided by k.</p><p>Note that mean is an integer, so the sum of the n + m rolls should be divisible by n + m.</p><p>Example 1:<br>Input: rolls &#x3D; [3,2,4,3], mean &#x3D; 4, n &#x3D; 2<br>Output: [6,6]<br>Explanation: The mean of all n + m rolls is (3 + 2 + 4 + 3 + 6 + 6) &#x2F; 6 &#x3D; 4.</p><p>Example 2:<br>Input: rolls &#x3D; [1,5,6], mean &#x3D; 3, n &#x3D; 4<br>Output: [2,3,2,2]<br>Explanation: The mean of all n + m rolls is (1 + 5 + 6 + 2 + 3 + 2 + 2) &#x2F; 7 &#x3D; 3.</p><p>Example 3:<br>Input: rolls &#x3D; [1,2,3,4], mean &#x3D; 6, n &#x3D; 4<br>Output: []<br>Explanation: It is impossible for the mean to be 6 no matter what the 4 missing rolls are.</p><p>Constraints:<br>m &#x3D;&#x3D; rolls.length<br>1 &lt;&#x3D; n, m &lt;&#x3D; 105<br>1 &lt;&#x3D; rolls[i], mean &lt;&#x3D; 6</p><p>找出缺失的观测数据。</p><blockquote>现有一份 n + m 次投掷单个 六面 骰子的观测数据，骰子的每个面从 1 到 6 编号。观测数据中缺失了 n 份，你手上只拿到剩余 m 次投掷的数据。幸好你有之前计算过的这 n + m 次投掷数据的 平均值 。<p>给你一个长度为 m 的整数数组 rolls ，其中 rolls[i] 是第 i 次观测的值。同时给你两个整数 mean 和 n 。</p><p>返回一个长度为 n 的数组，包含所有缺失的观测数据，且满足这 n + m 次投掷的 平均值 是 mean 。如果存在多组符合要求的答案，只需要返回其中任意一组即可。如果不存在答案，返回一个空数组。</p><p>k 个数字的 平均值 为这些数字求和后再除以 k 。</p><p>注意 mean 是一个整数，所以 n + m 次投掷的总和需要被 n + m 整除。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道数学题。已知 m 次的投掷数据和 n + m 次投掷数据的平均值，要求返回的是剩下 n 次的投掷数据，如果存在多组符合要求的答案，只需要返回其中任意一组即可。</p><p>设n + m 次投掷数据的总和是 totalSum，已知的 m 次投掷数据的总和是 curSum，那么剩下的 n 次投掷数据的总和是 restSum &#x3D; totalSum - curSum。如果 restSum &lt; n 或 restSum &gt; 6 * n，则不存在答案，返回空数组。</p><p>一般的 case 是我们用 restSum &#x2F; n 得到一个商 quotient 和一个余数 remainder，那么对于最后需要输出的数组 res，每一个位置上的值是 quotient + (i &lt; remainder ? 1 : 0)，每一个 quotient 需要 + 1 直到把 remainder 用完为止。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] missingRolls(<span class="hljs-type">int</span>[] rolls, <span class="hljs-type">int</span> mean, <span class="hljs-type">int</span> n) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> rolls.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">totalSum</span> <span class="hljs-operator">=</span> mean * (n + m);<br><span class="hljs-type">int</span> <span class="hljs-variable">curSum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> roll : rolls) &#123;<br>curSum += roll;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-variable">restSum</span> <span class="hljs-operator">=</span> totalSum - curSum;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (restSum &lt; n || restSum &gt; <span class="hljs-number">6</span> * n) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>];<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br><span class="hljs-type">int</span> <span class="hljs-variable">quotient</span> <span class="hljs-operator">=</span> restSum / n;<br><span class="hljs-type">int</span> <span class="hljs-variable">remainder</span> <span class="hljs-operator">=</span> restSum % n;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>res[i] = quotient + (i &lt; remainder ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -980,9 +980,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -1573,9 +1573,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -1812,9 +1812,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
       <tag>recursion</tag>
       
@@ -2641,9 +2641,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -2957,9 +2957,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4222,9 +4222,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -4282,9 +4282,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -4336,9 +4336,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4392,9 +4392,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -4448,9 +4448,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4475,9 +4475,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
