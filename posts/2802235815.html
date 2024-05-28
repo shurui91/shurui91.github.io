@@ -16,30 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order. Return the area of the largest submatrix within matrix where every element">
+    <meta name="description" content="You are given two strings s and t of the same length and an integer maxCost. You want to change s to t. Changing the ith character of s to ith character of t costs |s[i] - t[i]| (i.e., the absolute di">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1727. Largest Submatrix With Rearrangements">
-<meta property="og:url" content="https://shurui91.github.io/posts/185281803.html">
+<meta property="og:title" content="[LeetCode] 1208. Get Equal Substrings Within Budget">
+<meta property="og:url" content="https://shurui91.github.io/posts/2802235815.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order. Return the area of the largest submatrix within matrix where every element">
+<meta property="og:description" content="You are given two strings s and t of the same length and an integer maxCost. You want to change s to t. Changing the ith character of s to ith character of t costs |s[i] - t[i]| (i.e., the absolute di">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40852-pm.png">
-<meta property="article:published_time" content="2023-11-29T17:38:53.000Z">
-<meta property="article:modified_time" content="2023-11-29T17:49:36.045Z">
+<meta property="article:published_time" content="2021-02-10T15:11:05.000Z">
+<meta property="article:modified_time" content="2024-05-28T22:38:24.045Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="matrix">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="sliding window">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png">
   
   
   
-  <title>[LeetCode] 1727. Largest Submatrix With Rearrangements - CNoodle</title>
+  <title>[LeetCode] 1208. Get Equal Substrings Within Budget - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1727. Largest Submatrix With Rearrangements"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1208. Get Equal Substrings Within Budget"></span>
           
         </div>
 
@@ -204,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-29 09:38" pubdate>
-          November 29, 2023 am
+        <time datetime="2021-02-10 07:11" pubdate>
+          February 10, 2021 am
         </time>
       </span>
     
@@ -216,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -227,7 +223,7 @@
         
         
         
-          15 mins
+          16 mins
         
       </span>
     
@@ -264,28 +260,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1727. Largest Submatrix With Rearrangements</h1>
+            <h1 id="seo-header">[LeetCode] 1208. Get Equal Substrings Within Budget</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary matrix matrix of size m x n, and you are allowed to rearrange the columns of the matrix in any order.</p>
-<p>Return the area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40536-pm.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: matrix &#x3D; [[0,0,1],[1,1,1],[1,0,1]]<br>Output: 4<br>Explanation: You can rearrange the columns as shown above.<br>The largest submatrix of 1s, in bold, has an area of 4.</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/29/screenshot-2020-12-30-at-40852-pm.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: matrix &#x3D; [[1,0,1,0,1]]<br>Output: 3<br>Explanation: You can rearrange the columns as shown above.<br>The largest submatrix of 1s, in bold, has an area of 3.</p>
-<p>Example 3:<br>Input: matrix &#x3D; [[1,1,0],[1,0,1]]<br>Output: 2<br>Explanation: Notice that you must rearrange entire columns, and there is no way to make a submatrix of 1s larger than an area of 2.</p>
-<p>Constraints:<br>m &#x3D;&#x3D; matrix.length<br>n &#x3D;&#x3D; matrix[i].length<br>1 &lt;&#x3D; m * n &lt;&#x3D; 105<br>matrix[i][j] is either 0 or 1.</p>
-<p>重新排列后的最大子矩阵。</p>
+                <p>You are given two strings s and t of the same length and an integer maxCost.</p>
+<p>You want to change s to t. Changing the ith character of s to ith character of t costs |s[i] - t[i]| (i.e., the absolute difference between the ASCII values of the characters).</p>
+<p>Return the maximum length of a substring of s that can be changed to be the same as the corresponding substring of t with a cost less than or equal to maxCost. If there is no substring from s that can be changed to its corresponding substring from t, return 0.</p>
+<p>Example 1:<br>Input: s &#x3D; “abcd”, t &#x3D; “bcdf”, maxCost &#x3D; 3<br>Output: 3<br>Explanation: “abc” of s can change to “bcd”.<br>That costs 3, so the maximum length is 3.</p>
+<p>Example 2:<br>Input: s &#x3D; “abcd”, t &#x3D; “cdef”, maxCost &#x3D; 3<br>Output: 1<br>Explanation: Each character in s costs 2 to change to character in t,  so the maximum length is 1.</p>
+<p>Example 3:<br>Input: s &#x3D; “abcd”, t &#x3D; “acde”, maxCost &#x3D; 0<br>Output: 1<br>Explanation: You cannot make any change, so the maximum length is 1.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>t.length &#x3D;&#x3D; s.length<br>0 &lt;&#x3D; maxCost &lt;&#x3D; 106<br>s and t consist of only lowercase English letters.</p>
+<p>尽可能使字符串相等。</p>
 <blockquote>
-<p>给你一个二进制矩阵 matrix ，它的大小为 m x n ，你可以将 matrix 中的 列 按任意顺序重新排列。<br>请你返回最优方案下将 matrix 重新排列后，全是 1 的子矩阵面积。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>类似<a href="https://shurui91.github.io/posts/3456055979.html">85题</a>，我们先从上到下记录矩阵里每一列出现的连续的 1 的个数，比如第一个例子，matrix &#x3D; [[0,0,1],[1,1,1],[1,0,1]]，从上到下记录之后，矩阵变成<br>matrix &#x3D; [<br>    [0,0,1],<br>    [1,1,2],<br>    [2,0,3]<br>]</p>
-<p>然后我们对这个矩阵<code>逐行</code>扫描，看一下如果以当前行为结尾，能组成的最大子矩阵的面积是多少。这样一来这道题就跟85题很像了。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestSubmatrix</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (matrix[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    matrix[i][j] += matrix[i - <span class="hljs-number">1</span>][j];<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            Arrays.sort(matrix[i]);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> matrix[i][j] * (n - j);<br>                res = Math.max(res, area);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+给你两个长度相同的字符串，s 和 t。
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>
+<p>将 s 中的第 i 个字符变到 t 中的第 i 个字符需要 |s[i] - t[i]| 的开销（开销可能为 0），也就是两个字符的 ASCII 码值的差的绝对值。</p>
+<p>用于变更字符串的最大预算是 maxCost。在转化字符串时，总开销应当小于等于该预算，这也意味着字符串的转化可能是不完全的。</p>
+<p>如果你可以将 s 的子字符串转化为它在 t 中对应的子字符串，则返回可以转化的最大长度。</p>
+<p>如果 s 中没有子字符串可以转化成 t 中对应的子字符串，则返回 0。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/get-equal-substrings-within-budget">https://leetcode-cn.com/problems/get-equal-substrings-within-budget</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口，而且可以用模板。模板参见 76 题。可以消耗的开销一共是 maxCost，对于每个相同位置上的字符的 ASCII 码的差值，可以通过先移动 end 指针不断消耗 maxCost，直到 maxCost &#x3D;&#x3D; 0。当 maxCost &#x3D;&#x3D; 0 的时候，可以试图移动 start 指针，过程中记录 res 的最大值即可。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">equalSubstring</span><span class="hljs-params">(String s, String t, <span class="hljs-type">int</span> maxCost)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; len) &#123;<br>            maxCost -= Math.abs(s.charAt(end) - t.charAt(end));<br>            end++;<br>            <span class="hljs-keyword">while</span> (maxCost &lt; <span class="hljs-number">0</span>) &#123;<br>                maxCost += Math.abs(s.charAt(start) - t.charAt(start));<br>                start++;<br>            &#125;<br>            res = Math.max(res, end - start);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -301,13 +304,11 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
-      
-        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
-      
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
     </div>
   
@@ -319,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1727. Largest Submatrix With Rearrangements</div>
-      <div>https://shurui91.github.io/posts/185281803.html</div>
+      <div>[LeetCode] 1208. Get Equal Substrings Within Budget</div>
+      <div>https://shurui91.github.io/posts/2802235815.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 29, 2023</div>
+          <div>February 10, 2021</div>
         </div>
       
       
@@ -364,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3543248498.html" title="[LeetCode] 2661. First Completely Painted Row or Column">
+                      <a href="/posts/3447756879.html" title="[LeetCode] 765. Couples Holding Hands">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2661. First Completely Painted Row or Column</span>
+                        <span class="hidden-mobile">[LeetCode] 765. Couples Holding Hands</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -374,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/4006849877.html" title="[LeetCode] 1685. Sum of Absolute Differences in a Sorted Array">
-                        <span class="hidden-mobile">[LeetCode] 1685. Sum of Absolute Differences in a Sorted Array</span>
+                      <a href="/posts/4252400418.html" title="[LeetCode] 1423. Maximum Points You Can Obtain from Cards">
+                        <span class="hidden-mobile">[LeetCode] 1423. Maximum Points You Can Obtain from Cards</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,8 +396,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/185281803.html';
-          this.page.identifier = '/posts/185281803.html';
+          this.page.url = 'https://shurui91.github.io/posts/2802235815.html';
+          this.page.identifier = '/posts/2802235815.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
