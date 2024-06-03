@@ -1690,6 +1690,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2486. Append Characters to String to Make Subsequence</title>
+    <link href="/posts/4051463354.html"/>
+    <url>/posts/4051463354.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two strings s and t consisting of only lowercase English letters.</p><p>Return the minimum number of characters that need to be appended to the end of s so that t becomes a subsequence of s.</p><p>A subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.</p><p>Example 1:<br>Input: s &#x3D; “coaching”, t &#x3D; “coding”<br>Output: 4<br>Explanation: Append the characters “ding” to the end of s so that s &#x3D; “coachingding”.<br>Now, t is a subsequence of s (“coachingding”).<br>It can be shown that appending any 3 characters to the end of s will never make t a subsequence.</p><p>Example 2:<br>Input: s &#x3D; “abcde”, t &#x3D; “a”<br>Output: 0<br>Explanation: t is already a subsequence of s (“abcde”).</p><p>Example 3:<br>Input: s &#x3D; “z”, t &#x3D; “abcde”<br>Output: 5<br>Explanation: Append the characters “abcde” to the end of s so that s &#x3D; “zabcde”.<br>Now, t is a subsequence of s (“zabcde”).<br>It can be shown that appending any 4 characters to the end of s will never make t a subsequence.</p><p>Constraints:<br>1 &lt;&#x3D; s.length, t.length &lt;&#x3D; 105<br>s and t consist only of lowercase English letters.</p><p>追加字符以获得子序列。</p><blockquote>给你两个仅由小写英文字母组成的字符串 s 和 t 。<p>现在需要通过向 s 末尾追加字符的方式使 t 变成 s 的一个 子序列 ，返回需要追加的最少字符数。</p><p>子序列是一个可以由其他字符串删除部分（或不删除）字符但不改变剩下字符顺序得到的字符串。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/append-characters-to-string-to-make-subsequence">https://leetcode.cn/problems/append-characters-to-string-to-make-subsequence</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是双指针。这是判断子序列的基本题，我们用两个指针 i, j 分别指向 s 和 t （长度分别为 m 和 n）并同时开始遍历。如果 t 先遍历完，说明 t 本身就是 s 的子序列；如果 s 遍历完之后发现 t 还未遍历完，那么 s 需要补足的字符个数 &#x3D; n - j，即 t 中还未遍历到的字符个数。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m) - s 的长度<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">appendCharacters</span><span class="hljs-params">(String s, String t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> t.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m &amp;&amp; j &lt; n) &#123;<br>            <span class="hljs-keyword">if</span> (s.charAt(i) == t.charAt(j)) &#123;<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (j == n) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n - j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1071. Greatest Common Divisor of Strings</title>
     <link href="/posts/3566414224.html"/>
     <url>/posts/3566414224.html</url>
