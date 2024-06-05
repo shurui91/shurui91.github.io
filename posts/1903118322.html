@@ -16,25 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+    <meta name="description" content="There are n balls on a table, each ball has a color black or white. You are given a 0-indexed binary string s of length n, where 1 and 0 represent black and white balls, respectively. In each step, yo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1002. Find Common Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/92520130.html">
+<meta property="og:title" content="[LeetCode] 2938. Separate Black and White Balls">
+<meta property="og:url" content="https://shurui91.github.io/posts/1903118322.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+<meta property="og:description" content="There are n balls on a table, each ball has a color black or white. You are given a 0-indexed binary string s of length n, where 1 and 0 represent black and white balls, respectively. In each step, yo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-31T15:45:05.000Z">
-<meta property="article:modified_time" content="2024-06-05T16:26:22.354Z">
+<meta property="article:published_time" content="2024-06-05T17:16:45.000Z">
+<meta property="article:modified_time" content="2024-06-05T17:40:03.662Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1002. Find Common Characters - CNoodle</title>
+  <title>[LeetCode] 2938. Separate Black and White Balls - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1002. Find Common Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2938. Separate Black and White Balls"></span>
           
         </div>
 
@@ -199,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-31 08:45" pubdate>
-          March 31, 2020 am
+        <time datetime="2024-06-05 10:16" pubdate>
+          June 5, 2024 am
         </time>
       </span>
     
@@ -211,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.6k words
         
       </span>
     
@@ -222,7 +223,7 @@
         
         
         
-          12 mins
+          14 mins
         
       </span>
     
@@ -259,26 +260,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1002. Find Common Characters</h1>
+            <h1 id="seo-header">[LeetCode] 2938. Separate Black and White Balls</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.</p>
-<p>Example 1:<br>Input: words &#x3D; [“bella”,”label”,”roller”]<br>Output: [“e”,”l”,”l”]</p>
-<p>Example 2:<br>Input: words &#x3D; [“cool”,”lock”,”cook”]<br>Output: [“c”,”o”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consists of lowercase English letters.</p>
-<p>查找共用字符。</p>
+                <p>There are n balls on a table, each ball has a color black or white.</p>
+<p>You are given a 0-indexed binary string s of length n, where 1 and 0 represent black and white balls, respectively.</p>
+<p>In each step, you can choose two adjacent balls and swap them.</p>
+<p>Return the minimum number of steps to group all the black balls to the right and all the white balls to the left.</p>
+<p>Example 1:<br>Input: s &#x3D; “101”<br>Output: 1<br>Explanation: We can group all the black balls to the right in the following way:</p>
+<ul>
+<li>Swap s[0] and s[1], s &#x3D; “011”.<br>Initially, 1s are not grouped together, requiring at least 1 step to group them to the right.</li>
+</ul>
+<p>Example 2:<br>Input: s &#x3D; “100”<br>Output: 2<br>Explanation: We can group all the black balls to the right in the following way:</p>
+<ul>
+<li>Swap s[0] and s[1], s &#x3D; “010”.</li>
+<li>Swap s[1] and s[2], s &#x3D; “001”.<br>It can be proven that the minimum number of steps needed is 2.</li>
+</ul>
+<p>Example 3:<br>Input: s &#x3D; “0111”<br>Output: 0<br>Explanation: All the black balls are already grouped to the right.</p>
+<p>Constraints:<br>1 &lt;&#x3D; n &#x3D;&#x3D; s.length &lt;&#x3D; 105<br>s[i] is either ‘0’ or ‘1’.</p>
+<p>区分黑球与白球。</p>
 <blockquote>
-给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。
+桌子上有 n 个球，每个球的颜色不是黑色，就是白色。
+
+<p>给你一个长度为 n 、下标从 0 开始的二进制字符串 s，其中 1 和 0 分别代表黑色和白色的球。</p>
+<p>在每一步中，你可以选择两个相邻的球并交换它们。</p>
+<p>返回「将所有黑色球都移到右侧，所有白色球都移到左侧所需的 最小步数」。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个装了单词的数组，请求出这些单词里面共同的字母，以 list 形式输出。如果有多个相同的字母也需要多次输出。</p>
-<p>思路是用 hashmap 记录 input 中第一个单词里面每个字母的出现次数，然后从第二个单词开始，也是去计算每个字母出现的次数，但是把某个字母在某个单词中出现的最少的次数加入结果集。举个例子，比如 cool 里面 o 出现了两次，但是在 lock 里面 o 只出现了一次，记录 o 的时候只记录最少的出现次数。最后遍历结果集里面每个单词，根据次数拼接成最后要输出的 list。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n) - n 个单词 * 每个单词的平均长度 m<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是追击型双指针。题目要求我们把所有的黑球（1）都移到右侧，所有白球（0）都移到左侧。同时注意交换的原则，一个黑球移到右侧的前提是同时有一个白球移到左侧，所以一个黑球如果被移动了，那么同时涉及到的白球就不要再重复计算移动次数了。</p>
+<p>题目最终的目标是让球形成类似如下这样，0 在左侧，1 在右侧。<br><code>000000011111111</code></p>
+<p>具体的做法是从左往右遍历 input 字符串，如果当前遇到的是一个白球（0），那么我要尽可能地把他往左移动。这里我需要两个指针 i 和 j，i 表示的是我当前遍历到的位置，j 表示的是下一个白球可以被移动到的位置。那么在当我遇到某一个白球的时候，这个白球移动的距离 &#x3D; i - j。每遇到一个白球我就做一次这个动作，并把这个移动的距离累加到结果里。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">commonChars</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : first.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">int</span>[] letters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cur.toCharArray()) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++) &#123;<br>                map[j] = Math.min(map[j], letters[j]);<br>            &#125;<br>        &#125;<br><br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (i + <span class="hljs-string">&#x27;a&#x27;</span>);<br>                res.add(c + <span class="hljs-string">&quot;&quot;</span>);<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">minimumSteps</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>		<span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>			<span class="hljs-type">char</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> s.charAt(i);<br>			<span class="hljs-comment">// 遇到白色</span><br>			<span class="hljs-keyword">if</span> (cur == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>				res += i - j;<br>				j++;<br>			&#125;<br>			i++;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -293,11 +310,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
+      
+        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+      
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
     </div>
   
@@ -309,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1002. Find Common Characters</div>
-      <div>https://shurui91.github.io/posts/92520130.html</div>
+      <div>[LeetCode] 2938. Separate Black and White Balls</div>
+      <div>https://shurui91.github.io/posts/1903118322.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 31, 2020</div>
+          <div>June 5, 2024</div>
         </div>
       
       
@@ -354,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3910559116.html" title="[LeetCode] 3. Longest Substring Without Repeating Characters">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 3. Longest Substring Without Repeating Characters</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/298596106.html" title="[LeetCode] 201. Bitwise AND of Numbers Range">
-                        <span class="hidden-mobile">[LeetCode] 201. Bitwise AND of Numbers Range</span>
+                      <a href="/posts/2736396816.html" title="[LeetCode] 2028. Find Missing Observations">
+                        <span class="hidden-mobile">[LeetCode] 2028. Find Missing Observations</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +398,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/92520130.html';
-          this.page.identifier = '/posts/92520130.html';
+          this.page.url = 'https://shurui91.github.io/posts/1903118322.html';
+          this.page.identifier = '/posts/1903118322.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
