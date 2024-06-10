@@ -16,25 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given the array paths, where paths[i] &#x3D; [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outg">
+    <meta name="description" content="A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. Let this ordering be represented by the integer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1436. Destination City">
-<meta property="og:url" content="https://shurui91.github.io/posts/803566732.html">
+<meta property="og:title" content="[LeetCode] 1051. Height Checker">
+<meta property="og:url" content="https://shurui91.github.io/posts/742715672.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given the array paths, where paths[i] &#x3D; [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outg">
+<meta property="og:description" content="A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. Let this ordering be represented by the integer">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-06T15:33:03.000Z">
-<meta property="article:modified_time" content="2023-12-15T23:27:52.738Z">
+<meta property="article:published_time" content="2020-10-28T10:13:58.000Z">
+<meta property="article:modified_time" content="2024-06-10T18:51:07.209Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="sort">
+<meta property="article:tag" content="bucket sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1436. Destination City - CNoodle</title>
+  <title>[LeetCode] 1051. Height Checker - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1436. Destination City"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1051. Height Checker"></span>
           
         </div>
 
@@ -199,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-10-06 08:33" pubdate>
-          October 6, 2021 am
+        <time datetime="2020-10-28 03:13" pubdate>
+          October 28, 2020 am
         </time>
       </span>
     
@@ -211,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          2.2k words
         
       </span>
     
@@ -222,7 +223,7 @@
         
         
         
-          15 mins
+          19 mins
         
       </span>
     
@@ -259,25 +260,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1436. Destination City</h1>
+            <h1 id="seo-header">[LeetCode] 1051. Height Checker</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given the array paths, where paths[i] &#x3D; [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.</p>
-<p>It is guaranteed that the graph of paths forms a line without any loop, therefore, there will be exactly one destination city.</p>
-<p>Example 1:<br>Input: paths &#x3D; [[“London”,”New York”],[“New York”,”Lima”],[“Lima”,”Sao Paulo”]]<br>Output: “Sao Paulo”<br>Explanation: Starting at “London” city you will reach “Sao Paulo” city which is the destination city. Your trip consist of: “London” -&gt; “New York” -&gt; “Lima” -&gt; “Sao Paulo”.</p>
-<p>Example 2:<br>Input: paths &#x3D; [[“B”,”C”],[“D”,”B”],[“C”,”A”]]<br>Output: “A”<br>Explanation: All possible trips are:<br>“D” -&gt; “B” -&gt; “C” -&gt; “A”.<br>“B” -&gt; “C” -&gt; “A”.<br>“C” -&gt; “A”.<br>“A”.<br>Clearly the destination city is “A”.</p>
-<p>Example 3:<br>Input: paths &#x3D; [[“A”,”Z”]]<br>Output: “Z”</p>
-<p>Constraints:<br>1 &lt;&#x3D; paths.length &lt;&#x3D; 100<br>paths[i].length &#x3D;&#x3D; 2<br>1 &lt;&#x3D; cityAi.length, cityBi.length &lt;&#x3D; 10<br>cityAi !&#x3D; cityBi<br>All strings consist of lowercase and uppercase English letters and the space character.</p>
-<p>旅行终点站。</p>
+                <p>A school is trying to take an annual photo of all the students. The students are asked to stand in a single file line in non-decreasing order by height. Let this ordering be represented by the integer array expected where expected[i] is the expected height of the ith student in line.</p>
+<p>You are given an integer array heights representing the current order that the students are standing in. Each heights[i] is the height of the ith student in line (0-indexed).</p>
+<p>Return the number of indices where heights[i] !&#x3D; expected[i].</p>
+<p>Example 1:<br>Input: heights &#x3D; [1,1,4,2,1,3]<br>Output: 3<br>Explanation:<br>heights:  [1,1,4,2,1,3]<br>expected: [1,1,1,2,3,4]<br>Indices 2, 4, and 5 do not match.</p>
+<p>Example 2:<br>Input: heights &#x3D; [5,1,2,3,4]<br>Output: 5<br>Explanation:<br>heights:  [5,1,2,3,4]<br>expected: [1,2,3,4,5]<br>All indices do not match.</p>
+<p>Example 3:<br>Input: heights &#x3D; [1,2,3,4,5]<br>Output: 0<br>Explanation:<br>heights:  [1,2,3,4,5]<br>expected: [1,2,3,4,5]<br>All indices match.</p>
+<p>Constraints:<br>1 &lt;&#x3D; heights.length &lt;&#x3D; 100<br>1 &lt;&#x3D; heights[i] &lt;&#x3D; 100</p>
+<p>高度检查器。</p>
 <blockquote>
-<p>给你一份旅游线路图，该线路图中的旅行线路用数组 paths 表示，其中 paths[i] &#x3D; [cityAi, cityBi] 表示该线路将会从 cityAi 直接前往 cityBi 。请你找出这次旅行的终点站，即没有任何可以通往其他城市的线路的城市。<br>题目数据保证线路图会形成一条不存在循环的线路，因此恰有一个旅行终点站。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/destination-city">https://leetcode-cn.com/problems/destination-city</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+学校在拍年度纪念照时，一般要求学生按照 非递减 的高度顺序排列。
+
+<p>请你返回能让所有学生以 非递减 高度排列的最小必要移动人数。</p>
+<p>注意，当一组学生被选中时，他们之间可以以任何可能的方式重新排序，而未被选中的学生应该保持不动。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/height-checker">https://leetcode-cn.com/problems/height-checker</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是哈希表。这里我们用一个哈希表把所有的 path 存下来，存的方式是hashmap&lt;key, value&gt; &#x3D; cityA, cityB。然后我们再从任意一个城市出发，看看最后到底终点站是哪个城市。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+
+
+<h2 id="思路一-排序"><a href="#思路一-排序" class="headerlink" title="思路一 - 排序"></a>思路一 - 排序</h2><p>因为题目问的是需要移动多少个人的位置，所以当排序过后，每个人就知道他们应该站在什么位置上了。此时把排序过的和未排序过的数组进行比较，有不同的，则说明需要移动。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">destCity</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; paths)</span> &#123;<br>        HashMap&lt;String, String&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (List&lt;String&gt; path : paths) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">from</span> <span class="hljs-operator">=</span> path.get(<span class="hljs-number">0</span>);<br>            <span class="hljs-type">String</span> <span class="hljs-variable">to</span> <span class="hljs-operator">=</span> path.get(<span class="hljs-number">1</span>);<br>            map.put(from, to);<br>        &#125;<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">city</span> <span class="hljs-operator">=</span> paths.get(<span class="hljs-number">0</span>).get(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">while</span> (map.containsKey(city)) &#123;<br>            city = map.get(city);<br>        &#125;<br>        <span class="hljs-keyword">return</span> city;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">heightChecker</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span>[] sorted = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[len];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            sorted[i] = heights[i];<br>        &#125;<br>        Arrays.sort(sorted);<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            <span class="hljs-keyword">if</span> (sorted[i] != heights[i]) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路二-桶排序"><a href="#思路二-桶排序" class="headerlink" title="思路二 - 桶排序"></a>思路二 - 桶排序</h2><p>桶排序的做法类似，但是更高效。因为身高的数据范围是 [1, 100]，所以我们创建 101 个桶，表示身高从 0 到 100 每个不同身高分别有多少人。第一次遍历数组，记录不同身高分别有多少人。再次遍历数组，因为需要满足排列是非递减，把桶中的元素按照桶的下标从小到大一个个放到 expected 数组内，然后再比较 expected 数组和 heights 数组，有不同的，则说明需要移动。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">heightChecker</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">101</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> height : heights) &#123;<br>            map[height]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span>[] expected = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                expected[index++] = i;<br>                map[i]--;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">diff</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (expected[i] != heights[i]) &#123;<br>                diff++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> diff;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -294,9 +308,11 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
+      
+        <a href="/tags/bucket-sort/" class="print-no-link">#bucket sort</a>
       
     </div>
   
@@ -308,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1436. Destination City</div>
-      <div>https://shurui91.github.io/posts/803566732.html</div>
+      <div>[LeetCode] 1051. Height Checker</div>
+      <div>https://shurui91.github.io/posts/742715672.html</div>
     </div>
     <div class="license-meta">
       
@@ -321,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 6, 2021</div>
+          <div>October 28, 2020</div>
         </div>
       
       
@@ -353,9 +369,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2794589433.html" title="[LeetCode] 2000. Reverse Prefix of Word">
+                      <a href="/posts/2214751183.html" title="[LeetCode] 524. Longest Word in Dictionary through Deleting">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2000. Reverse Prefix of Word</span>
+                        <span class="hidden-mobile">[LeetCode] 524. Longest Word in Dictionary through Deleting</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -363,8 +379,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2013378145.html" title="[LeetCode] 1053. Previous Permutation With One Swap">
-                        <span class="hidden-mobile">[LeetCode] 1053. Previous Permutation With One Swap</span>
+                      <a href="/posts/3870056761.html" title="[LeetCode] 948. Bag of Tokens">
+                        <span class="hidden-mobile">[LeetCode] 948. Bag of Tokens</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -384,8 +400,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/803566732.html';
-          this.page.identifier = '/posts/803566732.html';
+          this.page.url = 'https://shurui91.github.io/posts/742715672.html';
+          this.page.identifier = '/posts/742715672.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
