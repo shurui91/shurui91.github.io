@@ -16,27 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+    <meta name="description" content="Given two arrays arr1 and arr2, the elements of arr2 are distinct, and all elements in arr2 are also in arr1. Sort the elements of arr1 such that the relative ordering of items in arr1 are the same as">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique">
-<meta property="og:url" content="https://shurui91.github.io/posts/3172184168.html">
+<meta property="og:title" content="[LeetCode] 1122. Relative Sort Array">
+<meta property="og:url" content="https://shurui91.github.io/posts/3311195696.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+<meta property="og:description" content="Given two arrays arr1 and arr2, the elements of arr2 are distinct, and all elements in arr2 are also in arr1. Sort the elements of arr1 such that the relative ordering of items in arr1 are the same as">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-21T23:00:43.000Z">
-<meta property="article:modified_time" content="2023-11-21T23:13:46.158Z">
+<meta property="article:published_time" content="2020-03-11T21:28:36.000Z">
+<meta property="article:modified_time" content="2024-06-12T03:37:29.173Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="string">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="counting sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique - CNoodle</title>
+  <title>[LeetCode] 1122. Relative Sort Array - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1122. Relative Sort Array"></span>
           
         </div>
 
@@ -201,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-21 15:00" pubdate>
-          November 21, 2023 pm
+        <time datetime="2020-03-11 14:28" pubdate>
+          March 11, 2020 pm
         </time>
       </span>
     
@@ -213,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          1.9k words
         
       </span>
     
@@ -224,7 +223,7 @@
         
         
         
-          14 mins
+          16 mins
         
       </span>
     
@@ -261,27 +260,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</h1>
+            <h1 id="seo-header">[LeetCode] 1122. Relative Sort Array</h1>
             
             
               <div class="markdown-body">
                 
-                <p>A string s is called good if there are no two different characters in s that have the same frequency.</p>
-<p>Given a string s, return the minimum number of characters you need to delete to make s good.</p>
-<p>The frequency of a character in a string is the number of times it appears in the string. For example, in the string “aab”, the frequency of ‘a’ is 2, while the frequency of ‘b’ is 1.</p>
-<p>Example 1:<br>Input: s &#x3D; “aab”<br>Output: 0<br>Explanation: s is already good.</p>
-<p>Example 2:<br>Input: s &#x3D; “aaabbbcc”<br>Output: 2<br>Explanation: You can delete two ‘b’s resulting in the good string “aaabcc”.<br>Another way it to delete one ‘b’ and one ‘c’ resulting in the good string “aaabbc”.</p>
-<p>Example 3:<br>Input: s &#x3D; “ceabaacb”<br>Output: 2<br>Explanation: You can delete both ‘c’s resulting in the good string “eabaab”.<br>Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s contains only lowercase English letters.</p>
-<p>字符频次唯一的最小删除次数。</p>
+                <p>Given two arrays arr1 and arr2, the elements of arr2 are distinct, and all elements in arr2 are also in arr1.</p>
+<p>Sort the elements of arr1 such that the relative ordering of items in arr1 are the same as in arr2. Elements that do not appear in arr2 should be placed at the end of arr1 in ascending order.</p>
+<p>Example 1:<br>Input: arr1 &#x3D; [2,3,1,3,2,4,6,7,9,2,19], arr2 &#x3D; [2,1,4,3,9,6]<br>Output: [2,2,2,1,4,3,3,9,6,7,19]</p>
+<p>Example 2:<br>Input: arr1 &#x3D; [28,6,22,8,44,17], arr2 &#x3D; [22,28,8,6]<br>Output: [22,28,8,6,17,44]</p>
+<p>Constraints:<br>1 &lt;&#x3D; arr1.length, arr2.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; arr1[i], arr2[i] &lt;&#x3D; 1000<br>All the elements of arr2 are distinct.<br>Each arr2[i] is in arr1.</p>
+<p>数组的相对排序。</p>
 <blockquote>
-<p>如果字符串 s 中 不存在 两个不同字符 频次 相同的情况，就称 s 是 优质字符串 。<br>给你一个字符串 s，返回使 s 成为 优质字符串 需要删除的 最小 字符数。<br>字符串中字符的 频次 是该字符在字符串中的出现次数。例如，在字符串 “aab” 中，’a’ 的频次是 2，而 ‘b’ 的频次是 1 。</p>
+给你两个数组，arr1 和 arr2，arr2 中的元素各不相同，arr2 中的每个元素都出现在 arr1 中。
+
+<p>对 arr1 中的元素进行排序，使 arr1 中项的相对顺序和 arr2 中的相对顺序相同。未在 arr2 中出现过的元素需要按照升序放在 arr1 的末尾。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历数组的时候，用一个长度为26的 <code>int[] map</code> 数组记录 input 字符串中每个不同字母的出现次数。</p>
-<p>接着我们再创建一个 hashset，去遍历这个长度为 26 的 int 数组，对于当前字母的出现次数 map[i]，如果他在 hashset 中出现过，那么他就不是一个 unique 的出现次数，那么我们就把这个出现次数减一，直到他变成一个 unique 的出现次数，再加入 hashset。</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是用 counting sort（计数排序）做，用一个长度为 1001（Java需要定义长度）的数组（bucket）记录每个数字在 arr1 中出现的次数，然后根据数字在 arr2 中出现与否来改动arr1，使得在 arr2 中有的数字在 arr1 中能按照他们的相对顺序重新排列；再次扫描 bucket，把 arr1 中有但是 arr2 中没有的元素添加到 arr1 的末端。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletions</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] &gt; <span class="hljs-number">0</span> &amp;&amp; set.contains(map[i])) &#123;<br>                map[i]--;<br>                count++;<br>            &#125;<br>            set.add(map[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] relativeSortArray(<span class="hljs-type">int</span>[] arr1, <span class="hljs-type">int</span>[] arr2) &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1001</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr1) &#123;<br>            map[num]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr2) &#123;<br>            <span class="hljs-keyword">while</span> (map[num] != <span class="hljs-number">0</span>) &#123;<br>                arr1[index++] = num;<br>                map[num]--;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                arr1[index++] = i;<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr1;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">arr1</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">arr2</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> relativeSortArray = <span class="hljs-keyword">function</span> (<span class="hljs-params">arr1, arr2</span>) &#123;<br>    <span class="hljs-keyword">let</span> bucket = &#123;&#125;;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr1.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">if</span> (bucket[arr1[i]]) &#123;<br>            bucket[arr1[i]]++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            bucket[arr1[i]] = <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; arr2.<span class="hljs-property">length</span>; j++) &#123;<br>        <span class="hljs-keyword">while</span> (bucket[arr2[j]]) &#123;<br>            res.<span class="hljs-title function_">push</span>(arr2[j]);<br>            bucket[arr2[j]]--;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> bucket) &#123;<br>        <span class="hljs-keyword">while</span> (bucket[key]) &#123;<br>            res.<span class="hljs-title function_">push</span>(key);<br>            bucket[key]--;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -295,15 +299,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
       
     </div>
   
@@ -315,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</div>
-      <div>https://shurui91.github.io/posts/3172184168.html</div>
+      <div>[LeetCode] 1122. Relative Sort Array</div>
+      <div>https://shurui91.github.io/posts/3311195696.html</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 21, 2023</div>
+          <div>March 11, 2020</div>
         </div>
       
       
@@ -360,9 +362,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2208021994.html" title="[LeetCode] 1410. HTML Entity Parser">
+                      <a href="/posts/2990643160.html" title="[LeetCode] 572. Subtree of Another Tree">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1410. HTML Entity Parser</span>
+                        <span class="hidden-mobile">[LeetCode] 572. Subtree of Another Tree</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -370,8 +372,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
+                      <a href="/posts/3816757317.html" title="[LeetCode] 236. Lowest Common Ancestor of a Binary Tree">
+                        <span class="hidden-mobile">[LeetCode] 236. Lowest Common Ancestor of a Binary Tree</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -391,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3172184168.html';
-          this.page.identifier = '/posts/3172184168.html';
+          this.page.url = 'https://shurui91.github.io/posts/3311195696.html';
+          this.page.identifier = '/posts/3311195696.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
