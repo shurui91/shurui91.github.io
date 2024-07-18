@@ -16,29 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a 2D integer array descriptions where descriptions[i] &#x3D; [parenti, childi, isLefti] indicates that parenti is the parent of childi in a binary tree of unique values. Furthermore,If i">
+    <meta name="description" content="Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order. Example 1:Input: nums &#x3D; [1,1,1,2,2,3], k &#x3D; 2Output: [1,2] Example 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2196. Create Binary Tree From Descriptions">
-<meta property="og:url" content="https://shurui91.github.io/posts/3080780969.html">
+<meta property="og:title" content="[LeetCode] 347. Top K Frequent Elements">
+<meta property="og:url" content="https://shurui91.github.io/posts/445851025.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a 2D integer array descriptions where descriptions[i] &#x3D; [parenti, childi, isLefti] indicates that parenti is the parent of childi in a binary tree of unique values. Furthermore,If i">
+<meta property="og:description" content="Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order. Example 1:Input: nums &#x3D; [1,1,1,2,2,3], k &#x3D; 2Output: [1,2] Example 2">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/02/09/example1drawio.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/02/09/example2drawio.png">
-<meta property="article:published_time" content="2024-07-16T16:29:55.000Z">
-<meta property="article:modified_time" content="2024-07-16T16:39:30.098Z">
+<meta property="article:published_time" content="2020-03-08T11:58:37.000Z">
+<meta property="article:modified_time" content="2024-07-18T18:26:25.723Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
 <meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
+<meta property="article:tag" content="bucket sort">
+<meta property="article:tag" content="heap">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2022/02/09/example1drawio.png">
   
   
   
-  <title>[LeetCode] 2196. Create Binary Tree From Descriptions - CNoodle</title>
+  <title>[LeetCode] 347. Top K Frequent Elements - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2196. Create Binary Tree From Descriptions"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 347. Top K Frequent Elements"></span>
           
         </div>
 
@@ -203,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-16 09:29" pubdate>
-          July 16, 2024 am
+        <time datetime="2020-03-08 04:58" pubdate>
+          March 8, 2020 am
         </time>
       </span>
     
@@ -215,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k words
+          1.5k words
         
       </span>
     
@@ -226,7 +224,7 @@
         
         
         
-          23 mins
+          13 mins
         
       </span>
     
@@ -263,30 +261,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2196. Create Binary Tree From Descriptions</h1>
+            <h1 id="seo-header">[LeetCode] 347. Top K Frequent Elements</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a 2D integer array descriptions where descriptions[i] &#x3D; [parenti, childi, isLefti] indicates that parenti is the parent of childi in a binary tree of unique values. Furthermore,<br>If isLefti &#x3D;&#x3D; 1, then childi is the left child of parenti.<br>If isLefti &#x3D;&#x3D; 0, then childi is the right child of parenti.<br>Construct the binary tree described by descriptions and return its root.</p>
-<p>The test cases will be generated such that the binary tree is valid.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/02/09/example1drawio.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: descriptions &#x3D; [[20,15,1],[20,17,0],[50,20,1],[50,80,0],[80,19,1]]<br>Output: [50,20,80,15,17,19]<br>Explanation: The root node is the node with value 50 since it has no parent.<br>The resulting binary tree is shown in the diagram.</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/02/09/example2drawio.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: descriptions &#x3D; [[1,2,1],[2,3,0],[3,4,1]]<br>Output: [1,2,null,null,3,4]<br>Explanation: The root node is the node with value 1 since it has no parent.<br>The resulting binary tree is shown in the diagram.</p>
-<p>Constraints:<br>1 &lt;&#x3D; descriptions.length &lt;&#x3D; 104<br>descriptions[i].length &#x3D;&#x3D; 3<br>1 &lt;&#x3D; parent, child &lt;&#x3D; 105<br>0 &lt;&#x3D; isLeft &lt;&#x3D; 1<br>The binary tree described by descriptions is valid.</p>
-<p>根据描述创建二叉树。</p>
+                <p>Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,1,1,2,2,3], k &#x3D; 2<br>Output: [1,2]</p>
+<p>Example 2:<br>Input: nums &#x3D; [1], k &#x3D; 1<br>Output: [1]</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104<br>k is in the range [1, the number of unique elements in the array].<br>It is guaranteed that the answer is unique.</p>
+<p>Follow up: Your algorithm’s time complexity must be better than O(n log n), where n is the array’s size.</p>
+<p>前 K 个高频元素。</p>
 <blockquote>
-给你一个二维整数数组 descriptions ，其中 descriptions[i] = [parent, child, isLeft] 表示 parent 是 child 在 二叉树 中的 父节点，二叉树中各节点的值 互不相同 。此外：
-
-<p>如果 isLeft &#x3D;&#x3D; 1 ，那么 child 就是 parent 的左子节点。<br>如果 isLeft &#x3D;&#x3D; 0 ，那么 child 就是 parent 的右子节点。<br>请你根据 descriptions 的描述来构造二叉树并返回其 根节点 。</p>
-<p>测试用例会保证可以构造出 有效 的二叉树。</p>
+给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是哈希表 + 模拟。遍历 input 数组，因为题目说了二叉树中各节点的值互不相同，所以这里我们可以用一个哈希表记录&lt;node val, TreeNode&gt;的关系。因为每个 description 展示的是两个 node 之间的关系，所以在用哈希表存好&lt;node val, TreeNode&gt;之后，我们还可以连接这两个节点，以保存节点之间的父子关系。</p>
-<p>这里同时我用了一个 visited 数组，记录所有遍历到的 child 节点。最后我再次遍历这个 visited 数组的时候，唯一一个没有被遍历到的值就是根节点的值 root.val，所以最后返回的是 map.get(root.val) 就是根节点。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>前 K 个 XX 的题型思路大多不是 pq 就是 bucket sort。题目要求时间复杂度必须优于 O(nlogn)。<br>因为题目有时间复杂度的要求所以只能是 bucket sort 桶排序的思想做。</p>
+<p>解释一下思路，既然是桶排序，所以需要将出现频率一样的元素放到同一个桶里面，所以这里会用到一个 hashmap 记录数字和他们各自出现频率（key:value）。接着就需要根据频率大小，挑出前 K 个频率最大的元素。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - 题目要求<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">createBinaryTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] descriptions)</span> &#123;<br>		HashMap&lt;Integer, TreeNode&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>		<span class="hljs-type">int</span>[] visited = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">100001</span>];<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; descriptions.length; i++) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">parent</span> <span class="hljs-operator">=</span> descriptions[i][<span class="hljs-number">0</span>];<br>			<span class="hljs-type">int</span> <span class="hljs-variable">child</span> <span class="hljs-operator">=</span> descriptions[i][<span class="hljs-number">1</span>];<br>			<span class="hljs-type">int</span> <span class="hljs-variable">isLeft</span> <span class="hljs-operator">=</span> descriptions[i][<span class="hljs-number">2</span>];<br>			<span class="hljs-keyword">if</span> (!map.containsKey(parent)) &#123;<br>				<span class="hljs-type">TreeNode</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(parent);<br>				map.put(parent, node);<br>			&#125;<br>			<span class="hljs-keyword">if</span> (!map.containsKey(child)) &#123;<br>				<span class="hljs-type">TreeNode</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(child);<br>				map.put(child, node);<br>			&#125;<br>			<br>			<span class="hljs-comment">// build parent, child relationship</span><br>			<span class="hljs-type">TreeNode</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> map.get(parent);<br>			<span class="hljs-type">TreeNode</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> map.get(child);<br>			<span class="hljs-comment">// visited数组记录所有遍历过的child node</span><br>			visited[child] = <span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">if</span> (isLeft == <span class="hljs-number">1</span>) &#123;<br>				p.left = c;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				p.right = c;<br>			&#125;<br>		&#125;<br><br>		<span class="hljs-type">TreeNode</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>();<br>		<span class="hljs-keyword">for</span> (Integer i : map.keySet()) &#123;<br>			<span class="hljs-keyword">if</span> (visited[i] == <span class="hljs-number">0</span>) &#123;<br>				root = map.get(i);<br>				<span class="hljs-keyword">return</span> root;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] topKFrequent(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k) &#123;<br>		<span class="hljs-comment">// 记录不同元素分别出现的个数</span><br>		HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>			map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>		&#125;<br><br>		<span class="hljs-comment">// bucket sort</span><br>		List&lt;Integer&gt;[] bucket = <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>[nums.length + <span class="hljs-number">1</span>];<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> key : map.keySet()) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">freq</span> <span class="hljs-operator">=</span> map.get(key);<br>			<span class="hljs-comment">// 把出现次数相同的元素放在同一个桶里</span><br>			<span class="hljs-keyword">if</span> (bucket[freq] == <span class="hljs-literal">null</span>) &#123;<br>				bucket[freq] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>			&#125;<br>			bucket[freq].add(key);<br>		&#125;<br><br>		<span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>		<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-comment">// 从出现次数大的桶开始</span><br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> bucket.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt; k; i--) &#123;<br>			<span class="hljs-keyword">if</span> (bucket[i] != <span class="hljs-literal">null</span>) &#123;<br>				<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : bucket[i]) &#123;<br>					res[index++] = num;<br>					<span class="hljs-keyword">if</span> (index == k) &#123;<br>						<span class="hljs-keyword">break</span>;<br>					&#125;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -307,7 +302,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
+        <a href="/tags/bucket-sort/" class="print-no-link">#bucket sort</a>
+      
+        <a href="/tags/heap/" class="print-no-link">#heap</a>
       
     </div>
   
@@ -319,8 +316,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2196. Create Binary Tree From Descriptions</div>
-      <div>https://shurui91.github.io/posts/3080780969.html</div>
+      <div>[LeetCode] 347. Top K Frequent Elements</div>
+      <div>https://shurui91.github.io/posts/445851025.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +329,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 16, 2024</div>
+          <div>March 8, 2020</div>
         </div>
       
       
@@ -364,12 +361,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/3054890269.html" title="[LeetCode] 235. Lowest Common Ancestor of a Binary Search Tree">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[LeetCode] 235. Lowest Common Ancestor of a Binary Search Tree</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1903118322.html" title="[LeetCode] 2938. Separate Black and White Balls">
-                        <span class="hidden-mobile">[LeetCode] 2938. Separate Black and White Balls</span>
+                      <a href="/posts/479904417.html" title="[LeetCode] 225. Implement Stack using Queues">
+                        <span class="hidden-mobile">[LeetCode] 225. Implement Stack using Queues</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,8 +392,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3080780969.html';
-          this.page.identifier = '/posts/3080780969.html';
+          this.page.url = 'https://shurui91.github.io/posts/445851025.html';
+          this.page.identifier = '/posts/445851025.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
