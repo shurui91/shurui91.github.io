@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 1380. Lucky Numbers in a Matrix</title>
+    <link href="/posts/4020803870.html"/>
+    <url>/posts/4020803870.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order.</p><p>A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.</p><p>Example 1:<br>Input: matrix &#x3D; [[3,7,8],[9,11,13],[15,16,17]]<br>Output: [15]<br>Explanation: 15 is the only lucky number since it is the minimum in its row and the maximum in its column.</p><p>Example 2:<br>Input: matrix &#x3D; [[1,10,4,2],[9,3,8,7],[15,16,17,12]]<br>Output: [12]<br>Explanation: 12 is the only lucky number since it is the minimum in its row and the maximum in its column.</p><p>Example 3:<br>Input: matrix &#x3D; [[7,8],[1,2]]<br>Output: [7]<br>Explanation: 7 is the only lucky number since it is the minimum in its row and the maximum in its column.</p><p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; n, m &lt;&#x3D; 50<br>1 &lt;&#x3D; matrix[i][j] &lt;&#x3D; 105.<br>All elements in the matrix are distinct.</p><p>矩阵中的幸运数。</p><blockquote>给你一个 m * n 的矩阵，矩阵中的数字 各不相同 。请你按 任意 顺序返回矩阵中的所有幸运数。<p>幸运数 是指矩阵中满足同时下列两个条件的元素：</p><ul><li>在同一行的所有元素中最小</li><li>在同一列的所有元素中最大</blockquote></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道二维矩阵的基础题，正常遍历这个二维数组。然后我们需要用两个一维数组分别记录每一行的最大值和每一列的最大值。接着我们再次遍历每一行的最大值和每一列的最大值，如果某一行的最大值恰巧是某一列的最小值，则把这个值加入结果集。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(m + n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">luckyNumbers</span> <span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        Arrays.fill(rows, Integer.MAX_VALUE);<br>        <span class="hljs-type">int</span>[] cols = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(cols, Integer.MIN_VALUE);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                rows[i] = Math.min(rows[i], val);<br>                cols[j] = Math.max(cols[j], val);<br>            &#125;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                <span class="hljs-keyword">if</span> (rows[i] == cur &amp;&amp; cols[j] == cur) &#123;<br>                    res.add(cur);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>matrix</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3096. Minimum Levels to Gain More Points</title>
     <link href="/posts/97181666.html"/>
     <url>/posts/97181666.html</url>
@@ -236,9 +261,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -417,9 +442,9 @@
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -577,9 +602,9 @@
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -799,9 +824,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1057,9 +1082,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -1311,9 +1336,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
@@ -1494,9 +1519,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -1652,9 +1677,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -1758,9 +1783,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1918,9 +1943,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
       <tag>recursion</tag>
       
@@ -1976,9 +2001,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -2167,9 +2192,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2481,9 +2506,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sliding window</tag>
       
@@ -2591,9 +2616,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -2645,9 +2670,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3088,9 +3113,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3117,9 +3142,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3169,9 +3194,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -3194,9 +3219,9 @@
       
       <tag>java</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>enumeration</tag>
       
@@ -3651,9 +3676,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4627,9 +4652,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -4683,9 +4708,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4737,9 +4762,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>preorder</tag>
       
@@ -4768,9 +4793,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4795,9 +4820,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     

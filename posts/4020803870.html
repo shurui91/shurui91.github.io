@@ -16,31 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+    <meta name="description" content="Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order. A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 513. Find Bottom Left Tree Value">
-<meta property="og:url" content="https://shurui91.github.io/posts/1856795069.html">
+<meta property="og:title" content="[LeetCode] 1380. Lucky Numbers in a Matrix">
+<meta property="og:url" content="https://shurui91.github.io/posts/4020803870.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+<meta property="og:description" content="Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order. A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg">
-<meta property="article:published_time" content="2020-01-14T09:44:10.000Z">
-<meta property="article:modified_time" content="2024-02-28T17:47:31.610Z">
+<meta property="article:published_time" content="2024-07-19T05:05:57.000Z">
+<meta property="article:modified_time" content="2024-07-19T05:12:24.189Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="bfs">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="preorder">
+<meta property="article:tag" content="matrix">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
   
   
   
-  <title>[LeetCode] 513. Find Bottom Left Tree Value - CNoodle</title>
+  <title>[LeetCode] 1380. Lucky Numbers in a Matrix - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 513. Find Bottom Left Tree Value"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1380. Lucky Numbers in a Matrix"></span>
           
         </div>
 
@@ -205,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-14 01:44" pubdate>
-          January 14, 2020 am
+        <time datetime="2024-07-18 22:05" pubdate>
+          July 18, 2024 pm
         </time>
       </span>
     
@@ -217,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          1.8k words
         
       </span>
     
@@ -228,7 +222,7 @@
         
         
         
-          21 mins
+          15 mins
         
       </span>
     
@@ -265,31 +259,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 513. Find Bottom Left Tree Value</h1>
+            <h1 id="seo-header">[LeetCode] 1380. Lucky Numbers in a Matrix</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, return the leftmost value in the last row of the tree.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [2,1,3]<br>Output: 1</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]<br>Output: 7</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 104].<br>-231 &lt;&#x3D; Node.val &lt;&#x3D; 231 - 1</p>
-<p>找树左下角的值。</p>
+                <p>Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order.</p>
+<p>A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.</p>
+<p>Example 1:<br>Input: matrix &#x3D; [[3,7,8],[9,11,13],[15,16,17]]<br>Output: [15]<br>Explanation: 15 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
+<p>Example 2:<br>Input: matrix &#x3D; [[1,10,4,2],[9,3,8,7],[15,16,17,12]]<br>Output: [12]<br>Explanation: 12 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
+<p>Example 3:<br>Input: matrix &#x3D; [[7,8],[1,2]]<br>Output: [7]<br>Explanation: 7 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
+<p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; n, m &lt;&#x3D; 50<br>1 &lt;&#x3D; matrix[i][j] &lt;&#x3D; 105.<br>All elements in the matrix are distinct.</p>
+<p>矩阵中的幸运数。</p>
 <blockquote>
-<p>给定一个二叉树的 根节点 root，请找出该二叉树的 最底层 最左边 节点的值。<br>假设二叉树中至少有一个节点。</p>
-</blockquote>
-<h2 id="思路-BFS"><a href="#思路-BFS" class="headerlink" title="思路 - BFS"></a>思路 - BFS</h2><p>首先 BFS 比较直观，只要按层序遍历的做法一层层把 node 塞进 queue。当遍历到最底层的时候，输出第一个塞进去的节点值即可。注意每层节点在塞入 queue 的时候应该是先塞右孩子再塞左孩子，原因是BFS的解法不看当前遍历到了第几层，只能通过这种方式才能保证最底层最靠左的叶子节点是最后被塞入 queue 的。如果按照第一个例子跑一遍，结果就是2 - 3 - 1而不是2 - 1 - 3.</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+给你一个 m * n 的矩阵，矩阵中的数字 各不相同 。请你按 任意 顺序返回矩阵中的所有幸运数。
+
+<p>幸运数 是指矩阵中满足同时下列两个条件的元素：</p>
+<ul>
+<li>在同一行的所有元素中最小</li>
+<li>在同一列的所有元素中最大</blockquote></li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道二维矩阵的基础题，正常遍历这个二维数组。然后我们需要用两个一维数组分别记录每一行的最大值和每一列的最大值。接着我们再次遍历每一行的最大值和每一列的最大值，如果某一行的最大值恰巧是某一列的最小值，则把这个值加入结果集。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(m + n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(root);<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.poll();<br>            res = cur.val;<br>            <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.right);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.left);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findBottomLeftValue = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> res = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">let</span> queue = [root];<br>    <span class="hljs-keyword">while</span> (queue.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = queue.<span class="hljs-title function_">shift</span>();<br>        res = cur.<span class="hljs-property">val</span>;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">right</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">right</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">left</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">left</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="思路-DFS"><a href="#思路-DFS" class="headerlink" title="思路 - DFS"></a>思路 - DFS</h2><p>用DFS做的思路就稍微复杂一些。DFS 的做法会用到先序遍历，同时我们需要两个变量，height 记录当前遍历到的节点的深度，depth 记录当前遍历到的最大深度。当我们遍历到某个节点的时候，如果当前这个节点的深度 height 小于 depth，则说明当前这个节点一定不在最深层；否则这个节点是在最深层。同时因为我们是先遍历左子树的关系，所以当我们往某个左子树上走的时候，会记录第一个 height 被更新的左子树，这样深度最大的左孩子就会被记录下来了。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node. public class TreeNode &#123; int val; TreeNode</span><br><span class="hljs-comment"> * left; TreeNode right; TreeNode(int x) &#123; val = x; &#125; &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        helper(root, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (height &lt; depth) &#123;<br>            res = root.val;<br>            height = dpeth;<br>        &#125;<br>        helper(root.left, depth + <span class="hljs-number">1</span>);<br>        helper(root.right, depth + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">luckyNumbers</span> <span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        Arrays.fill(rows, Integer.MAX_VALUE);<br>        <span class="hljs-type">int</span>[] cols = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(cols, Integer.MIN_VALUE);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                rows[i] = Math.min(rows[i], val);<br>                cols[j] = Math.max(cols[j], val);<br>            &#125;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                <span class="hljs-keyword">if</span> (rows[i] == cur &amp;&amp; cols[j] == cur) &#123;<br>                    res.add(cur);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -304,17 +297,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
+        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
       
     </div>
   
@@ -326,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 513. Find Bottom Left Tree Value</div>
-      <div>https://shurui91.github.io/posts/1856795069.html</div>
+      <div>[LeetCode] 1380. Lucky Numbers in a Matrix</div>
+      <div>https://shurui91.github.io/posts/4020803870.html</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 14, 2020</div>
+          <div>July 18, 2024</div>
         </div>
       
       
@@ -371,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3961220199.html" title="[LeetCode] 506. Relative Ranks">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 506. Relative Ranks</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3757411780.html" title="[LeetCode] 102. Binary Tree Level Order Traversal">
-                        <span class="hidden-mobile">[LeetCode] 102. Binary Tree Level Order Traversal</span>
+                      <a href="/posts/97181666.html" title="[LeetCode] 3096. Minimum Levels to Gain More Points">
+                        <span class="hidden-mobile">[LeetCode] 3096. Minimum Levels to Gain More Points</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,8 +383,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1856795069.html';
-          this.page.identifier = '/posts/1856795069.html';
+          this.page.url = 'https://shurui91.github.io/posts/4020803870.html';
+          this.page.identifier = '/posts/4020803870.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
