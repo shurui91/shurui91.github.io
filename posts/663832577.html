@@ -16,31 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+    <meta name="description" content="Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array. Example 1:Input: data &#x3D; [1,0,1,0,1]Output: 1Explan">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 513. Find Bottom Left Tree Value">
-<meta property="og:url" content="https://shurui91.github.io/posts/1856795069.html">
+<meta property="og:title" content="[LeetCode] 1151. Minimum Swaps to Group All 1s Together">
+<meta property="og:url" content="https://shurui91.github.io/posts/663832577.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, return the leftmost value in the last row of the tree. Example 1:Input: root &#x3D; [2,1,3]Output: 1 Example 2:Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]Output:">
+<meta property="og:description" content="Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array. Example 1:Input: data &#x3D; [1,0,1,0,1]Output: 1Explan">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg">
-<meta property="article:published_time" content="2020-01-14T09:44:10.000Z">
-<meta property="article:modified_time" content="2024-02-28T17:47:31.610Z">
+<meta property="article:published_time" content="2021-03-11T11:04:05.000Z">
+<meta property="article:modified_time" content="2024-08-03T18:01:26.083Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="bfs">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="preorder">
+<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="sliding window with fixed size">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg">
   
   
   
-  <title>[LeetCode] 513. Find Bottom Left Tree Value - CNoodle</title>
+  <title>[LeetCode] 1151. Minimum Swaps to Group All 1s Together - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 513. Find Bottom Left Tree Value"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1151. Minimum Swaps to Group All 1s Together"></span>
           
         </div>
 
@@ -205,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-14 01:44" pubdate>
-          January 14, 2020 am
+        <time datetime="2021-03-11 03:04" pubdate>
+          March 11, 2021 am
         </time>
       </span>
     
@@ -217,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          2.1k words
         
       </span>
     
@@ -228,7 +224,7 @@
         
         
         
-          21 mins
+          18 mins
         
       </span>
     
@@ -265,31 +261,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 513. Find Bottom Left Tree Value</h1>
+            <h1 id="seo-header">[LeetCode] 1151. Minimum Swaps to Group All 1s Together</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, return the leftmost value in the last row of the tree.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [2,1,3]<br>Output: 1</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/14/tree2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,2,3,4,null,5,6,null,null,7]<br>Output: 7</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 104].<br>-231 &lt;&#x3D; Node.val &lt;&#x3D; 231 - 1</p>
-<p>找树左下角的值。</p>
-<blockquote>
-<p>给定一个二叉树的 根节点 root，请找出该二叉树的 最底层 最左边 节点的值。<br>假设二叉树中至少有一个节点。</p>
-</blockquote>
-<h2 id="思路-BFS"><a href="#思路-BFS" class="headerlink" title="思路 - BFS"></a>思路 - BFS</h2><p>首先 BFS 比较直观，只要按层序遍历的做法一层层把 node 塞进 queue。当遍历到最底层的时候，输出第一个塞进去的节点值即可。注意每层节点在塞入 queue 的时候应该是先塞右孩子再塞左孩子，原因是BFS的解法不看当前遍历到了第几层，只能通过这种方式才能保证最底层最靠左的叶子节点是最后被塞入 queue 的。如果按照第一个例子跑一遍，结果就是2 - 3 - 1而不是2 - 1 - 3.</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(root);<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.poll();<br>            res = cur.val;<br>            <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.right);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>                queue.offer(cur.left);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array.</p>
+<p>Example 1:<br>Input: data &#x3D; [1,0,1,0,1]<br>Output: 1<br>Explanation: There are 3 ways to group all 1’s together:<br>[1,1,1,0,0] using 1 swap.<br>[0,1,1,1,0] using 2 swaps.<br>[0,0,1,1,1] using 1 swap.<br>The minimum is 1.</p>
+<p>Example 2:<br>Input: data &#x3D; [0,0,0,1,0]<br>Output: 0<br>Explanation: Since there is only one 1 in the array, no swaps are needed.</p>
+<p>Example 3:<br>Input: data &#x3D; [1,0,1,0,1,0,0,1,1,0,1]<br>Output: 3<br>Explanation: One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].</p>
+<p>Constraints:<br>1 &lt;&#x3D; data.length &lt;&#x3D; 105<br>data[i] is either 0 or 1.</p>
+<p>最少交换次数来组合所有的 1。</p>
+<p>给出一个二进制数组 data，你需要通过交换位置，将数组中所有的 1 组合到一起，并返回所有可能中所需最少的交换次数。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题问的是 swap 的次数，注意 swap 的策略是有好坏的，这也就是为什么例子一有三种 swap 的结果但是这三种策略的代价是不一样的。我这里提供一个滑动窗口的思路。这道题前缀和也能做，日后有时间我再补充。注意这道题的滑动窗口尺寸是固定的。滑动窗口的尺寸就是 1 的个数。</p>
+<p>首先我们用一个变量 ones 记录 input 数组中一共有多少个 1。然后我们用滑动窗口的模板开始扫描 input 数组，当 end 指针遇到 1 的时候，count++；当 end 和 start 两个指针的距离 &#x3D;&#x3D; ones 的时候，此时我们看一下 end 和 start 之间有几个 1，此时 ones 和 count 的差值就是需要 swap 的次数。遍历整个数组，找到全局最小的 swap 次数即可。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d : data) &#123;<br>            <span class="hljs-keyword">if</span> (d == <span class="hljs-number">1</span>) &#123;<br>                ones++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (ones == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-keyword">while</span> (end &lt; data.length) &#123;<br>            <span class="hljs-keyword">if</span> (data[end] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">if</span> (end - start == ones) &#123;<br>                res = Math.min(res, ones - count);<br>                <span class="hljs-keyword">if</span> (data[start] == <span class="hljs-number">1</span>) &#123;<br>                    count--;<br>                &#125;<br>                start++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findBottomLeftValue = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> res = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">let</span> queue = [root];<br>    <span class="hljs-keyword">while</span> (queue.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = queue.<span class="hljs-title function_">shift</span>();<br>        res = cur.<span class="hljs-property">val</span>;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">right</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">right</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">left</span>) &#123;<br>            queue.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">left</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="思路-DFS"><a href="#思路-DFS" class="headerlink" title="思路 - DFS"></a>思路 - DFS</h2><p>用DFS做的思路就稍微复杂一些。DFS 的做法会用到先序遍历，同时我们需要两个变量，height 记录当前遍历到的节点的深度，depth 记录当前遍历到的最大深度。当我们遍历到某个节点的时候，如果当前这个节点的深度 height 小于 depth，则说明当前这个节点一定不在最深层；否则这个节点是在最深层。同时因为我们是先遍历左子树的关系，所以当我们往某个左子树上走的时候，会记录第一个 height 被更新的左子树，这样深度最大的左孩子就会被记录下来了。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node. public class TreeNode &#123; int val; TreeNode</span><br><span class="hljs-comment"> * left; TreeNode right; TreeNode(int x) &#123; val = x; &#125; &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findBottomLeftValue</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        helper(root, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> depth)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">if</span> (height &lt; depth) &#123;<br>            res = root.val;<br>            height = dpeth;<br>        &#125;<br>        helper(root.left, depth + <span class="hljs-number">1</span>);<br>        helper(root.right, depth + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h2><p>这里我再提供一个 for 循环的代码。因为这道题滑动窗口的 size 是固定的，所以 for 循环也能做。<br>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-comment">// 统计一共有多少个1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d : data) &#123;<br>            <span class="hljs-keyword">if</span> (d == <span class="hljs-number">1</span>) &#123;<br>                ones++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 统计前ones个位置上有多少个1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; ones; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                c++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-comment">// 如果1都在一开始的位置上，则无需swap</span><br>        <span class="hljs-keyword">if</span> (c == ones) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-comment">// min是一开始的位置上需要swap的次数</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> ones - c;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> c;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> ones; j &lt; data.length; j++) &#123;<br>            <span class="hljs-keyword">if</span> (data[j] == <span class="hljs-number">1</span>) &#123;<br>                k++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (data[j - ones] == <span class="hljs-number">1</span>) &#123;<br>                k--;<br>            &#125;<br>            min = Math.min(min, ones - k);<br>        &#125;<br>        <span class="hljs-keyword">return</span> min;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -304,17 +296,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
-        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
+        <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
       
     </div>
   
@@ -326,8 +316,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 513. Find Bottom Left Tree Value</div>
-      <div>https://shurui91.github.io/posts/1856795069.html</div>
+      <div>[LeetCode] 1151. Minimum Swaps to Group All 1s Together</div>
+      <div>https://shurui91.github.io/posts/663832577.html</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +329,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 14, 2020</div>
+          <div>March 11, 2021</div>
         </div>
       
       
@@ -371,9 +361,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3961220199.html" title="[LeetCode] 506. Relative Ranks">
+                      <a href="/posts/2929899458.html" title="[LeetCode] 1481. Least Number of Unique Integers after K Removals">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 506. Relative Ranks</span>
+                        <span class="hidden-mobile">[LeetCode] 1481. Least Number of Unique Integers after K Removals</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -381,8 +371,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3757411780.html" title="[LeetCode] 102. Binary Tree Level Order Traversal">
-                        <span class="hidden-mobile">[LeetCode] 102. Binary Tree Level Order Traversal</span>
+                      <a href="/posts/2810047019.html" title="[LeetCode] 303. Range Sum Query - Immutable">
+                        <span class="hidden-mobile">[LeetCode] 303. Range Sum Query - Immutable</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,8 +392,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1856795069.html';
-          this.page.identifier = '/posts/1856795069.html';
+          this.page.url = 'https://shurui91.github.io/posts/663832577.html';
+          this.page.identifier = '/posts/663832577.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
