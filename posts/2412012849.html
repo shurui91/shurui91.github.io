@@ -16,26 +16,28 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="There are 3n piles of coins of varying size, you and your friends will take piles of coins as follows:In each step, you will choose any 3 piles of coins (not necessarily consecutive).Of your choice, A">
+    <meta name="description" content="Given the head of a linked list, remove the nth node from the end of the list and return its head. Example 1:Input: head &#x3D; [1,2,3,4,5], n &#x3D; 2Output: [1,2,3,5] Example 2:Input: head &#x3D; [1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1561. Maximum Number of Coins You Can Get">
-<meta property="og:url" content="https://shurui91.github.io/posts/3851844021.html">
+<meta property="og:title" content="[LeetCode] 19. Remove Nth Node From End of List">
+<meta property="og:url" content="https://shurui91.github.io/posts/2412012849.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="There are 3n piles of coins of varying size, you and your friends will take piles of coins as follows:In each step, you will choose any 3 piles of coins (not necessarily consecutive).Of your choice, A">
+<meta property="og:description" content="Given the head of a linked list, remove the nth node from the end of the list and return its head. Example 1:Input: head &#x3D; [1,2,3,4,5], n &#x3D; 2Output: [1,2,3,5] Example 2:Input: head &#x3D; [1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-25T09:05:02.000Z">
-<meta property="article:modified_time" content="2023-11-24T01:23:21.928Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg">
+<meta property="article:published_time" content="2019-11-08T09:20:32.000Z">
+<meta property="article:modified_time" content="2024-08-24T21:00:31.742Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg">
   
   
   
-  <title>[LeetCode] 1561. Maximum Number of Coins You Can Get - CNoodle</title>
+  <title>[LeetCode] 19. Remove Nth Node From End of List - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1561. Maximum Number of Coins You Can Get"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 19. Remove Nth Node From End of List"></span>
           
         </div>
 
@@ -200,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-02-25 01:05" pubdate>
-          February 25, 2021 am
+        <time datetime="2019-11-08 01:20" pubdate>
+          November 8, 2019 am
         </time>
       </span>
     
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          1.6k words
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          15 mins
+          14 mins
         
       </span>
     
@@ -260,24 +262,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1561. Maximum Number of Coins You Can Get</h1>
+            <h1 id="seo-header">[LeetCode] 19. Remove Nth Node From End of List</h1>
             
             
               <div class="markdown-body">
                 
-                <p>There are 3n piles of coins of varying size, you and your friends will take piles of coins as follows:<br>In each step, you will choose any 3 piles of coins (not necessarily consecutive).<br>Of your choice, Alice will pick the pile with the maximum number of coins.<br>You will pick the next pile with maximum number of coins.<br>Your friend Bob will pick the last pile.<br>Repeat until there are no more piles of coins.<br>Given an array of integers piles where piles[i] is the number of coins in the ith pile.</p>
-<p>Return the maximum number of coins which you can have.</p>
-<p>Example 1:<br>Input: piles &#x3D; [2,4,1,2,7,8]<br>Output: 9<br>Explanation: Choose the triplet (2, 7, 8), Alice Pick the pile with 8 coins, you the pile with 7 coins and Bob the last one.<br>Choose the triplet (1, 2, 4), Alice Pick the pile with 4 coins, you the pile with 2 coins and Bob the last one.<br>The maximum number of coins which you can have are: 7 + 2 &#x3D; 9.<br>On the other hand if we choose this arrangement (1, 2, 8), (2, 4, 7) you only get 2 + 4 &#x3D; 6 coins which is not optimal.</p>
-<p>Example 2:<br>Input: piles &#x3D; [2,4,5]<br>Output: 4</p>
-<p>Example 3:<br>Input: piles &#x3D; [9,8,7,6,5,1,2,3,4]<br>Output: 18</p>
-<p>你可以获得的最大硬币数目。</p>
+                <p>Given the head of a linked list, remove the nth node from the end of the list and return its head.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" srcset="/img/loading.gif" lazyload alt="Exapmle 1"><br>Input: head &#x3D; [1,2,3,4,5], n &#x3D; 2<br>Output: [1,2,3,5]</p>
+<p>Example 2:<br>Input: head &#x3D; [1], n &#x3D; 1<br>Output: []</p>
+<p>Example 3:<br>Input: head &#x3D; [1,2], n &#x3D; 1<br>Output: [1]</p>
+<p>Constraints:<br>The number of nodes in the list is sz.<br>1 &lt;&#x3D; sz &lt;&#x3D; 30<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>1 &lt;&#x3D; n &lt;&#x3D; sz</p>
+<p>Follow up: Could you do this in one pass?</p>
+<p>移除链表倒数第N个节点。</p>
 <blockquote>
-<p>有 3n 堆数目不一的硬币，你和你的朋友们打算按以下方式分硬币：<br>每一轮中，你将会选出 任意 3 堆硬币（不一定连续）。<br>Alice 将会取走硬币数量最多的那一堆。<br>你将会取走硬币数量第二多的那一堆。<br>Bob 将会取走最后一堆。<br>重复这个过程，直到没有更多硬币。<br>给你一个整数数组 piles ，其中 piles[i] 是第 i 堆中硬币的数目。<br>返回你可以获得的最大硬币数目。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-number-of-coins-you-can-get">https://leetcode-cn.com/problems/maximum-number-of-coins-you-can-get</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是排序 + two pointer。这道题我们必须排序，否则是拿不到次多的那一堆的。排序完之后，我们用左右两个指针逼近中间，左指针 i 指向的是每次选取的三堆硬币中最少的，右指针 j 指向的是每次选取的三堆硬币中最多的，j - 1 指向的是次多的。要选取的次数是piles.length &#x2F; 3。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是在头结点之前（一般我们创建dummy节点的位置）创建两个节点分别叫做 slow 和 fast。先让 fast 前移 N + 1 个节点，这样使得 slow 和 fast 之间有 N + 1 个节点的距离。然后同时让 slow 和 fast 前移，直到 fast 遍历到链表尾部。此刻 slow 停下来的位置就是需要移除的节点之前的那个节点。为什么需要使 slow 和 fast 之间有 N + 1 个节点的距离是因为我们移除的是 slow.next 这个节点。可以参考<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solution/dong-hua-tu-jie-leetcode-di-19-hao-wen-ti-shan-chu/">这个动图</a>帮助理解。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxCoins</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles)</span> &#123;<br>        Arrays.sort(piles);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> piles.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> n / <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; j &amp;&amp; count != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">if</span> (i &lt; j - <span class="hljs-number">1</span>) &#123;<br>                res += piles[j - <span class="hljs-number">1</span>];<br>                count--;<br>            &#125;<br>            i++;<br>            j -= <span class="hljs-number">2</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">slow</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">fast</span> <span class="hljs-operator">=</span> dummy;<br>        dummy.next = head;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>            fast = fast.next;<br>            <span class="hljs-comment">// System.out.println(fast.val);</span><br>        &#125;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">null</span>) &#123;<br>            fast = fast.next;<br>            slow = slow.next;<br>        &#125;<br>        slow.next = slow.next.next;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> removeNthFromEnd = <span class="hljs-keyword">function</span>(<span class="hljs-params">head, n</span>) &#123;<br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">let</span> slow = dummy;<br>    <span class="hljs-keyword">let</span> fast = dummy;<br>    dummy.<span class="hljs-property">next</span> = head;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (fast !== <span class="hljs-literal">null</span>) &#123;<br>        slow = slow.<span class="hljs-property">next</span>;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    slow.<span class="hljs-property">next</span> = slow.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -291,13 +300,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+      
+        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
       
     </div>
   
@@ -309,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1561. Maximum Number of Coins You Can Get</div>
-      <div>https://shurui91.github.io/posts/3851844021.html</div>
+      <div>[LeetCode] 19. Remove Nth Node From End of List</div>
+      <div>https://shurui91.github.io/posts/2412012849.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +331,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 25, 2021</div>
+          <div>November 8, 2019</div>
         </div>
       
       
@@ -354,9 +363,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2810047019.html" title="[LeetCode] 303. Range Sum Query - Immutable">
+                      <a href="/posts/1602189076.html" title="[LeetCode] 21. Merge Two Sorted Lists">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 303. Range Sum Query - Immutable</span>
+                        <span class="hidden-mobile">[LeetCode] 21. Merge Two Sorted Lists</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +373,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3447756879.html" title="[LeetCode] 765. Couples Holding Hands">
-                        <span class="hidden-mobile">[LeetCode] 765. Couples Holding Hands</span>
+                      <a href="/posts/2917377662.html" title="[LeetCode] 162. Find Peak Element">
+                        <span class="hidden-mobile">[LeetCode] 162. Find Peak Element</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3851844021.html';
-          this.page.identifier = '/posts/3851844021.html';
+          this.page.url = 'https://shurui91.github.io/posts/2412012849.html';
+          this.page.identifier = '/posts/2412012849.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
