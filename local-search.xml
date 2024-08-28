@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 3142. Check if Grid Satisfies Conditions</title>
+    <link href="/posts/135857717.html"/>
+    <url>/posts/135857717.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 2D matrix grid of size m x n. You need to check if each cell grid[i][j] is:<br>Equal to the cell below it, i.e. grid[i][j] &#x3D;&#x3D; grid[i + 1][j] (if it exists).<br>Different from the cell to its right, i.e. grid[i][j] !&#x3D; grid[i][j + 1] (if it exists).<br>Return true if all the cells satisfy these conditions, otherwise, return false.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2024/04/15/examplechanged.png" alt="Example 1"><br>Input: grid &#x3D; [[1,0,2],[1,0,2]]<br>Output: true</p><p>Explanation:<br>All the cells in the grid satisfy the conditions.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2024/03/27/example21.png" alt="Example 2"><br>Input: grid &#x3D; [[1,1,1],[0,0,0]]<br>Output: false</p><p>Explanation:<br>All cells in the first row are equal.</p><p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2024/03/31/changed.png" alt="Example 3"><br>Input: grid &#x3D; [[1],[2],[3]]<br>Output: false</p><p>Explanation:<br>Cells in the first column have different values.</p><p>Constraints:<br>1 &lt;&#x3D; n, m &lt;&#x3D; 10<br>0 &lt;&#x3D; grid[i][j] &lt;&#x3D; 9</p><p>判断矩阵是否满足条件。</p><blockquote>给你一个大小为 m x n 的二维矩阵 grid 。你需要判断每一个格子 grid[i][j] 是否满足：如果它下面的格子存在，那么它需要等于它下面的格子，也就是 grid[i][j] == grid[i + 1][j] 。如果它右边的格子存在，那么它需要不等于它右边的格子，也就是 grid[i][j] != grid[i][j + 1] 。如果 所有 格子都满足以上条件，那么返回 true ，否则返回 false 。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题不涉及算法，就是矩阵的遍历。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">satisfiesConditions</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br><br>        <span class="hljs-comment">// grid[i][j] == grid[i + 1][j]</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] != grid[i + <span class="hljs-number">1</span>][j]) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// grid[i][j] != grid[i][j + 1]</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n - <span class="hljs-number">1</span>; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == grid[i][j + <span class="hljs-number">1</span>]) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>matrix</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2053. Kth Distinct String in an Array</title>
     <link href="/posts/2933557121.html"/>
     <url>/posts/2933557121.html</url>
@@ -4480,9 +4505,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -4507,9 +4532,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
