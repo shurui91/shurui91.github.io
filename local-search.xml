@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>[LeetCode] 2326. Spiral Matrix IV</title>
+    <link href="/posts/3244292270.html"/>
+    <url>/posts/3244292270.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two integers m and n, which represent the dimensions of a matrix.</p><p>You are also given the head of a linked list of integers.</p><p>Generate an m x n matrix that contains the integers in the linked list presented in spiral order (clockwise), starting from the top-left of the matrix. If there are remaining empty spaces, fill them with -1.</p><p>Return the generated matrix.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/05/09/ex1new.jpg" alt="Example 1"><br>Input: m &#x3D; 3, n &#x3D; 5, head &#x3D; [3,0,2,6,8,1,7,9,4,2,5,5,0]<br>Output: [[3,0,2,6,8],[5,0,-1,-1,1],[5,2,4,9,7]]<br>Explanation: The diagram above shows how the values are printed in the matrix.<br>Note that the remaining spaces in the matrix are filled with -1.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/05/11/ex2.jpg" alt="Example 2"><br>Input: m &#x3D; 1, n &#x3D; 4, head &#x3D; [0,1,2]<br>Output: [[0,1,2,-1]]<br>Explanation: The diagram above shows how the values are printed from left to right in the matrix.<br>The last space in the matrix is set to -1.</p><p>Constraints:<br>1 &lt;&#x3D; m, n &lt;&#x3D; 105<br>1 &lt;&#x3D; m * n &lt;&#x3D; 105<br>The number of nodes in the list is in the range [1, m * n].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p><p>螺旋矩阵 IV。</p><blockquote>给你两个整数：m 和 n ，表示矩阵的维数。<p>另给你一个整数链表的头节点 head 。</p><p>请你生成一个大小为 m x n 的螺旋矩阵，矩阵包含链表中的所有整数。链表中的整数从矩阵 左上角 开始、顺时针 按 螺旋 顺序填充。如果还存在剩余的空格，则用 -1 填充。</p><p>返回生成的矩阵。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>还是按照类似54题那样的遍历方式，无非是把 node.val 放入坐标里。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn) - output matrix</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[][] spiralMatrix(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, ListNode head) &#123;<br>        <span class="hljs-type">int</span>[][] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        <span class="hljs-comment">// initial the matrix with -1</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                res[i][j] = -<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">bottom</span> <span class="hljs-operator">=</span> m - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (left &lt;= right &amp;&amp; top &lt;= bottom) &#123;<br>            <span class="hljs-comment">// left to right</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> left; i &lt;= right; i++) &#123;<br><span class="hljs-keyword">if</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>res[top][i] = cur.val;<br>cur = cur.next;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br>top++;<br><br>            <span class="hljs-comment">// right to bottom</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> top; i &lt;= bottom; i++) &#123;<br><span class="hljs-keyword">if</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>res[i][right] = cur.val;<br>cur = cur.next;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br>right--;<br><br>            <span class="hljs-comment">// right to left</span><br>            <span class="hljs-keyword">if</span> (top &lt;= bottom) &#123;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> right; i &gt;= left; i--) &#123;<br><span class="hljs-keyword">if</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>res[bottom][i] = cur.val;<br>cur = cur.next;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br>&#125;<br>bottom--;<br><br>            <span class="hljs-comment">// bottom to top</span><br>            <span class="hljs-keyword">if</span> (left &lt;= right) &#123;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> bottom; i &gt;= top; i--) &#123;<br><span class="hljs-keyword">if</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>res[i][left] = cur.val;<br>cur = cur.next;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">break</span>;<br>&#125;<br>&#125;<br>&#125;<br>left++;<br><br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>matrix</tag>
+      
+      <tag>linked list</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 885. Spiral Matrix III</title>
     <link href="/posts/1411971418.html"/>
     <url>/posts/1411971418.html</url>
@@ -257,9 +286,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -525,9 +554,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>stack</tag>
       
       <tag>linked list</tag>
       
@@ -791,11 +820,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1165,9 +1194,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1323,11 +1352,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1681,9 +1710,9 @@
       
       <tag>sort</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1970,9 +1999,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2221,9 +2250,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -2273,9 +2302,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
