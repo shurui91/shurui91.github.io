@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring</title>
+    <link href="/posts/4164148831.html"/>
+    <url>/posts/4164148831.html</url>
+    
+    <content type="html"><![CDATA[<p>An alphabetical continuous string is a string consisting of consecutive letters in the alphabet. In other words, it is any substring of the string “abcdefghijklmnopqrstuvwxyz”.</p><p>For example, “abc” is an alphabetical continuous string, while “acb” and “za” are not.<br>Given a string s consisting of lowercase letters only, return the length of the longest alphabetical continuous substring.</p><p>Example 1:<br>Input: s &#x3D; “abacaba”<br>Output: 2<br>Explanation: There are 4 distinct continuous substrings: “a”, “b”, “c” and “ab”.<br>“ab” is the longest continuous substring.</p><p>Example 2:<br>Input: s &#x3D; “abcde”<br>Output: 5<br>Explanation: “abcde” is the longest continuous substring.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists of only English lowercase letters.</p><p>最长的字母序连续子字符串的长度。</p><blockquote>字母序连续字符串 是由字母表中连续字母组成的字符串。换句话说，字符串 "abcdefghijklmnopqrstuvwxyz" 的任意子字符串都是 字母序连续字符串 。<p>例如，”abc” 是一个字母序连续字符串，而 “acb” 和 “za” 不是。<br>给你一个仅由小写英文字母组成的字符串 s ，返回其 最长 的 字母序连续子字符串 的长度。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>判断两个字母是否是字母表中连续的字母，就是去判断他们 ASCII 码的差值是否为 1。而且这道题降低了难度，”za” 这样的字母序是不算作连续的字符串的。</p><p>思路是双指针，我们需要两个指针，左指针指向当前字母，右指针从下一个字母开始一直往右走，判断两个指针指向的字母的 ASCII 码的差值是否等于两个指针下标的差。如果是，则说明这两个字母是连续的，我们需要更新最长的字母序连续子字符串的长度。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)，n 是字符串 s 的长度。<br>空间O(1)，只需要常数的空间。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestContinuousSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.length()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> i;<br>            <span class="hljs-keyword">while</span> (i &lt; s.length() &amp;&amp; i - start == s.charAt(i) - s.charAt(start)) &#123;<br>                i++;<br>            &#125;<br>            res = Math.max(res, i - start);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>还有一种更简便的做法是用 for 循环，判断当前字母的 ASCII 码是否比上一个字母的 ASCII 码大 1，如果是，则说明这两个字母是连续的，我们需要更新最长的字母序连续子字符串的长度；如果不是则说明这两个字母不是连续的，我们需要重新开始。</p><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestContinuousSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; s.length(); i++) &#123;<br><span class="hljs-keyword">if</span> (s.charAt(i) - s.charAt(i - <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) &#123;<br>count++;<br>res = Math.max(res, count);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>count = <span class="hljs-number">1</span>;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 884. Uncommon Words from Two Sentences</title>
     <link href="/posts/1381901360.html"/>
     <url>/posts/1381901360.html</url>
@@ -500,9 +525,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1063,9 +1088,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1575,9 +1600,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
@@ -1758,9 +1783,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -2022,9 +2047,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2269,9 +2294,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -2460,9 +2485,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2822,9 +2847,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>prefix sum</tag>
       
@@ -2932,9 +2957,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -3015,9 +3040,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3458,9 +3483,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3487,9 +3512,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -4738,9 +4763,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -4765,9 +4790,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
