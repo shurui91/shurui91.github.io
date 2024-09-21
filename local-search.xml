@@ -4030,6 +4030,29 @@
   
   
   <entry>
+    <title>[LeetCode] 277. Find the Celebrity</title>
+    <link href="/posts/1300749645.html"/>
+    <url>/posts/1300749645.html</url>
+    
+    <content type="html"><![CDATA[<p>Suppose you are at a party with n people labeled from 0 to n - 1 and among them, there may exist one celebrity. The definition of a celebrity is that all the other n - 1 people know the celebrity, but the celebrity does not know any of them.</p><p>Now you want to find out who the celebrity is or verify that there is not one. You are only allowed to ask questions like: “Hi, A. Do you know B?” to get information about whether A knows B. You need to find out the celebrity (or verify there is not one) by asking as few questions as possible (in the asymptotic sense).</p><p>You are given a helper function bool knows(a, b) that tells you whether a knows b. Implement a function int findCelebrity(n). There will be exactly one celebrity if they are at the party.</p><p>Return the celebrity’s label if there is a celebrity at the party. If there is no celebrity, return -1.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/01/19/g1.jpg" alt="Example 1"><br>Input: graph &#x3D; [[1,1,0],[0,1,0],[1,1,1]]<br>Output: 1<br>Explanation: There are three persons labeled with 0, 1 and 2. graph[i][j] &#x3D; 1 means person i knows person j, otherwise graph[i][j] &#x3D; 0 means person i does not know person j. The celebrity is the person labeled as 1 because both 0 and 2 know him but 1 does not know anybody.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/01/19/g2.jpg" alt="Example 2"><br>Input: graph &#x3D; [[1,0,1],[1,1,0],[0,1,1]]<br>Output: -1<br>Explanation: There is no celebrity.</p><p>Constraints:<br>n &#x3D;&#x3D; graph.length &#x3D;&#x3D; graph[i].length<br>2 &lt;&#x3D; n &lt;&#x3D; 100<br>graph[i][j] is 0 or 1.<br>graph[i][i] &#x3D;&#x3D; 1</p><p>Follow up: If the maximum number of allowed calls to the API knows is 3 * n, could you find a solution without exceeding the maximum number of calls?</p><p>搜寻名人。</p><blockquote>给一个API函数bool knows(a, b)，以用来判断a是否认识b，认识返回true，不认识返回false。请你尽可能少的调用这个函数。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是首先假设第一个人是名人的候选人 candidate，然后往后扫描，看这个名人是否不认识后面所有的人，期间只要有一次函数返回 false 则说明 candidate 不是名人，因为有人认识他。接着设认识 candidate 的人为 candidate，一直扫描到最后。因为存在没有名人的可能性所以还要扫描第二次来判断第一次找到的 candidate 是否真的是名人，第二次扫描的时候只要 candidate 认识任何一个人，或者有任何一个人不认识 candidate，则返回 -1，否则返回 candidate。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/* The knows API is defined in the parent class Relation.</span><br><span class="hljs-comment">      boolean knows(int a, int b); */</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Relation</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findCelebrity</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (knows(candidate, i)) &#123;<br>                candidate = i;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// double check</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i != candidate &amp;&amp; (knows(candidate, i) || !knows(i, candidate))) &#123;<br>                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> candidate;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>graph</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 997. Find the Town Judge</title>
     <link href="/posts/4068024640.html"/>
     <url>/posts/4068024640.html</url>
@@ -4389,9 +4412,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -4788,9 +4811,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -4815,9 +4838,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
@@ -6057,9 +6080,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>two sum</tag>
       
