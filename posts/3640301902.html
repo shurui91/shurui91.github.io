@@ -16,25 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="An alphabetical continuous string is a string consisting of consecutive letters in the alphabet. In other words, it is any substring of the string “abcdefghijklmnopqrstuvwxyz”. For example, “abc” is a">
+    <meta name="description" content="There is an infrastructure of n cities with some number of roads connecting these cities. Each roads[i] &#x3D; [ai, bi] indicates that there is a bidirectional road between cities ai and bi. The netwo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring">
-<meta property="og:url" content="https://shurui91.github.io/posts/4164148831.html">
+<meta property="og:title" content="[LeetCode] 1615. Maximal Network Rank">
+<meta property="og:url" content="https://shurui91.github.io/posts/3640301902.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="An alphabetical continuous string is a string consisting of consecutive letters in the alphabet. In other words, it is any substring of the string “abcdefghijklmnopqrstuvwxyz”. For example, “abc” is a">
+<meta property="og:description" content="There is an infrastructure of n cities with some number of roads connecting these cities. Each roads[i] &#x3D; [ai, bi] indicates that there is a bidirectional road between cities ai and bi. The netwo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-09-19T20:14:38.000Z">
-<meta property="article:modified_time" content="2024-09-19T20:26:31.427Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/21/ex1.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/21/ex2.png">
+<meta property="article:published_time" content="2020-10-11T20:47:52.000Z">
+<meta property="article:modified_time" content="2024-09-21T21:12:37.360Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="graph">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/09/21/ex1.png">
   
   
   
-  <title>[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring - CNoodle</title>
+  <title>[LeetCode] 1615. Maximal Network Rank - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1615. Maximal Network Rank"></span>
           
         </div>
 
@@ -199,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-19 13:14" pubdate>
-          September 19, 2024 pm
+        <time datetime="2020-10-11 13:47" pubdate>
+          October 11, 2020 pm
         </time>
       </span>
     
@@ -211,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          2.4k words
         
       </span>
     
@@ -222,7 +224,7 @@
         
         
         
-          16 mins
+          21 mins
         
       </span>
     
@@ -259,33 +261,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring</h1>
+            <h1 id="seo-header">[LeetCode] 1615. Maximal Network Rank</h1>
             
             
               <div class="markdown-body">
                 
-                <p>An alphabetical continuous string is a string consisting of consecutive letters in the alphabet. In other words, it is any substring of the string “abcdefghijklmnopqrstuvwxyz”.</p>
-<p>For example, “abc” is an alphabetical continuous string, while “acb” and “za” are not.<br>Given a string s consisting of lowercase letters only, return the length of the longest alphabetical continuous substring.</p>
-<p>Example 1:<br>Input: s &#x3D; “abacaba”<br>Output: 2<br>Explanation: There are 4 distinct continuous substrings: “a”, “b”, “c” and “ab”.<br>“ab” is the longest continuous substring.</p>
-<p>Example 2:<br>Input: s &#x3D; “abcde”<br>Output: 5<br>Explanation: “abcde” is the longest continuous substring.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists of only English lowercase letters.</p>
-<p>最长的字母序连续子字符串的长度。</p>
+                <p>There is an infrastructure of n cities with some number of roads connecting these cities. Each roads[i] &#x3D; [ai, bi] indicates that there is a bidirectional road between cities ai and bi.</p>
+<p>The network rank of two different cities is defined as the total number of directly connected roads to either city. If a road is directly connected to both cities, it is only counted once.</p>
+<p>The maximal network rank of the infrastructure is the maximum network rank of all pairs of different cities.</p>
+<p>Given the integer n and the array roads, return the maximal network rank of the entire infrastructure.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/09/21/ex1.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: n &#x3D; 4, roads &#x3D; [[0,1],[0,3],[1,2],[1,3]]<br>Output: 4<br>Explanation: The network rank of cities 0 and 1 is 4 as there are 4 roads that are connected to either 0 or 1. The road between 0 and 1 is only counted once.</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/09/21/ex2.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: n &#x3D; 5, roads &#x3D; [[0,1],[0,3],[1,2],[1,3],[2,3],[2,4]]<br>Output: 5<br>Explanation: There are 5 roads that are connected to cities 1 or 2.</p>
+<p>Example 3:<br>Input: n &#x3D; 8, roads &#x3D; [[0,1],[1,2],[2,3],[2,4],[5,6],[5,7]]<br>Output: 5<br>Explanation: The network rank of 2 and 5 is 5. Notice that all the cities do not have to be connected.</p>
+<p>Constraints:<br>2 &lt;&#x3D; n &lt;&#x3D; 100<br>0 &lt;&#x3D; roads.length &lt;&#x3D; n * (n - 1) &#x2F; 2<br>roads[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; ai, bi &lt;&#x3D; n-1<br>ai !&#x3D; bi<br>Each pair of cities has at most one road connecting them.</p>
+<p>最大网络秩。</p>
 <blockquote>
-字母序连续字符串 是由字母表中连续字母组成的字符串。换句话说，字符串 "abcdefghijklmnopqrstuvwxyz" 的任意子字符串都是 字母序连续字符串 。
+n 座城市和一些连接这些城市的道路 roads 共同组成一个基础设施网络。每个 roads[i] = [ai, bi] 都表示在城市 ai 和 bi 之间有一条双向道路。
 
-<p>例如，”abc” 是一个字母序连续字符串，而 “acb” 和 “za” 不是。<br>给你一个仅由小写英文字母组成的字符串 s ，返回其 最长 的 字母序连续子字符串 的长度。</p>
+<p>两座不同城市构成的 城市对 的 网络秩 定义为：与这两座城市 直接 相连的道路总数。如果存在一条道路直接连接这两座城市，则这条道路只计算 一次 。</p>
+<p>整个基础设施网络的 最大网络秩 是所有不同城市对中的 最大网络秩 。</p>
+<p>给你整数 n 和数组 roads，返回整个基础设施网络的 最大网络秩 。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-network-rank">https://leetcode-cn.com/problems/maximal-network-rank</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>判断两个字母是否是字母表中连续的字母，就是去判断他们 ASCII 码的差值是否为 1。而且这道题降低了难度，”za” 这样的字母序是不算作连续的字符串的。</p>
-<p>思路是双指针，我们需要两个指针，左指针指向当前字母，右指针从下一个字母开始一直往右走，判断两个指针指向的字母的 ASCII 码的差值是否等于两个指针下标的差。如果是，则说明这两个字母是连续的，我们需要更新最长的字母序连续子字符串的长度。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)，n 是字符串 s 的长度。<br>空间O(1)，只需要常数的空间。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意如上，本质上是在找 input 里两点之间最大的网络秩 rank。这是一道图论的题，注意每条给出的边都是无向的所以对于一条边上的两个点来说，他们的 rank 都各自 + 1。思路是首先用一个数组 edges 记录每个点各自的 rank 是多少，每遇到一条边，这条边的两端的点的 rank 都各自 + 1；同时我们需要一个二维的邻接矩阵 adj，这里我选择用 boolean，因为我们只需要记录两点之间是否是邻接点即可。</p>
+<p>我们遍历一遍 roads 数组之后，我们可以把 edges 数组和 adj 矩阵都统计完毕。之后我们再用两个 for loop 遍历这 n 个点，看看每两个不同的点之间的 rank sum。注意如果两点是能直接相连的，他们在邻接矩阵 adj 里就会是 true，此时 rank 需要减一。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestContinuousSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.length()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> i;<br>            <span class="hljs-keyword">while</span> (i &lt; s.length() &amp;&amp; i - start == s.charAt(i) - s.charAt(start)) &#123;<br>                i++;<br>            &#125;<br>            res = Math.max(res, i - start);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>还有一种更简便的做法是用 for 循环，判断当前字母的 ASCII 码是否比上一个字母的 ASCII 码大 1，如果是，则说明这两个字母是连续的，我们需要更新最长的字母序连续子字符串的长度；如果不是则说明这两个字母不是连续的，我们需要重新开始。</p>
-<p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestContinuousSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; s.length(); i++) &#123;<br>			<span class="hljs-keyword">if</span> (s.charAt(i) - s.charAt(i - <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) &#123;<br>				count++;<br>				res = Math.max(res, count);<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				count = <span class="hljs-number">1</span>;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximalNetworkRank</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] roads)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (roads == <span class="hljs-literal">null</span> || roads.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rank</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] edges = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-type">boolean</span>[][] adj = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n][n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; roads.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">from</span> <span class="hljs-operator">=</span> roads[i][<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">to</span> <span class="hljs-operator">=</span> roads[i][<span class="hljs-number">1</span>];<br>            edges[from]++;<br>            edges[to]++;<br>            adj[from][to] = <span class="hljs-literal">true</span>;<br>            adj[to][from] = <span class="hljs-literal">true</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>                rank = edges[i] + edges[j] - (adj[i][j] == <span class="hljs-literal">true</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>                res = Math.max(res, rank);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -300,11 +304,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/graph/" class="print-no-link">#graph</a>
       
     </div>
   
@@ -316,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring</div>
-      <div>https://shurui91.github.io/posts/4164148831.html</div>
+      <div>[LeetCode] 1615. Maximal Network Rank</div>
+      <div>https://shurui91.github.io/posts/3640301902.html</div>
     </div>
     <div class="license-meta">
       
@@ -329,7 +331,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 19, 2024</div>
+          <div>October 11, 2020</div>
         </div>
       
       
@@ -361,12 +363,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/posts/3870056761.html" title="[LeetCode] 948. Bag of Tokens">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[LeetCode] 948. Bag of Tokens</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1381901360.html" title="[LeetCode] 884. Uncommon Words from Two Sentences">
-                        <span class="hidden-mobile">[LeetCode] 884. Uncommon Words from Two Sentences</span>
+                      <a href="/posts/3398385201.html" title="[LeetCode] 611. Valid Triangle Number">
+                        <span class="hidden-mobile">[LeetCode] 611. Valid Triangle Number</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -386,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/4164148831.html';
-          this.page.identifier = '/posts/4164148831.html';
+          this.page.url = 'https://shurui91.github.io/posts/3640301902.html';
+          this.page.identifier = '/posts/3640301902.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
