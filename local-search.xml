@@ -525,9 +525,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1088,9 +1088,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1600,9 +1600,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>matrix</tag>
       
@@ -1783,9 +1783,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>string</tag>
       
@@ -2047,9 +2047,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2294,9 +2294,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>counting sort</tag>
       
@@ -2485,9 +2485,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2563,6 +2563,31 @@
       <tag>java</tag>
       
       <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 729. My Calendar I</title>
+    <link href="/posts/1564004087.html"/>
+    <url>/posts/1564004087.html</url>
+    
+    <content type="html"><![CDATA[<p>You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a double booking.</p><p>A double booking happens when two events have some non-empty intersection (i.e., some moment is common to both events.).</p><p>The event can be represented as a pair of integers start and end that represents a booking on the half-open interval [start, end), the range of real numbers x such that start &lt;&#x3D; x &lt; end.</p><p>Implement the MyCalendar class:<br>MyCalendar() Initializes the calendar object.<br>boolean book(int start, int end) Returns true if the event can be added to the calendar successfully without causing a double booking. Otherwise, return false and do not add the event to the calendar.</p><p>Example 1:<br>Input<br>[“MyCalendar”, “book”, “book”, “book”]<br>[[], [10, 20], [15, 25], [20, 30]]<br>Output<br>[null, true, false, true]</p><p>Explanation<br>MyCalendar myCalendar &#x3D; new MyCalendar();<br>myCalendar.book(10, 20); &#x2F;&#x2F; return True<br>myCalendar.book(15, 25); &#x2F;&#x2F; return False, It can not be booked because time 15 is already booked by another event.<br>myCalendar.book(20, 30); &#x2F;&#x2F; return True, The event can be booked, as the first event takes every time less than 20, but not including 20.</p><p>Constraints:<br>0 &lt;&#x3D; start &lt; end &lt;&#x3D; 109<br>At most 1000 calls will be made to book.</p><p>我的日程安排表 I。</p><blockquote>实现一个 MyCalendar 类来存放你的日程安排。如果要添加的日程安排不会造成 重复预订 ，则可以存储这个新的日程安排。<p>当两个日程安排有一些时间上的交叉时（例如两个日程安排都在同一时间内），就会产生 重复预订 。</p><p>日程可以用一对整数 start 和 end 表示，这里的时间是半开区间，即 [start, end), 实数 x 的范围为，  start &lt;&#x3D; x &lt; end 。</p><p>实现 MyCalendar 类：</p><p>MyCalendar() 初始化日历对象。<br>boolean book(int start, int end) 如果可以将日程安排成功添加到日历中而不会导致重复预订，返回 true 。否则，返回 false 并且不要将该日程安排添加到日历中。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/my-calendar-i">https://leetcode.cn/problems/my-calendar-i</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目给的是一些日程安排，以 start 和 end 表示，应该是按数据流给出的，请你判断是否有安排冲突。</p><p>这道题我提供一个 treemap 的解法。这道题有点像扫描线那一类的题目，但是注意题目给的是数据流，数据不是一次性给出的。这里我们创建一个treemap&lt;start, end&gt;，存每一个安排的开始时间和结束时间。每当进来一个新的日程安排的时候（我们设这个日程安排为 A），我们用 A 的 start 去找 treemap 是否存在一个 floorKey，且这个 floorKey 的 end 是大于 A 的 start 的，如果有，就说明之前有一个安排的结束时间大于目前这个安排 A 的开始时间，冲突。</p><p>我们再用 A 的 start 去找 treemap 是否存在一个 ceilingKey，这个 ceilingKey 是另外一个安排 B 的开始时间，如果 B 存在且 B 的结束时间小于 A 的结束时间，也说明是冲突。</p><p>这两种冲突都不存在，我们才可以将 A 放入 treemap。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCalendar</span> &#123;<br>    TreeMap&lt;Integer, Integer&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCalendar</span><span class="hljs-params">()</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">book</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span> &#123;<br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">floorKey</span> <span class="hljs-operator">=</span> map.floorKey(start);<br>        <span class="hljs-keyword">if</span> (floorKey != <span class="hljs-literal">null</span> &amp;&amp; map.get(floorKey) &gt; start) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">ceilingKey</span> <span class="hljs-operator">=</span> map.ceilingKey(start);<br>        <span class="hljs-keyword">if</span> (ceilingKey != <span class="hljs-literal">null</span> &amp;&amp; ceilingKey &lt; end) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        map.put(start, end);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your MyCalendar object will be instantiated and called as such:</span><br><span class="hljs-comment"> * MyCalendar obj = new MyCalendar();</span><br><span class="hljs-comment"> * boolean param_1 = obj.book(start,end);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>treemap</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -2847,9 +2872,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>prefix sum</tag>
       
@@ -2957,9 +2982,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>heap</tag>
       
@@ -3040,9 +3065,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3483,9 +3508,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3535,9 +3560,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
