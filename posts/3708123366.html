@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="Design your implementation of the circular double-ended queue (deque). Implement the MyCircularDeque class:MyCircularDeque(int k) Initializes the deque with a maximum size of k.boolean insertFront() A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 641. Design Circular Deque">
+<meta property="og:url" content="https://shurui91.github.io/posts/3708123366.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="Design your implementation of the circular double-ended queue (deque). Implement the MyCircularDeque class:MyCircularDeque(int k) Initializes the deque with a maximum size of k.boolean insertFront() A">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2024-09-28T18:03:14.000Z">
+<meta property="article:modified_time" content="2024-09-28T18:08:35.886Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="design">
+<meta property="article:tag" content="linked list">
+<meta property="article:tag" content="queue">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 641. Design Circular Deque - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 641. Design Circular Deque"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2024-09-28 11:03" pubdate>
+          September 28, 2024 am
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          4.1k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          12 mins
+          35 mins
         
       </span>
     
@@ -260,26 +260,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 641. Design Circular Deque</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>Design your implementation of the circular double-ended queue (deque).</p>
+<p>Implement the MyCircularDeque class:<br>MyCircularDeque(int k) Initializes the deque with a maximum size of k.<br>boolean insertFront() Adds an item at the front of Deque. Returns true if the operation is successful, or false otherwise.<br>boolean insertLast() Adds an item at the rear of Deque. Returns true if the operation is successful, or false otherwise.<br>boolean deleteFront() Deletes an item from the front of Deque. Returns true if the operation is successful, or false otherwise.<br>boolean deleteLast() Deletes an item from the rear of Deque. Returns true if the operation is successful, or false otherwise.<br>int getFront() Returns the front item from the Deque. Returns -1 if the deque is empty.<br>int getRear() Returns the last item from Deque. Returns -1 if the deque is empty.<br>boolean isEmpty() Returns true if the deque is empty, or false otherwise.<br>boolean isFull() Returns true if the deque is full, or false otherwise.</p>
+<p>Example 1:<br>Input<br>[“MyCircularDeque”, “insertLast”, “insertLast”, “insertFront”, “insertFront”, “getRear”, “isFull”, “deleteLast”, “insertFront”, “getFront”]<br>[[3], [1], [2], [3], [4], [], [], [], [4], []]<br>Output<br>[null, true, true, true, false, 2, true, true, true, 4]</p>
+<p>Explanation<br>MyCircularDeque myCircularDeque &#x3D; new MyCircularDeque(3);<br>myCircularDeque.insertLast(1);  &#x2F;&#x2F; return True<br>myCircularDeque.insertLast(2);  &#x2F;&#x2F; return True<br>myCircularDeque.insertFront(3); &#x2F;&#x2F; return True<br>myCircularDeque.insertFront(4); &#x2F;&#x2F; return False, the queue is full.<br>myCircularDeque.getRear();      &#x2F;&#x2F; return 2<br>myCircularDeque.isFull();       &#x2F;&#x2F; return True<br>myCircularDeque.deleteLast();   &#x2F;&#x2F; return True<br>myCircularDeque.insertFront(4); &#x2F;&#x2F; return True<br>myCircularDeque.getFront();     &#x2F;&#x2F; return 4</p>
+<p>Constraints:<br>1 &lt;&#x3D; k &lt;&#x3D; 1000<br>0 &lt;&#x3D; value &lt;&#x3D; 1000<br>At most 2000 calls will be made to insertFront, insertLast, deleteFront, deleteLast, getFront, getRear, isEmpty, isFull.</p>
+<p>设计循环双端队列。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+设计实现双端队列。
+
+<p>实现 MyCircularDeque 类:</p>
+<ul>
+<li>MyCircularDeque(int k) ：构造函数,双端队列最大为 k 。</li>
+<li>boolean insertFront()：将一个元素添加到双端队列头部。 如果操作成功返回 true ，否则返回 false 。</li>
+<li>boolean insertLast() ：将一个元素添加到双端队列尾部。如果操作成功返回 true ，否则返回 false 。</li>
+<li>boolean deleteFront() ：从双端队列头部删除一个元素。 如果操作成功返回 true ，否则返回 false 。</li>
+<li>boolean deleteLast() ：从双端队列尾部删除一个元素。如果操作成功返回 true ，否则返回 false 。</li>
+<li>int getFront() )：从双端队列头部获得一个元素。如果双端队列为空，返回 -1 。</li>
+<li>int getRear() ：获得双端队列的最后一个元素。 如果双端队列为空，返回 -1 。</li>
+<li>boolean isEmpty() ：若双端队列为空，则返回 true ，否则返回 false  。</li>
+<li>boolean isFull() ：若双端队列满了，则返回 true ，否则返回 false 。</blockquote></li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题思路类似 622 题，无非是把普通的 queue 变成 dequeue。做这道题之前可以先做一些相关题目。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>    <span class="hljs-type">int</span> value;<br>    Node prev;<br>    Node next;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Node</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-built_in">this</span>.value = value;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCircularDeque</span> &#123;<br>    <span class="hljs-type">int</span> size;<br>    <span class="hljs-type">int</span> k;<br>    Node head;<br>    Node tail;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyCircularDeque</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-built_in">this</span>.size = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">this</span>.k = k;<br>        head = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>        tail = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(-<span class="hljs-number">1</span>);<br>        head.next = tail;<br>        tail.prev = head;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertFront</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">newNode</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(value);<br>        newNode.next = head.next;<br>        newNode.prev = head;<br>        head.next.prev = newNode;<br>        head.next = newNode;<br>        size++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insertLast</span><span class="hljs-params">(<span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isFull()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">newNode</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(value);<br>        newNode.next = tail;<br>        newNode.prev = tail.prev;<br>        tail.prev.next = newNode;<br>        tail.prev = newNode;<br>        size++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        head.next.next.prev = head;<br>        head.next = head.next.next;<br>        size--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">deleteLast</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        tail.prev.prev.next = tail;<br>        tail.prev = tail.prev.prev;<br>        size--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getFront</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> head.next.value;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRear</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> tail.prev.value;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEmpty</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> size == <span class="hljs-number">0</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isFull</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> size == k;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your MyCircularDeque object will be instantiated and called as such:</span><br><span class="hljs-comment"> * MyCircularDeque obj = new MyCircularDeque(k);</span><br><span class="hljs-comment"> * boolean param_1 = obj.insertFront(value);</span><br><span class="hljs-comment"> * boolean param_2 = obj.insertLast(value);</span><br><span class="hljs-comment"> * boolean param_3 = obj.deleteFront();</span><br><span class="hljs-comment"> * boolean param_4 = obj.deleteLast();</span><br><span class="hljs-comment"> * int param_5 = obj.getFront();</span><br><span class="hljs-comment"> * int param_6 = obj.getRear();</span><br><span class="hljs-comment"> * boolean param_7 = obj.isEmpty();</span><br><span class="hljs-comment"> * boolean param_8 = obj.isFull();</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">146. LRU Cache<br>460. LFU Cache<br>622. Design Circular Queue<br>641. Design Circular Deque<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -296,11 +308,11 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/design/" class="print-no-link">#design</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
+        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/queue/" class="print-no-link">#queue</a>
       
     </div>
   
@@ -312,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 641. Design Circular Deque</div>
+      <div>https://shurui91.github.io/posts/3708123366.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>September 28, 2024</div>
         </div>
       
       
@@ -357,18 +369,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/4164148831.html" title="[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring">
+                        <span class="hidden-mobile">[LeetCode] 2414. Length of the Longest Alphabetical Continuous Substring</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/3708123366.html';
+          this.page.identifier = '/posts/3708123366.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
