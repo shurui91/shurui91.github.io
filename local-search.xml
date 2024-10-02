@@ -579,9 +579,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1142,9 +1142,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1654,9 +1654,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>matrix</tag>
       
@@ -1837,9 +1837,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>string</tag>
       
@@ -2101,9 +2101,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2375,9 +2375,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>counting sort</tag>
       
@@ -2566,9 +2566,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3003,9 +3003,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>prefix sum</tag>
       
@@ -3113,9 +3113,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>heap</tag>
       
@@ -3196,9 +3196,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3639,9 +3639,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3691,9 +3691,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3810,7 +3810,7 @@
     <link href="/posts/3212402937.html"/>
     <url>/posts/3212402937.html</url>
     
-    <content type="html"><![CDATA[<p>Koko loves to eat bananas.  There are N piles of bananas, the i-th pile has piles[i] bananas.  The guards have gone and will come back in H hours.</p><p>Koko can decide her bananas-per-hour eating speed of K.  Each hour, she chooses some pile of bananas, and eats K bananas from that pile.  If the pile has less than K bananas, she eats all of them instead, and won’t eat any more bananas during this hour.</p><p>Koko likes to eat slowly, but still wants to finish eating all the bananas before the guards come back.</p><p>Return the minimum integer K such that she can eat all the bananas within H hours.</p><p>Example 1:<br>Input: piles &#x3D; [3,6,7,11], H &#x3D; 8<br>Output: 4</p><p>Example 2:<br>Input: piles &#x3D; [30,11,23,4,20], H &#x3D; 5<br>Output: 30</p><p>Example 3:<br>Input: piles &#x3D; [30,11,23,4,20], H &#x3D; 6<br>Output: 23</p><p>Constraints:<br>1 &lt;&#x3D; piles.length &lt;&#x3D; 10^4<br>piles.length &lt;&#x3D; H &lt;&#x3D; 10^9<br>1 &lt;&#x3D; piles[i] &lt;&#x3D; 10^9</p><p>爱吃香蕉的珂珂。</p><blockquote>珂珂喜欢吃香蕉。这里有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 h 小时后回来。<p>珂珂可以决定她吃香蕉的速度 k （单位：根&#x2F;小时）。每个小时，她将会选择一堆香蕉，从中吃掉 k 根。如果这堆香蕉少于 k 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  </p><p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。</p><p>返回她可以在 h 小时内吃掉所有香蕉的最小速度 k（k 为整数）。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/koko-eating-bananas">https://leetcode.cn/problems/koko-eating-bananas</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是二分法，而且这道题属于是在答案上二分的类型。这里题目的限制条件的最后一条规定了 piles[i] 不会大于 10 的九次方，所以二分法的上界我直接就取了 10^9。这里二分是在分猴子吃香蕉的速度，这是最后要求的答案。二分法得到某一个速度 mid 之后，去计算吃掉所有香蕉需要花费的时间。这里我们需要额外写一个函数去做计算时间的工作。在这个计算时间的函数里，对于某一堆香蕉，如果香蕉数 % 速度 不等于 0，那么意味着时间需要 + 1。例子，比如吃的速度是 3，但是香蕉有 10 个，那么就必须分 4 个小时吃完。注意因为题目要我们计算的是最小速度，所以如果计算出来的时间小于 H 则说明速度快了，需要往左半边走，减慢速度；反之则往右半边走，加快速度。二分法的 while 循环退出的那一刻，low 就是满足题意的最小速度。同时注意二分法的左指针初始化不能为 0，因为这里是对吃香蕉的速度做二分，如果涉及 0，计算时间的时候是会报错的，除法分母不能为 0。</p><p>二刷我把 getHour 函数改成 long 型了，因为官方加了新的 case。整形是过不去的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mlogn) - logn的部分是在做二分，乘以 m 是因为每得到一个速度之后都要带回 piles 去计算时间<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="Java实现一"><a href="#Java实现一" class="headerlink" title="Java实现一"></a>Java实现一</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minEatingSpeed</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> H)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">low</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000000000</span>;<br>        <span class="hljs-keyword">while</span> (low &lt;= high) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> low + (high - low) / <span class="hljs-number">2</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">hour</span> <span class="hljs-operator">=</span> getHour(piles, mid);<br>            <span class="hljs-keyword">if</span> (hour &lt;= H) &#123;<br>                high = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                low = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> low;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">getHour</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> speed)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p : piles) &#123;<br>            res += p / speed;<br>            <span class="hljs-keyword">if</span> (p % speed != <span class="hljs-number">0</span>) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="Java实现二"><a href="#Java实现二" class="headerlink" title="Java实现二"></a>Java实现二</h3><p>我再提供一个左闭右开的二分代码。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minEatingSpeed</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> h)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">low</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>);<br>        <span class="hljs-keyword">while</span> (low &lt; high) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> low + (high - low) / <span class="hljs-number">2</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">hour</span> <span class="hljs-operator">=</span> helper(piles, mid);<br>            <span class="hljs-comment">// 如果耗时太多，说明速度太慢，需要移动左指针</span><br>            <span class="hljs-comment">// 反之移动右指针</span><br>            <span class="hljs-keyword">if</span> (hour &gt; h) &#123;<br>                low = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                high = mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> low;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> speed)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p : piles) &#123;<br>            res += p / speed;<br>            <span class="hljs-keyword">if</span> (p % speed != <span class="hljs-number">0</span>) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">410. Split Array Largest Sum<br>774. Minimize Max Distance to Gas Station<br>875. Koko Eating Bananas<br>1011. Capacity To Ship Packages In N Days<br>1060. Missing Element in Sorted Array<br>1231. Divide Chocolate<br>1283. Find the Smallest Divisor Given a Threshold<br>1482. Minimum Number of Days to Make m Bouquets<br>1539. Kth Missing Positive Number<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Koko loves to eat bananas.  There are N piles of bananas, the i-th pile has piles[i] bananas.  The guards have gone and will come back in H hours.</p><p>Koko can decide her bananas-per-hour eating speed of K.  Each hour, she chooses some pile of bananas, and eats K bananas from that pile.  If the pile has less than K bananas, she eats all of them instead, and won’t eat any more bananas during this hour.</p><p>Koko likes to eat slowly, but still wants to finish eating all the bananas before the guards come back.</p><p>Return the minimum integer K such that she can eat all the bananas within H hours.</p><p>Example 1:<br>Input: piles &#x3D; [3,6,7,11], H &#x3D; 8<br>Output: 4</p><p>Example 2:<br>Input: piles &#x3D; [30,11,23,4,20], H &#x3D; 5<br>Output: 30</p><p>Example 3:<br>Input: piles &#x3D; [30,11,23,4,20], H &#x3D; 6<br>Output: 23</p><p>Constraints:<br>1 &lt;&#x3D; piles.length &lt;&#x3D; 10^4<br>piles.length &lt;&#x3D; H &lt;&#x3D; 10^9<br>1 &lt;&#x3D; piles[i] &lt;&#x3D; 10^9</p><p>爱吃香蕉的珂珂。</p><blockquote>珂珂喜欢吃香蕉。这里有 n 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 h 小时后回来。<p>珂珂可以决定她吃香蕉的速度 k （单位：根&#x2F;小时）。每个小时，她将会选择一堆香蕉，从中吃掉 k 根。如果这堆香蕉少于 k 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  </p><p>珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。</p><p>返回她可以在 h 小时内吃掉所有香蕉的最小速度 k（k 为整数）。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/koko-eating-bananas">https://leetcode.cn/problems/koko-eating-bananas</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是二分法，而且这道题属于是在答案上二分的类型。这里题目的限制条件的最后一条规定了 piles[i] 不会大于 10 的九次方，所以二分法的上界我直接就取了 10^9。这里二分是在分猴子吃香蕉的速度，这是最后要求的答案。二分法得到某一个速度 mid 之后，去计算吃掉所有香蕉需要花费的时间。这里我们需要额外写一个函数去做计算时间的工作。在这个计算时间的函数里，对于某一堆香蕉，如果香蕉数 % 速度 不等于 0，那么意味着时间需要 + 1。例子，比如吃的速度是 3，但是香蕉有 10 个，那么就必须分 4 个小时吃完。注意因为题目要我们计算的是最小速度，所以如果计算出来的时间小于 H 则说明速度快了，需要往左半边走，减慢速度；反之则往右半边走，加快速度。二分法的 while 循环退出的那一刻，low 就是满足题意的最小速度。同时注意二分法的左指针初始化不能为 0，因为这里是对吃香蕉的速度做二分，如果涉及 0，计算时间的时候是会报错的，除法分母不能为 0。</p><p>二刷我把 getHour 函数改成 long 型了，因为官方加了新的 case。整形是过不去的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mlogn) - logn的部分是在做二分，乘以 m 是因为每得到一个速度之后都要带回 piles 去计算时间<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="Java实现一"><a href="#Java实现一" class="headerlink" title="Java实现一"></a>Java实现一</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minEatingSpeed</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> H)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">low</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000000000</span>;<br>        <span class="hljs-keyword">while</span> (low &lt;= high) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> low + (high - low) / <span class="hljs-number">2</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">hour</span> <span class="hljs-operator">=</span> getHour(piles, mid);<br>            <span class="hljs-keyword">if</span> (hour &lt;= H) &#123;<br>                high = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                low = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> low;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">getHour</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> speed)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p : piles) &#123;<br>            res += p / speed;<br>            <span class="hljs-keyword">if</span> (p % speed != <span class="hljs-number">0</span>) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="Java实现二"><a href="#Java实现二" class="headerlink" title="Java实现二"></a>Java实现二</h3><p>我再提供一个左闭右开的二分代码。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minEatingSpeed</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> h)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">low</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">high</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>);<br>        <span class="hljs-keyword">while</span> (low &lt; high) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> low + (high - low) / <span class="hljs-number">2</span>;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">hour</span> <span class="hljs-operator">=</span> helper(piles, mid);<br>            <span class="hljs-comment">// 如果耗时太多，说明速度太慢，需要移动左指针</span><br>            <span class="hljs-comment">// 反之移动右指针</span><br>            <span class="hljs-keyword">if</span> (hour &gt; h) &#123;<br>                low = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                high = mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> low;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] piles, <span class="hljs-type">int</span> speed)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> p : piles) &#123;<br>            res += p / speed;<br>            <span class="hljs-keyword">if</span> (p % speed != <span class="hljs-number">0</span>) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">410. Split Array Largest Sum<br>774. Minimize Max Distance to Gas Station<br>875. Koko Eating Bananas<br>1011. Capacity To Ship Packages In N Days<br>1060. Missing Element in Sorted Array<br>1231. Divide Chocolate<br>1283. Find the Smallest Divisor Given a Threshold<br>1482. Minimum Number of Days to Make m Bouquets<br>1539. Kth Missing Positive Number<br>1870. Minimum Speed to Arrive on Time<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
