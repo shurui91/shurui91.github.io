@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2491. Divide Players Into Teams of Equal Skill</title>
+    <link href="/posts/3764186800.html"/>
+    <url>/posts/3764186800.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a positive integer array skill of even length n where skill[i] denotes the skill of the ith player. Divide the players into n &#x2F; 2 teams of size 2 such that the total skill of each team is equal.</p><p>The chemistry of a team is equal to the product of the skills of the players on that team.</p><p>Return the sum of the chemistry of all the teams, or return -1 if there is no way to divide the players into teams such that the total skill of each team is equal.</p><p>Example 1:<br>Input: skill &#x3D; [3,2,5,1,3,4]<br>Output: 22<br>Explanation:<br>Divide the players into the following teams: (1, 5), (2, 4), (3, 3), where each team has a total skill of 6.<br>The sum of the chemistry of all the teams is: 1 * 5 + 2 * 4 + 3 * 3 &#x3D; 5 + 8 + 9 &#x3D; 22.</p><p>Example 2:<br>Input: skill &#x3D; [3,4]<br>Output: 12<br>Explanation:<br>The two players form a team with a total skill of 7.<br>The chemistry of the team is 3 * 4 &#x3D; 12.</p><p>Example 3:<br>Input: skill &#x3D; [1,1,2,3]<br>Output: -1<br>Explanation:<br>There is no way to divide the players into teams such that the total skill of each team is equal.</p><p>Constraints:<br>2 &lt;&#x3D; skill.length &lt;&#x3D; 105<br>skill.length is even.<br>1 &lt;&#x3D; skill[i] &lt;&#x3D; 1000</p><p>划分技能点相等的团队。</p><blockquote>给你一个正整数数组 skill ，数组长度为 偶数 n ，其中 skill[i] 表示第 i 个玩家的技能点。将所有玩家分成 n / 2 个 2 人团队，使每一个团队的技能点之和 相等 。<p>团队的 化学反应 等于团队中玩家的技能点 乘积 。</p><p>返回所有团队的 化学反应 之和，如果无法使每个团队的技能点之和相等，则返回 -1 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意题目的题设，如果 input 数组最后是能组成 n &#x2F; 2 组团队且每一个团队的技能点之和相等的话，那么技能点的和 sum &#x3D; 最小的玩家技能点 + 最大的玩家技能点。所以这里我们可以将 input 数组排序，然后用双指针的方式从两边往中间逼近。如果有任何一组技能点的和 !&#x3D; sum则说明配对失败，返回 -1。</p><p>注意题目的数据范围，res 要用 long 类型，否则会溢出。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">dividePlayers</span><span class="hljs-params">(<span class="hljs-type">int</span>[] skill)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> skill.length;<br>        <span class="hljs-type">int</span>[] sorted = skill.clone();<br>        Arrays.sort(sorted);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> sorted[<span class="hljs-number">0</span>] + sorted[n - <span class="hljs-number">1</span>];<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> sorted[left++];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> sorted[right--];<br>            <span class="hljs-keyword">if</span> (l + r != sum) &#123;<br>                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res += l * r;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1497. Check If Array Pairs Are Divisible by k</title>
     <link href="/posts/2043078748.html"/>
     <url>/posts/2043078748.html</url>
@@ -579,9 +604,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1142,9 +1167,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1654,9 +1679,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>matrix</tag>
       
@@ -1837,9 +1862,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>string</tag>
       
@@ -2101,9 +2126,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2404,9 +2429,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>counting sort</tag>
       
@@ -2595,9 +2620,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3032,9 +3057,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>prefix sum</tag>
       
@@ -3142,9 +3167,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>heap</tag>
       
@@ -3225,9 +3250,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3668,9 +3693,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3720,9 +3745,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5046,9 +5071,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5073,9 +5098,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
