@@ -24,12 +24,12 @@
 <meta property="og:description" content="There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i]. You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from the ith stat">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-13T11:20:53.000Z">
-<meta property="article:modified_time" content="2024-10-05T23:30:10.661Z">
+<meta property="article:modified_time" content="2024-10-05T23:32:27.811Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="javascript">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="greedy">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary_large_image">
@@ -282,7 +282,7 @@
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个长度为 n 的环，用数组表示。环上的每一个点都有两个值，一个是当前加油站的油量，一个是开到下一个加油站的耗油量。请找到一个起点能够保证车开完一圈，返回起点的坐标；若找不到这个起点则返回-1。这是一个数学题。这个题涉及一个定理（此处不证明了），如果一个数组的总和非负，那么一定可以找到一个起始位置，从它开始绕数组一圈，累加和一直都是非负的。有了这个定理之后，可以对input做如下判断。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个长度为 n 的环，用数组表示。环上的每一个点都有两个值，一个是当前加油站的油量，一个是开到下一个加油站的耗油量。请找到一个起点能够保证车开完一圈，返回起点的坐标；若找不到这个起点则返回-1。这是一个数学题。这个题涉及一个定理（此处不证明了），<mark>如果一个数组的总和非负，那么一定可以找到一个起始位置，从它开始绕数组一圈，累加和一直都是非负的</mark>。有了这个定理之后，可以对input做如下判断。</p>
 <ol>
 <li>从位置 i 开始直到绕完一圈，如果油箱没空，说明从 i 开始所有的累积都是正的（总的加油量大于耗油量）</li>
 <li>如果在位置 j 的时候油箱空了，说明从位置 i 开始是走不完全程的，此时可以从 j + 1 的位置重新开始计算。为什么不考虑从 i + 1 的位置开始重新计算是因为 i 处的油量是正的情况下已经走不完全程了，因为从 i 去到 i + 1也有油耗，如果从 i + 1 开始，更走不完全程了</li>
@@ -307,11 +307,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
