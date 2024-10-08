@@ -2785,6 +2785,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2116. Check if a Parentheses String Can Be Valid</title>
+    <link href="/posts/1409866939.html"/>
+    <url>/posts/1409866939.html</url>
+    
+    <content type="html"><![CDATA[<p>A parentheses string is a non-empty string consisting only of ‘(‘ and ‘)’. It is valid if any of the following conditions is true:<br>It is ().<br>It can be written as AB (A concatenated with B), where A and B are valid parentheses strings.<br>It can be written as (A), where A is a valid parentheses string.<br>You are given a parentheses string s and a string locked, both of length n. locked is a binary string consisting only of ‘0’s and ‘1’s. For each index i of locked,</p><p>If locked[i] is ‘1’, you cannot change s[i].<br>But if locked[i] is ‘0’, you can change s[i] to either ‘(‘ or ‘)’.<br>Return true if you can make s a valid parentheses string. Otherwise, return false.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/11/06/eg1.png" alt="Example 1"><br>Input: s &#x3D; “))()))”, locked &#x3D; “010100”<br>Output: true<br>Explanation: locked[1] &#x3D;&#x3D; ‘1’ and locked[3] &#x3D;&#x3D; ‘1’, so we cannot change s[1] or s[3].<br>We change s[0] and s[4] to ‘(‘ while leaving s[2] and s[5] unchanged to make s valid.</p><p>Example 2:<br>Input: s &#x3D; “()()”, locked &#x3D; “0000”<br>Output: true<br>Explanation: We do not need to make any changes because s is already valid.</p><p>Example 3:<br>Input: s &#x3D; “)”, locked &#x3D; “0”<br>Output: false<br>Explanation: locked permits us to change s[0].<br>Changing s[0] to either ‘(‘ or ‘)’ will not make s valid.</p><p>Constraints:<br>n &#x3D;&#x3D; s.length &#x3D;&#x3D; locked.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>s[i] is either ‘(‘ or ‘)’.<br>locked[i] is either ‘0’ or ‘1’.</p><p>判断一个括号字符串是否有效。</p><blockquote>一个括号字符串是只由 '(' 和 ')' 组成的 非空 字符串。如果一个字符串满足下面 任意 一个条件，那么它就是有效的：<p>字符串为 ().<br>它可以表示为 AB（A 与 B 连接），其中A 和 B 都是有效括号字符串。<br>它可以表示为 (A) ，其中 A 是一个有效括号字符串。<br>给你一个括号字符串 s 和一个字符串 locked ，两者长度都为 n 。locked 是一个二进制字符串，只包含 ‘0’ 和 ‘1’ 。对于 locked 中 每一个 下标 i ：</p><p>如果 locked[i] 是 ‘1’ ，你 不能 改变 s[i] 。<br>如果 locked[i] 是 ‘0’ ，你 可以 将 s[i] 变为 ‘(‘ 或者 ‘)’ 。<br>如果你可以将 s 变为有效括号字符串，请你返回 true ，否则返回 false 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/check-if-a-parentheses-string-can-be-valid">https://leetcode.cn/problems/check-if-a-parentheses-string-can-be-valid</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遇到括号配对的题，大概率会涉及到 stack，以及需要从左往右 + 从右往左扫两遍。这么做的目的是抓到多余的左括号和多余的右括号。这道题的思路也很接近，不过这道题多给了一个数组 locked，表示可以改动的括号的方向。我们的做法依然还是扫两遍，第一遍我们从左往右扫描，扫描的时候我们用一个变量 count 统计左括号和可以改动的括号（locked.charAt(i) &#x3D;&#x3D; 0）的数量，这样当我们遇到右括号的时候，我们可以把左括号抵消。当左括号被抵消完毕之后，我们可以再用那些可以改动的括号来抵消更多的右括号，直到那些可以改动的括号被用完为止。</p><p>第二遍从右往左扫描的时候，我们用变量 count 统计右括号和可以改动的括号（locked.charAt(i) &#x3D;&#x3D; 0）的数量，这样当我们遇到左括号的时候，我们可以把右括号抵消。思路跟第一遍一样只是括号方向相反。</p><p>最后还有一个例外情况是如果统计到的半括号 + 可以改动的半括号的数量是奇数，就说明括号是无法成对的，就返回 false。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canBeValid</span><span class="hljs-params">(String s, String locked)</span> &#123;<br>        <span class="hljs-type">char</span>[] words = s.toCharArray();<br>        <span class="hljs-type">char</span>[] lock = locked.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br><span class="hljs-comment">// 遇到左括号或者当前位置是可以修改的，则count++</span><br><span class="hljs-comment">// 如果当前位置是右括号，则count--</span><br>            <span class="hljs-keyword">if</span> (words[i] == <span class="hljs-string">&#x27;(&#x27;</span> || lock[i] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (words[i] == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                count--;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (count % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>        count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br><span class="hljs-comment">// 遇到右括号或者当前位置是可以修改的，则count++</span><br><span class="hljs-comment">// 如果当前位置是左括号，则count--</span><br>            <span class="hljs-keyword">if</span> (words[i] == <span class="hljs-string">&#x27;)&#x27;</span> || lock[i] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (words[i] == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                count--;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (count % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+      <tag>stack</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1491. Average Salary Excluding the Minimum and Maximum Salary</title>
     <link href="/posts/576839838.html"/>
     <url>/posts/576839838.html</url>
@@ -5274,9 +5301,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5301,9 +5328,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
