@@ -440,9 +440,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -604,9 +604,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -974,11 +974,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -1167,9 +1167,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1348,9 +1348,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -1506,11 +1506,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -1679,9 +1679,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>matrix</tag>
       
@@ -1862,11 +1862,11 @@
       
       <tag>java</tag>
       
+      <tag>greedy</tag>
+      
       <tag>sort</tag>
       
       <tag>string</tag>
-      
-      <tag>greedy</tag>
       
     </tags>
     
@@ -2126,9 +2126,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2180,9 +2180,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2483,9 +2483,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>counting sort</tag>
       
@@ -2514,9 +2514,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>math</tag>
       
       <tag>counting sort</tag>
       
@@ -2566,9 +2566,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2674,9 +2674,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2799,9 +2799,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>stack</tag>
       
@@ -2901,9 +2901,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>string</tag>
       
       <tag>stack</tag>
       
@@ -3165,9 +3165,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>prefix sum</tag>
       
@@ -3275,9 +3275,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>heap</tag>
       
@@ -3358,9 +3358,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3519,6 +3519,31 @@
       <tag>preorder</tag>
       
       <tag>backtracking</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 921. Minimum Add to Make Parentheses Valid</title>
+    <link href="/posts/2414888932.html"/>
+    <url>/posts/2414888932.html</url>
+    
+    <content type="html"><![CDATA[<p>A parentheses string is valid if and only if:</p><ul><li>It is the empty string,</li><li>It can be written as AB (A concatenated with B), where A and B are valid strings, or</li><li>It can be written as (A), where A is a valid string.</li></ul><p>You are given a parentheses string s. In one move, you can insert a parenthesis at any position of the string.</p><ul><li>For example, if s &#x3D; “()))”, you can insert an opening parenthesis to be “(()))” or a closing parenthesis to be “())))”.</li></ul><p>Return the minimum number of moves required to make s valid.</p><p>Example 1:<br>Input: s &#x3D; “())”<br>Output: 1</p><p>Example 2:<br>Input: s &#x3D; “(((“<br>Output: 3</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 1000<br>s[i] is either ‘(‘ or ‘)’.</p><p>使括号有效的最少添加。</p><blockquote>给定一个由 '(' 和 ')' 括号组成的字符串 S，我们需要添加最少的括号（ '(' 或是 ')'，可以在任何位置），以使得到的括号字符串有效。<p>从形式上讲，只有满足下面几点之一，括号字符串才是有效的：</p><p>它是一个空字符串，或者<br>它可以被写成 AB （A 与 B 连接）, 其中 A 和 B 都是有效字符串，或者<br>它可以被写作 (A)，其中 A 是有效字符串。<br>给定一个括号字符串，返回为使结果字符串有效而必须添加的最少括号数。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/minimum-add-to-make-parentheses-valid">https://leetcode-cn.com/problems/minimum-add-to-make-parentheses-valid</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>括号匹配类型的题目，思路不是栈就是动态规划。这道题只涉及栈。</p><ul><li>遇到左括号，无条件入栈</li><li>遇到右括号，如果栈顶有元素且为左括号，则抵消左括号</li><li>如果栈顶没有元素，无条件入栈</li></ul><p>最后看一下栈内元素个数，这些元素就是匹配不上的括号数。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minAddToMakeValid</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Deque&lt;Character&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                stack.offerLast(c);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (!stack.isEmpty() &amp;&amp; stack.peekLast() == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                    stack.pollLast();<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    stack.offerLast(c);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stack.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">20. Valid Parentheses<br>678. Valid Parenthesis String<br>921. Minimum Add to Make Parentheses Valid<br>1111. Maximum Nesting Depth of Two Valid Parentheses Strings<br>1003. Check If Word Is Valid After Substitutions<br>1249. Minimum Remove to Make Valid Parentheses<br>1541. Minimum Insertions to Balance a Parentheses String<br>1963. Minimum Number of Swaps to Make the String Balanced<br>2116. Check if a Parentheses String Can Be Valid<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -3801,9 +3826,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3853,9 +3878,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5610,9 +5635,9 @@
       
       <tag>javascript</tag>
       
-      <tag>math</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -6553,7 +6578,7 @@
     <link href="/posts/869519969.html"/>
     <url>/posts/869519969.html</url>
     
-    <content type="html"><![CDATA[<p>Given a string s containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.</p><p>An input string is valid if:<br>Open brackets must be closed by the same type of brackets.<br>Open brackets must be closed in the correct order.<br>Every close bracket has a corresponding open bracket of the same type.</p><p>Example 1:<br>Input: s &#x3D; “()”<br>Output: true</p><p>Example 2:<br>Input: s &#x3D; “()[]{}”<br>Output: true</p><p>Example 3:<br>Input: s &#x3D; “(]”<br>Output: false</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 104<br>s consists of parentheses only ‘()[]{}’.</p><p>有效的括号。</p><blockquote><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。<br>有效字符串需满足：<br>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/valid-parentheses">https://leetcode.cn/problems/valid-parentheses</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是用 stack 做。如果看到左半边括号就无条件压入栈；如果看到右半边括号，判断栈是不是为空，为空就报错；栈不为空再判断目前栈顶元素是不是相对应的左半边，若不是也报错。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String s)</span> &#123;<br>        Deque&lt;Character&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span> || c == <span class="hljs-string">&#x27;[&#x27;</span> || c == <span class="hljs-string">&#x27;&#123;&#x27;</span>) &#123;<br>                stack.push(c);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;(&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;]&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;[&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;&#125;&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;&#123;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stack.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">boolean</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> isValid = <span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) &#123;<br>    <span class="hljs-keyword">let</span> stack = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;(&#x27;</span> || s[i] === <span class="hljs-string">&#x27;[&#x27;</span> || s[i] === <span class="hljs-string">&#x27;&#123;&#x27;</span>) &#123;<br>            stack.<span class="hljs-title function_">push</span>(s[i]);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;(&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;]&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;[&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;&#125;&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;&#123;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">20. Valid Parentheses<br>678. Valid Parenthesis String<br>1111. Maximum Nesting Depth of Two Valid Parentheses Strings<br>921. Minimum Add to Make Parentheses Valid<br>1541. Minimum Insertions to Balance a Parentheses String<br>1003. Check If Word Is Valid After Substitutions<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given a string s containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.</p><p>An input string is valid if:<br>Open brackets must be closed by the same type of brackets.<br>Open brackets must be closed in the correct order.<br>Every close bracket has a corresponding open bracket of the same type.</p><p>Example 1:<br>Input: s &#x3D; “()”<br>Output: true</p><p>Example 2:<br>Input: s &#x3D; “()[]{}”<br>Output: true</p><p>Example 3:<br>Input: s &#x3D; “(]”<br>Output: false</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 104<br>s consists of parentheses only ‘()[]{}’.</p><p>有效的括号。</p><blockquote><p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。<br>有效字符串需满足：<br>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/valid-parentheses">https://leetcode.cn/problems/valid-parentheses</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是用 stack 做。如果看到左半边括号就无条件压入栈；如果看到右半边括号，判断栈是不是为空，为空就报错；栈不为空再判断目前栈顶元素是不是相对应的左半边，若不是也报错。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String s)</span> &#123;<br>        Deque&lt;Character&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span> || c == <span class="hljs-string">&#x27;[&#x27;</span> || c == <span class="hljs-string">&#x27;&#123;&#x27;</span>) &#123;<br>                stack.push(c);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;(&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;]&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;[&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;&#125;&#x27;</span>) &#123;<br>                <span class="hljs-keyword">if</span> (stack.isEmpty() || stack.pop() != <span class="hljs-string">&#x27;&#123;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stack.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">boolean</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> isValid = <span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) &#123;<br>    <span class="hljs-keyword">let</span> stack = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;(&#x27;</span> || s[i] === <span class="hljs-string">&#x27;[&#x27;</span> || s[i] === <span class="hljs-string">&#x27;&#123;&#x27;</span>) &#123;<br>            stack.<span class="hljs-title function_">push</span>(s[i]);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;(&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;]&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;[&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (s[i] === <span class="hljs-string">&#x27;&#125;&#x27;</span>) &#123;<br>            <span class="hljs-keyword">if</span> (stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> || stack.<span class="hljs-title function_">pop</span>() != <span class="hljs-string">&#x27;&#123;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> stack.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">20. Valid Parentheses<br>678. Valid Parenthesis String<br>921. Minimum Add to Make Parentheses Valid<br>1111. Maximum Nesting Depth of Two Valid Parentheses Strings<br>1003. Check If Word Is Valid After Substitutions<br>1249. Minimum Remove to Make Valid Parentheses<br>1541. Minimum Insertions to Balance a Parentheses String<br>1963. Minimum Number of Swaps to Make the String Balanced<br>2116. Check if a Parentheses String Can Be Valid<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
