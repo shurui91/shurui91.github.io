@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 962. Maximum Width Ramp</title>
+    <link href="/posts/2923917953.html"/>
+    <url>/posts/2923917953.html</url>
+    
+    <content type="html"><![CDATA[<p>A ramp in an integer array nums is a pair (i, j) for which i &lt; j and nums[i] &lt;&#x3D; nums[j]. The width of such a ramp is j - i.</p><p>Given an integer array nums, return the maximum width of a ramp in nums. If there is no ramp in nums, return 0.</p><p>Example 1:<br>Input: nums &#x3D; [6,0,8,2,1,5]<br>Output: 4<br>Explanation: The maximum width ramp is achieved at (i, j) &#x3D; (1, 5): nums[1] &#x3D; 0 and nums[5] &#x3D; 5.</p><p>Example 2:<br>Input: nums &#x3D; [9,8,1,0,1,9,4,0,4,1]<br>Output: 7<br>Explanation: The maximum width ramp is achieved at (i, j) &#x3D; (2, 9): nums[2] &#x3D; 1 and nums[9] &#x3D; 1.</p><p>Constraints:<br>2 &lt;&#x3D; nums.length &lt;&#x3D; 5 * 104<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 5 * 104</p><p>最大宽度坡。</p><blockquote>给定一个整数数组 A，坡是元组 (i, j)，其中  i < j 且 A[i] <= A[j]。这样的坡的宽度为 j - i。<p>找出 A 中的坡的最大宽度，如果不存在，返回 0 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路是单调栈，不过这道题跟一般的单调栈题目有些不同。这道题的单调栈找的是两个距离最远的下标。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxWidthRamp</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (stack.isEmpty() || nums[i] &lt; nums[stack.peekLast()]) &#123;<br>                stack.offerLast(i);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) &#123;<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; nums[i] &gt;= nums[stack.peekLast()]) &#123;<br>                res = Math.max(res, i - stack.pollLast());<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>stack</tag>
+      
+      <tag>monotonic stack</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2491. Divide Players Into Teams of Equal Skill</title>
     <link href="/posts/3764186800.html"/>
     <url>/posts/3764186800.html</url>
@@ -604,9 +631,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1167,9 +1194,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1679,9 +1706,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
@@ -1862,9 +1889,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -2126,9 +2153,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2483,9 +2510,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -2674,9 +2701,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3165,9 +3192,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>prefix sum</tag>
       
@@ -3275,9 +3302,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -3358,9 +3385,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3826,9 +3853,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3878,9 +3905,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -5388,9 +5415,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -5415,9 +5442,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
