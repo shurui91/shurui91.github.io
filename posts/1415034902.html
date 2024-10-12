@@ -24,7 +24,7 @@
 <meta property="og:description" content="Given an array of meeting time intervals intervals where intervals[i] &#x3D; [starti, endi], return the minimum number of conference rooms required. Example 1:Input: intervals &#x3D; [[0,30],[5,10],[1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-01T08:35:32.000Z">
-<meta property="article:modified_time" content="2024-10-12T20:58:17.783Z">
+<meta property="article:modified_time" content="2024-10-12T21:00:33.157Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -281,10 +281,10 @@
 <p>如果扫描线的题目做多了，一开始的本能反应可能是对 start 或者对 end 排序，看看是否存在 interval 之间的 overlap，但是其实是行不通的，因为可能存在比如某个会议 start 时间没有跟其他任何一个会议的 end 时间有冲突，但是有可能这个会议一直持续到最后，他的 end 时间跟别的会议也没有 overlap，但是他其实一直是占用一个房间的。</p>
 <p>同时，为什么排序 + 双指针这个做法是正确的呢？对 start 和对 end 分别排序之后，因为 start 和 end 是有序的，在用双指针分别指向当前的 start 和当前的 end 的时候，只要当前 start 小于当前的 end，就一定要再开一个房间，因为当前确实是有一个会议没有结束。我们将 start 和 end 分别排序之后，其实是可以把数据抽象成如下这幅图的。</p>
 <p>一开始，会议时间线是这样的：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">|<span class="hljs-string">_____</span>|<br>      |<span class="hljs-string">______</span>|<br>|<span class="hljs-string">________</span>|<br>        |<span class="hljs-string">_______</span>|<br></code></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">|_____|<br>      |______|<br>|________|<br>        |_______|<br></code></pre></td></tr></table></figure>
 
 <p>如果把开始时间和结束时间分别排序，会变成：</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">||<span class="hljs-string">    </span>||<br>     |<span class="hljs-string">   </span>|<span class="hljs-string">   </span>|<span class="hljs-string">  </span>|<br></code></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">||    ||<br>     |   |   |  |<br></code></pre></td></tr></table></figure>
 
 <p>所以只要碰到 start，就一定要增加一个房间，碰到 end 就可以减少一个房间。我们在遍历的过程中找到同时使用的会议室的峰值即可。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - 因为有对 input 排序<br>空间O(n) - 有用额外数组对 start 和 end 排序</p>
