@@ -498,9 +498,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1032,11 +1032,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1406,9 +1406,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1564,11 +1564,11 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
       
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1922,9 +1922,9 @@
       
       <tag>sort</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2238,9 +2238,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2572,9 +2572,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -2624,9 +2624,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2857,9 +2857,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>stack</tag>
       
@@ -2959,9 +2959,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>string</tag>
+      
+      <tag>greedy</tag>
       
       <tag>stack</tag>
       
@@ -5446,9 +5446,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5473,9 +5473,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
@@ -5693,9 +5693,9 @@
       
       <tag>javascript</tag>
       
-      <tag>greedy</tag>
-      
       <tag>math</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -6426,7 +6426,7 @@
     <link href="/posts/3842132459.html"/>
     <url>/posts/3842132459.html</url>
     
-    <content type="html"><![CDATA[<p>Given an array of meeting time intervals where intervals[i] &#x3D; [start, end], determine if a person could attend all meetings.</p><p>Example 1:<br>Input: intervals &#x3D; [[0,30],[5,10],[15,20]]<br>Output: false</p><p>Example 2:<br>Input: intervals &#x3D; [[7,10],[2,4]]<br>Output: true</p><p>Constraints:<br>0 &lt;&#x3D; intervals.length &lt;&#x3D; 104<br>intervals[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; start &lt; end &lt;&#x3D; 106</p><blockquote>给定一个会议时间安排的数组 intervals ，每个会议时间都会包括开始和结束的时间 intervals[i] = [starti, endi] ，请你判断一个人是否能够参加这里面的全部会议。<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/meeting-rooms">https://leetcode.cn/problems/meeting-rooms</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给的 input 是一个二维数组，二维数组里面的每一个元素记录了每个会议的开始时间和结束时间。问同一个人是否有可能参加所有的会议。思路很简单，这是LC上算是一种比较特别的题型 - 扫描线。这题的思路是按照会议开始时间给 input 排序，如果有任何一个会议的结束时间 &gt; 下一个会议的开始时间，就 return false。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canAttendMeetings</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; intervals.length; i++) &#123;<br>            <span class="hljs-keyword">if</span> (intervals[i][<span class="hljs-number">0</span>] &lt; intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">252. Meeting Rooms<br>253. Meeting Rooms II<br>2406. Divide Intervals Into Minimum Number of Groups<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given an array of meeting time intervals where intervals[i] &#x3D; [start, end], determine if a person could attend all meetings.</p><p>Example 1:<br>Input: intervals &#x3D; [[0,30],[5,10],[15,20]]<br>Output: false</p><p>Example 2:<br>Input: intervals &#x3D; [[7,10],[2,4]]<br>Output: true</p><p>Constraints:<br>0 &lt;&#x3D; intervals.length &lt;&#x3D; 104<br>intervals[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; start &lt; end &lt;&#x3D; 106</p><blockquote>给定一个会议时间安排的数组 intervals ，每个会议时间都会包括开始和结束的时间 intervals[i] = [starti, endi] ，请你判断一个人是否能够参加这里面的全部会议。<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/meeting-rooms">https://leetcode.cn/problems/meeting-rooms</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一-按会议开始时间排序"><a href="#思路一-按会议开始时间排序" class="headerlink" title="思路一 - 按会议开始时间排序"></a>思路一 - 按会议开始时间排序</h2><p>给的 input 是一个二维数组，二维数组里面的每一个元素记录了每个会议的开始时间和结束时间。问同一个人是否有可能参加所有的会议。思路很简单，这是LC上算是一种比较特别的题型 - 扫描线。这题的思路是按照会议开始时间给 input 排序，如果有任何一个会议的结束时间 &gt; 下一个会议的开始时间，就 return false。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canAttendMeetings</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; intervals.length; i++) &#123;<br>            <span class="hljs-keyword">if</span> (intervals[i][<span class="hljs-number">0</span>] &lt; intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[][]</span>&#125; <span class="hljs-variable">intervals</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">boolean</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> canAttendMeetings = <span class="hljs-keyword">function</span> (<span class="hljs-params">intervals</span>) &#123;<br><span class="hljs-keyword">let</span> sorted = intervals.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; sorted.<span class="hljs-property">length</span>; i++) &#123;<br><span class="hljs-keyword">if</span> (sorted[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] &gt; sorted[i][<span class="hljs-number">0</span>]) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="思路二-按结束时间排序"><a href="#思路二-按结束时间排序" class="headerlink" title="思路二 - 按结束时间排序"></a>思路二 - 按结束时间排序</h2><p>这道题也可以按照会议结束时间排序，然后从第二个会议开始看，如果有任何一个会议的开始时间早于前一个会议的结束时间，则 return false。思路跟 JS 的版本其实都是类似的，无非是实现方式稍有差异。</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canAttendMeetings</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; intervals.length; i++) &#123;<br>            <span class="hljs-keyword">if</span> (intervals[i][<span class="hljs-number">0</span>] &lt; intervals[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">252. Meeting Rooms<br>253. Meeting Rooms II<br>2406. Divide Intervals Into Minimum Number of Groups<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
