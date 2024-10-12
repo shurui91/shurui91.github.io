@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>[LeetCode] 2406. Divide Intervals Into Minimum Number of Groups</title>
+    <link href="/posts/2190935650.html"/>
+    <url>/posts/2190935650.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 2D integer array intervals where intervals[i] &#x3D; [left, right] represents the inclusive interval [left, right].</p><p>You have to divide the intervals into one or more groups such that each interval is in exactly one group, and no two intervals that are in the same group intersect each other.</p><p>Return the minimum number of groups you need to make.</p><p>Two intervals intersect if there is at least one common number between them. For example, the intervals [1, 5] and [5, 8] intersect.</p><p>Example 1:<br>Input: intervals &#x3D; [[5,10],[6,8],[1,5],[2,3],[1,10]]<br>Output: 3<br>Explanation: We can divide the intervals into the following groups:</p><ul><li>Group 1: [1, 5], [6, 8].</li><li>Group 2: [2, 3], [5, 10].</li><li>Group 3: [1, 10].<br>It can be proven that it is not possible to divide the intervals into fewer than 3 groups.</li></ul><p>Example 2:<br>Input: intervals &#x3D; [[1,3],[5,6],[8,10],[11,13]]<br>Output: 1<br>Explanation: None of the intervals overlap, so we can put all of them in one group.</p><p>Constraints:<br>1 &lt;&#x3D; intervals.length &lt;&#x3D; 105<br>intervals[i].length &#x3D;&#x3D; 2<br>1 &lt;&#x3D; left &lt;&#x3D; right &lt;&#x3D; 106</p><p>将区间分为最少组数。</p><blockquote>给你一个二维整数数组 intervals ，其中 intervals[i] = [left, right] 表示 闭 区间 [left, right] 。<p>你需要将 intervals 划分为一个或者多个区间 组 ，每个区间 只 属于一个组，且同一个组中任意两个区间 不相交 。</p><p>请你返回 最少 需要划分成多少个组。</p><p>如果两个区间覆盖的范围有重叠（即至少有一个公共数字），那么我们称这两个区间是 相交 的。比方说区间 [1, 5] 和 [5, 8] 相交。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题思路同会议室 II。大致思路都是排序 + 比较，只是具体做法有些区别。以下请把 left 和 right 分别理解为一个会议的开始时间和结束时间。</p><h2 id="思路一-排序-最小堆"><a href="#思路一-排序-最小堆" class="headerlink" title="思路一 - 排序 + 最小堆"></a>思路一 - 排序 + 最小堆</h2><p>初始化的时候对 input 按 开始时间 排序，然后准备一个最小堆，是用来放入所有会议的 结束时间。遍历 input 数组，因为 input 已经按 开始时间 排过序，所以对于某个 开始时间 而言，我们拿他去跟堆顶的最小的 结束时间 比较。如果 开始时间 跟 结束时间 有重叠，则说明这两个会议时间是有交集的，一定要再开一个会议室（将当前结束时间放入堆中）。照着此题的题意就是这两个区间一定不能分在同一组。最后最小堆的 size 就是会议室的数量 - 也就是分组的数量。</p><h2 id="思路二-对-left-和-right-分别排序"><a href="#思路二-对-left-和-right-分别排序" class="headerlink" title="思路二 - 对 left 和 right 分别排序"></a>思路二 - 对 left 和 right 分别排序</h2><p>对会议的 开始时间 和 结束时间 分别排序。用双指针的方式遍历 开始时间 和 结束时间。如果某个 结束时间 比当前的 开始时间 小，则说明两个会议没有交集，可以分在同一组。如果某个 结束时间 比当前的 开始时间 大，则说明两个会议有交集，就需要再加一组。最后返回组的数量。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现 - 排序 + 最小堆</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minGroups</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>        PriorityQueue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a - b);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> intervals.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span>[] cur = intervals[i];<br>            <span class="hljs-keyword">if</span> (!queue.isEmpty() &amp;&amp; queue.peek() &lt; cur[<span class="hljs-number">0</span>]) &#123;<br>                queue.poll();<br>            &#125;<br>            queue.offer(cur[<span class="hljs-number">1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Java实现 - 对 left 和 right 分别排序</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minGroups</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (intervals == <span class="hljs-literal">null</span> || intervals.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> intervals.length;<br>        <span class="hljs-type">int</span>[] start = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span>[] end = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            start[i] = intervals[i][<span class="hljs-number">0</span>];<br>            end[i] = intervals[i][<span class="hljs-number">1</span>];<br>        &#125;<br>        Arrays.sort(start);<br>        Arrays.sort(end);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">pointer</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (start[i] &lt;= end[pointer]) &#123;<br>                res++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                pointer++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">252. Meeting Rooms<br>253. Meeting Rooms II<br>2406. Divide Intervals Into Minimum Number of Groups<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>heap</tag>
+      
+      <tag>line sweep</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 962. Maximum Width Ramp</title>
     <link href="/posts/2923917953.html"/>
     <url>/posts/2923917953.html</url>
@@ -5415,9 +5446,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -5442,9 +5473,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
