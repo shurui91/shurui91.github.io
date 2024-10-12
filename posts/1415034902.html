@@ -24,7 +24,7 @@
 <meta property="og:description" content="Given an array of meeting time intervals intervals where intervals[i] &#x3D; [starti, endi], return the minimum number of conference rooms required. Example 1:Input: intervals &#x3D; [[0,30],[5,10],[1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-11-01T08:35:32.000Z">
-<meta property="article:modified_time" content="2024-10-12T20:57:21.760Z">
+<meta property="article:modified_time" content="2024-10-12T20:58:17.783Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k words
+          3.2k words
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          26 mins
+          27 mins
         
       </span>
     
@@ -298,6 +298,9 @@
 <h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)，其中排序O(nlogn)，heap的各项操作O(logn)<br>空间O(n)</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMeetingRooms</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] intervals)</span> &#123;<br>		<span class="hljs-comment">// 按开始时间排序</span><br>        Arrays.sort(intervals, (a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>		<span class="hljs-comment">// 堆顶是结束时间最小的会议</span><br>        PriorityQueue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a - b);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> intervals.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span>[] cur = intervals[i];<br>            <span class="hljs-keyword">if</span> (!queue.isEmpty() &amp;&amp; queue.peek() &lt;= cur[<span class="hljs-number">0</span>]) &#123;<br>                queue.poll();<br>            &#125;<br>            queue.offer(cur[<span class="hljs-number">1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> queue.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">252. Meeting Rooms<br>253. Meeting Rooms II<br>2406. Divide Intervals Into Minimum Number of Groups<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
