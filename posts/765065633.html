@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a 0-indexed integer array nums and an integer k. You have a starting score of 0. In one operation:choose an index i such that 0 &lt;&#x3D; i &lt; nums.length,increase your score by nums[">
+    <meta name="description" content="A string s is called happy if it satisfies the following conditions:  s only contains the letters ‘a’, ‘b’, and ‘c’. s does not contain any of “aaa”, “bbb”, or “ccc” as a substring. s contains at most">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2530. Maximal Score After Applying K Operations">
-<meta property="og:url" content="https://shurui91.github.io/posts/417783291.html">
+<meta property="og:title" content="[LeetCode] 1405. Longest Happy String">
+<meta property="og:url" content="https://shurui91.github.io/posts/765065633.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a 0-indexed integer array nums and an integer k. You have a starting score of 0. In one operation:choose an index i such that 0 &lt;&#x3D; i &lt; nums.length,increase your score by nums[">
+<meta property="og:description" content="A string s is called happy if it satisfies the following conditions:  s only contains the letters ‘a’, ‘b’, and ‘c’. s does not contain any of “aaa”, “bbb”, or “ccc” as a substring. s contains at most">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-18T16:48:47.000Z">
-<meta property="article:modified_time" content="2024-10-15T01:48:28.125Z">
+<meta property="article:published_time" content="2021-01-19T08:56:01.000Z">
+<meta property="article:modified_time" content="2024-10-16T23:12:44.907Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="greedy">
-<meta property="article:tag" content="heap">
+<meta property="article:tag" content="dynamic programming">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2530. Maximal Score After Applying K Operations - CNoodle</title>
+  <title>[LeetCode] 1405. Longest Happy String - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2530. Maximal Score After Applying K Operations"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1405. Longest Happy String"></span>
           
         </div>
 
@@ -200,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-18 09:48" pubdate>
-          October 18, 2023 am
+        <time datetime="2021-01-19 00:56" pubdate>
+          January 19, 2021 am
         </time>
       </span>
     
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          2.2k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          14 mins
+          19 mins
         
       </span>
     
@@ -260,30 +259,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2530. Maximal Score After Applying K Operations</h1>
+            <h1 id="seo-header">[LeetCode] 1405. Longest Happy String</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a 0-indexed integer array nums and an integer k. You have a starting score of 0.</p>
-<p>In one operation:<br>choose an index i such that 0 &lt;&#x3D; i &lt; nums.length,<br>increase your score by nums[i], and<br>replace nums[i] with ceil(nums[i] &#x2F; 3).<br>Return the maximum possible score you can attain after applying exactly k operations.</p>
-<p>The ceiling function ceil(val) is the least integer greater than or equal to val.</p>
-<p>Example 1:<br>Input: nums &#x3D; [10,10,10,10,10], k &#x3D; 5<br>Output: 50<br>Explanation: Apply the operation to each array element exactly once. The final score is 10 + 10 + 10 + 10 + 10 &#x3D; 50.</p>
-<p>Example 2:<br>Input: nums &#x3D; [1,10,3,3,3], k &#x3D; 3<br>Output: 17<br>Explanation: You can do the following operations:<br>Operation 1: Select i &#x3D; 1, so nums becomes [1,4,3,3,3]. Your score increases by 10.<br>Operation 2: Select i &#x3D; 1, so nums becomes [1,2,3,3,3]. Your score increases by 4.<br>Operation 3: Select i &#x3D; 2, so nums becomes [1,1,1,3,3]. Your score increases by 3.<br>The final score is 10 + 4 + 3 &#x3D; 17.</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length, k &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 109</p>
-<p>执行 K 次操作后的最大分数。</p>
+                <p>A string s is called happy if it satisfies the following conditions:</p>
+<ul>
+<li>s only contains the letters ‘a’, ‘b’, and ‘c’.</li>
+<li>s does not contain any of “aaa”, “bbb”, or “ccc” as a substring.</li>
+<li>s contains at most a occurrences of the letter ‘a’.</li>
+<li>s contains at most b occurrences of the letter ‘b’.</li>
+<li>s contains at most c occurrences of the letter ‘c’.</li>
+</ul>
+<p>Given three integers a, b, and c, return the longest possible happy string. If there are multiple longest happy strings, return any of them. If there is no such string, return the empty string “”.</p>
+<p>A substring is a contiguous sequence of characters within a string.</p>
+<p>Example 1:<br>Input: a &#x3D; 1, b &#x3D; 1, c &#x3D; 7<br>Output: “ccaccbcc”<br>Explanation: “ccbccacc” would also be a correct answer.</p>
+<p>Example 2:<br>Input: a &#x3D; 7, b &#x3D; 1, c &#x3D; 0<br>Output: “aabaa”<br>Explanation: It is the only correct answer in this case.</p>
+<p>Constraints:<br>0 &lt;&#x3D; a, b, c &lt;&#x3D; 100<br>a + b + c &gt; 0</p>
+<p>最长快乐字符串。</p>
 <blockquote>
-给你一个下标从 0 开始的整数数组 nums 和一个整数 k 。你的 起始分数 为 0 。
+如果字符串中不含有任何 'aaa'，'bbb' 或 'ccc' 这样的字符串作为子串，那么该字符串就是一个「快乐字符串」。
 
-<p>在一步 操作 中：<br>选出一个满足 0 &lt;&#x3D; i &lt; nums.length 的下标 i ，<br>将你的 分数 增加 nums[i] ，并且<br>将 nums[i] 替换为 ceil(nums[i] &#x2F; 3) 。<br>返回在 恰好 执行 k 次操作后，你可能获得的最大分数。</p>
-<p>向上取整函数 ceil(val) 的结果是大于或等于 val 的最小整数。</p>
+<p>给你三个整数 a，b ，c，请你返回 任意一个 满足下列全部条件的字符串 s：</p>
+<p>s 是一个尽可能长的快乐字符串。<br>s 中 最多 有a 个字母 ‘a’、b 个字母 ‘b’、c 个字母 ‘c’ 。<br>s 中只含有 ‘a’、’b’ 、’c’ 三种字母。<br>如果不存在这样的字符串 s ，请返回一个空字符串 “”。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-happy-string">https://leetcode-cn.com/problems/longest-happy-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心，具体做法会用到一个最大堆。初始化的时候将 input 数组里的所有元素都放入最大堆，然后每次弹出堆顶元素 top，将这个元素的值累加到结果 res，然后再把 top 除以 3 再放回最大堆，如此一套流程执行 k 次之后停止。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn) - 也可以是O(nlogk)，取决于你怎么创建这个最大堆<br>空间O(n) - 也可以是O(k)，取决于你怎么创建这个最大堆</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题其实是 984 题的升级版，984 题只有 A 和 B 两个字母，这道题需要处理三个不同字母。</p>
+<p>这道题的思路是贪心。这道题的贪心贪的就是尽可能先用剩余个数最多的字母。具体做法是我们用一个优先队列把三个字母及其次数放进去，次数最多的字母在堆顶。如果当前堆顶的字母已经在 res 里连续拼接过两次了，就需要再弹出下一个字母，直到堆空或者下一个字母不和当前堆顶的字母连续。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">maxKelements</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        PriorityQueue&lt;Double&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; Double.compare(b, a));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            queue.offer((<span class="hljs-type">double</span>) num);<br>        &#125;<br>        <br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>        <span class="hljs-keyword">while</span> (k != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">double</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> queue.poll();<br>            res += top;<br>            queue.offer(Math.ceil(top / <span class="hljs-number">3</span>));<br>            k--;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">longestDiverseString</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> c)</span> &#123;<br>		<span class="hljs-comment">// [&#x27;a&#x27;, count]</span><br>		PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((x, y) -&gt; y[<span class="hljs-number">1</span>] - x[<span class="hljs-number">1</span>]);<br>		<span class="hljs-keyword">if</span> (a &gt; <span class="hljs-number">0</span>) queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">0</span>, a&#125;);<br>		<span class="hljs-keyword">if</span> (b &gt; <span class="hljs-number">0</span>) queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">1</span>, b&#125;);<br>		<span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">0</span>) queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;<span class="hljs-number">2</span>, c&#125;);<br><br>		<span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>		<span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>			<span class="hljs-type">int</span>[] cur = queue.poll();<br>			<span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> sb.length();<br>			<span class="hljs-keyword">if</span> (n &gt;= <span class="hljs-number">2</span> &amp;&amp; sb.charAt(n - <span class="hljs-number">1</span>) - <span class="hljs-string">&#x27;a&#x27;</span> == cur[<span class="hljs-number">0</span>] &amp;&amp; sb.charAt(n - <span class="hljs-number">2</span>) - <span class="hljs-string">&#x27;a&#x27;</span> == cur[<span class="hljs-number">0</span>]) &#123;<br>				<span class="hljs-keyword">if</span> (queue.isEmpty()) &#123;<br>					<span class="hljs-keyword">break</span>;<br>				&#125;<br>				<span class="hljs-type">int</span>[] next = queue.poll();<br>				sb.append((<span class="hljs-type">char</span>) (<span class="hljs-string">&#x27;a&#x27;</span> + next[<span class="hljs-number">0</span>]));<br>				<span class="hljs-keyword">if</span> (--next[<span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) &#123;<br>					queue.offer(next);<br>				&#125;<br>				queue.offer(cur);<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				sb.append((<span class="hljs-type">char</span>) (<span class="hljs-string">&#x27;a&#x27;</span> + cur[<span class="hljs-number">0</span>]));<br>				<span class="hljs-keyword">if</span> (--cur[<span class="hljs-number">1</span>] &gt; <span class="hljs-number">0</span>) &#123;<br>					queue.offer(cur);<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> sb.toString();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">984. String Without AAA or BBB<br>1405. Longest Happy String<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -298,13 +308,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
-        <a href="/tags/heap/" class="print-no-link">#heap</a>
+        <a href="/tags/dynamic-programming/" class="print-no-link">#dynamic programming</a>
       
     </div>
   
@@ -316,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2530. Maximal Score After Applying K Operations</div>
-      <div>https://shurui91.github.io/posts/417783291.html</div>
+      <div>[LeetCode] 1405. Longest Happy String</div>
+      <div>https://shurui91.github.io/posts/765065633.html</div>
     </div>
     <div class="license-meta">
       
@@ -329,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 18, 2023</div>
+          <div>January 19, 2021</div>
         </div>
       
       
@@ -361,9 +369,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3117302007.html" title="[LeetCode] 2558. Take Gifts From the Richest Pile">
+                      <a href="/posts/1169337340.html" title="[LeetCode] 1657. Determine if Two Strings Are Close">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2558. Take Gifts From the Richest Pile</span>
+                        <span class="hidden-mobile">[LeetCode] 1657. Determine if Two Strings Are Close</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -371,8 +379,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1880376029.html" title="[LeetCode] 1921. Eliminate Maximum Number of Monsters">
-                        <span class="hidden-mobile">[LeetCode] 1921. Eliminate Maximum Number of Monsters</span>
+                      <a href="/posts/3220296722.html" title="[LeetCode] 二分查找模板 binary search">
+                        <span class="hidden-mobile">[LeetCode] 二分查找模板 binary search</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -392,8 +400,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/417783291.html';
-          this.page.identifier = '/posts/417783291.html';
+          this.page.url = 'https://shurui91.github.io/posts/765065633.html';
+          this.page.identifier = '/posts/765065633.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
