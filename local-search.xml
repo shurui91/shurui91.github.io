@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1545. Find Kth Bit in Nth Binary String</title>
+    <link href="/posts/2502083860.html"/>
+    <url>/posts/2502083860.html</url>
+    
+    <content type="html"><![CDATA[<p>Given two positive integers n and k, the binary string Sn is formed as follows:<br>S1 &#x3D; “0”<br>Si &#x3D; Si - 1 + “1” + reverse(invert(Si - 1)) for i &gt; 1<br>Where + denotes the concatenation operation, reverse(x) returns the reversed string x, and invert(x) inverts all the bits in x (0 changes to 1 and 1 changes to 0).</p><p>For example, the first four strings in the above sequence are:<br>S1 &#x3D; “0”<br>S2 &#x3D; “011”<br>S3 &#x3D; “0111001”<br>S4 &#x3D; “011100110110001”<br>Return the kth bit in Sn. It is guaranteed that k is valid for the given n.</p><p>Example 1:<br>Input: n &#x3D; 3, k &#x3D; 1<br>Output: “0”<br>Explanation: S3 is “0111001”.<br>The 1st bit is “0”.</p><p>Example 2:<br>Input: n &#x3D; 4, k &#x3D; 11<br>Output: “1”<br>Explanation: S4 is “011100110110001”.<br>The 11th bit is “1”.</p><p>Constraints:<br>1 &lt;&#x3D; n &lt;&#x3D; 20<br>1 &lt;&#x3D; k &lt;&#x3D; 2n - 1</p><p>找出第 N 个二进制字符串中的第 K 位。</p><blockquote>给你两个正整数 n 和 k，二进制字符串  Sn 的形成规则如下：S1 = "0"当 i > 1 时，Si = Si-1 + "1" + reverse(invert(Si-1))其中 + 表示串联操作，reverse(x) 返回反转 x 后得到的字符串，而 invert(x) 则会翻转 x 中的每一位（0 变为 1，而 1 变为 0）。<p>例如，符合上述描述的序列的前 4 个字符串依次是：<br>S1 &#x3D; “0”<br>S2 &#x3D; “011”<br>S3 &#x3D; “0111001”<br>S4 &#x3D; “011100110110001”<br>请你返回  Sn 的 第 k 位字符 ，题目数据保证 k 一定在 Sn 长度范围以内。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路是递归。注意这个条件，<code>当 i &gt; 1 时，Si = Si-1 + &quot;1&quot; + reverse(invert(Si-1))</code>，当前字符串 Si 是由 Si-1 得到的。因着这个规则，我们可以试图用递归做。</p><ul><li>如果 k 是中间那个 1，那么就返回 1</li><li>如果 k 在左半边，那么就递归去找 Si - 1 的 k 位上的字符</li><li>如果 k 在右半边，那么就递归去找 Si - 1，然后找到与 k 轴对称的那个 index，再做 invert 操作，是 0 则返回 1，是 1 则返回 0。</li></ul><p>找与 k 轴对称的那个 index 的方法，自己需要演算一下。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - 每次递归就找原长度的一半即可<br>空间O(n) - 栈空间</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">char</span> <span class="hljs-title function_">findKthBit</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br><span class="hljs-comment">// 如果长度是1，那么就是S1</span><br>        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125;<br><span class="hljs-comment">// 如果k恰好是中间那个digit，那么就是1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">2</span>, n) - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (k == (len + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;1&#x27;</span>;<br>        &#125;<br>        <span class="hljs-comment">// if at the first half</span><br>        <span class="hljs-keyword">if</span> (k &lt; (len + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> findKthBit(n - <span class="hljs-number">1</span>, k);<br>        &#125;<br><span class="hljs-comment">// 如果k是右半边的digit，找到k在上一个字符串里的位置的reverse位置上的digit再返回他的invert的值</span><br>        <span class="hljs-keyword">return</span> findKthBit(n - <span class="hljs-number">1</span>, len - k + <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;1&#x27;</span> ? <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-string">&#x27;1&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>recursion</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 908. Smallest Range I</title>
     <link href="/posts/2286244288.html"/>
     <url>/posts/2286244288.html</url>
