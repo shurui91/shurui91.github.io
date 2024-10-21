@@ -16,27 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+    <meta name="description" content="Given an integer array hours representing times in hours, return an integer denoting the number of pairs i, j where i &lt; j and hours[i] + hours[j] forms a complete day. A complete day is defined as">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique">
-<meta property="og:url" content="https://shurui91.github.io/posts/3172184168.html">
+<meta property="og:title" content="[LeetCode] 3184. Count Pairs That Form a Complete Day I">
+<meta property="og:url" content="https://shurui91.github.io/posts/280881127.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="A string s is called good if there are no two different characters in s that have the same frequency. Given a string s, return the minimum number of characters you need to delete to make s good. The f">
+<meta property="og:description" content="Given an integer array hours representing times in hours, return an integer denoting the number of pairs i, j where i &lt; j and hours[i] + hours[j] forms a complete day. A complete day is defined as">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-21T23:00:43.000Z">
-<meta property="article:modified_time" content="2023-11-21T23:13:46.158Z">
+<meta property="article:published_time" content="2024-10-21T20:36:42.000Z">
+<meta property="article:modified_time" content="2024-10-21T20:51:58.738Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="sort">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="counting sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique - CNoodle</title>
+  <title>[LeetCode] 3184. Count Pairs That Form a Complete Day I - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 3184. Count Pairs That Form a Complete Day I"></span>
           
         </div>
 
@@ -201,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-21 15:00" pubdate>
-          November 21, 2023 pm
+        <time datetime="2024-10-21 13:36" pubdate>
+          October 21, 2024 pm
         </time>
       </span>
     
@@ -261,27 +260,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</h1>
+            <h1 id="seo-header">[LeetCode] 3184. Count Pairs That Form a Complete Day I</h1>
             
             
               <div class="markdown-body">
                 
-                <p>A string s is called good if there are no two different characters in s that have the same frequency.</p>
-<p>Given a string s, return the minimum number of characters you need to delete to make s good.</p>
-<p>The frequency of a character in a string is the number of times it appears in the string. For example, in the string “aab”, the frequency of ‘a’ is 2, while the frequency of ‘b’ is 1.</p>
-<p>Example 1:<br>Input: s &#x3D; “aab”<br>Output: 0<br>Explanation: s is already good.</p>
-<p>Example 2:<br>Input: s &#x3D; “aaabbbcc”<br>Output: 2<br>Explanation: You can delete two ‘b’s resulting in the good string “aaabcc”.<br>Another way it to delete one ‘b’ and one ‘c’ resulting in the good string “aaabbc”.</p>
-<p>Example 3:<br>Input: s &#x3D; “ceabaacb”<br>Output: 2<br>Explanation: You can delete both ‘c’s resulting in the good string “eabaab”.<br>Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s contains only lowercase English letters.</p>
-<p>字符频次唯一的最小删除次数。</p>
+                <p>Given an integer array hours representing times in hours, return an integer denoting the number of pairs i, j where i &lt; j and hours[i] + hours[j] forms a complete day.</p>
+<p>A complete day is defined as a time duration that is an exact multiple of 24 hours.</p>
+<p>For example, 1 day is 24 hours, 2 days is 48 hours, 3 days is 72 hours, and so on.</p>
+<p>Example 1:<br>Input: hours &#x3D; [12,12,30,24,24]<br>Output: 2</p>
+<p>Explanation:<br>The pairs of indices that form a complete day are (0, 1) and (3, 4).</p>
+<p>Example 2:<br>Input: hours &#x3D; [72,48,24,3]<br>Output: 3</p>
+<p>Explanation:<br>The pairs of indices that form a complete day are (0, 1), (0, 2), and (1, 2).</p>
+<p>Constraints:<br>1 &lt;&#x3D; hours.length &lt;&#x3D; 100<br>1 &lt;&#x3D; hours[i] &lt;&#x3D; 109</p>
+<p>构成整天的下标对数目 I。</p>
 <blockquote>
-<p>如果字符串 s 中 不存在 两个不同字符 频次 相同的情况，就称 s 是 优质字符串 。<br>给你一个字符串 s，返回使 s 成为 优质字符串 需要删除的 最小 字符数。<br>字符串中字符的 频次 是该字符在字符串中的出现次数。例如，在字符串 “aab” 中，’a’ 的频次是 2，而 ‘b’ 的频次是 1 。</p>
+给你一个整数数组 hours，表示以 小时 为单位的时间，返回一个整数，表示满足 i < j 且 hours[i] + hours[j] 构成 整天 的下标对 i, j 的数目。
+
+<p>整天 定义为时间持续时间是 24 小时的 整数倍 。</p>
+<p>例如，1 天是 24 小时，2 天是 48 小时，3 天是 72 小时，以此类推。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历数组的时候，用一个长度为26的 <code>int[] map</code> 数组记录 input 字符串中每个不同字母的出现次数。</p>
-<p>接着我们再创建一个 hashset，去遍历这个长度为 26 的 int 数组，对于当前字母的出现次数 map[i]，如果他在 hashset 中出现过，那么他就不是一个 unique 的出现次数，那么我们就把这个出现次数减一，直到他变成一个 unique 的出现次数，再加入 hashset。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+
+
+<h2 id="思路一-暴力解"><a href="#思路一-暴力解" class="headerlink" title="思路一 暴力解"></a>思路一 暴力解</h2><p>暴力解法是枚举所有可能的下标对，然后判断是否构成整天。时间复杂度为 O(n^2)。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minDeletions</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            map[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; map.length; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] &gt; <span class="hljs-number">0</span> &amp;&amp; set.contains(map[i])) &#123;<br>                map[i]--;<br>                count++;<br>            &#125;<br>            set.add(map[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// brute force</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countCompleteDayPairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] hours)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> hours.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> hours[i];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> hours[j];<br>                <span class="hljs-keyword">if</span> ((a + b) % <span class="hljs-number">24</span> == <span class="hljs-number">0</span>) &#123;<br>                    count++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="思路二-利用模运算的规则"><a href="#思路二-利用模运算的规则" class="headerlink" title="思路二 - 利用模运算的规则"></a>思路二 - 利用模运算的规则</h2><p>题目要求我们找的 pair 是 a + b 形成的 hour 是一整天，可以是 24 小时也可以是 48 小时，只要是 24 的倍数即可。同时注意到模运算是有结合律的，即如果 <code>(a + b) % 24 = 0</code>，那么 <code>a % 24 + b % 24 = 24</code>。</p>
+<p>所以这里我们可以用一个长度为 24 的数组<code>int[] map</code>把所有数字 % 24 后的值统计出来。设当前遍历到的小时是 hour，那么我们把它 % 24，即 <code>hour % 24</code>，把它存入 map 中。可以和<code>hour % 24</code>配对的 hour 是 <code>24 - hour % 24</code>。唯一的例外是 24 和 24 的倍数，具体参见代码。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(24) - O(1)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countCompleteDayPairs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] hours)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> hours.length;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">24</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> h : hours) &#123;<br>            <span class="hljs-keyword">if</span> (h % <span class="hljs-number">24</span> != <span class="hljs-number">0</span>) &#123;<br>                count += map[<span class="hljs-number">24</span> - h % <span class="hljs-number">24</span>];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                count += map[<span class="hljs-number">0</span>];<br>            &#125;<br>            map[h % <span class="hljs-number">24</span>]++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -295,15 +305,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
-      
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
-      
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
       
     </div>
   
@@ -315,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1647. Minimum Deletions to Make Character Frequencies Unique</div>
-      <div>https://shurui91.github.io/posts/3172184168.html</div>
+      <div>[LeetCode] 3184. Count Pairs That Form a Complete Day I</div>
+      <div>https://shurui91.github.io/posts/280881127.html</div>
     </div>
     <div class="license-meta">
       
@@ -328,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 21, 2023</div>
+          <div>October 21, 2024</div>
         </div>
       
       
@@ -360,18 +368,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2208021994.html" title="[LeetCode] 1410. HTML Entity Parser">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1410. HTML Entity Parser</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
+                      <a href="/posts/1156564084.html" title="[LeetCode] 910. Smallest Range II">
+                        <span class="hidden-mobile">[LeetCode] 910. Smallest Range II</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -391,8 +393,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3172184168.html';
-          this.page.identifier = '/posts/3172184168.html';
+          this.page.url = 'https://shurui91.github.io/posts/280881127.html';
+          this.page.identifier = '/posts/280881127.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
