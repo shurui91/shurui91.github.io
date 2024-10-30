@@ -16,29 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree, return the preorder traversal of its nodes’ values. Example 1:Input: root &#x3D; [1,null,2,3]Output: [1,2,3] Example 2:Input: root &#x3D; []Output: [] Example 3:Input:">
+    <meta name="description" content="Given a string s containing only digits, return the lexicographically smallest string that can be obtained after swapping adjacent digits in s with the same parity at most once. Digits have the same p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 144. Binary Tree Preorder Traversal">
-<meta property="og:url" content="https://shurui91.github.io/posts/3110873426.html">
+<meta property="og:title" content="[LeetCode] 3216. Lexicographically Smallest String After a Swap">
+<meta property="og:url" content="https://shurui91.github.io/posts/2502881258.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree, return the preorder traversal of its nodes’ values. Example 1:Input: root &#x3D; [1,null,2,3]Output: [1,2,3] Example 2:Input: root &#x3D; []Output: [] Example 3:Input:">
+<meta property="og:description" content="Given a string s containing only digits, return the lexicographically smallest string that can be obtained after swapping adjacent digits in s with the same parity at most once. Digits have the same p">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg">
-<meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png">
-<meta property="article:published_time" content="2019-12-16T20:47:02.000Z">
-<meta property="article:modified_time" content="2024-02-13T17:40:45.063Z">
+<meta property="article:published_time" content="2024-10-30T00:54:01.000Z">
+<meta property="article:modified_time" content="2024-10-30T02:01:43.367Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="preorder">
-<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg">
   
   
   
-  <title>[LeetCode] 144. Binary Tree Preorder Traversal - CNoodle</title>
+  <title>[LeetCode] 3216. Lexicographically Smallest String After a Swap - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 144. Binary Tree Preorder Traversal"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 3216. Lexicographically Smallest String After a Swap"></span>
           
         </div>
 
@@ -203,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2019-12-16 12:47" pubdate>
-          December 16, 2019 pm
+        <time datetime="2024-10-29 17:54" pubdate>
+          October 29, 2024 pm
         </time>
       </span>
     
@@ -215,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.4k words
         
       </span>
     
@@ -226,7 +222,7 @@
         
         
         
-          15 mins
+          12 mins
         
       </span>
     
@@ -263,30 +259,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 144. Binary Tree Preorder Traversal</h1>
+            <h1 id="seo-header">[LeetCode] 3216. Lexicographically Smallest String After a Swap</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree, return the preorder traversal of its nodes’ values.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/09/15/inorder_1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,null,2,3]<br>Output: [1,2,3]</p>
-<p>Example 2:<br>Input: root &#x3D; []<br>Output: []</p>
-<p>Example 3:<br>Input: root &#x3D; [1]<br>Output: [1]</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [0, 100].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100</p>
-<p>Follow up: Recursive solution is trivial, could you do it iteratively?</p>
-<p>二叉树的前序遍历。</p>
+                <p>Given a string s containing only digits, return the lexicographically smallest string that can be obtained after swapping adjacent digits in s with the same parity at most once.</p>
+<p>Digits have the same parity if both are odd or both are even. For example, 5 and 9, as well as 2 and 4, have the same parity, while 6 and 9 do not.</p>
+<p>Example 1:<br>Input: s &#x3D; “45320”<br>Output: “43520”</p>
+<p>Explanation:<br>s[1] &#x3D;&#x3D; ‘5’ and s[2] &#x3D;&#x3D; ‘3’ both have the same parity, and swapping them results in the lexicographically smallest string.</p>
+<p>Example 2:<br>Input: s &#x3D; “001”<br>Output: “001”</p>
+<p>Explanation:<br>There is no need to perform a swap because s is already the lexicographically smallest.</p>
+<p>Constraints:<br>2 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of digits.</p>
+<p>交换后字典序最小的字符串。</p>
 <blockquote>
-<p>给你二叉树的根节点 root ，返回它节点值的 前序 遍历。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>树的几种遍历，网上有一个不错的<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/">例子</a>，一个树给了多种遍历的结果。</p>
-<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20230623123129/traversal.png" srcset="/img/loading.gif" lazyload alt="Tree Traversal"></p>
-<p>二叉树的遍历有多种方式，此题是要求用先序遍历。先序遍历的特点是根 - 左 - 右。即如果只有一个根节点和两个子节点的情形下（比如[1, 2, 3]），输出结果应该也是[1, 2, 3]。这题迭代和递归都需要掌握。遍历的时候会用到栈，因为栈是先进后出，所以放进栈的时候记得要逆向，先放右孩子再放左孩子，这样弹出的时候就会先弹出左孩子，再弹出右孩子。两种做法的时间复杂度是O(n)，空间复杂度是O(h)。h是树的高度。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(h)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> stack.pop();<br>            res.add(cur.val);<br>            <span class="hljs-keyword">if</span> (cur.right != <span class="hljs-literal">null</span>) &#123;<br>                stack.push(cur.right);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (cur.left != <span class="hljs-literal">null</span>) &#123;<br>                stack.push(cur.left);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+给你一个仅由数字组成的字符串 s，在最多交换一次 相邻 且具有相同 奇偶性 的数字后，返回可以得到的字典序最小的字符串。
 
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> res;<br>        helper(res, root);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(List&lt;Integer&gt; res, TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;<br>        res.add(root.val);<br>        helper(res, root.left);<br>        helper(res, root.right);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果两个数字都是奇数或都是偶数，则它们具有相同的奇偶性。例如，5 和 9、2 和 4 奇偶性相同，而 6 和 9 奇偶性不同。</p>
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意交换的规则，两个数字只能同为奇数或者同为偶数才能互相交换。所以思路是从左往右遍历所有的字符，如果某两个相邻的字符 <code>a 和 b (a 在左，b 在右)</code> 具有相同的奇偶性且 a &gt; b，则可以进行交换。照着这个思路，找到第一对符合条件的 a 和 b，即可交换并返回结果。为什么是第一对，是因为需要让字典序尽可能的小，你交换在后面的字符，字典序是不如交换第一对大的。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSmallestString</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">char</span>[] letters = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> letters[i - <span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> letters[i] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (helper(a, b) &amp;&amp; a &gt; b) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> letters[i - <span class="hljs-number">1</span>];<br>                letters[i - <span class="hljs-number">1</span>] = letters[i];<br>                letters[i] = temp;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(letters);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> a % <span class="hljs-number">2</span> == b % <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -303,11 +299,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
+        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
       
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
     </div>
   
@@ -319,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 144. Binary Tree Preorder Traversal</div>
-      <div>https://shurui91.github.io/posts/3110873426.html</div>
+      <div>[LeetCode] 3216. Lexicographically Smallest String After a Swap</div>
+      <div>https://shurui91.github.io/posts/2502881258.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 16, 2019</div>
+          <div>October 29, 2024</div>
         </div>
       
       
@@ -364,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/861348967.html" title="[LeetCode] 104. Maximum Depth of Binary Tree">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 104. Maximum Depth of Binary Tree</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2352395276.html" title="[Leetcode] 58. Length of Last Word">
-                        <span class="hidden-mobile">[Leetcode] 58. Length of Last Word</span>
+                      <a href="/posts/11988317.html" title="[LeetCode] 951. Flip Equivalent Binary Trees">
+                        <span class="hidden-mobile">[LeetCode] 951. Flip Equivalent Binary Trees</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,8 +383,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3110873426.html';
-          this.page.identifier = '/posts/3110873426.html';
+          this.page.url = 'https://shurui91.github.io/posts/2502881258.html';
+          this.page.identifier = '/posts/2502881258.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 3216. Lexicographically Smallest String After a Swap</title>
+    <link href="/posts/2502881258.html"/>
+    <url>/posts/2502881258.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a string s containing only digits, return the lexicographically smallest string that can be obtained after swapping adjacent digits in s with the same parity at most once.</p><p>Digits have the same parity if both are odd or both are even. For example, 5 and 9, as well as 2 and 4, have the same parity, while 6 and 9 do not.</p><p>Example 1:<br>Input: s &#x3D; “45320”<br>Output: “43520”</p><p>Explanation:<br>s[1] &#x3D;&#x3D; ‘5’ and s[2] &#x3D;&#x3D; ‘3’ both have the same parity, and swapping them results in the lexicographically smallest string.</p><p>Example 2:<br>Input: s &#x3D; “001”<br>Output: “001”</p><p>Explanation:<br>There is no need to perform a swap because s is already the lexicographically smallest.</p><p>Constraints:<br>2 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of digits.</p><p>交换后字典序最小的字符串。</p><blockquote>给你一个仅由数字组成的字符串 s，在最多交换一次 相邻 且具有相同 奇偶性 的数字后，返回可以得到的字典序最小的字符串。<p>如果两个数字都是奇数或都是偶数，则它们具有相同的奇偶性。例如，5 和 9、2 和 4 奇偶性相同，而 6 和 9 奇偶性不同。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意交换的规则，两个数字只能同为奇数或者同为偶数才能互相交换。所以思路是从左往右遍历所有的字符，如果某两个相邻的字符 <code>a 和 b (a 在左，b 在右)</code> 具有相同的奇偶性且 a &gt; b，则可以进行交换。照着这个思路，找到第一对符合条件的 a 和 b，即可交换并返回结果。为什么是第一对，是因为需要让字典序尽可能的小，你交换在后面的字符，字典序是不如交换第一对大的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSmallestString</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">char</span>[] letters = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> letters[i - <span class="hljs-number">1</span>] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> letters[i] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (helper(a, b) &amp;&amp; a &gt; b) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> letters[i - <span class="hljs-number">1</span>];<br>                letters[i - <span class="hljs-number">1</span>] = letters[i];<br>                letters[i] = temp;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(letters);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>        <span class="hljs-keyword">return</span> a % <span class="hljs-number">2</span> == b % <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 951. Flip Equivalent Binary Trees</title>
     <link href="/posts/11988317.html"/>
     <url>/posts/11988317.html</url>
@@ -1620,9 +1645,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2213,9 +2238,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2618,9 +2643,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -3799,9 +3824,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -4215,9 +4240,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6200,9 +6225,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6260,9 +6285,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6314,9 +6339,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6370,9 +6395,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6426,9 +6451,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6453,9 +6478,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
