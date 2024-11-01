@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>[LeetCode] 3226. Number of Bit Changes to Make Two Integers Equal</title>
+    <link href="/posts/3397917777.html"/>
+    <url>/posts/3397917777.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two positive integers n and k.</p><p>You can choose any bit in the binary representation of n that is equal to 1 and change it to 0.</p><p>Return the number of changes needed to make n equal to k. If it is impossible, return -1.</p><p>Example 1:<br>Input: n &#x3D; 13, k &#x3D; 4<br>Output: 2</p><p>Explanation:<br>Initially, the binary representations of n and k are n &#x3D; (1101)2 and k &#x3D; (0100)2.<br>We can change the first and fourth bits of n. The resulting integer is n &#x3D; (0100)2 &#x3D; k.</p><p>Example 2:<br>Input: n &#x3D; 21, k &#x3D; 21<br>Output: 0</p><p>Explanation:<br>n and k are already equal, so no changes are needed.</p><p>Example 3:<br>Input: n &#x3D; 14, k &#x3D; 13<br>Output: -1</p><p>Explanation:<br>It is not possible to make n equal to k.</p><p>Constraints:<br>1 &lt;&#x3D; n, k &lt;&#x3D; 106</p><p>使两个整数相等的位更改次数。</p><blockquote>给你两个正整数 n 和 k。<p>你可以选择 n 的 二进制表示 中任意一个值为 1 的位，并将其改为 0。</p><p>返回使得 n 等于 k 所需要的更改次数。如果无法实现，返回 -1。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道位运算的问题。首先注意，这道题里我们只能改 n 的某个 digit，不能改 k 中的 digit；而且我们只能把 1 改成 0，不能把 0 改成 1。</p><p>那么判断是否能改和怎么改呢？因为不能改 k 中的任何 digit，所以我们可以计算一下 <code>n &amp; k</code>，如果<code>n &amp; k != k</code>，则说明 n 中有一些位置上存在 0，而我们是不能改动 0 的，这种 case 我们就直接返回 -1。如果<code>n &amp; k == k</code>，起码说明我们可以改。此时我们可以用各种语言自带的 API 统计一下 n 和 k 分别包含几个 1，然后返回他们的差值即可。</p><p>或者我们也可以看 <code>n | k</code> 是否等于 n，如果等于 n，则说明 k 里面不存在多余的 1。通过这个方式我们也可以判断是否可以改动。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minChanges</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">return</span> (n &amp; k) != k ? -<span class="hljs-number">1</span> : Integer.bitCount(n ^ k);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minChanges</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">return</span> (n | k) != n ? -<span class="hljs-number">1</span> : Integer.bitCount(n ^ k);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>bit manipulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3216. Lexicographically Smallest String After a Swap</title>
     <link href="/posts/2502881258.html"/>
     <url>/posts/2502881258.html</url>
@@ -1645,9 +1668,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -2238,9 +2261,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -2643,9 +2666,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
       <tag>recursion</tag>
       
@@ -3824,9 +3847,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -4240,9 +4263,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6225,9 +6248,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6285,9 +6308,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -6339,9 +6362,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6395,9 +6418,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -6451,9 +6474,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6478,9 +6501,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
