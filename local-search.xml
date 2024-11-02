@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>给网站添加免费的SSL证书</title>
+    <link href="/posts/345603125.html"/>
+    <url>/posts/345603125.html</url>
+    
+    <content type="html"><![CDATA[<p>自己曾经做了一个网站部署在一台 <code>ubuntu</code> 服务器上，但是由于一开始不会配置 SSL，所以花钱买了付费的 SSL。最近发现了 Let’s Encrypt，可以免费申请 SSL 证书，下面是详细的教程。</p><p>我的网站是一个 React 的项目，所以我的服务器上只是一个简单的 <code>Node.js 环境 + Nginx</code>。我主要参考了<a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04">这个帖子</a>。如果你是用其他的环境比如<code>LAMP</code>那一套的，请自行搜索其他的教程。</p><h2 id="0-安装-node-js"><a href="#0-安装-node-js" class="headerlink" title="0. 安装 node.js"></a>0. 安装 node.js</h2><p>先看一下服务器上是否安装了 node.js</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">--version</span><br></code></pre></td></tr></table></figure><p>如果这行命令没有返回 node 版本号，那么就需要安装 node.js。这里不展示了。</p><h2 id="1-安装-certbot"><a href="#1-安装-certbot" class="headerlink" title="1. 安装 certbot"></a>1. 安装 certbot</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo snap <span class="hljs-keyword">install </span>core<span class="hljs-comment">; sudo snap refresh core</span><br></code></pre></td></tr></table></figure><p>如果你曾经安装过 certbot，这里建议你先卸载原先的版本然后重新安装，这样你就有最新的版本了。</p><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt <span class="hljs-built_in">remove</span> certbot<br></code></pre></td></tr></table></figure><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo snap install <span class="hljs-comment">--classic certbot</span><br></code></pre></td></tr></table></figure><h3 id="创建一个-symbolic-link"><a href="#创建一个-symbolic-link" class="headerlink" title="创建一个 symbolic link"></a>创建一个 symbolic link</h3><p>因为 certbot 安装完毕之后是不能直接跑他的命令的，所以这里我们多一步，创建一个 symbolic link。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo ln -s <span class="hljs-regexp">/snap/</span>bin<span class="hljs-regexp">/certbot /u</span>sr<span class="hljs-regexp">/bin/</span>certbot<br></code></pre></td></tr></table></figure><h2 id="2-检查一下-Nginx-的相关配置"><a href="#2-检查一下-Nginx-的相关配置" class="headerlink" title="2. 检查一下 Nginx 的相关配置"></a>2. 检查一下 Nginx 的相关配置</h2><p>如果你没有安装 Nginx，请参考<a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-22-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)">这个帖子</a>。</p><p>如果你安装了 Nginx，请打开以下这个文件。<code>example.com</code>是你自己的域名。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo nano <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/sites-available/</span>example.com<br></code></pre></td></tr></table></figure><p>确保你有带有<code>server_name</code>的那一行，应该长这样。确保他没有被注释掉。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs /etc/nginx/sites-available/example.com">server_name example.com www.example.com;<br></code></pre></td></tr></table></figure><p>保存配置，从编辑器中退出来，然后敲这个命令确保没有语法错误。</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo nginx -t</span><br></code></pre></td></tr></table></figure><p>用这个命令把 Nginx reload 一下使配置生效。</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo systemctl reload nginx</span><br></code></pre></td></tr></table></figure><h2 id="3-防火墙设置"><a href="#3-防火墙设置" class="headerlink" title="3. 防火墙设置"></a>3. 防火墙设置</h2><p>ubuntu 服务器上一般都是用一个叫做<code>ufw</code>的东西来做防火墙的。我们可以用这个命令看一下目前的状态。</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo ufw status</span><br></code></pre></td></tr></table></figure><p>一般返回的东西应该是这样的。</p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">Output</span><br><span class="hljs-symbol">Status:</span> active<br><br><span class="hljs-symbol">To</span>                         Action      From<br>--                         ------      ----<br><span class="hljs-symbol">OpenSSH</span>                    ALLOW       Anywhere                  <br><span class="hljs-symbol">Nginx</span> HTTP                 ALLOW       Anywhere                  <br><span class="hljs-symbol">OpenSSH</span> (<span class="hljs-built_in">v6</span>)               ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)             <br><span class="hljs-symbol">Nginx</span> HTTP (<span class="hljs-built_in">v6</span>)            ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)<br></code></pre></td></tr></table></figure><p>敲如下命令使防火墙能允许 HTTPS 流量。</p><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">sudo ufw allow <span class="hljs-string">&#x27;Nginx Full&#x27;</span><br>sudo ufw <span class="hljs-keyword">delete</span> allow <span class="hljs-string">&#x27;Nginx HTTP&#x27;</span><br></code></pre></td></tr></table></figure><p>之后你的防火墙配置应该是这样的。</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo ufw status</span><br></code></pre></td></tr></table></figure><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Output<br>Status: active<br><br><span class="hljs-keyword">To</span>                         Action      <span class="hljs-keyword">From</span><br><span class="hljs-comment">--                         ------      ----</span><br>OpenSSH                    ALLOW       Anywhere<br>Nginx <span class="hljs-keyword">Full</span>                 ALLOW       Anywhere<br>OpenSSH (v6)               ALLOW       Anywhere (v6)<br>Nginx <span class="hljs-keyword">Full</span> (v6)            ALLOW       Anywhere (v6)<br></code></pre></td></tr></table></figure><h2 id="4-获得-SSL-证书"><a href="#4-获得-SSL-证书" class="headerlink" title="4. 获得 SSL 证书"></a>4. 获得 SSL 证书</h2><p>敲如下命令来申请 SSL 证书。记得改成自己的域名。</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sudo certbot <span class="hljs-attr">--nginx</span> -d example<span class="hljs-selector-class">.com</span> -d www<span class="hljs-selector-class">.example</span>.com<br></code></pre></td></tr></table></figure><p>如果一切正常，terminal 最后会显示 SSL 证书被存到什么路径了之类的信息，类似这样。</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gradle">Output<br>IMPORTANT NOTES:<br>Successfully received certificate.<br>Certificate is saved at: <span class="hljs-regexp">/etc/</span>letsencrypt<span class="hljs-regexp">/live/y</span>our_domain/fullchain.pem<br>Key is saved at: <span class="hljs-regexp">/etc/</span>letsencrypt<span class="hljs-regexp">/live/y</span>our_domain/privkey.pem<br><span class="hljs-keyword">This</span> certificate expires on <span class="hljs-number">2022</span>-<span class="hljs-number">06</span>-<span class="hljs-number">01</span>.<br>These files will be updated when the certificate renews.<br>Certbot has set up a scheduled <span class="hljs-keyword">task</span> to automatically renew <span class="hljs-keyword">this</span> certificate in the background.<br><br>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br><span class="hljs-keyword">If</span> you like Certbot, please consider supporting our work by:<br>* Donating to ISRG <span class="hljs-regexp">/ Let&#x27;s Encrypt: https:/</span><span class="hljs-regexp">/letsencrypt.org/</span>donate<br>* Donating to EFF: https:<span class="hljs-comment">//eff.org/donate-le</span><br></code></pre></td></tr></table></figure><p>理论上此时你的 SSL 应该就立即生效了。你可以试着访问自己的网站，或者通过一些 SSL 检测工具来验证一下你的证书是否有效。</p><h2 id="5-自动更新-SSL-证书"><a href="#5-自动更新-SSL-证书" class="headerlink" title="5. 自动更新 SSL 证书"></a>5. 自动更新 SSL 证书</h2><p>虽然我们通过这个方式获得的 SSL 证书是免费的，但是它的有效期一般只有 90 天。所以这里我们可以配置他的自动更新。</p><p>如下这个命令可以让 certbot 一天运行两次以检查当前的 SSL 是否依然有效。</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sudo systemctl status snap<span class="hljs-selector-class">.certbot</span><span class="hljs-selector-class">.renew</span>.service<br></code></pre></td></tr></table></figure><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts">Output<br>○ snap.certbot.renew.service - Service for snap application certbot.renew<br><span class="hljs-symbol">     Loaded:</span> loaded (<span class="hljs-keyword">/etc/</span>systemd<span class="hljs-keyword">/system/</span>snap.certbot.renew.<span class="hljs-attr">service</span><span class="hljs-punctuation">;</span> static)<br><span class="hljs-symbol">     Active:</span> inactive (dead)<br><span class="hljs-symbol">TriggeredBy:</span> ● snap.certbot.renew.timer<br></code></pre></td></tr></table></figure><p>可以通过如下这个命令测试一下 SSL 是如何更新的。</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo certbot renew <span class="hljs-comment">--dry-run</span><br></code></pre></td></tr></table></figure><h2 id="❤️-以上"><a href="#❤️-以上" class="headerlink" title="❤️ 以上"></a>❤️ 以上</h2>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>devops</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3226. Number of Bit Changes to Make Two Integers Equal</title>
     <link href="/posts/3397917777.html"/>
     <url>/posts/3397917777.html</url>
@@ -259,9 +278,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
@@ -336,9 +355,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -677,9 +696,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -733,9 +752,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -895,9 +914,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -1155,9 +1174,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -1300,9 +1319,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -1456,9 +1475,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -1668,9 +1687,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1718,9 +1737,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -2024,9 +2043,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -2051,9 +2070,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -2232,9 +2251,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -2261,9 +2280,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -2311,9 +2330,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -2444,9 +2463,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -2500,9 +2519,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>simulation</tag>
       
@@ -2666,9 +2685,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -2884,9 +2903,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -3117,9 +3136,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -3485,9 +3504,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -3705,9 +3724,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -3847,9 +3866,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -4103,9 +4122,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -4155,9 +4174,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -4207,9 +4226,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -4263,9 +4282,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -4552,9 +4571,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -4583,9 +4602,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -4660,11 +4679,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -4926,9 +4945,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -5032,9 +5051,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5163,11 +5182,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5196,9 +5215,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5225,11 +5244,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5256,11 +5275,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5287,11 +5306,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5318,11 +5337,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5424,9 +5443,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5802,9 +5821,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6215,9 +6234,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6248,9 +6267,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6308,9 +6327,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6362,9 +6381,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6418,9 +6437,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6474,9 +6493,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6501,9 +6520,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6549,9 +6568,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6605,9 +6624,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6659,9 +6678,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6792,9 +6811,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -6846,9 +6865,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -7071,11 +7090,11 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
