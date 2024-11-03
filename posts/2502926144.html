@@ -16,28 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string s, return the length of the longest substring that contains at most two distinct characters. Example 1:Input: s &#x3D; “eceba”Output: 3Explanation: The substring is “ece” which its leng">
+    <meta name="description" content="Given a non-negative integer c, decide whether there’re two integers a and b such that a2 + b2 &#x3D; c. Example 1:Input: c &#x3D; 5Output: trueExplanation: 1 * 1 + 2 * 2 &#x3D; 5 Example 2:Input: c &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 159. Longest Substring with At Most Two Distinct Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/2079065207.html">
+<meta property="og:title" content="[LeetCode] 633. Sum of Square Numbers">
+<meta property="og:url" content="https://shurui91.github.io/posts/2502926144.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string s, return the length of the longest substring that contains at most two distinct characters. Example 1:Input: s &#x3D; “eceba”Output: 3Explanation: The substring is “ece” which its leng">
+<meta property="og:description" content="Given a non-negative integer c, decide whether there’re two integers a and b such that a2 + b2 &#x3D; c. Example 1:Input: c &#x3D; 5Output: trueExplanation: 1 * 1 + 2 * 2 &#x3D; 5 Example 2:Input: c &amp;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-03T17:03:57.000Z">
-<meta property="article:modified_time" content="2024-10-07T21:08:35.663Z">
+<meta property="article:published_time" content="2021-01-12T14:57:47.000Z">
+<meta property="article:modified_time" content="2024-11-03T23:47:37.515Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="string">
-<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 159. Longest Substring with At Most Two Distinct Characters - CNoodle</title>
+  <title>[LeetCode] 633. Sum of Square Numbers - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 159. Longest Substring with At Most Two Distinct Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 633. Sum of Square Numbers"></span>
           
         </div>
 
@@ -202,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-04-03 10:03" pubdate>
-          April 3, 2020 am
+        <time datetime="2021-01-12 06:57" pubdate>
+          January 12, 2021 am
         </time>
       </span>
     
@@ -214,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          864 words
         
       </span>
     
@@ -225,7 +222,7 @@
         
         
         
-          15 mins
+          8 mins
         
       </span>
     
@@ -262,28 +259,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 159. Longest Substring with At Most Two Distinct Characters</h1>
+            <h1 id="seo-header">[LeetCode] 633. Sum of Square Numbers</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string s, return the length of the longest substring that contains at most two distinct characters.</p>
-<p>Example 1:<br>Input: s &#x3D; “eceba”<br>Output: 3<br>Explanation: The substring is “ece” which its length is 3.</p>
-<p>Example 2:<br>Input: s &#x3D; “ccaabbb”<br>Output: 5<br>Explanation: The substring is “aabbb” which its length is 5.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists of English letters.</p>
-<p>至多包含两个不同字符的最长子串。</p>
+                <p>Given a non-negative integer c, decide whether there’re two integers a and b such that a2 + b2 &#x3D; c.</p>
+<p>Example 1:<br>Input: c &#x3D; 5<br>Output: true<br>Explanation: 1 * 1 + 2 * 2 &#x3D; 5</p>
+<p>Example 2:<br>Input: c &#x3D; 3<br>Output: false</p>
+<p>Example 3:<br>Input: c &#x3D; 4<br>Output: true</p>
+<p>Example 4:<br>Input: c &#x3D; 2<br>Output: true</p>
+<p>Example 5:<br>Input: c &#x3D; 1<br>Output: true</p>
+<p>Constraints:<br>0 &lt;&#x3D; c &lt;&#x3D; 231 - 1</p>
+<p>平方数之和。</p>
 <blockquote>
-题意是给一个字符串，请返回一个最长子串的长度，子串至多包含两个不同字符的最长子串。
+给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a^2 + b^2 = c 。
 </blockquote>
 
 
-<h2 id="思路-滑动窗口，类似76题"><a href="#思路-滑动窗口，类似76题" class="headerlink" title="思路 - 滑动窗口，类似76题"></a>思路 - 滑动窗口，类似76题</h2><p>这题依然是用到 sliding window 的思想。给左右两个指针，并且创建一个 hashmap，key 是遍历到的字母，value 是字母最后一次出现位置的 index。扫描的时候，一开始只让右指针移动，把遍历到的字母和当前的坐标值加入hashmap。此时最大子串的长度就是左右指针的间距。当右指针遍历到第三个不同字母的时候，需要扫描hashmap，找到value（记为leftmost）最小的那个key并且删除这个键值对。此时左指针的位置是leftmost + 1。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1) - 虽然有 hashmap 但是 size 很小，只有 26 个字母</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给定一个数字 C，请判断是否存在另外两个数字 A 和 B，满足 A 平方 + B 平方 &#x3D; C 平方。</p>
+<p>思路是双指针逼近。根据题意，A 和 B 的范围一定比 C 的平方根要小，所以 A 和 B 的取值范围是 <code>0 - Math.sqrt(C)</code>。可以将 left &#x3D; 0，right &#x3D; Math.sqrt(C) 做二分，其余部分就是二分法题目的常规判断了。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(logn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lengthOfLongestSubstringTwoDistinct</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">counter</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">256</span>];<br>        <span class="hljs-keyword">while</span> (end &lt; s.length()) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> s.charAt(end);<br>            <span class="hljs-keyword">if</span> (map[c1] == <span class="hljs-number">0</span>) &#123;<br>                counter++;<br>            &#125;<br>            map[c1]++;<br>            end++;<br>            <span class="hljs-keyword">while</span> (counter &gt; <span class="hljs-number">2</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c2</span> <span class="hljs-operator">=</span> s.charAt(start);<br>                map[c2]--;<br>                <span class="hljs-keyword">if</span> (map[c2] == <span class="hljs-number">0</span>) &#123;<br>                    counter--;<br>                &#125;<br>                start++;<br>            &#125;<br>            res = Math.max(res, end - start);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> lengthOfLongestSubstringTwoDistinct = <span class="hljs-keyword">function</span> (<span class="hljs-params">s</span>) &#123;<br>    <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    <span class="hljs-keyword">let</span> left = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> max = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> right = <span class="hljs-number">0</span>; right &lt; s.<span class="hljs-property">length</span>; right++) &#123;<br>        map.<span class="hljs-title function_">set</span>(s[right], right);<br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-property">size</span> &gt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">let</span> leftMostChar = <span class="hljs-literal">null</span>;<br>            <span class="hljs-keyword">let</span> leftMostIndex = <span class="hljs-title class_">Infinity</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> [char, index] <span class="hljs-keyword">of</span> map) &#123;<br>                <span class="hljs-keyword">if</span> (index &lt; leftMostIndex) &#123;<br>                    leftMostChar = char;<br>                    leftMostIndex = index;<br>                &#125;<br>            &#125;<br>            map.<span class="hljs-title function_">delete</span>(leftMostChar);<br>            left = leftMostIndex + <span class="hljs-number">1</span>;<br>        &#125;<br>        max = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(max, right - left + <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> max;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">judgeSquareSum</span><span class="hljs-params">(<span class="hljs-type">int</span> c)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> (<span class="hljs-type">long</span>) Math.sqrt(c);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            res = left * left + right * right;<br>            <span class="hljs-keyword">if</span> (res == c) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (res &gt; c) &#123;<br>                right--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                left++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -298,17 +296,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+        <a href="/tags/math/" class="print-no-link">#math</a>
       
     </div>
   
@@ -320,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 159. Longest Substring with At Most Two Distinct Characters</div>
-      <div>https://shurui91.github.io/posts/2079065207.html</div>
+      <div>[LeetCode] 633. Sum of Square Numbers</div>
+      <div>https://shurui91.github.io/posts/2502926144.html</div>
     </div>
     <div class="license-meta">
       
@@ -333,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 3, 2020</div>
+          <div>January 12, 2021</div>
         </div>
       
       
@@ -365,9 +357,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/4170399115.html" title="[LeetCode] 209. Minimum Size Subarray Sum">
+                      <a href="/posts/3220296722.html" title="[LeetCode] 二分查找模板 binary search">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 209. Minimum Size Subarray Sum</span>
+                        <span class="hidden-mobile">[LeetCode] 二分查找模板 binary search</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -375,8 +367,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1151287680.html" title="[LeetCode] 340. Longest Substring with At Most K Distinct Characters">
-                        <span class="hidden-mobile">[LeetCode] 340. Longest Substring with At Most K Distinct Characters</span>
+                      <a href="/posts/805821143.html" title="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree">
+                        <span class="hidden-mobile">[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -396,8 +388,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2079065207.html';
-          this.page.identifier = '/posts/2079065207.html';
+          this.page.url = 'https://shurui91.github.io/posts/2502926144.html';
+          this.page.identifier = '/posts/2502926144.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
