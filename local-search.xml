@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 3163. String Compression III</title>
+    <link href="/posts/4073470908.html"/>
+    <url>/posts/4073470908.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a string word, compress it using the following algorithm:<br>Begin with an empty string comp. While word is not empty, use the following operation:<br>Remove a maximum length prefix of word made of a single character c repeating at most 9 times.<br>Append the length of the prefix followed by c to comp.<br>Return the string comp.</p><p>Example 1:<br>Input: word &#x3D; “abcde”<br>Output: “1a1b1c1d1e”</p><p>Explanation:<br>Initially, comp &#x3D; “”. Apply the operation 5 times, choosing “a”, “b”, “c”, “d”, and “e” as the prefix in each operation.</p><p>For each prefix, append “1” followed by the character to comp.</p><p>Example 2:<br>Input: word &#x3D; “aaaaaaaaaaaaaabb”<br>Output: “9a5a2b”</p><p>Explanation:<br>Initially, comp &#x3D; “”. Apply the operation 3 times, choosing “aaaaaaaaa”, “aaaaa”, and “bb” as the prefix in each operation.</p><p>For prefix “aaaaaaaaa”, append “9” followed by “a” to comp.<br>For prefix “aaaaa”, append “5” followed by “a” to comp.<br>For prefix “bb”, append “2” followed by “b” to comp.</p><p>Constraints:<br>1 &lt;&#x3D; word.length &lt;&#x3D; 2 * 105<br>word consists only of lowercase English letters.</p><p>压缩字符串 III。</p><blockquote>给你一个字符串 word，请你使用以下算法进行压缩：- 从空字符串 comp 开始。当 word 不为空 时，执行以下操作：    - 移除 word 的最长单字符前缀，该前缀由单一字符 c 重复多次组成，且该前缀长度 最多 为 9 。    - 将前缀的长度和字符 c 追加到 comp 。返回字符串 comp 。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道模拟题。按照题意卡住条件即可，可直接参见代码。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - output 也是个字符串</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">compressedString</span><span class="hljs-params">(String word)</span> &#123;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> word.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> word.charAt(i);<br>            <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; word.charAt(i) == cur &amp;&amp; count &lt; <span class="hljs-number">9</span>) &#123;<br>                count++;<br>                i++;<br>            &#125;<br>            sb.append(count);<br>            sb.append(cur);<br>            count = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>给网站添加免费的SSL证书</title>
     <link href="/posts/345603125.html"/>
     <url>/posts/345603125.html</url>
@@ -278,9 +303,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -355,9 +380,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -696,9 +721,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -752,9 +777,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -914,9 +939,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1174,9 +1199,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1319,9 +1344,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1475,9 +1500,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1737,9 +1762,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -2043,9 +2068,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2070,9 +2095,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2251,9 +2276,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -2330,9 +2355,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2463,9 +2488,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -2519,9 +2544,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2903,9 +2928,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3136,9 +3161,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3504,9 +3529,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3724,9 +3749,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -3862,9 +3887,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -4147,9 +4172,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4199,9 +4224,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4251,9 +4276,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4596,9 +4621,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -4627,9 +4652,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4704,11 +4729,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -4970,9 +4995,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -5076,9 +5101,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -5207,11 +5232,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5240,9 +5265,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -5269,11 +5294,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5300,11 +5325,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5331,11 +5356,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5362,11 +5387,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
@@ -5468,9 +5493,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -5846,9 +5871,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6259,9 +6284,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6593,9 +6618,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6649,9 +6674,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6703,9 +6728,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6836,9 +6861,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -6890,9 +6915,9 @@
       
       <tag>array</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>javascript</tag>
       
@@ -7115,11 +7140,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>java</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>javascript</tag>
       
