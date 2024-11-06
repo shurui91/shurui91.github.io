@@ -16,30 +16,21 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of an n-ary tree, return the preorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by">
+    <meta name="description" content="Given an integer array arr. You have to sort the integers in the array in ascending order by the number of 1’s in their binary representation and in case of two or more integers have the same number o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 589. N-ary Tree Preorder Traversal">
-<meta property="og:url" content="https://shurui91.github.io/posts/999659702.html">
+<meta property="og:title" content="[LeetCode] 1356. Sort Integers by The Number of 1 Bits">
+<meta property="og:url" content="https://shurui91.github.io/posts/2027031335.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of an n-ary tree, return the preorder traversal of its nodes’ values. Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by">
+<meta property="og:description" content="Given an integer array arr. You have to sort the integers in the array in ascending order by the number of 1’s in their binary representation and in case of two or more integers have the same number o">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png">
-<meta property="article:published_time" content="2020-01-15T09:16:46.000Z">
-<meta property="article:modified_time" content="2024-02-17T18:25:11.873Z">
+<meta property="article:published_time" content="2024-11-06T22:14:15.000Z">
+<meta property="article:modified_time" content="2024-11-06T22:22:10.028Z">
 <meta property="article:author" content="Aaron Liu">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="preorder">
-<meta property="article:tag" content="n-ary tree">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png">
   
   
   
-  <title>[LeetCode] 589. N-ary Tree Preorder Traversal - CNoodle</title>
+  <title>[LeetCode] 1356. Sort Integers by The Number of 1 Bits - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 589. N-ary Tree Preorder Traversal"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1356. Sort Integers by The Number of 1 Bits"></span>
           
         </div>
 
@@ -204,8 +195,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-15 01:16" pubdate>
-          January 15, 2020 am
+        <time datetime="2024-11-06 14:14" pubdate>
+          November 6, 2024 pm
         </time>
       </span>
     
@@ -216,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          1.5k words
         
       </span>
     
@@ -227,7 +218,7 @@
         
         
         
-          21 mins
+          13 mins
         
       </span>
     
@@ -264,35 +255,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 589. N-ary Tree Preorder Traversal</h1>
+            <h1 id="seo-header">[LeetCode] 1356. Sort Integers by The Number of 1 Bits</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of an n-ary tree, return the preorder traversal of its nodes’ values.</p>
-<p>Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2018/10/12/narytreeexample.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [1,null,3,2,4,null,5,6]<br>Output: [1,3,5,6,2,4]</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2019/11/08/sample_4_964.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: root &#x3D; [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>Output: [1,2,3,6,7,11,14,4,8,12,5,9,13,10]</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [0, 104].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 104<br>The height of the n-ary tree is less than or equal to 1000.</p>
-<p>Follow up: Recursive solution is trivial, could you do it iteratively?</p>
-<p>N叉树的前序遍历。</p>
+                <p>Given an integer array arr. You have to sort the integers in the array in ascending order by the number of 1’s in their binary representation and in case of two or more integers have the same number of 1’s you have to sort them in ascending order.</p>
+<p>Return the sorted array.</p>
+<p>Example 1:<br>Input: arr &#x3D; [0,1,2,3,4,5,6,7,8]<br>Output: [0,1,2,4,8,3,5,6,7]<br>Explantion: [0] is the only integer with 0 bits.<br>[1,2,4,8] all have 1 bit.<br>[3,5,6] have 2 bits.<br>[7] has 3 bits.<br>The sorted array by bits is [0,1,2,4,8,3,5,6,7]</p>
+<p>Example 2:<br>Input: arr &#x3D; [1024,512,256,128,64,32,16,8,4,2,1]<br>Output: [1,2,4,8,16,32,64,128,256,512,1024]<br>Explantion: All integers have 1 bit in the binary representation, you should just sort them in ascending order.</p>
+<p>Example 3:<br>Input: arr &#x3D; [10000,10000]<br>Output: [10000,10000]</p>
+<p>Example 4:<br>Input: arr &#x3D; [2,3,5,7,11,13,17,19]<br>Output: [2,3,5,17,7,11,13,19]</p>
+<p>Example 5:<br>Input: arr &#x3D; [10,100,1000,10000]<br>Output: [10,100,10000,1000]</p>
+<p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 500<br>0 &lt;&#x3D; arr[i] &lt;&#x3D; 10^4</p>
+<p>根据数字二进制下 1 的数目排序。</p>
 <blockquote>
-<p>给定一个 n 叉树的根节点  root ，返回 其节点值的 前序遍历 。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal">https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。
+
+<p>如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。</p>
+<p>请你返回排序后的数组。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目的 followup 问能不能用迭代的做法做。我这里给出迭代和递归的两种不同做法。其中迭代是 DFS 做的。</p>
-<h2 id="迭代复杂度"><a href="#迭代复杂度" class="headerlink" title="迭代复杂度"></a>迭代复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="迭代代码"><a href="#迭代代码" class="headerlink" title="迭代代码"></a>迭代代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Stack&lt;Node&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> stack.pop();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> cur.children.size() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>                stack.push(cur.children.get(i));<br>            &#125;<br>            res.add(cur.val);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Node</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> preorder = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> stack = [root];<br>    <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = stack.<span class="hljs-title function_">pop</span>();<br>        <span class="hljs-keyword">let</span> size = cur.<span class="hljs-property">children</span>.<span class="hljs-property">length</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = size - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            stack.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">children</span>[i]);<br>        &#125;<br>        res.<span class="hljs-title function_">push</span>(cur.<span class="hljs-property">val</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="递归复杂度"><a href="#递归复杂度" class="headerlink" title="递归复杂度"></a>递归复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="递归代码"><a href="#递归代码" class="headerlink" title="递归代码"></a>递归代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">preorder</span><span class="hljs-params">(Node root)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        helper(root, res);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(Node root, List&lt;Integer&gt; res)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        res.add(root.val);<br>        <span class="hljs-keyword">for</span> (Node child : root.children) &#123;<br>            helper(child, res);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">Node</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> preorder = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-title function_">helper</span>(res, root);<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br><br><span class="hljs-keyword">var</span> helper = <span class="hljs-keyword">function</span> (<span class="hljs-params">res, root</span>) &#123;<br>    <span class="hljs-keyword">if</span> (root === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    res.<span class="hljs-title function_">push</span>(root.<span class="hljs-property">val</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> child <span class="hljs-keyword">of</span> root.<span class="hljs-property">children</span>) &#123;<br>        <span class="hljs-title function_">helper</span>(res, child);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意很简单，对于每个数字，我们计算其二进制表达中的 1 的个数，根据 1 出现的数量多少对数组进行排序。对于两个二进制表达中 1 的数量相同的数字，我们再按照其十进制的表达由大到小排序。</p>
+<p>这道题不涉及算法，就是按这个规则实现排序即可。我认为这道题的重点就是让你记住语言里是有自带的 api 帮你快速计算一个二进制数字里面有几个 1。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] sortByBits(<span class="hljs-type">int</span>[] arr) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        Integer[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            nums[i] = arr[i];<br>        &#125;<br><br>        Arrays.sort(nums, (a, b) -&gt; Integer.bitCount(a) == Integer.bitCount(b) ? a - b : Integer.bitCount(a) - Integer.bitCount(b));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            arr[i] = nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -302,23 +291,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
-      
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
-      
-        <a href="/tags/n-ary-tree/" class="print-no-link">#n-ary tree</a>
-      
-    </div>
-  
 </div>
 
 
@@ -327,8 +299,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 589. N-ary Tree Preorder Traversal</div>
-      <div>https://shurui91.github.io/posts/999659702.html</div>
+      <div>[LeetCode] 1356. Sort Integers by The Number of 1 Bits</div>
+      <div>https://shurui91.github.io/posts/2027031335.html</div>
     </div>
     <div class="license-meta">
       
@@ -340,7 +312,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>January 15, 2020</div>
+          <div>November 6, 2024</div>
         </div>
       
       
@@ -372,18 +344,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3054235392.html" title="[LeetCode] 9. Palindrome Number">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 9. Palindrome Number</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3961220199.html" title="[LeetCode] 506. Relative Ranks">
-                        <span class="hidden-mobile">[LeetCode] 506. Relative Ranks</span>
+                      <a href="/posts/2353492200.html" title="[LeetCode] 3011. Find if Array Can Be Sorted">
+                        <span class="hidden-mobile">[LeetCode] 3011. Find if Array Can Be Sorted</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -403,8 +369,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/999659702.html';
-          this.page.identifier = '/posts/999659702.html';
+          this.page.url = 'https://shurui91.github.io/posts/2027031335.html';
+          this.page.identifier = '/posts/2027031335.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

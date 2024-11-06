@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>[LeetCode] 1356. Sort Integers by The Number of 1 Bits</title>
+    <link href="/posts/2027031335.html"/>
+    <url>/posts/2027031335.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an integer array arr. You have to sort the integers in the array in ascending order by the number of 1’s in their binary representation and in case of two or more integers have the same number of 1’s you have to sort them in ascending order.</p><p>Return the sorted array.</p><p>Example 1:<br>Input: arr &#x3D; [0,1,2,3,4,5,6,7,8]<br>Output: [0,1,2,4,8,3,5,6,7]<br>Explantion: [0] is the only integer with 0 bits.<br>[1,2,4,8] all have 1 bit.<br>[3,5,6] have 2 bits.<br>[7] has 3 bits.<br>The sorted array by bits is [0,1,2,4,8,3,5,6,7]</p><p>Example 2:<br>Input: arr &#x3D; [1024,512,256,128,64,32,16,8,4,2,1]<br>Output: [1,2,4,8,16,32,64,128,256,512,1024]<br>Explantion: All integers have 1 bit in the binary representation, you should just sort them in ascending order.</p><p>Example 3:<br>Input: arr &#x3D; [10000,10000]<br>Output: [10000,10000]</p><p>Example 4:<br>Input: arr &#x3D; [2,3,5,7,11,13,17,19]<br>Output: [2,3,5,17,7,11,13,19]</p><p>Example 5:<br>Input: arr &#x3D; [10,100,1000,10000]<br>Output: [10,100,10000,1000]</p><p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 500<br>0 &lt;&#x3D; arr[i] &lt;&#x3D; 10^4</p><p>根据数字二进制下 1 的数目排序。</p><blockquote>给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。<p>如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。</p><p>请你返回排序后的数组。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意很简单，对于每个数字，我们计算其二进制表达中的 1 的个数，根据 1 出现的数量多少对数组进行排序。对于两个二进制表达中 1 的数量相同的数字，我们再按照其十进制的表达由大到小排序。</p><p>这道题不涉及算法，就是按这个规则实现排序即可。我认为这道题的重点就是让你记住语言里是有自带的 api 帮你快速计算一个二进制数字里面有几个 1。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] sortByBits(<span class="hljs-type">int</span>[] arr) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        Integer[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            nums[i] = arr[i];<br>        &#125;<br><br>        Arrays.sort(nums, (a, b) -&gt; Integer.bitCount(a) == Integer.bitCount(b) ? a - b : Integer.bitCount(a) - Integer.bitCount(b));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            arr[i] = nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3011. Find if Array Can Be Sorted</title>
     <link href="/posts/2353492200.html"/>
     <url>/posts/2353492200.html</url>
@@ -1739,9 +1752,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -3972,9 +3985,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -6373,9 +6386,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6433,9 +6446,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -6543,9 +6556,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -6626,9 +6639,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
