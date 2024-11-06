@@ -2503,6 +2503,35 @@
   
   
   <entry>
+    <title>[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K</title>
+    <link href="/posts/1885109088.html"/>
+    <url>/posts/1885109088.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array nums and an integer k. Find the maximum subarray sum of all the subarrays of nums that meet the following conditions:<br>The length of the subarray is k, and<br>All the elements of the subarray are distinct.<br>Return the maximum subarray sum of all the subarrays that meet the conditions. If no subarray meets the conditions, return 0.</p><p>A subarray is a contiguous non-empty sequence of elements within an array.</p><p>Example 1:<br>Input: nums &#x3D; [1,5,4,2,9,9,9], k &#x3D; 3<br>Output: 15<br>Explanation: The subarrays of nums with length 3 are:</p><ul><li>[1,5,4] which meets the requirements and has a sum of 10.</li><li>[5,4,2] which meets the requirements and has a sum of 11.</li><li>[4,2,9] which meets the requirements and has a sum of 15.</li><li>[2,9,9] which does not meet the requirements because the element 9 is repeated.</li><li>[9,9,9] which does not meet the requirements because the element 9 is repeated.<br>We return 15 because it is the maximum subarray sum of all the subarrays that meet the conditions</li></ul><p>Example 2:<br>Input: nums &#x3D; [4,4,4], k &#x3D; 3<br>Output: 0<br>Explanation: The subarrays of nums with length 3 are:</p><ul><li>[4,4,4] which does not meet the requirements because the element 4 is repeated.<br>We return 0 because no subarrays meet the conditions.</li></ul><p>Constraints:<br>1 &lt;&#x3D; k &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105</p><p>长度为 K 子数组中的最大和。</p><blockquote>给你一个整数数组 nums 和一个整数 k 。请你从 nums 中满足下述条件的全部子数组中找出最大子数组和：<p>子数组的长度是 k，且<br>子数组中的所有元素 各不相同 。<br>返回满足题面要求的最大子数组和。如果不存在子数组满足这些条件，返回 0 。</p><p>子数组 是数组中一段连续非空的元素序列。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/maximum-sum-of-distinct-subarrays-with-length-k">https://leetcode.cn/problems/maximum-sum-of-distinct-subarrays-with-length-k</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口。这一题是滑动窗口，窗口尺寸固定为 K。这里我用 hashmap 记录每个不同元素及其出现次数。如果你是用 for 循环来维护窗口的尺寸的话（意思是右指针往前走一步，左指针立马也往前走一步），只能用 hashmap 做。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">maximumSubarraySum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            sum += nums[i];<br>            map.put(nums[i], map.getOrDefault(nums[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>        <span class="hljs-keyword">if</span> (map.size() == k) &#123;<br>            res = sum;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; nums.length; i++) &#123;<br>            map.put(nums[i], map.getOrDefault(nums[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            sum += nums[i];<br>            sum -= nums[i - k];<br>            map.put(nums[i - k], map.get(nums[i - k]) - <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (map.get(nums[i - k]) == <span class="hljs-number">0</span>) &#123;<br>                map.remove(nums[i - k]);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (map.size() == k) &#123;<br>                res = Math.max(res, sum);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>sliding window with fixed size</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1071. Greatest Common Divisor of Strings</title>
     <link href="/posts/3566414224.html"/>
     <url>/posts/3566414224.html</url>

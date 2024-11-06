@@ -16,26 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given two strings s and t consisting of only lowercase English letters. Return the minimum number of characters that need to be appended to the end of s so that t becomes a subsequence of s. A">
+    <meta name="description" content="You are given an integer array nums and an integer k. Find the maximum subarray sum of all the subarrays of nums that meet the following conditions:The length of the subarray is k, andAll the elements">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2486. Append Characters to String to Make Subsequence">
-<meta property="og:url" content="https://shurui91.github.io/posts/4051463354.html">
+<meta property="og:title" content="[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K">
+<meta property="og:url" content="https://shurui91.github.io/posts/1885109088.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given two strings s and t consisting of only lowercase English letters. Return the minimum number of characters that need to be appended to the end of s so that t becomes a subsequence of s. A">
+<meta property="og:description" content="You are given an integer array nums and an integer k. Find the maximum subarray sum of all the subarrays of nums that meet the following conditions:The length of the subarray is k, andAll the elements">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-07-20T05:22:07.000Z">
-<meta property="article:modified_time" content="2024-06-03T20:23:23.191Z">
+<meta property="article:published_time" content="2023-07-19T20:09:34.000Z">
+<meta property="article:modified_time" content="2024-11-06T19:02:24.208Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="sliding window with fixed size">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2486. Append Characters to String to Make Subsequence - CNoodle</title>
+  <title>[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2486. Append Characters to String to Make Subsequence"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K"></span>
           
         </div>
 
@@ -200,7 +201,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-19 22:22" pubdate>
+        <time datetime="2023-07-19 13:09" pubdate>
           July 19, 2023 pm
         </time>
       </span>
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          2.1k words
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          14 mins
+          18 mins
         
       </span>
     
@@ -260,32 +261,40 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2486. Append Characters to String to Make Subsequence</h1>
+            <h1 id="seo-header">[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given two strings s and t consisting of only lowercase English letters.</p>
-<p>Return the minimum number of characters that need to be appended to the end of s so that t becomes a subsequence of s.</p>
-<p>A subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.</p>
-<p>Example 1:<br>Input: s &#x3D; “coaching”, t &#x3D; “coding”<br>Output: 4<br>Explanation: Append the characters “ding” to the end of s so that s &#x3D; “coachingding”.<br>Now, t is a subsequence of s (“coachingding”).<br>It can be shown that appending any 3 characters to the end of s will never make t a subsequence.</p>
-<p>Example 2:<br>Input: s &#x3D; “abcde”, t &#x3D; “a”<br>Output: 0<br>Explanation: t is already a subsequence of s (“abcde”).</p>
-<p>Example 3:<br>Input: s &#x3D; “z”, t &#x3D; “abcde”<br>Output: 5<br>Explanation: Append the characters “abcde” to the end of s so that s &#x3D; “zabcde”.<br>Now, t is a subsequence of s (“zabcde”).<br>It can be shown that appending any 4 characters to the end of s will never make t a subsequence.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length, t.length &lt;&#x3D; 105<br>s and t consist only of lowercase English letters.</p>
-<p>追加字符以获得子序列。</p>
+                <p>You are given an integer array nums and an integer k. Find the maximum subarray sum of all the subarrays of nums that meet the following conditions:<br>The length of the subarray is k, and<br>All the elements of the subarray are distinct.<br>Return the maximum subarray sum of all the subarrays that meet the conditions. If no subarray meets the conditions, return 0.</p>
+<p>A subarray is a contiguous non-empty sequence of elements within an array.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,5,4,2,9,9,9], k &#x3D; 3<br>Output: 15<br>Explanation: The subarrays of nums with length 3 are:</p>
+<ul>
+<li>[1,5,4] which meets the requirements and has a sum of 10.</li>
+<li>[5,4,2] which meets the requirements and has a sum of 11.</li>
+<li>[4,2,9] which meets the requirements and has a sum of 15.</li>
+<li>[2,9,9] which does not meet the requirements because the element 9 is repeated.</li>
+<li>[9,9,9] which does not meet the requirements because the element 9 is repeated.<br>We return 15 because it is the maximum subarray sum of all the subarrays that meet the conditions</li>
+</ul>
+<p>Example 2:<br>Input: nums &#x3D; [4,4,4], k &#x3D; 3<br>Output: 0<br>Explanation: The subarrays of nums with length 3 are:</p>
+<ul>
+<li>[4,4,4] which does not meet the requirements because the element 4 is repeated.<br>We return 0 because no subarrays meet the conditions.</li>
+</ul>
+<p>Constraints:<br>1 &lt;&#x3D; k &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105</p>
+<p>长度为 K 子数组中的最大和。</p>
 <blockquote>
-给你两个仅由小写英文字母组成的字符串 s 和 t 。
+给你一个整数数组 nums 和一个整数 k 。请你从 nums 中满足下述条件的全部子数组中找出最大子数组和：
 
-<p>现在需要通过向 s 末尾追加字符的方式使 t 变成 s 的一个 子序列 ，返回需要追加的最少字符数。</p>
-<p>子序列是一个可以由其他字符串删除部分（或不删除）字符但不改变剩下字符顺序得到的字符串。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/append-characters-to-string-to-make-subsequence">https://leetcode.cn/problems/append-characters-to-string-to-make-subsequence</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>子数组的长度是 k，且<br>子数组中的所有元素 各不相同 。<br>返回满足题面要求的最大子数组和。如果不存在子数组满足这些条件，返回 0 。</p>
+<p>子数组 是数组中一段连续非空的元素序列。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-sum-of-distinct-subarrays-with-length-k">https://leetcode.cn/problems/maximum-sum-of-distinct-subarrays-with-length-k</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是双指针。这是判断子序列的基本题，我们用两个指针 i, j 分别指向 s 和 t （长度分别为 m 和 n）并同时开始遍历。如果 t 先遍历完，说明 t 本身就是 s 的子序列；如果 s 遍历完之后发现 t 还未遍历完，那么 s 需要补足的字符个数 &#x3D; n - j，即 t 中还未遍历到的字符个数。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m) - s 的长度<br>空间O(1)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口。这一题是滑动窗口，窗口尺寸固定为 K。这里我用 hashmap 记录每个不同元素及其出现次数。如果你是用 for 循环来维护窗口的尺寸的话（意思是右指针往前走一步，左指针立马也往前走一步），只能用 hashmap 做。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">appendCharacters</span><span class="hljs-params">(String s, String t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> t.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m &amp;&amp; j &lt; n) &#123;<br>            <span class="hljs-keyword">if</span> (s.charAt(i) == t.charAt(j)) &#123;<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (j == n) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> n - j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">maximumSubarraySum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            sum += nums[i];<br>            map.put(nums[i], map.getOrDefault(nums[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br>        <span class="hljs-keyword">if</span> (map.size() == k) &#123;<br>            res = sum;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; nums.length; i++) &#123;<br>            map.put(nums[i], map.getOrDefault(nums[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            sum += nums[i];<br>            sum -= nums[i - k];<br>            map.put(nums[i - k], map.get(nums[i - k]) - <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">if</span> (map.get(nums[i - k]) == <span class="hljs-number">0</span>) &#123;<br>                map.remove(nums[i - k]);<br>            &#125;<br>            <span class="hljs-keyword">if</span> (map.size() == k) &#123;<br>                res = Math.max(res, sum);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -300,13 +309,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
+        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
       
     </div>
   
@@ -318,8 +329,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2486. Append Characters to String to Make Subsequence</div>
-      <div>https://shurui91.github.io/posts/4051463354.html</div>
+      <div>[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K</div>
+      <div>https://shurui91.github.io/posts/1885109088.html</div>
     </div>
     <div class="license-meta">
       
@@ -363,9 +374,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2192711178.html" title="[LeetCode] 1870. Minimum Speed to Arrive on Time">
+                      <a href="/posts/4051463354.html" title="[LeetCode] 2486. Append Characters to String to Make Subsequence">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1870. Minimum Speed to Arrive on Time</span>
+                        <span class="hidden-mobile">[LeetCode] 2486. Append Characters to String to Make Subsequence</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -373,8 +384,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1885109088.html" title="[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K">
-                        <span class="hidden-mobile">[LeetCode] 2461. Maximum Sum of Distinct Subarrays With Length K</span>
+                      <a href="/posts/3566414224.html" title="[LeetCode] 1071. Greatest Common Divisor of Strings">
+                        <span class="hidden-mobile">[LeetCode] 1071. Greatest Common Divisor of Strings</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -394,8 +405,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/4051463354.html';
-          this.page.identifier = '/posts/4051463354.html';
+          this.page.url = 'https://shurui91.github.io/posts/1885109088.html';
+          this.page.identifier = '/posts/1885109088.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
