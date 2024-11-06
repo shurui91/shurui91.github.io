@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 3011. Find if Array Can Be Sorted</title>
+    <link href="/posts/2353492200.html"/>
+    <url>/posts/2353492200.html</url>
+    
+    <content type="html"><![CDATA[<p>In one operation, you can swap any two adjacent elements if they have the same number of set bits. You are allowed to do this operation any number of times (including zero).</p><p>Return true if you can sort the array, else return false.</p><p>Example 1:<br>Input: nums &#x3D; [8,4,2,30,15]<br>Output: true<br>Explanation: Let’s look at the binary representation of every element. The numbers 2, 4, and 8 have one set bit each with binary representation “10”, “100”, and “1000” respectively. The numbers 15 and 30 have four set bits each with binary representation “1111” and “11110”.<br>We can sort the array using 4 operations:</p><ul><li>Swap nums[0] with nums[1]. This operation is valid because 8 and 4 have one set bit each. The array becomes [4,8,2,30,15].</li><li>Swap nums[1] with nums[2]. This operation is valid because 8 and 2 have one set bit each. The array becomes [4,2,8,30,15].</li><li>Swap nums[0] with nums[1]. This operation is valid because 4 and 2 have one set bit each. The array becomes [2,4,8,30,15].</li><li>Swap nums[3] with nums[4]. This operation is valid because 30 and 15 have four set bits each. The array becomes [2,4,8,15,30].<br>The array has become sorted, hence we return true.<br>Note that there may be other sequences of operations which also sort the array.</li></ul><p>Example 2:<br>Input: nums &#x3D; [1,2,3,4,5]<br>Output: true<br>Explanation: The array is already sorted, hence we return true.</p><p>Example 3:<br>Input: nums &#x3D; [3,16,8,4,2]<br>Output: false<br>Explanation: It can be shown that it is not possible to sort the input array using any number of operations.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 100<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 28</p><p>判断一个数组是否可以变为有序。</p><blockquote>给你一个下标从 0 开始且全是 正 整数的数组 nums 。<p>一次 操作 中，如果两个 相邻 元素在二进制下设置位的数目 相同 ，那么你可以将这两个元素交换。你可以执行这个操作 任意次 （也可以 0 次）。</p><p>如果你可以使数组变为非降序，请你返回 true ，否则返回 false 。</p><p>示例 1：<br>输入：nums &#x3D; [8,4,2,30,15]<br>输出：true<br>解释：我们先观察每个元素的二进制表示。 2 ，4 和 8 分别都只有一个数位为 1 ，分别为 “10” ，”100” 和 “1000” 。15 和 30 分别有 4 个数位为 1 ：”1111” 和 “11110” 。<br>我们可以通过 4 个操作使数组非降序：</p><ul><li>交换 nums[0] 和 nums[1] 。8 和 4 分别只有 1 个数位为 1 。数组变为 [4,8,2,30,15] 。</li><li>交换 nums[1] 和 nums[2] 。8 和 2 分别只有 1 个数位为 1 。数组变为 [4,2,8,30,15] 。</li><li>交换 nums[0] 和 nums[1] 。4 和 2 分别只有 1 个数位为 1 。数组变为 [2,4,8,30,15] 。</li><li>交换 nums[3] 和 nums[4] 。30 和 15 分别有 4 个数位为 1 ，数组变为 [2,4,8,15,30] 。<br>数组变成有序的，所以我们返回 true 。<br>注意我们还可以通过其他的操作序列使数组变得有序。</li></ul><p>示例 2：<br>输入：nums &#x3D; [1,2,3,4,5]<br>输出：true<br>解释：数组已经是非降序的，所以我们返回 true 。</p><p>示例 3：<br>输入：nums &#x3D; [3,16,8,4,2]<br>输出：false<br>解释：无法通过操作使数组变为非降序。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道关于二进制的题目。注意<code>元素在二进制下设置位的数目相同</code>这个定义的意思其实就是两个数字的二进制表示中的 1 的个数要相同。如果两个数字的 1 的个数相同，且他们在原数组里是相邻元素，才能互相交换位置。</p><p>所以我们需要遍历 input 数组，看一看每个数字的 <code>Integer.bitCount(num)</code>，如果某一串连续的数字他们的 1 的个数都相同的话，这一段数字就可以互相交换以确保他们有序。所以数组会因为 1 的个数的不同而变得分段有序。</p><p>再次遍历排过序的数组，如果分段排序不能导致最后的整体有序，则返回 false，否则返回 true。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canSortArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> i;<br><span class="hljs-comment">// 二进制表达里 1 的个数</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> Integer.bitCount(nums[i]);<br>            <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; Integer.bitCount(nums[i]) == ones) &#123;<br>                i++;<br>            &#125;<br><span class="hljs-comment">// 分段排序</span><br>            Arrays.sort(nums, start, i);<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[j] &lt; nums[j - <span class="hljs-number">1</span>]) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sort</tag>
+      
+      <tag>bit manipulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3163. String Compression III</title>
     <link href="/posts/4073470908.html"/>
     <url>/posts/4073470908.html</url>
@@ -1712,9 +1739,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3945,9 +3972,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -6346,9 +6373,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6406,9 +6433,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6516,9 +6543,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6599,9 +6626,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
