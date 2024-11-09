@@ -16,24 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="The bitwise AND of an array nums is the bitwise AND of all integers in nums. For example, for nums &#x3D; [1, 5, 3], the bitwise AND is equal to 1 &amp; 5 &amp; 3 &#x3D; 1.Also, for nums &#x3D; [7], t">
+    <meta name="description" content="Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold. Example 1:Input: arr &#x3D; [2,2,2,2,5,5,5,8]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero">
-<meta property="og:url" content="https://shurui91.github.io/posts/250684932.html">
+<meta property="og:title" content="[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold">
+<meta property="og:url" content="https://shurui91.github.io/posts/2495846327.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="The bitwise AND of an array nums is the bitwise AND of all integers in nums. For example, for nums &#x3D; [1, 5, 3], the bitwise AND is equal to 1 &amp; 5 &amp; 3 &#x3D; 1.Also, for nums &#x3D; [7], t">
+<meta property="og:description" content="Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold. Example 1:Input: arr &#x3D; [2,2,2,2,5,5,5,8]">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-11-07T17:30:53.000Z">
-<meta property="article:modified_time" content="2024-11-08T05:33:03.222Z">
+<meta property="article:published_time" content="2024-11-09T18:39:06.000Z">
+<meta property="article:modified_time" content="2024-11-09T18:45:29.585Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="bit manipulation">
+<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="sliding window with fixed size">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero - CNoodle</title>
+  <title>[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold"></span>
           
         </div>
 
@@ -198,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-07 09:30" pubdate>
-          November 7, 2024 am
+        <time datetime="2024-11-09 10:39" pubdate>
+          November 9, 2024 am
         </time>
       </span>
     
@@ -210,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          1.2k words
         
       </span>
     
@@ -221,7 +223,7 @@
         
         
         
-          17 mins
+          11 mins
         
       </span>
     
@@ -258,31 +260,27 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero</h1>
+            <h1 id="seo-header">[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold</h1>
             
             
               <div class="markdown-body">
                 
-                <p>The bitwise AND of an array nums is the bitwise AND of all integers in nums.</p>
-<p>For example, for nums &#x3D; [1, 5, 3], the bitwise AND is equal to 1 &amp; 5 &amp; 3 &#x3D; 1.<br>Also, for nums &#x3D; [7], the bitwise AND is 7.<br>You are given an array of positive integers candidates. Evaluate the bitwise AND of every combination of numbers of candidates. Each number in candidates may only be used once in each combination.</p>
-<p>Return the size of the largest combination of candidates with a bitwise AND greater than 0.</p>
-<p>Example 1:<br>Input: candidates &#x3D; [16,17,71,62,12,24,14]<br>Output: 4<br>Explanation: The combination [16,17,62,24] has a bitwise AND of 16 &amp; 17 &amp; 62 &amp; 24 &#x3D; 16 &gt; 0.<br>The size of the combination is 4.<br>It can be shown that no combination with a size greater than 4 has a bitwise AND greater than 0.<br>Note that more than one combination may have the largest size.<br>For example, the combination [62,12,24,14] has a bitwise AND of 62 &amp; 12 &amp; 24 &amp; 14 &#x3D; 8 &gt; 0.</p>
-<p>Example 2:<br>Input: candidates &#x3D; [8,8]<br>Output: 2<br>Explanation: The largest combination [8,8] has a bitwise AND of 8 &amp; 8 &#x3D; 8 &gt; 0.<br>The size of the combination is 2, so we return 2.</p>
-<p>Constraints:<br>1 &lt;&#x3D; candidates.length &lt;&#x3D; 105<br>1 &lt;&#x3D; candidates[i] &lt;&#x3D; 107</p>
-<p>按位与结果大于零的最长组合。</p>
+                <p>Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold.</p>
+<p>Example 1:<br>Input: arr &#x3D; [2,2,2,2,5,5,5,8], k &#x3D; 3, threshold &#x3D; 4<br>Output: 3<br>Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).</p>
+<p>Example 2:<br>Input: arr &#x3D; [11,13,17,23,29,31,7,5,2,3], k &#x3D; 3, threshold &#x3D; 5<br>Output: 6<br>Explanation: The first 6 sub-arrays of size 3 have averages greater than 5. Note that averages are not integers.</p>
+<p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 104<br>1 &lt;&#x3D; k &lt;&#x3D; arr.length<br>0 &lt;&#x3D; threshold &lt;&#x3D; 104</p>
+<p>大小为 K 且平均值大于等于阈值的子数组数目。</p>
 <blockquote>
-对数组 nums 执行 按位与 相当于对数组 nums 中的所有整数执行 按位与 。
+给你一个整数数组 arr 和两个整数 k 和 threshold 。
 
-<p>例如，对 nums &#x3D; [1, 5, 3] 来说，按位与等于 1 &amp; 5 &amp; 3 &#x3D; 1 。<br>同样，对 nums &#x3D; [7] 而言，按位与等于 7 。<br>给你一个正整数数组 candidates 。计算 candidates 中的数字每种组合下 按位与 的结果。 candidates 中的每个数字在每种组合中只能使用 一次 。</p>
-<p>返回按位与结果大于 0 的 最长 组合的长度。</p>
+<p>请你返回长度为 k 且平均值大于等于 threshold 的子数组数目。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道位运算的题。因为题目要求我们找到是一个数字组合，这个组合需要满足的条件是他们的 AND 操作要最大。但是因为这个组合里的数字个数不定，所以没法用类似 backtracking 那样的方法去枚举；且问的是 AND 操作的最大值，所以思路只能往 bit manipulation 上靠。</p>
-<p>假如所有数字可以用 8 个 digit 表达完 (0000 0000)，那么使 AND 的结果最大的方式就是最高位最好都是 1。那么我们可以从二进制的低位遍历到高位（从右往左看），统计一下每个数字的二进制表达里每个位置上的 1 的情况，用一个 map 记录一下。在遍历过程中记录出现 1 的<code>最大次数</code>。因为是从右往左扫描的所以最大次数越往左，结果越大。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - candidates 数组遍历一次<br>空间O(1)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题是一道窗口尺寸固定的滑动窗口题。注意尽量不要在中间过程求平均值因为会涉及到精度问题。在过程中我们可以只求数字的 sum，不求平均值，到最后再计算平均值。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestCombination</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candidates)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">24</span>];<br>		<span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> candidate : candidates) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">24</span>; i++) &#123;<br>				<span class="hljs-keyword">if</span> ((candidate &amp; (<span class="hljs-number">1</span> &lt;&lt; i)) &gt; <span class="hljs-number">0</span>) &#123;<br>					map[i]++;<br>					max = Math.max(max, map[i]);<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> threshold)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            sum += arr[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (sum &gt;= threshold * k) &#123;<br>            res++;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; n; i++) &#123;<br>            sum += arr[i];<br>            sum -= arr[i - k];<br>            <span class="hljs-keyword">if</span> (sum &gt;= threshold * k) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,9 +295,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/bit-manipulation/" class="print-no-link">#bit manipulation</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+      
+        <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
       
     </div>
   
@@ -311,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero</div>
-      <div>https://shurui91.github.io/posts/250684932.html</div>
+      <div>[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold</div>
+      <div>https://shurui91.github.io/posts/2495846327.html</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 7, 2024</div>
+          <div>November 9, 2024</div>
         </div>
       
       
@@ -356,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2495846327.html" title="[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2027031335.html" title="[LeetCode] 1356. Sort Integers by The Number of 1 Bits">
-                        <span class="hidden-mobile">[LeetCode] 1356. Sort Integers by The Number of 1 Bits</span>
+                      <a href="/posts/250684932.html" title="[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero">
+                        <span class="hidden-mobile">[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -387,8 +383,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/250684932.html';
-          this.page.identifier = '/posts/250684932.html';
+          this.page.url = 'https://shurui91.github.io/posts/2495846327.html';
+          this.page.identifier = '/posts/2495846327.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

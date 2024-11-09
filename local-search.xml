@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold</title>
+    <link href="/posts/2495846327.html"/>
+    <url>/posts/2495846327.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an array of integers arr and two integers k and threshold, return the number of sub-arrays of size k and average greater than or equal to threshold.</p><p>Example 1:<br>Input: arr &#x3D; [2,2,2,2,5,5,5,8], k &#x3D; 3, threshold &#x3D; 4<br>Output: 3<br>Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).</p><p>Example 2:<br>Input: arr &#x3D; [11,13,17,23,29,31,7,5,2,3], k &#x3D; 3, threshold &#x3D; 5<br>Output: 6<br>Explanation: The first 6 sub-arrays of size 3 have averages greater than 5. Note that averages are not integers.</p><p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 104<br>1 &lt;&#x3D; k &lt;&#x3D; arr.length<br>0 &lt;&#x3D; threshold &lt;&#x3D; 104</p><p>大小为 K 且平均值大于等于阈值的子数组数目。</p><blockquote>给你一个整数数组 arr 和两个整数 k 和 threshold 。<p>请你返回长度为 k 且平均值大于等于 threshold 的子数组数目。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题是一道窗口尺寸固定的滑动窗口题。注意尽量不要在中间过程求平均值因为会涉及到精度问题。在过程中我们可以只求数字的 sum，不求平均值，到最后再计算平均值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> threshold)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            sum += arr[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span> (sum &gt;= threshold * k) &#123;<br>            res++;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; n; i++) &#123;<br>            sum += arr[i];<br>            sum -= arr[i - k];<br>            <span class="hljs-keyword">if</span> (sum &gt;= threshold * k) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>sliding window with fixed size</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2275. Largest Combination With Bitwise AND Greater Than Zero</title>
     <link href="/posts/250684932.html"/>
     <url>/posts/250684932.html</url>
