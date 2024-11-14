@@ -16,25 +16,24 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order. A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in">
+    <meta name="description" content="You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters. Return the smallest character in le">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1380. Lucky Numbers in a Matrix">
-<meta property="og:url" content="https://shurui91.github.io/posts/4020803870.html">
+<meta property="og:title" content="[LeetCode] 744. Find Smallest Letter Greater Than Target">
+<meta property="og:url" content="https://shurui91.github.io/posts/3106797658.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order. A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in">
+<meta property="og:description" content="You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters. Return the smallest character in le">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-19T05:05:57.000Z">
-<meta property="article:modified_time" content="2024-07-19T05:12:47.352Z">
+<meta property="article:published_time" content="2021-01-14T11:30:21.000Z">
+<meta property="article:modified_time" content="2024-11-14T00:15:51.216Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="matrix">
+<meta property="article:tag" content="binary search">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1380. Lucky Numbers in a Matrix - CNoodle</title>
+  <title>[LeetCode] 744. Find Smallest Letter Greater Than Target - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1380. Lucky Numbers in a Matrix"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 744. Find Smallest Letter Greater Than Target"></span>
           
         </div>
 
@@ -199,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-18 22:05" pubdate>
-          July 18, 2024 pm
+        <time datetime="2021-01-14 03:30" pubdate>
+          January 14, 2021 am
         </time>
       </span>
     
@@ -211,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -222,7 +221,7 @@
         
         
         
-          15 mins
+          16 mins
         
       </span>
     
@@ -259,30 +258,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1380. Lucky Numbers in a Matrix</h1>
+            <h1 id="seo-header">[LeetCode] 744. Find Smallest Letter Greater Than Target</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an m x n matrix of distinct numbers, return all lucky numbers in the matrix in any order.</p>
-<p>A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.</p>
-<p>Example 1:<br>Input: matrix &#x3D; [[3,7,8],[9,11,13],[15,16,17]]<br>Output: [15]<br>Explanation: 15 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
-<p>Example 2:<br>Input: matrix &#x3D; [[1,10,4,2],[9,3,8,7],[15,16,17,12]]<br>Output: [12]<br>Explanation: 12 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
-<p>Example 3:<br>Input: matrix &#x3D; [[7,8],[1,2]]<br>Output: [7]<br>Explanation: 7 is the only lucky number since it is the minimum in its row and the maximum in its column.</p>
-<p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; n, m &lt;&#x3D; 50<br>1 &lt;&#x3D; matrix[i][j] &lt;&#x3D; 105.<br>All elements in the matrix are distinct.</p>
-<p>矩阵中的幸运数。</p>
+                <p>You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.</p>
+<p>Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.</p>
+<p>Example 1:<br>Input: letters &#x3D; [“c”,”f”,”j”], target &#x3D; “a”<br>Output: “c”<br>Explanation: The smallest character that is lexicographically greater than ‘a’ in letters is ‘c’.</p>
+<p>Example 2:<br>Input: letters &#x3D; [“c”,”f”,”j”], target &#x3D; “c”<br>Output: “f”<br>Explanation: The smallest character that is lexicographically greater than ‘c’ in letters is ‘f’.</p>
+<p>Example 3:<br>Input: letters &#x3D; [“x”,”x”,”y”,”y”], target &#x3D; “z”<br>Output: “x”<br>Explanation: There are no characters in letters that is lexicographically greater than ‘z’ so we return letters[0].</p>
+<p>Constraints:<br>2 &lt;&#x3D; letters.length &lt;&#x3D; 104<br>letters[i] is a lowercase English letter.<br>letters is sorted in non-decreasing order.<br>letters contains at least two different characters.<br>target is a lowercase English letter.</p>
+<p>寻找比目标字母大的最小字母。</p>
 <blockquote>
-给你一个 m * n 的矩阵，矩阵中的数字 各不相同 。请你按 任意 顺序返回矩阵中的所有幸运数。
+给你一个排序后的字符列表 letters ，列表中只包含小写英文字母。另给出一个目标字母 target，请你寻找在这一有序列表里比目标字母大的最小字母。
 
-<p>幸运数 是指矩阵中满足同时下列两个条件的元素：</p>
-<ul>
-<li>在同一行的所有元素中最小</li>
-<li>在同一列的所有元素中最大</blockquote></li>
-</ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道二维矩阵的基础题，正常遍历这个二维数组。然后我们需要用两个一维数组分别记录每一行的最大值和每一列的最大值。接着我们再次遍历每一行的最大值和每一列的最大值，如果某一行的最大值恰巧是某一列的最小值，则把这个值加入结果集。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(m + n)</p>
+<p>在比较时，字母是依序循环出现的。举个例子：</p>
+<p>如果目标字母 target &#x3D; ‘z’ 并且字符列表为 letters &#x3D; [‘a’, ‘b’]，则答案返回 ‘a’</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target">https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>最优解是二分法，当然线性的做法也是可以的。</p>
+<p>这里有一个 corner case 需要判断，就是如果 target 字母 &gt;&#x3D; input 数组的最后一个字母，那么我们返回的是 input 数组的首字母。其他环节都是正常的二分法判断。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(logn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">luckyNumbers</span> <span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        Arrays.fill(rows, Integer.MAX_VALUE);<br>        <span class="hljs-type">int</span>[] cols = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(cols, Integer.MIN_VALUE);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                rows[i] = Math.min(rows[i], val);<br>                cols[j] = Math.max(cols[j], val);<br>            &#125;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> matrix[i][j];<br>                <span class="hljs-keyword">if</span> (rows[i] == cur &amp;&amp; cols[j] == cur) &#123;<br>                    res.add(cur);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">char</span> <span class="hljs-title function_">nextGreatestLetter</span><span class="hljs-params">(<span class="hljs-type">char</span>[] letters, <span class="hljs-type">char</span> target)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> letters.length;<br>        <span class="hljs-keyword">if</span> (target &gt;= letters[n - <span class="hljs-number">1</span>]) &#123;<br>            <span class="hljs-keyword">return</span> letters[<span class="hljs-number">0</span>];<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left + <span class="hljs-number">1</span> &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (letters[mid] &lt;= target) &#123;<br>                left = mid;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right = mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (letters[left] &gt; target) &#123;<br>            <span class="hljs-keyword">return</span> letters[left];<br>        &#125;<br>        <span class="hljs-keyword">return</span> letters[right];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,11 +298,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
+        <a href="/tags/binary-search/" class="print-no-link">#binary search</a>
       
     </div>
   
@@ -313,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1380. Lucky Numbers in a Matrix</div>
-      <div>https://shurui91.github.io/posts/4020803870.html</div>
+      <div>[LeetCode] 744. Find Smallest Letter Greater Than Target</div>
+      <div>https://shurui91.github.io/posts/3106797658.html</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +325,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 18, 2024</div>
+          <div>January 14, 2021</div>
         </div>
       
       
@@ -358,9 +357,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/289974058.html" title="[LeetCode] 2134. Minimum Swaps to Group All 1s Together II">
+                      <a href="/posts/765065633.html" title="[LeetCode] 1405. Longest Happy String">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2134. Minimum Swaps to Group All 1s Together II</span>
+                        <span class="hidden-mobile">[LeetCode] 1405. Longest Happy String</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -368,8 +367,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/97181666.html" title="[LeetCode] 3096. Minimum Levels to Gain More Points">
-                        <span class="hidden-mobile">[LeetCode] 3096. Minimum Levels to Gain More Points</span>
+                      <a href="/posts/3220296722.html" title="[LeetCode] 二分查找模板 binary search">
+                        <span class="hidden-mobile">[LeetCode] 二分查找模板 binary search</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,8 +388,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/4020803870.html';
-          this.page.identifier = '/posts/4020803870.html';
+          this.page.url = 'https://shurui91.github.io/posts/3106797658.html';
+          this.page.identifier = '/posts/3106797658.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
