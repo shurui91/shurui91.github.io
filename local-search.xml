@@ -8,7 +8,7 @@
     <link href="/posts/2894172629.html"/>
     <url>/posts/2894172629.html</url>
     
-    <content type="html"><![CDATA[<p>Implement a SnapshotArray that supports the following interface:<br>SnapshotArray(int length) initializes an array-like data structure with the given length. Initially, each element equals 0.<br>void set(index, val) sets the element at the given index to be equal to val.<br>int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.<br>int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id</p><p>Example 1:<br>Input: [“SnapshotArray”,”set”,”snap”,”set”,”get”]<br>[[3],[0,5],[],[0,6],[0,0]]<br>Output: [null,null,0,null,5]<br>Explanation:<br>SnapshotArray snapshotArr &#x3D; new SnapshotArray(3); &#x2F;&#x2F; set the length to be 3<br>snapshotArr.set(0,5);  &#x2F;&#x2F; Set array[0] &#x3D; 5<br>snapshotArr.snap();  &#x2F;&#x2F; Take a snapshot, return snap_id &#x3D; 0<br>snapshotArr.set(0,6);<br>snapshotArr.get(0,0);  &#x2F;&#x2F; Get the value of array[0] with snap_id &#x3D; 0, return 5</p><p>Constraints:<br>1 &lt;&#x3D; length &lt;&#x3D; 5 * 104<br>0 &lt;&#x3D; index &lt; length<br>0 &lt;&#x3D; val &lt;&#x3D; 109<br>0 &lt;&#x3D; snap_id &lt; (the total number of times we call snap())<br>At most 5 * 104 calls will be made to set, snap, and get.</p><p>快照数组。</p><blockquote>实现支持下列接口的「快照数组」- SnapshotArray：- SnapshotArray(int length) - 初始化一个与指定长度相等的 类数组 的数据结构。初始时，每个元素都等于 0。- void set(index, val) - 会将指定索引 index 处的元素设置为 val。- int snap() - 获取该数组的快照，并返回快照的编号 snap_id（快照号是调用 snap() 的总次数减去 1）。- int get(index, snap_id) - 根据指定的 snap_id 选择快照，并返回该快照指定索引 index 的值。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>创建一个 hashmap <code>&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map</code>，其中 hashmap 的 key 是数组的下标 index，treemap 里存的是<code>&lt;timestamp, value&gt;</code>。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间：初始化O(n), set() - O(logn), get() - O(1), 整体O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SnapshotArray</span> &#123;<br>    <span class="hljs-type">int</span> snapId;<br>    <span class="hljs-comment">// &lt;index, &lt;snapId, value&gt;&gt;</span><br>    HashMap&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SnapshotArray</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<br>            map.put(i, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;());<br>            map.get(i).put(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        &#125;<br>        snapId = <span class="hljs-number">0</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        TreeMap&lt;Integer, Integer&gt; tmap = map.get(index);<br>        <span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br>            tmap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>            tmap.put(snapId, val);<br>            map.put(index, tmap);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.get(index).put(snapId, val);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">snap</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> snapId++;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> snap_id)</span> &#123;<br>        <span class="hljs-keyword">return</span> map.get(index).floorEntry(snap_id).getValue();<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your SnapshotArray object will be instantiated and called as such:</span><br><span class="hljs-comment"> * SnapshotArray obj = new SnapshotArray(length);</span><br><span class="hljs-comment"> * obj.set(index,val);</span><br><span class="hljs-comment"> * int param_2 = obj.snap();</span><br><span class="hljs-comment"> * int param_3 = obj.get(index,snap_id);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Implement a SnapshotArray that supports the following interface:<br>SnapshotArray(int length) initializes an array-like data structure with the given length. Initially, each element equals 0.<br>void set(index, val) sets the element at the given index to be equal to val.<br>int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.<br>int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id</p><p>Example 1:<br>Input: [“SnapshotArray”,”set”,”snap”,”set”,”get”]<br>[[3],[0,5],[],[0,6],[0,0]]<br>Output: [null,null,0,null,5]<br>Explanation:<br>SnapshotArray snapshotArr &#x3D; new SnapshotArray(3); &#x2F;&#x2F; set the length to be 3<br>snapshotArr.set(0,5);  &#x2F;&#x2F; Set array[0] &#x3D; 5<br>snapshotArr.snap();  &#x2F;&#x2F; Take a snapshot, return snap_id &#x3D; 0<br>snapshotArr.set(0,6);<br>snapshotArr.get(0,0);  &#x2F;&#x2F; Get the value of array[0] with snap_id &#x3D; 0, return 5</p><p>Constraints:<br>1 &lt;&#x3D; length &lt;&#x3D; 5 * 104<br>0 &lt;&#x3D; index &lt; length<br>0 &lt;&#x3D; val &lt;&#x3D; 109<br>0 &lt;&#x3D; snap_id &lt; (the total number of times we call snap())<br>At most 5 * 104 calls will be made to set, snap, and get.</p><p>快照数组。</p><blockquote>实现支持下列接口的「快照数组」- SnapshotArray：<p>SnapshotArray(int length) - 初始化一个与指定长度相等的 类数组 的数据结构。初始时，每个元素都等于 0。</p><p>void set(index, val) - 会将指定索引 index 处的元素设置为 val。</p><p>int snap() - 获取该数组的快照，并返回快照的编号 snap_id（快照号是调用 snap() 的总次数减去 1）。</p><p>int get(index, snap_id) - 根据指定的 snap_id 选择快照，并返回该快照指定索引 index 的值。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>创建一个 hashmap <code>&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map</code>，其中 hashmap 的 key 是数组的下标 index，treemap 里存的是<code>&lt;timestamp, value&gt;</code>。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间：初始化O(n), set() - O(logn), get() - O(1), 整体O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SnapshotArray</span> &#123;<br>    <span class="hljs-type">int</span> snapId;<br>    <span class="hljs-comment">// &lt;index, &lt;snapId, value&gt;&gt;</span><br>    HashMap&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SnapshotArray</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<br>            map.put(i, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;());<br>            map.get(i).put(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        &#125;<br>        snapId = <span class="hljs-number">0</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        TreeMap&lt;Integer, Integer&gt; tmap = map.get(index);<br>        <span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br>            tmap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>            tmap.put(snapId, val);<br>            map.put(index, tmap);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.get(index).put(snapId, val);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">snap</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> snapId++;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> snap_id)</span> &#123;<br>        <span class="hljs-keyword">return</span> map.get(index).floorEntry(snap_id).getValue();<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your SnapshotArray object will be instantiated and called as such:</span><br><span class="hljs-comment"> * SnapshotArray obj = new SnapshotArray(length);</span><br><span class="hljs-comment"> * obj.set(index,val);</span><br><span class="hljs-comment"> * int param_2 = obj.snap();</span><br><span class="hljs-comment"> * int param_3 = obj.get(index,snap_id);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -2036,9 +2036,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3861,9 +3861,9 @@
       
       <tag>sort</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sliding window</tag>
       
       <tag>prefix sum</tag>
       
@@ -4350,9 +4350,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -6809,9 +6809,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -6869,9 +6869,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -6979,9 +6979,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -7062,9 +7062,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     

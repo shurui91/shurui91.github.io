@@ -24,7 +24,7 @@
 <meta property="og:description" content="Implement a SnapshotArray that supports the following interface:SnapshotArray(int length) initializes an array-like data structure with the given length. Initially, each element equals 0.void set(inde">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-11-15T06:12:54.000Z">
-<meta property="article:modified_time" content="2024-11-15T06:22:44.825Z">
+<meta property="article:modified_time" content="2024-11-15T06:25:50.271Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -273,10 +273,11 @@
 <p>快照数组。</p>
 <blockquote>
 实现支持下列接口的「快照数组」- SnapshotArray：
-- SnapshotArray(int length) - 初始化一个与指定长度相等的 类数组 的数据结构。初始时，每个元素都等于 0。
-- void set(index, val) - 会将指定索引 index 处的元素设置为 val。
-- int snap() - 获取该数组的快照，并返回快照的编号 snap_id（快照号是调用 snap() 的总次数减去 1）。
-- int get(index, snap_id) - 根据指定的 snap_id 选择快照，并返回该快照指定索引 index 的值。
+
+<p>SnapshotArray(int length) - 初始化一个与指定长度相等的 类数组 的数据结构。初始时，每个元素都等于 0。</p>
+<p>void set(index, val) - 会将指定索引 index 处的元素设置为 val。</p>
+<p>int snap() - 获取该数组的快照，并返回快照的编号 snap_id（快照号是调用 snap() 的总次数减去 1）。</p>
+<p>int get(index, snap_id) - 根据指定的 snap_id 选择快照，并返回该快照指定索引 index 的值。</p>
 </blockquote>
 
 
