@@ -16,28 +16,21 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string s, find the length of the longest substring without repeating characters. Example 1:Input: s &#x3D; “abcabcbb”Output: 3Explanation: The answer is “abc”, with the length of 3. Example 2:">
+    <meta name="description" content="You are given two integer arrays persons and times. In an election, the ith vote was cast for persons[i] at time times[i]. For each query at a time t, find the person that was leading the election at">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 3. Longest Substring Without Repeating Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/3910559116.html">
+<meta property="og:title" content="[LeetCode] 911. Online Election">
+<meta property="og:url" content="https://shurui91.github.io/posts/730347545.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string s, find the length of the longest substring without repeating characters. Example 1:Input: s &#x3D; “abcabcbb”Output: 3Explanation: The answer is “abc”, with the length of 3. Example 2:">
+<meta property="og:description" content="You are given two integer arrays persons and times. In an election, the ith vote was cast for persons[i] at time times[i]. For each query at a time t, find the person that was leading the election at">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-03T15:29:33.000Z">
-<meta property="article:modified_time" content="2024-02-09T06:16:15.267Z">
+<meta property="article:published_time" content="2024-11-15T19:21:31.000Z">
+<meta property="article:modified_time" content="2024-11-15T19:35:58.823Z">
 <meta property="article:author" content="Aaron Liu">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="sliding window">
-<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 3. Longest Substring Without Repeating Characters - CNoodle</title>
+  <title>[LeetCode] 911. Online Election - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 3. Longest Substring Without Repeating Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 911. Online Election"></span>
           
         </div>
 
@@ -202,8 +195,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-04-03 08:29" pubdate>
-          April 3, 2020 am
+        <time datetime="2024-11-15 11:21" pubdate>
+          November 15, 2024 am
         </time>
       </span>
     
@@ -214,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          3.2k words
         
       </span>
     
@@ -225,7 +218,7 @@
         
         
         
-          14 mins
+          28 mins
         
       </span>
     
@@ -262,32 +255,36 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 3. Longest Substring Without Repeating Characters</h1>
+            <h1 id="seo-header">[LeetCode] 911. Online Election</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string s, find the length of the longest substring without repeating characters.</p>
-<p>Example 1:<br>Input: s &#x3D; “abcabcbb”<br>Output: 3<br>Explanation: The answer is “abc”, with the length of 3.</p>
-<p>Example 2:<br>Input: s &#x3D; “bbbbb”<br>Output: 1<br>Explanation: The answer is “b”, with the length of 1.</p>
-<p>Example 3:<br>Input: s &#x3D; “pwwkew”<br>Output: 3<br>Explanation: The answer is “wke”, with the length of 3.<br>Notice that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
-<p>Example 4:<br>Input: s &#x3D; “”<br>Output: 0</p>
-<p>Constraints:<br>0 &lt;&#x3D; s.length &lt;&#x3D; 5 * 104<br>s consists of English letters, digits, symbols and spaces.</p>
-<p>最长无重复字符的子串。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个 input 字符串，请输出其最长的，没有重复字符的子串的长度。这是two pointer追击型指针&#x2F;sliding window的基础题。</p>
-<p>思路是用一个 hashmap 或者 hashset 以及两个指针 i 和 j，其中 i 指针在左边，j 指针在右边，j 指针每次看当前遍历到的 character 是否在 hashset 中出现过，此时有两种情况</p>
-<ul>
-<li>如果没出现过则将当前这个字符串加入 hashset 并且 j++，同时每次更新一下此时此刻两个指针之间的距离 res，这就是满足题意的子串的长度</li>
-<li>如果出现过则将 i 指针指向的字母从 hashset 中删除并且 i++</li>
-</ul>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - hashset</p>
+                <p>You are given two integer arrays persons and times. In an election, the ith vote was cast for persons[i] at time times[i].</p>
+<p>For each query at a time t, find the person that was leading the election at time t. Votes cast at time t will count towards our query. In the case of a tie, the most recent vote (among tied candidates) wins.</p>
+<p>Implement the TopVotedCandidate class:</p>
+<p>TopVotedCandidate(int[] persons, int[] times) Initializes the object with the persons and times arrays.<br>int q(int t) Returns the number of the person that was leading the election at time t according to the mentioned rules.</p>
+<p>Example 1:<br>Input<br>[“TopVotedCandidate”, “q”, “q”, “q”, “q”, “q”, “q”]<br>[[[0, 1, 1, 0, 0, 1, 0], [0, 5, 10, 15, 20, 25, 30]], [3], [12], [25], [15], [24], [8]]<br>Output<br>[null, 0, 1, 1, 0, 0, 1]</p>
+<p>Explanation<br>TopVotedCandidate topVotedCandidate &#x3D; new TopVotedCandidate([0, 1, 1, 0, 0, 1, 0], [0, 5, 10, 15, 20, 25, 30]);<br>topVotedCandidate.q(3); &#x2F;&#x2F; return 0, At time 3, the votes are [0], and 0 is leading.<br>topVotedCandidate.q(12); &#x2F;&#x2F; return 1, At time 12, the votes are [0,1,1], and 1 is leading.<br>topVotedCandidate.q(25); &#x2F;&#x2F; return 1, At time 25, the votes are [0,1,1,0,0,1], and 1 is leading (as ties go to the most recent vote.)<br>topVotedCandidate.q(15); &#x2F;&#x2F; return 0<br>topVotedCandidate.q(24); &#x2F;&#x2F; return 0<br>topVotedCandidate.q(8); &#x2F;&#x2F; return 1</p>
+<p>Constraints:<br>1 &lt;&#x3D; persons.length &lt;&#x3D; 5000<br>times.length &#x3D;&#x3D; persons.length<br>0 &lt;&#x3D; persons[i] &lt; persons.length<br>0 &lt;&#x3D; times[i] &lt;&#x3D; 109<br>times is sorted in a strictly increasing order.<br>times[0] &lt;&#x3D; t &lt;&#x3D; 109<br>At most 104 calls will be made to q.</p>
+<p>在线选举。</p>
+<blockquote>
+给你两个整数数组 persons 和 times 。在选举中，第 i 张票是在时刻为 times[i] 时投给候选人 persons[i] 的。
+
+<p>对于发生在时刻 t 的每个查询，需要找出在 t 时刻在选举中领先的候选人的编号。</p>
+<p>在 t 时刻投出的选票也将被计入我们的查询之中。在平局的情况下，最近获得投票的候选人将会获胜。</p>
+<p>实现 TopVotedCandidate 类：<br>TopVotedCandidate(int[] persons, int[] times) 使用 persons 和 times 数组初始化对象。<br>int q(int t) 根据前面描述的规则，返回在时刻 t 在选举中领先的候选人的编号。</p>
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道设计题。这里我重新解释一下题意。在选举中，第 i 张票是在时刻为 times[i] 时投给候选人 persons[i] 的，这个部分应该没有歧义。但是接下来，对于发生在时刻 t 的每个查询，请注意这个时刻 t 未必跟投票的时刻是能对的上的。比如题目给的例子，如下是分别在时间点 0, 5, 10, 15, 20, 25, 30 时给不同的 candidate 投票的情况。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog"><span class="hljs-string">[0, 1, 1, 0, 0, 1, 0]</span><br><span class="hljs-string">[0, 5, 10, 15, 20, 25, 30]</span><br></code></pre></td></tr></table></figure>
+<p>但是查询的时刻 t 则分别发生在 3, 12, 25, 15, 24, 8 这几个时刻。</p>
+<p>存投票的结果这部分不难，这道题难在如何高效地查询。思路是二分法。存投票这个动作，我们需要一个 hashmap 和一个 list。其中 hashmap 存的是每个 candidate 和他们各自对应的票数。list 里存的是int[] { time, leadingPerson }，意思是在每当有一个人投票之后，我们就看一下当前这次投票结束之后领先的候选人是谁，把这个信息存到 list 里。</p>
+<p>因为投票的时刻 time 是有序的，所以 list 里的元素也是按 time 有序的。所以当我们查询的时候就可以用二分法了，这里相当于是在一个有序的数组里找一个<code>最大的小于等于 t 的元素</code>。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(logn)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        Set&lt;Character&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.length()) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (!set.contains(c)) &#123;<br>                set.add(c);<br>                i++;<br>                res = Math.max(res, i - j);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                set.remove(s.charAt(j));<br>                j++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> lengthOfLongestSubstring = <span class="hljs-keyword">function</span> (<span class="hljs-params">s</span>) &#123;<br>    <span class="hljs-keyword">let</span> map = &#123;&#125;;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (j &lt; s.<span class="hljs-property">length</span>) &#123;<br>        <span class="hljs-keyword">if</span> (map[s[j]]) &#123;<br>            map[s[i]] = <span class="hljs-literal">false</span>;<br>            i++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map[s[j]] = <span class="hljs-literal">true</span>;<br>            res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, j - i + <span class="hljs-number">1</span>);<br>            j++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">3. Longest Substring Without Repeating Characters<br>1695. Maximum Erasure Value<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TopVotedCandidate</span> &#123;<br>	List&lt;<span class="hljs-type">int</span>[]&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>	HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>	<span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">TopVotedCandidate</span><span class="hljs-params">(<span class="hljs-type">int</span>[] persons, <span class="hljs-type">int</span>[] times)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> persons.length;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">person</span> <span class="hljs-operator">=</span> persons[i];<br>			<span class="hljs-type">int</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> times[i];<br>			map.put(person, map.getOrDefault(person, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>			<span class="hljs-keyword">if</span> (map.get(person) &gt;= max) &#123;<br>				max = map.get(person);<br>				list.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123;time, person&#125;);<br>			&#125;<br>		&#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">q</span><span class="hljs-params">(<span class="hljs-type">int</span> t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> list.size() - <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">while</span> (left + <span class="hljs-number">1</span> &lt; right) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (list.get(mid)[<span class="hljs-number">0</span>] == t) &#123;<br>                <span class="hljs-keyword">return</span> list.get(mid)[<span class="hljs-number">1</span>];<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (list.get(mid)[<span class="hljs-number">0</span>] &gt; t) &#123;<br>				right = mid;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>                left = mid;<br>            &#125;<br>		&#125;<br>		<span class="hljs-keyword">if</span> (list.get(right)[<span class="hljs-number">0</span>] &lt;= t) &#123;<br>			<span class="hljs-keyword">return</span> list.get(right)[<span class="hljs-number">1</span>];<br>		&#125;<br>		<span class="hljs-keyword">return</span> list.get(left)[<span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your TopVotedCandidate object will be instantiated and called as such:</span><br><span class="hljs-comment"> * TopVotedCandidate obj = new TopVotedCandidate(persons, times);</span><br><span class="hljs-comment"> * int param_1 = obj.q(t);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,25 +294,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
-      
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
-      
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
-      
-        <a href="/tags/string/" class="print-no-link">#string</a>
-      
-    </div>
-  
 </div>
 
 
@@ -324,8 +302,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 3. Longest Substring Without Repeating Characters</div>
-      <div>https://shurui91.github.io/posts/3910559116.html</div>
+      <div>[LeetCode] 911. Online Election</div>
+      <div>https://shurui91.github.io/posts/730347545.html</div>
     </div>
     <div class="license-meta">
       
@@ -337,7 +315,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 3, 2020</div>
+          <div>November 15, 2024</div>
         </div>
       
       
@@ -369,18 +347,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1151287680.html" title="[LeetCode] 340. Longest Substring with At Most K Distinct Characters">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 340. Longest Substring with At Most K Distinct Characters</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2236387316.html" title="[LeetCode] 76. Minimum Window Substring">
-                        <span class="hidden-mobile">[LeetCode] 76. Minimum Window Substring</span>
+                      <a href="/posts/2894172629.html" title="[LeetCode] 1146. Snapshot Array">
+                        <span class="hidden-mobile">[LeetCode] 1146. Snapshot Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -400,8 +372,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3910559116.html';
-          this.page.identifier = '/posts/3910559116.html';
+          this.page.url = 'https://shurui91.github.io/posts/730347545.html';
+          this.page.identifier = '/posts/730347545.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
