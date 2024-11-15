@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>[LeetCode] 1146. Snapshot Array</title>
+    <link href="/posts/2894172629.html"/>
+    <url>/posts/2894172629.html</url>
+    
+    <content type="html"><![CDATA[<p>Implement a SnapshotArray that supports the following interface:<br>SnapshotArray(int length) initializes an array-like data structure with the given length. Initially, each element equals 0.<br>void set(index, val) sets the element at the given index to be equal to val.<br>int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.<br>int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id</p><p>Example 1:<br>Input: [“SnapshotArray”,”set”,”snap”,”set”,”get”]<br>[[3],[0,5],[],[0,6],[0,0]]<br>Output: [null,null,0,null,5]<br>Explanation:<br>SnapshotArray snapshotArr &#x3D; new SnapshotArray(3); &#x2F;&#x2F; set the length to be 3<br>snapshotArr.set(0,5);  &#x2F;&#x2F; Set array[0] &#x3D; 5<br>snapshotArr.snap();  &#x2F;&#x2F; Take a snapshot, return snap_id &#x3D; 0<br>snapshotArr.set(0,6);<br>snapshotArr.get(0,0);  &#x2F;&#x2F; Get the value of array[0] with snap_id &#x3D; 0, return 5</p><p>Constraints:<br>1 &lt;&#x3D; length &lt;&#x3D; 5 * 104<br>0 &lt;&#x3D; index &lt; length<br>0 &lt;&#x3D; val &lt;&#x3D; 109<br>0 &lt;&#x3D; snap_id &lt; (the total number of times we call snap())<br>At most 5 * 104 calls will be made to set, snap, and get.</p><p>快照数组。</p><blockquote>实现支持下列接口的「快照数组」- SnapshotArray：- SnapshotArray(int length) - 初始化一个与指定长度相等的 类数组 的数据结构。初始时，每个元素都等于 0。- void set(index, val) - 会将指定索引 index 处的元素设置为 val。- int snap() - 获取该数组的快照，并返回快照的编号 snap_id（快照号是调用 snap() 的总次数减去 1）。- int get(index, snap_id) - 根据指定的 snap_id 选择快照，并返回该快照指定索引 index 的值。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>创建一个 hashmap <code>&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map</code>，其中 hashmap 的 key 是数组的下标 index，treemap 里存的是<code>&lt;timestamp, value&gt;</code>。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间：初始化O(n), set() - O(logn), get() - O(1), 整体O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SnapshotArray</span> &#123;<br>    <span class="hljs-type">int</span> snapId;<br>    <span class="hljs-comment">// &lt;index, &lt;snapId, value&gt;&gt;</span><br>    HashMap&lt;Integer, TreeMap&lt;Integer, Integer&gt;&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SnapshotArray</span><span class="hljs-params">(<span class="hljs-type">int</span> length)</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<br>            map.put(i, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;());<br>            map.get(i).put(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        &#125;<br>        snapId = <span class="hljs-number">0</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        TreeMap&lt;Integer, Integer&gt; tmap = map.get(index);<br>        <span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br>            tmap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>            tmap.put(snapId, val);<br>            map.put(index, tmap);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.get(index).put(snapId, val);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">snap</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> snapId++;<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> snap_id)</span> &#123;<br>        <span class="hljs-keyword">return</span> map.get(index).floorEntry(snap_id).getValue();<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your SnapshotArray object will be instantiated and called as such:</span><br><span class="hljs-comment"> * SnapshotArray obj = new SnapshotArray(length);</span><br><span class="hljs-comment"> * obj.set(index,val);</span><br><span class="hljs-comment"> * int param_2 = obj.snap();</span><br><span class="hljs-comment"> * int param_3 = obj.get(index,snap_id);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>treemap</tag>
+      
+      <tag>binary search</tag>
+      
+      <tag>design</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2080. Range Frequency Queries</title>
     <link href="/posts/2674324247.html"/>
     <url>/posts/2674324247.html</url>
@@ -16,15 +47,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
       
-      <tag>design</tag>
+      <tag>java</tag>
       
       <tag>binary search</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -45,11 +76,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -72,9 +103,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>binary search</tag>
       
@@ -124,9 +155,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -151,9 +182,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -178,11 +209,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -207,9 +238,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -282,9 +313,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -401,11 +432,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>recursion</tag>
       
@@ -428,11 +459,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>counting sort</tag>
       
@@ -455,9 +486,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -511,9 +542,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -536,9 +567,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -567,9 +598,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>stack</tag>
       
@@ -594,11 +625,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -619,11 +650,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -673,9 +704,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -698,9 +729,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -723,9 +754,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>bit manipulation</tag>
       
@@ -748,9 +779,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -777,9 +808,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -856,9 +887,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -881,11 +912,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -908,9 +939,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -937,9 +968,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -962,9 +993,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>prefix sum</tag>
       
@@ -987,13 +1018,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>tree</tag>
       
     </tags>
     
@@ -1014,9 +1045,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1041,9 +1072,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -1068,11 +1099,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -1097,11 +1128,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -1124,11 +1155,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>dfs</tag>
+      <tag>array</tag>
       
       <tag>java</tag>
       
-      <tag>array</tag>
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -1153,9 +1184,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1178,9 +1209,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -1205,9 +1236,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1230,11 +1261,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1257,9 +1288,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1336,9 +1367,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1361,11 +1392,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>graph</tag>
       
@@ -1390,9 +1421,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -1415,9 +1446,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1463,9 +1494,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -1492,9 +1523,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1517,15 +1548,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>bfs</tag>
-      
-      <tag>dfs</tag>
-      
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>bfs</tag>
+      
+      <tag>dfs</tag>
       
       <tag>graph</tag>
       
@@ -1577,11 +1608,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -1604,11 +1635,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
+      <tag>array</tag>
       
       <tag>java</tag>
       
-      <tag>array</tag>
+      <tag>tree</tag>
       
       <tag>treemap</tag>
       
@@ -1635,11 +1666,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1664,11 +1695,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
     </tags>
     
@@ -1689,9 +1720,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1741,9 +1772,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -1768,9 +1799,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>bit manipulation</tag>
       
@@ -1793,9 +1824,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1820,9 +1851,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1922,9 +1953,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -1949,9 +1980,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -1974,9 +2005,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -1999,13 +2030,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -2028,9 +2059,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -2055,9 +2086,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -2203,9 +2234,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -2228,11 +2259,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -2253,9 +2284,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2307,9 +2338,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2334,9 +2365,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2359,11 +2390,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2386,11 +2417,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2436,9 +2467,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2465,9 +2496,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -2569,9 +2600,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -2594,11 +2625,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -2621,9 +2652,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2646,11 +2677,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2673,9 +2704,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2700,9 +2731,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -2727,9 +2758,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2754,9 +2785,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>binary search</tag>
       
@@ -2781,9 +2812,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -2808,11 +2839,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -2864,11 +2895,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>simulation</tag>
       
@@ -2891,11 +2922,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -2916,9 +2947,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -2943,11 +2974,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -2972,9 +3003,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3001,11 +3032,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>prefix sum</tag>
       
@@ -3030,9 +3061,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>binary search</tag>
       
@@ -3057,11 +3088,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -3086,11 +3117,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>two sum</tag>
       
@@ -3115,9 +3146,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3142,9 +3173,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3171,11 +3202,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -3202,11 +3233,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -3252,11 +3283,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3279,9 +3310,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3304,9 +3335,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>stack</tag>
       
@@ -3331,11 +3362,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3360,9 +3391,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3387,9 +3418,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -3410,9 +3441,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3487,9 +3518,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -3512,9 +3543,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3537,9 +3568,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3589,9 +3620,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -3616,9 +3647,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -3670,9 +3701,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3699,9 +3730,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -3724,11 +3755,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -3799,9 +3830,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3828,9 +3859,9 @@
       
       <tag>array</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>sort</tag>
+      
+      <tag>sliding window</tag>
       
       <tag>greedy</tag>
       
@@ -3880,9 +3911,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -3932,9 +3963,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -3959,11 +3990,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -3990,9 +4021,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -4021,9 +4052,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>design</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4071,11 +4102,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -4127,11 +4158,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -4154,9 +4185,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -4181,9 +4212,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -4290,9 +4321,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>math</tag>
       
@@ -4315,11 +4346,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -4392,11 +4423,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
     </tags>
     
@@ -4417,9 +4448,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
+      
+      <tag>tree</tag>
       
       <tag>postorder</tag>
       
@@ -4444,9 +4475,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
+      
+      <tag>tree</tag>
       
       <tag>postorder</tag>
       
@@ -4494,11 +4525,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -4519,9 +4550,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>dfs</tag>
-      
       <tag>java</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -4544,9 +4575,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4573,11 +4604,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4600,9 +4631,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4627,9 +4658,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4677,11 +4708,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -4706,11 +4737,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
     </tags>
     
@@ -4731,11 +4762,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -4758,11 +4789,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>enumeration</tag>
       
@@ -4810,9 +4841,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>binary search</tag>
       
@@ -4837,11 +4868,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
     </tags>
     
@@ -4862,9 +4893,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
+      
+      <tag>tree</tag>
       
       <tag>postorder</tag>
       
@@ -4889,9 +4920,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -4916,11 +4947,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>brainteaser</tag>
       
@@ -5024,9 +5055,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -5053,11 +5084,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -5132,11 +5163,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sliding window</tag>
       
@@ -5153,7 +5184,7 @@
     <link href="/posts/3002885147.html"/>
     <url>/posts/3002885147.html</url>
     
-    <content type="html"><![CDATA[<p>Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key’s value at a certain timestamp.</p><p>Implement the TimeMap class:</p><ul><li>TimeMap() Initializes the object of the data structure.</li><li>void set(String key, String value, int timestamp) Stores the key key with the value value at the given time timestamp.</li><li>String get(String key, int timestamp) Returns a value such that set was called previously, with timestamp_prev &lt;&#x3D; timestamp. If there are multiple such values, it returns the value associated with the largest timestamp_prev. If there are no values, it returns “”.</li></ul><p>Example 1:<br>Input<br>[“TimeMap”, “set”, “get”, “get”, “set”, “get”, “get”]<br>[[], [“foo”, “bar”, 1], [“foo”, 1], [“foo”, 3], [“foo”, “bar2”, 4], [“foo”, 4], [“foo”, 5]]<br>Output<br>[null, null, “bar”, “bar”, null, “bar2”, “bar2”]</p><p>Explanation<br>TimeMap timeMap &#x3D; new TimeMap();<br>timeMap.set(“foo”, “bar”, 1);  &#x2F;&#x2F; store the key “foo” and value “bar” along with timestamp &#x3D; 1.<br>timeMap.get(“foo”, 1);         &#x2F;&#x2F; return “bar”<br>timeMap.get(“foo”, 3);         &#x2F;&#x2F; return “bar”, since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is “bar”.<br>timeMap.set(“foo”, “bar2”, 4); &#x2F;&#x2F; store the key “foo” and value “bar2” along with timestamp &#x3D; 4.<br>timeMap.get(“foo”, 4);         &#x2F;&#x2F; return “bar2”<br>timeMap.get(“foo”, 5);         &#x2F;&#x2F; return “bar2”</p><p>Constraints:<br>1 &lt;&#x3D; key.length, value.length &lt;&#x3D; 100<br>key and value consist of lowercase English letters and digits.<br>1 &lt;&#x3D; timestamp &lt;&#x3D; 107<br>All the timestamps timestamp of set are strictly increasing.<br>At most 2 * 105 calls will be made to set and get.</p><p>基于时间的键值存储。</p><blockquote>设计一个基于时间的键值数据结构，该结构可以在不同时间戳存储对应同一个键的多个值，并针对特定时间戳检索键对应的值。<p>实现 TimeMap 类：</p><ul><li>TimeMap() 初始化数据结构对象</li><li>void set(String key, String value, int timestamp) 存储给定时间戳 timestamp 时的键 key 和值 value。</li><li>String get(String key, int timestamp) 返回一个值，该值在之前调用了 set，其中 timestamp_prev &lt;&#x3D; timestamp 。如果有多个这样的值，它将返回与最大  timestamp_prev 关联的值。如果没有值，则返回空字符串（””）。</blockquote></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为是基于 key 找 value，所以大概率是需要用 hashmap。不过这道题又给了一个维度叫做时间戳，所以我们在存储的时候需要同时考虑怎么找到时间戳。这里我提供两种做法，一种是基于 treemap，一种是基于二分法。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul><li>treemap<ul><li>构造 treemap 的时间O(nlogn)</li><li>空间O(n)</li></ul></li><li>binary search<ul><li>时间O(logn)</li><li>空间O(n)</li></ul></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>treemap实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TimeMap</span> &#123;<br><span class="hljs-keyword">private</span> HashMap&lt;String, TreeMap&lt;Integer, String&gt;&gt; map;<br><br><span class="hljs-comment">/** Initialize your data structure here. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">TimeMap</span><span class="hljs-params">()</span> &#123;<br>map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String key, String value, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>TreeMap&lt;Integer, String&gt; tmap = map.get(key);<br><span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br>tmap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>map.put(key, tmap);<br>&#125;<br>tmap.put(timestamp, value);<br>&#125;<br><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">get</span><span class="hljs-params">(String key, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>TreeMap&lt;Integer, String&gt; tmap = map.get(key);<br><span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>&#125;<br><span class="hljs-type">Integer</span> <span class="hljs-variable">floorKey</span> <span class="hljs-operator">=</span> tmap.floorKey(timestamp);<br><span class="hljs-keyword">if</span> (floorKey == <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>&#125;<br><span class="hljs-keyword">return</span> tmap.get(floorKey);<br>&#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your TimeMap object will be instantiated and called as such:</span><br><span class="hljs-comment"> * TimeMap obj = new TimeMap();</span><br><span class="hljs-comment"> * obj.set(key,value,timestamp);</span><br><span class="hljs-comment"> * String param_2 = obj.get(key,timestamp);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure><p>binary search实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Data</span> &#123;<br>    String val;<br>    <span class="hljs-type">int</span> time;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Data</span><span class="hljs-params">(String val, <span class="hljs-type">int</span> time)</span> &#123;<br>        <span class="hljs-built_in">this</span>.val = val;<br>        <span class="hljs-built_in">this</span>.time = time;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TimeMap</span> &#123;<br>    HashMap&lt;String, List&lt;Data&gt;&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">TimeMap</span><span class="hljs-params">()</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String key, String value, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(key)) &#123;<br>            map.put(key, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>        &#125;<br>        map.get(key).add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Data</span>(value, timestamp));<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">get</span><span class="hljs-params">(String key, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(key)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(map.get(key), timestamp);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> String <span class="hljs-title function_">helper</span><span class="hljs-params">(List&lt;Data&gt; list, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> list.size() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left + <span class="hljs-number">1</span> &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (list.get(mid).time == timestamp) &#123;<br>                <span class="hljs-keyword">return</span> list.get(mid).val;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (list.get(mid).time &lt; timestamp) &#123;<br>                left = mid;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (list.get(mid).time &gt; timestamp) &#123;<br>                right = mid;<br>            &#125;<br>        &#125;<br><span class="hljs-comment">// 因为如果right &lt;= timestamp，那么right一定是更接近timestamp的时间</span><br>        <span class="hljs-keyword">if</span> (list.get(right).time &lt;= timestamp) &#123;<br>            <span class="hljs-keyword">return</span> list.get(right).val;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (list.get(left).time &lt;= timestamp) &#123;<br>            <span class="hljs-keyword">return</span> list.get(left).val;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your TimeMap object will be instantiated and called as such:</span><br><span class="hljs-comment"> * TimeMap obj = new TimeMap();</span><br><span class="hljs-comment"> * obj.set(key,value,timestamp);</span><br><span class="hljs-comment"> * String param_2 = obj.get(key,timestamp);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">981. Time Based Key-Value Store<br>2034. Stock Price Fluctuation<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key’s value at a certain timestamp.</p><p>Implement the TimeMap class:</p><ul><li>TimeMap() Initializes the object of the data structure.</li><li>void set(String key, String value, int timestamp) Stores the key key with the value value at the given time timestamp.</li><li>String get(String key, int timestamp) Returns a value such that set was called previously, with timestamp_prev &lt;&#x3D; timestamp. If there are multiple such values, it returns the value associated with the largest timestamp_prev. If there are no values, it returns “”.</li></ul><p>Example 1:<br>Input<br>[“TimeMap”, “set”, “get”, “get”, “set”, “get”, “get”]<br>[[], [“foo”, “bar”, 1], [“foo”, 1], [“foo”, 3], [“foo”, “bar2”, 4], [“foo”, 4], [“foo”, 5]]<br>Output<br>[null, null, “bar”, “bar”, null, “bar2”, “bar2”]</p><p>Explanation<br>TimeMap timeMap &#x3D; new TimeMap();<br>timeMap.set(“foo”, “bar”, 1);  &#x2F;&#x2F; store the key “foo” and value “bar” along with timestamp &#x3D; 1.<br>timeMap.get(“foo”, 1);         &#x2F;&#x2F; return “bar”<br>timeMap.get(“foo”, 3);         &#x2F;&#x2F; return “bar”, since there is no value corresponding to foo at timestamp 3 and timestamp 2, then the only value is at timestamp 1 is “bar”.<br>timeMap.set(“foo”, “bar2”, 4); &#x2F;&#x2F; store the key “foo” and value “bar2” along with timestamp &#x3D; 4.<br>timeMap.get(“foo”, 4);         &#x2F;&#x2F; return “bar2”<br>timeMap.get(“foo”, 5);         &#x2F;&#x2F; return “bar2”</p><p>Constraints:<br>1 &lt;&#x3D; key.length, value.length &lt;&#x3D; 100<br>key and value consist of lowercase English letters and digits.<br>1 &lt;&#x3D; timestamp &lt;&#x3D; 107<br>All the timestamps timestamp of set are strictly increasing.<br>At most 2 * 105 calls will be made to set and get.</p><p>基于时间的键值存储。</p><blockquote>设计一个基于时间的键值数据结构，该结构可以在不同时间戳存储对应同一个键的多个值，并针对特定时间戳检索键对应的值。<p>实现 TimeMap 类：</p><p>TimeMap() 初始化数据结构对象<br>void set(String key, String value, int timestamp) 存储键 key、值 value，以及给定的时间戳 timestamp。<br>String get(String key, int timestamp)<br>返回先前调用 set(key, value, timestamp_prev) 所存储的值，其中 timestamp_prev &lt;&#x3D; timestamp 。<br>如果有多个这样的值，则返回对应最大的  timestamp_prev 的那个值。<br>如果没有值，则返回空字符串（””）。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/time-based-key-value-store">https://leetcode.cn/problems/time-based-key-value-store</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一-treemap"><a href="#思路一-treemap" class="headerlink" title="思路一 - treemap"></a>思路一 - treemap</h2><p>这个题有两种思路，一是用Java的 treemap，另一种是用到 binary search。</p><p>首先第一种思路，用 treemap。因为会存在多个键值是同样的 key，但是有不同的 value 和不同的 timestamp，所以一开始比较直观的思路一定是 hashmap&lt;String, timestamp&gt;，因为 hashmap 才能存储类似这种&lt;key, value&gt;键值对的数据。其次，题目要求当找到同样的 key，同样的 value 的时候，要返回最接近 timestamp 的 value，所以想到用 treemap&lt;timestamp, String&gt;，因为 treemap 是可以自动根据 key 排序的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul><li>treemap<ul><li>构造 treemap 的时间O(nlogn) - 每放进去一个元素就要重新排序一次</li><li>空间O(n)</li></ul></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>treemap实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TimeMap</span> &#123;<br><span class="hljs-keyword">private</span> HashMap&lt;String, TreeMap&lt;Integer, String&gt;&gt; map;<br><br><span class="hljs-comment">/** Initialize your data structure here. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">TimeMap</span><span class="hljs-params">()</span> &#123;<br>map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String key, String value, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>TreeMap&lt;Integer, String&gt; tmap = map.get(key);<br><span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br>tmap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();<br>map.put(key, tmap);<br>&#125;<br>tmap.put(timestamp, value);<br>&#125;<br><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">get</span><span class="hljs-params">(String key, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>TreeMap&lt;Integer, String&gt; tmap = map.get(key);<br><span class="hljs-keyword">if</span> (tmap == <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>&#125;<br><span class="hljs-type">Integer</span> <span class="hljs-variable">floorKey</span> <span class="hljs-operator">=</span> tmap.floorKey(timestamp);<br><span class="hljs-keyword">if</span> (floorKey == <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>&#125;<br><span class="hljs-keyword">return</span> tmap.get(floorKey);<br>&#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your TimeMap object will be instantiated and called as such:</span><br><span class="hljs-comment"> * TimeMap obj = new TimeMap();</span><br><span class="hljs-comment"> * obj.set(key,value,timestamp);</span><br><span class="hljs-comment"> * String param_2 = obj.get(key,timestamp);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure><h2 id="思路二-二分法"><a href="#思路二-二分法" class="headerlink" title="思路二 - 二分法"></a>思路二 - 二分法</h2><p>第二种思路是用到二分法。在不用 treemap 的前提下，我们依然需要 hashmap 存储 key 和 value（这里会是一个 list）的键值对，但是对于 value 相同但是 timestamp 不同的数据，我们可以自己创建一个类，把这个类放入 list，这样当 get key 的时候，实际上我们 get 到的是一个由 arraylist 串联好的，有相同 key 的 values。当你能得到这个 list 之后，可以根据给出的变量 timestamp 找到 list 中最接近于这个 timestamp 的键值对。因为题目给的时间戳一定是有序的所以这里我们无需再排序了。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><ul><li>binary search<ul><li>时间O(logn)</li><li>空间O(n)</li></ul></li></ul><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>binary search实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Data</span> &#123;<br>    String val;<br>    <span class="hljs-type">int</span> time;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Data</span><span class="hljs-params">(String val, <span class="hljs-type">int</span> time)</span> &#123;<br>        <span class="hljs-built_in">this</span>.val = val;<br>        <span class="hljs-built_in">this</span>.time = time;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TimeMap</span> &#123;<br>    HashMap&lt;String, List&lt;Data&gt;&gt; map;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">TimeMap</span><span class="hljs-params">()</span> &#123;<br>        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String key, String value, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(key)) &#123;<br>            map.put(key, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>        &#125;<br>        map.get(key).add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Data</span>(value, timestamp));<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">get</span><span class="hljs-params">(String key, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-keyword">if</span> (!map.containsKey(key)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(map.get(key), timestamp);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> String <span class="hljs-title function_">helper</span><span class="hljs-params">(List&lt;Data&gt; list, <span class="hljs-type">int</span> timestamp)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> list.size() - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left + <span class="hljs-number">1</span> &lt; right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (list.get(mid).time == timestamp) &#123;<br>                <span class="hljs-keyword">return</span> list.get(mid).val;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (list.get(mid).time &lt; timestamp) &#123;<br>                left = mid;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (list.get(mid).time &gt; timestamp) &#123;<br>                right = mid;<br>            &#125;<br>        &#125;<br><span class="hljs-comment">// 因为如果right &lt;= timestamp，那么right一定是更接近timestamp的时间</span><br>        <span class="hljs-keyword">if</span> (list.get(right).time &lt;= timestamp) &#123;<br>            <span class="hljs-keyword">return</span> list.get(right).val;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (list.get(left).time &lt;= timestamp) &#123;<br>            <span class="hljs-keyword">return</span> list.get(left).val;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your TimeMap object will be instantiated and called as such:</span><br><span class="hljs-comment"> * TimeMap obj = new TimeMap();</span><br><span class="hljs-comment"> * obj.set(key,value,timestamp);</span><br><span class="hljs-comment"> * String param_2 = obj.get(key,timestamp);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">981. Time Based Key-Value Store<br>2034. Stock Price Fluctuation<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -5161,17 +5192,17 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>treemap</tag>
       
       <tag>string</tag>
       
-      <tag>design</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5192,11 +5223,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -5221,13 +5252,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
-      <tag>bfs</tag>
+      <tag>hashmap</tag>
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
+      <tag>tree</tag>
+      
+      <tag>bfs</tag>
       
     </tags>
     
@@ -5248,15 +5279,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
-      <tag>bfs</tag>
+      <tag>hashmap</tag>
       
       <tag>java</tag>
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
+      <tag>tree</tag>
+      
+      <tag>bfs</tag>
       
     </tags>
     
@@ -5323,9 +5354,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>graph</tag>
       
@@ -5373,11 +5404,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>stack</tag>
       
@@ -5402,13 +5433,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
     </tags>
     
@@ -5429,9 +5460,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -5506,9 +5537,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>greedy</tag>
       
@@ -5533,13 +5564,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
@@ -5562,11 +5593,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>string</tag>
       
@@ -5589,13 +5620,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>bfs</tag>
+      <tag>array</tag>
       
       <tag>java</tag>
       
       <tag>javascript</tag>
       
-      <tag>array</tag>
+      <tag>bfs</tag>
       
       <tag>flood fill</tag>
       
@@ -5618,9 +5649,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>backtracking</tag>
       
@@ -5666,13 +5697,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5697,13 +5728,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5728,13 +5759,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5759,13 +5790,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5790,13 +5821,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5821,13 +5852,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>sliding window</tag>
       
@@ -5852,9 +5883,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>binary search</tag>
       
@@ -5877,11 +5908,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
     </tags>
     
@@ -5927,11 +5958,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>linked list</tag>
       
@@ -5979,11 +6010,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>prefix sum</tag>
       
@@ -6006,11 +6037,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -6054,9 +6085,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
+      
+      <tag>tree</tag>
       
       <tag>postorder</tag>
       
@@ -6079,13 +6110,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>tree</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -6108,11 +6139,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>counting sort</tag>
       
@@ -6135,13 +6166,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
-      <tag>dfs</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>tree</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -6164,11 +6195,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>tree</tag>
       
       <tag>recursion</tag>
       
@@ -6193,11 +6224,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>bucket sort</tag>
       
@@ -6222,11 +6253,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>permutation</tag>
       
@@ -6303,9 +6334,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>design</tag>
       
@@ -6330,13 +6361,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -6357,9 +6388,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>matrix</tag>
       
@@ -6382,11 +6413,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>matrix</tag>
       
@@ -6409,11 +6440,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>matrix</tag>
       
@@ -6436,11 +6467,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>matrix</tag>
       
@@ -6465,11 +6496,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>matrix</tag>
       
@@ -6492,11 +6523,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>greedy</tag>
       
@@ -6548,11 +6579,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
     </tags>
     
@@ -6573,11 +6604,11 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+      <tag>tree</tag>
       
       <tag>bst</tag>
       
@@ -6602,9 +6633,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>tree</tag>
-      
       <tag>java</tag>
+      
+      <tag>tree</tag>
       
       <tag>recursion</tag>
       
@@ -6629,13 +6660,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>math</tag>
       
@@ -6658,13 +6689,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>counting sort</tag>
       
@@ -6687,9 +6718,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
       
       <tag>sort</tag>
       
@@ -6718,11 +6749,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>linked list</tag>
       
@@ -6745,11 +6776,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>math</tag>
       
@@ -6774,11 +6805,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -6803,9 +6834,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>bucket sort</tag>
       
@@ -6830,15 +6861,15 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
       
       <tag>preorder</tag>
       
@@ -6861,11 +6892,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -6888,11 +6919,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -6915,11 +6946,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>inorder</tag>
       
@@ -6942,13 +6973,13 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -6971,15 +7002,15 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
       <tag>tree</tag>
       
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
       
     </tags>
     
@@ -7000,11 +7031,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>postorder</tag>
       
@@ -7027,11 +7058,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>java</tag>
+      
       <tag>tree</tag>
       
       <tag>dfs</tag>
-      
-      <tag>java</tag>
       
       <tag>preorder</tag>
       
@@ -7079,11 +7110,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>linked list</tag>
       
@@ -7135,11 +7166,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>linked list</tag>
       
@@ -7187,13 +7218,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -7214,9 +7245,9 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
       <tag>array</tag>
+      
+      <tag>java</tag>
       
       <tag>dynamic programming</tag>
       
@@ -7239,11 +7270,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>heap</tag>
       
@@ -7268,11 +7299,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>line sweep</tag>
       
@@ -7320,13 +7351,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
     </tags>
     
@@ -7347,11 +7378,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -7374,13 +7405,13 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>quick sort</tag>
       
@@ -7453,11 +7484,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>hashmap</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>hashmap</tag>
       
       <tag>math</tag>
       
@@ -7518,11 +7549,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>counting sort</tag>
       
@@ -7545,11 +7576,11 @@
       
       <tag>leetcode</tag>
       
+      <tag>array</tag>
+      
       <tag>java</tag>
       
       <tag>javascript</tag>
-      
-      <tag>array</tag>
       
       <tag>selection sort</tag>
       
@@ -7599,15 +7630,15 @@
       
       <tag>leetcode</tag>
       
-      <tag>java</tag>
-      
-      <tag>javascript</tag>
-      
       <tag>array</tag>
       
       <tag>two pointer</tag>
       
       <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
       
       <tag>two sum</tag>
       
