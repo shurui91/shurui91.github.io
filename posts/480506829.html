@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="Design an algorithm that collects daily price quotes for some stock and returns the span of that stock’s price for the current day. The span of the stock’s price in one day is the maximum number of co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 901. Online Stock Span">
+<meta property="og:url" content="https://shurui91.github.io/posts/480506829.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="Design an algorithm that collects daily price quotes for some stock and returns the span of that stock’s price for the current day. The span of the stock’s price in one day is the maximum number of co">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2020-05-20T14:13:42.000Z">
+<meta property="article:modified_time" content="2024-11-18T04:57:58.766Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="design">
+<meta property="article:tag" content="stack">
+<meta property="article:tag" content="monotonic stack">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 901. Online Stock Span - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 901. Online Stock Span"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2020-05-20 07:13" pubdate>
+          May 20, 2020 am
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.8k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          12 mins
+          24 mins
         
       </span>
     
@@ -260,26 +260,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 901. Online Stock Span</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>Design an algorithm that collects daily price quotes for some stock and returns the span of that stock’s price for the current day.</p>
+<p>The span of the stock’s price in one day is the maximum number of consecutive days (starting from that day and going backward) for which the stock price was less than or equal to the price of that day.</p>
+<p>For example, if the prices of the stock in the last four days is [7,2,1,2] and the price of the stock today is 2, then the span of today is 4 because starting from today, the price of the stock was less than or equal 2 for 4 consecutive days.<br>Also, if the prices of the stock in the last four days is [7,34,1,2] and the price of the stock today is 8, then the span of today is 3 because starting from today, the price of the stock was less than or equal 8 for 3 consecutive days.<br>Implement the StockSpanner class:<br>StockSpanner() Initializes the object of the class.<br>int next(int price) Returns the span of the stock’s price given that today’s price is price.</p>
+<p>Example 1:<br>Input<br>[“StockSpanner”, “next”, “next”, “next”, “next”, “next”, “next”, “next”]<br>[[], [100], [80], [60], [70], [60], [75], [85]]<br>Output<br>[null, 1, 1, 1, 2, 1, 4, 6]</p>
+<p>Explanation<br>StockSpanner stockSpanner &#x3D; new StockSpanner();<br>stockSpanner.next(100); &#x2F;&#x2F; return 1<br>stockSpanner.next(80);  &#x2F;&#x2F; return 1<br>stockSpanner.next(60);  &#x2F;&#x2F; return 1<br>stockSpanner.next(70);  &#x2F;&#x2F; return 2<br>stockSpanner.next(60);  &#x2F;&#x2F; return 1<br>stockSpanner.next(75);  &#x2F;&#x2F; return 4, because the last 4 prices (including today’s price of 75) were less than or equal to today’s price.<br>stockSpanner.next(85);  &#x2F;&#x2F; return 6</p>
+<p>Constraints:<br>1 &lt;&#x3D; price &lt;&#x3D; 105<br>At most 104 calls will be made to next.</p>
+<p>股票价格跨度。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
+编写一个 StockSpanner 类，它收集某些股票的每日报价，并返回该股票当日价格的跨度。
+
+<p>今天股票价格的跨度被定义为股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。</p>
+<p>例如，如果未来7天股票的价格是 [100, 80, 60, 70, 60, 75, 85]，那么股票跨度将是 [1, 1, 1, 2, 1, 4, 6]。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/online-stock-span">https://leetcode-cn.com/problems/online-stock-span</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为这道题的数据会到十的五次方，所以暴力解 n 方的思路应该是会超时的。O(n) 级别的思路是用单调栈。具体实现是用单调栈放两个东西，<code>&#123;价钱，股票当日价格的跨度res&#125;</code>。遍历 input 的数组，当 stack 为空的时候，就直接入栈；当 stack 不为空，需要查看栈顶元素是否小于等于当前要入栈的 price，如果是的话就弹出栈顶元素，并把栈顶元素的 res 累加到当前要入栈的元素的 res 里去。</p>
+<p>注意如果问的这个跨度是不连续的，则无法用单调栈的思路做了。</p>
+<p>这里补充一个为什么能想到单调栈里放的是<code>&#123;价钱，股票当日价格的跨度res&#125;</code>这个组合。比如题目给的例子<code>[100, 80, 60, 70, 60, 75, 85]</code>，一开始我们走到 100,80,60 都是递减的，所以直到 60，股价小于等于当前这一天的天数都是 0。然后我们走到70，此时我们发现70前面有一个60是小于70的，那么此时我就可以将60那天的结果（有多少天股价小于60）累加到70身上。因为股价小于60的天数一定也是小于等于70的。所以这道题的单调栈对于任何一天的股价而言，都是无条件入栈的，只是弹出的时候是有技巧的。当我们发现某一天 A 的股价大于栈顶那天 B 的股价的时候，就可以往外弹了，同时把所有小于 B 的股价的天数累加到 A 身上，意思是因为 B 天股价已经小于 A 天了，所以 如果有 X 天的股价是小于 B 那天的股价的，那么这些天的股价也必然小于 A 天。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - worse case<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">StockSpanner</span> &#123;<br>    Deque&lt;<span class="hljs-type">int</span>[]&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">StockSpanner</span><span class="hljs-params">()</span> &#123;<br>        <br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">next</span><span class="hljs-params">(<span class="hljs-type">int</span> price)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; stack.peekLast()[<span class="hljs-number">0</span>] &lt;= price) &#123;<br>            res += stack.pollLast()[<span class="hljs-number">1</span>];<br>        &#125;<br>        stack.offerLast(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; price, res &#125;);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your StockSpanner object will be instantiated and called as such:</span><br><span class="hljs-comment"> * StockSpanner obj = new StockSpanner();</span><br><span class="hljs-comment"> * int param_1 = obj.next(price);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -296,11 +303,11 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/design/" class="print-no-link">#design</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
+        <a href="/tags/stack/" class="print-no-link">#stack</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/monotonic-stack/" class="print-no-link">#monotonic stack</a>
       
     </div>
   
@@ -312,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 901. Online Stock Span</div>
+      <div>https://shurui91.github.io/posts/480506829.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>May 20, 2020</div>
         </div>
       
       
@@ -357,9 +364,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
+                      <a href="/posts/1405682268.html" title="[LeetCode] 1277. Count Square Submatrices with All Ones">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
+                        <span class="hidden-mobile">[LeetCode] 1277. Count Square Submatrices with All Ones</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -367,8 +374,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/1395124195.html" title="[LeetCode] 1371. Find the Longest Substring Containing Vowels in Even Counts">
+                        <span class="hidden-mobile">[LeetCode] 1371. Find the Longest Substring Containing Vowels in Even Counts</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +395,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/480506829.html';
+          this.page.identifier = '/posts/480506829.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
