@@ -544,9 +544,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -625,9 +625,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -1267,9 +1267,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -1830,9 +1830,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -2342,9 +2342,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>matrix</tag>
       
@@ -2525,9 +2525,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -2816,9 +2816,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3231,9 +3231,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>counting sort</tag>
       
@@ -3422,9 +3422,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -3913,11 +3913,11 @@
       
       <tag>array</tag>
       
+      <tag>sort</tag>
+      
       <tag>sliding window</tag>
       
       <tag>greedy</tag>
-      
-      <tag>sort</tag>
       
       <tag>prefix sum</tag>
       
@@ -4050,9 +4050,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -4133,9 +4133,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -4741,9 +4741,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -4793,9 +4793,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sort</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -5502,7 +5502,7 @@
     <link href="/posts/3520737794.html"/>
     <url>/posts/3520737794.html</url>
     
-    <content type="html"><![CDATA[<p>Given an array of integers heights representing the histogram’s bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg" alt="Example 1"><br>Input: heights &#x3D; [2,1,5,6,2,3]<br>Output: 10<br>Explanation: The above is a histogram where width of each bar is 1.<br>The largest rectangle is shown in the red area, which has an area &#x3D; 10 units.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg" alt="Example 2"><br>Input: heights &#x3D; [2,4]<br>Output: 4</p><p>Constraints:<br>1 &lt;&#x3D; heights.length &lt;&#x3D; 105<br>0 &lt;&#x3D; heights[i] &lt;&#x3D; 104</p><p>柱状图中最大的矩形。</p><blockquote><p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个数组表示一些非负整数，代表一些 bars，请你返回由这些 bar 组成的最大矩形的面积。</p><p>思路是单调栈。这个题可以用别的方法，但是复杂度都不如单调栈的思路。关于这个题本身，我参考了<a href="https://www.cnblogs.com/lichen782/p/leetcode_Largest_Rectangle_in_Histogram.html">这个帖子</a>，他讲的非常好，起码帮助我理解了这道题单调栈的做法。至于代码，你只要看懂这个帖子的讲解，代码一定看得懂。唯一需要注意的是为什么 for loop 要遍历完 input 数组之后再多走一步，是为了让遍历完 input 之后有一个机会停下来结算由最后一个 bar 组成的矩形的最大面积，否则如果是一直递增的 bars，遍历完是没有机会停下来结算的。</p><p>这个题为什么可以用单调栈做，并且单调栈的思想适用于什么样的题目，我觉得是比如你在一堆单调增或者单调减的数据里面突然找一个拐点，就可以尝试利用单调栈。这个还是需要多做才有感觉。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-keyword">if</span> (heights == <span class="hljs-literal">null</span> || heights.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= heights.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> i == heights.length ? <span class="hljs-number">0</span> : heights[i];<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; h &lt; heights[stack.peek()]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> heights[stack.pop()];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> stack.isEmpty() ? -<span class="hljs-number">1</span> : stack.peek();<br>                <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> height * (i - start - <span class="hljs-number">1</span>);<br>                res = Math.max(res, area);<br>            &#125;<br>            stack.push(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">heights</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> largestRectangleArea = <span class="hljs-keyword">function</span>(<span class="hljs-params">heights</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (heights == <span class="hljs-literal">null</span> || heights.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> stack = [];<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= heights.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">let</span> h = i == heights.<span class="hljs-property">length</span> ? <span class="hljs-number">0</span> : heights[i];<br>        <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span> &amp;&amp; h &lt; heights[stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]]) &#123;<br>            <span class="hljs-keyword">let</span> height = heights[stack.<span class="hljs-title function_">pop</span>()];<br>            <span class="hljs-keyword">let</span> start = !stack.<span class="hljs-property">length</span> ? -<span class="hljs-number">1</span> : stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">let</span> area = height * (i - start - <span class="hljs-number">1</span>);<br>            res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, area);<br>        &#125;<br>        stack.<span class="hljs-title function_">push</span>(i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="其他思路"><a href="#其他思路" class="headerlink" title="其他思路"></a>其他思路</h2><p>暴力解，O(n^2)，OA也勉强能过，不会超时<br>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 枚举左边界</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; left &lt; len; left++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">minHeight</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>            <span class="hljs-comment">// 枚举右边界</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left; right &lt; len; right++) &#123;<br>                <span class="hljs-comment">// 确定高度，我们要最小的高度</span><br>                minHeight = Math.min(minHeight, heights[right]);<br>                <span class="hljs-comment">// 计算面积，我们要保留计算过的最大的面积</span><br>                area = Math.max(area, (right - left + <span class="hljs-number">1</span>) * minHeight);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> area;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given an array of integers heights representing the histogram’s bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg" alt="Example 1"><br>Input: heights &#x3D; [2,1,5,6,2,3]<br>Output: 10<br>Explanation: The above is a histogram where width of each bar is 1.<br>The largest rectangle is shown in the red area, which has an area &#x3D; 10 units.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg" alt="Example 2"><br>Input: heights &#x3D; [2,4]<br>Output: 4</p><p>Constraints:<br>1 &lt;&#x3D; heights.length &lt;&#x3D; 105<br>0 &lt;&#x3D; heights[i] &lt;&#x3D; 104</p><p>柱状图中最大的矩形。</p><blockquote><p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。<br>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个数组表示一些非负整数，代表一些 bars，请你返回由这些 bar 组成的最大矩形的面积。</p><p>思路是单调栈。这个题可以用别的方法，但是复杂度都不如单调栈的思路。关于这个题本身，我参考了<a href="https://www.cnblogs.com/lichen782/p/leetcode_Largest_Rectangle_in_Histogram.html">这个帖子</a>，他讲的非常好，起码帮助我理解了这道题单调栈的做法。至于代码，你只要看懂这个帖子的讲解，代码一定看得懂。唯一需要注意的是为什么 for loop 要遍历完 input 数组之后再多走一步，是为了让遍历完 input 之后有一个机会停下来结算由最后一个 bar 组成的矩形的最大面积，否则如果是一直递增的 bars，遍历完是没有机会停下来结算的。</p><p>这个题为什么可以用单调栈做，并且单调栈的思想适用于什么样的题目，我觉得是比如你在一堆单调增或者单调减的数据里面突然找一个拐点，就可以尝试利用单调栈。这个还是需要多做才有感觉。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> i == n ? <span class="hljs-number">0</span> : heights[i];<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; h &lt; heights[stack.peekLast()]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">height</span> <span class="hljs-operator">=</span> heights[stack.pollLast()];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> stack.isEmpty() ? -<span class="hljs-number">1</span> : stack.peekLast();<br>                <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> height * (i - start - <span class="hljs-number">1</span>);<br>                res = Math.max(res, area);<br>            &#125;<br>            stack.offerLast(i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">heights</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> largestRectangleArea = <span class="hljs-keyword">function</span>(<span class="hljs-params">heights</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (heights == <span class="hljs-literal">null</span> || heights.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> stack = [];<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= heights.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">let</span> h = i == heights.<span class="hljs-property">length</span> ? <span class="hljs-number">0</span> : heights[i];<br>        <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span> &amp;&amp; h &lt; heights[stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]]) &#123;<br>            <span class="hljs-keyword">let</span> height = heights[stack.<span class="hljs-title function_">pop</span>()];<br>            <span class="hljs-keyword">let</span> start = !stack.<span class="hljs-property">length</span> ? -<span class="hljs-number">1</span> : stack[stack.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">let</span> area = height * (i - start - <span class="hljs-number">1</span>);<br>            res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, area);<br>        &#125;<br>        stack.<span class="hljs-title function_">push</span>(i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="其他思路"><a href="#其他思路" class="headerlink" title="其他思路"></a>其他思路</h2><p>暴力解，O(n^2)，OA也勉强能过，不会超时<br>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">area</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 枚举左边界</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; left &lt; len; left++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">minHeight</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>            <span class="hljs-comment">// 枚举右边界</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> left; right &lt; len; right++) &#123;<br>                <span class="hljs-comment">// 确定高度，我们要最小的高度</span><br>                minHeight = Math.min(minHeight, heights[right]);<br>                <span class="hljs-comment">// 计算面积，我们要保留计算过的最大的面积</span><br>                area = Math.max(area, (right - left + <span class="hljs-number">1</span>) * minHeight);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> area;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
