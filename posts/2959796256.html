@@ -24,7 +24,7 @@
 <meta property="og:description" content="You are given a list of songs where the ith song has a duration of time[i] seconds. Return the number of pairs of songs for which their total duration in seconds is divisible by 60. Formally, we want">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-28T13:05:47.000Z">
-<meta property="article:modified_time" content="2024-11-19T21:41:55.022Z">
+<meta property="article:modified_time" content="2024-11-19T21:44:10.285Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -269,11 +269,9 @@
                 
                 <p>You are given a list of songs where the ith song has a duration of time[i] seconds.</p>
 <p>Return the number of pairs of songs for which their total duration in seconds is divisible by 60. Formally, we want the number of indices i, j such that i &lt; j with (time[i] + time[j]) % 60 &#x3D;&#x3D; 0.</p>
-<p>Example 1:</p>
-<p>Input: time &#x3D; [30,20,150,100,40]<br>Output: 3<br>Explanation: Three pairs have a total duration divisible by 60:<br>(time[0] &#x3D; 30, time[2] &#x3D; 150): total duration 180<br>(time[1] &#x3D; 20, time[3] &#x3D; 100): total duration 120<br>(time[1] &#x3D; 20, time[4] &#x3D; 40): total duration 60<br>Example 2:</p>
-<p>Input: time &#x3D; [60,60,60]<br>Output: 3<br>Explanation: All three pairs have a total duration of 120, which is divisible by 60.</p>
-<p>Constraints:</p>
-<p>1 &lt;&#x3D; time.length &lt;&#x3D; 6 * 104<br>1 &lt;&#x3D; time[i] &lt;&#x3D; 500</p>
+<p>Example 1:<br>Input: time &#x3D; [30,20,150,100,40]<br>Output: 3<br>Explanation: Three pairs have a total duration divisible by 60:<br>(time[0] &#x3D; 30, time[2] &#x3D; 150): total duration 180<br>(time[1] &#x3D; 20, time[3] &#x3D; 100): total duration 120<br>(time[1] &#x3D; 20, time[4] &#x3D; 40): total duration 60</p>
+<p>Example 2:<br>Input: time &#x3D; [60,60,60]<br>Output: 3<br>Explanation: All three pairs have a total duration of 120, which is divisible by 60.</p>
+<p>Constraints:<br>1 &lt;&#x3D; time.length &lt;&#x3D; 6 * 104<br>1 &lt;&#x3D; time[i] &lt;&#x3D; 500</p>
 <p>总持续时间可被 60 整除的歌曲。</p>
 <blockquote>
 在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。
