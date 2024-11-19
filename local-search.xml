@@ -1577,11 +1577,11 @@
       
       <tag>java</tag>
       
+      <tag>MOD</tag>
+      
       <tag>math</tag>
       
       <tag>string</tag>
-      
-      <tag>MOD</tag>
       
     </tags>
     
@@ -2604,9 +2604,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>sort</tag>
       
       <tag>string</tag>
       
@@ -3117,9 +3117,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3256,11 +3256,11 @@
       
       <tag>java</tag>
       
+      <tag>counting sort</tag>
+      
       <tag>sort</tag>
       
       <tag>greedy</tag>
-      
-      <tag>counting sort</tag>
       
     </tags>
     
@@ -3287,9 +3287,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -3474,9 +3474,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3784,9 +3784,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>sort</tag>
       
       <tag>string</tag>
       
@@ -4017,9 +4017,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -4131,9 +4131,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>design</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4559,6 +4559,37 @@
       <tag>tree</tag>
       
       <tag>postorder</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1010. Pairs of Songs With Total Durations Divisible by 60</title>
+    <link href="/posts/2959796256.html"/>
+    <url>/posts/2959796256.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a list of songs where the ith song has a duration of time[i] seconds.</p><p>Return the number of pairs of songs for which their total duration in seconds is divisible by 60. Formally, we want the number of indices i, j such that i &lt; j with (time[i] + time[j]) % 60 &#x3D;&#x3D; 0.</p><p>Example 1:</p><p>Input: time &#x3D; [30,20,150,100,40]<br>Output: 3<br>Explanation: Three pairs have a total duration divisible by 60:<br>(time[0] &#x3D; 30, time[2] &#x3D; 150): total duration 180<br>(time[1] &#x3D; 20, time[3] &#x3D; 100): total duration 120<br>(time[1] &#x3D; 20, time[4] &#x3D; 40): total duration 60<br>Example 2:</p><p>Input: time &#x3D; [60,60,60]<br>Output: 3<br>Explanation: All three pairs have a total duration of 120, which is divisible by 60.</p><p>Constraints:</p><p>1 &lt;&#x3D; time.length &lt;&#x3D; 6 * 104<br>1 &lt;&#x3D; time[i] &lt;&#x3D; 500</p><p>总持续时间可被 60 整除的歌曲。</p><blockquote>在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。<p>返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字 i 和 j 满足  i &lt; j 且有 (time[i] + time[j]) % 60 &#x3D;&#x3D; 0。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/pairs-of-songs-with-total-durations-divisible-by-60">https://leetcode-cn.com/problems/pairs-of-songs-with-total-durations-divisible-by-60</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实把对 60 取模这个动作拿掉，你会发现这个题跟 two sum 几乎是一样的，所以思路也是类似去解决 two sum 一样的思路。对于两个数相加之后取模的操作，满足如下规则</p><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-comment">(A + B)</span> <span class="hljs-meta">%</span> <span class="hljs-number">60</span> == <span class="hljs-comment">(A % 60)</span> + <span class="hljs-comment">(B % 60)</span><br></code></pre></td></tr></table></figure><p><span style="color:red">这里我提供两种实现方式，但是核心思想还是跟 two sum 类似。</span></p><p>第一种，我们还是创建一个 hashmap，每当遇到一个数字 num 的时候，我们找一下另一个能和当前 num 组成配对的数字是否存在。潜在的配对数字是 <code>(60 - num % 60) % 60</code>。如果有就说明有合法的 pair。这个公式<code>(60 - num % 60) % 60</code>有一点技巧，处理了两个 corner case，30 + 30 和 0 + 60。首先 <code>num % 60</code> 就确保了可以把 num 变成一个小于 60 的数字，那么<code>60 - num % 60</code>也一定小于 60。为什么要再次对<code>(60 - num % 60)</code>取模60是为了处理 0 和 60 这种pair。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(60) - O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现一</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numPairsDivisibleBy60</span><span class="hljs-params">(<span class="hljs-type">int</span>[] time)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> t : time) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">comp</span> <span class="hljs-operator">=</span> (<span class="hljs-number">60</span> - t % <span class="hljs-number">60</span>) % <span class="hljs-number">60</span>;<br>            res += map.getOrDefault(comp, <span class="hljs-number">0</span>);<br>            map.put(t % <span class="hljs-number">60</span>, map.getOrDefault(t % <span class="hljs-number">60</span>, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Java实现二</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numPairsDivisibleBy60</span><span class="hljs-params">(<span class="hljs-type">int</span>[] time)</span> &#123;<br><span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">60</span>];<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> t : time) &#123;<br>res += map[(<span class="hljs-number">60</span> - t % <span class="hljs-number">60</span>) % <span class="hljs-number">60</span>];<br>map[t % <span class="hljs-number">60</span>]++;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">1010. Pairs of Songs With Total Durations Divisible by 60<br>2453. Destroy Sequential Targets<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
+      
+      <tag>MOD</tag>
       
     </tags>
     
