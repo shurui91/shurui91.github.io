@@ -16,27 +16,29 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="The frequency of an element is the number of times it occurs in an array. You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the elem">
+    <meta name="description" content="Given the head of a linked list, rotate the list to the right by k places. Example 1:Input: head &#x3D; [1,2,3,4,5], k &#x3D; 2Output: [4,5,1,2,3] Example 2:Input: head &#x3D; [0,1,2], k &#x3D; 4Outpu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1838. Frequency of the Most Frequent Element">
-<meta property="og:url" content="https://shurui91.github.io/posts/2171882472.html">
+<meta property="og:title" content="[LeetCode] 61. Rotate List">
+<meta property="og:url" content="https://shurui91.github.io/posts/493219566.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="The frequency of an element is the number of times it occurs in an array. You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the elem">
+<meta property="og:description" content="Given the head of a linked list, rotate the list to the right by k places. Example 1:Input: head &#x3D; [1,2,3,4,5], k &#x3D; 2Output: [4,5,1,2,3] Example 2:Input: head &#x3D; [0,1,2], k &#x3D; 4Outpu">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-26T11:54:21.000Z">
-<meta property="article:modified_time" content="2023-11-18T19:28:19.695Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg">
+<meta property="article:published_time" content="2019-11-05T23:25:16.000Z">
+<meta property="article:modified_time" content="2024-11-20T22:57:00.640Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="sliding window">
-<meta property="article:tag" content="sort">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="two pointer">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg">
   
   
   
-  <title>[LeetCode] 1838. Frequency of the Most Frequent Element - CNoodle</title>
+  <title>[LeetCode] 61. Rotate List - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1838. Frequency of the Most Frequent Element"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 61. Rotate List"></span>
           
         </div>
 
@@ -201,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-04-26 04:54" pubdate>
-          April 26, 2021 am
+        <time datetime="2019-11-05 15:25" pubdate>
+          November 5, 2019 pm
         </time>
       </span>
     
@@ -213,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          2.1k words
         
       </span>
     
@@ -224,7 +226,7 @@
         
         
         
-          17 mins
+          18 mins
         
       </span>
     
@@ -261,35 +263,37 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1838. Frequency of the Most Frequent Element</h1>
+            <h1 id="seo-header">[LeetCode] 61. Rotate List</h1>
             
             
               <div class="markdown-body">
                 
-                <p>The frequency of an element is the number of times it occurs in an array.</p>
-<p>You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the element at that index by 1.</p>
-<p>Return the maximum possible frequency of an element after performing at most k operations.</p>
-<p>Example 1:<br>Input: nums &#x3D; [1,2,4], k &#x3D; 5<br>Output: 3<br>Explanation: Increment the first element three times and the second element two times to make nums &#x3D; [4,4,4].<br>4 has a frequency of 3.</p>
-<p>Example 2:<br>Input: nums &#x3D; [1,4,8,13], k &#x3D; 5<br>Output: 2<br>Explanation: There are multiple optimal solutions:</p>
-<ul>
-<li>Increment the first element three times to make nums &#x3D; [4,4,8,13]. 4 has a frequency of 2.</li>
-<li>Increment the second element four times to make nums &#x3D; [1,8,8,13]. 8 has a frequency of 2.</li>
-<li>Increment the third element five times to make nums &#x3D; [1,4,13,13]. 13 has a frequency of 2.</li>
-</ul>
-<p>Example 3:<br>Input: nums &#x3D; [3,9,6], k &#x3D; 2<br>Output: 1</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p>
-<p>最高频元素的频数。</p>
+                <p>Given the head of a linked list, rotate the list to the right by k places.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: head &#x3D; [1,2,3,4,5], k &#x3D; 2<br>Output: [4,5,1,2,3]</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: head &#x3D; [0,1,2], k &#x3D; 4<br>Output: [2,0,1]</p>
+<p>Constraints:<br>The number of nodes in the list is in the range [0, 500].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>0 &lt;&#x3D; k &lt;&#x3D; 2 * 109</p>
+<p>旋转链表。</p>
 <blockquote>
-<p>元素的 频数 是该元素在一个数组中出现的次数。<br>给你一个整数数组 nums 和一个整数 k 。在一步操作中，你可以选择 nums 的一个下标，并将该下标对应元素的值增加 1 。<br>执行最多 k 次操作后，返回数组中最高频元素的 最大可能频数。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element">https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题我暂时提供一个滑动窗口的思路，不太好想。注意题目的解释有一点问题，不是只能对着一个元素做加一操作，而是你可以找若干个元素，对这若干个元素分别做加一操作，做 k 次操作。这些元素中有的可以做不止一次操作，只要全局操作次数为 k 即可。但是对哪些元素做加一操作，这就需要用到滑动窗口了。</p>
-<p>首先我们需要对 input 数组排序，之后还是用经典的滑动窗口模板，给出 start 和 end 两个指针。对于 end 指针指向的元素 nums[end]，我们可以把它视为一个 target number，意思是我们试图把其他小于 nums[end] 的元素都通过加一操作变为 nums[end]，从而使得 nums[end] 是出现次数最多的元素。对于 start 和 end 指针夹住的这一段元素，他们的加和很好算；但是如果他们的加和 sum + k 次操作之后的和大于这一段计划中的和的话，则需要移动 start 指针缩短窗口的距离。通过这个方法我们可以算出符合条件的最大的子数组的长度。</p>
-<p>这一段计划中的和应该是<code>出现次数最多的元素 * 个数 = nums[end] * (end - start)</code>。这里 end - start 这个范围不一定准，取决于滑动窗口的代码如何写。</p>
-<p>最后注意数据范围，计算 sum 的时候要用 long 型。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxFrequency</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		Arrays.sort(nums);<br>		<span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>			sum += nums[end];<br>			<span class="hljs-keyword">while</span> (sum + k &lt; (<span class="hljs-type">long</span>) nums[end] * (end - start + <span class="hljs-number">1</span>)) &#123;<br>				sum -= nums[start];<br>				start++;<br>			&#125;<br>			res = Math.max(res, end - start + <span class="hljs-number">1</span>);<br>			end++;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意很简单，给一个 linked list 和一个数字 k，请你对 linked list 向右 rotate <code>k</code> 次，输出 rotate 后的结果。因为是单链表所以没法从右往左遍历链表。思路是将 input 先连成一个环，然后在新的 head 节点和其之前一个节点处断开即可。</p>
+<p>代码里面注意几个细节。</p>
+<ol>
+<li>k 是有可能大于链表长度的，所以需要计算链表的长度 n，并用 n % k 计算出实际需要 rotate 的次数。</li>
+<li>需要遍历链表两次，第一遍遍历是为了计算链表的长度，记为 n，同时记得把最后一个节点再连回 head 节点。</li>
+<li>第二遍遍历链表的时候，cur 指针要停在新的 head 节点之前的那个节点。这个节点怎么计算呢？cur 需要从 1 开始，遍历到 n &#x3D; k % n 处，然后他的下一个节点才是新的 head 节点。</li>
+</ol>
+<p>跑一个例子</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs tap">1 -<span class="hljs-number"> 2 </span>-<span class="hljs-number"> 3 </span>-<span class="hljs-number"> 4 </span>- 5, k = 2<br><br>先移动到链表末端，得到长度 len = 5<br><br>1 -<span class="hljs-number"> 2 </span>-<span class="hljs-number"> 3 </span>-<span class="hljs-number"> 4 </span>- 5<br><br>|______________|<br><br>h<br><br>               h<br><br>将链表末端再连到 head 节点，形成一个环<br><br>因为需要往右 rotate<span class="hljs-number"> 2 </span>次，所以实际上是要将 head 指针往后移动 len - k 次，这样 head 指针会在新的 head 之前的一个节点上（4）。此时新的 head 节点是 head.next<br><br>最后将<span class="hljs-number"> 4 </span>和<span class="hljs-number"> 5 </span>之间的连接断开即可<br></code></pre></td></tr></table></figure>
+
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">rotateRight</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        <br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-comment">// 计算list长度</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span>) &#123;<br>            n++;<br>            cur = cur.next;<br>        &#125;<br>        cur.next = head;<br>        <br>        cur = head;<br>        k %= n;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n - k % n; i++) &#123;<br>            cur = cur.next;<br>        &#125;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span> cur.next;<br>        cur.next = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">return</span> newHead;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * function ListNode(val) &#123;</span><br><span class="hljs-comment"> *     this.val = val;</span><br><span class="hljs-comment"> *     this.next = null;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> rotateRight = <span class="hljs-keyword">function</span> (<span class="hljs-params">head, k</span>) &#123;<br>	<span class="hljs-comment">// corner case</span><br>	<span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.<span class="hljs-property">next</span> == <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> head;<br>	&#125;<br><br>	<span class="hljs-comment">// normal case</span><br>	<span class="hljs-keyword">let</span> len = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">let</span> cur = head;<br>	<span class="hljs-keyword">while</span> (cur.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span>) &#123;<br>		cur = cur.<span class="hljs-property">next</span>;<br>		len++;<br>	&#125;<br>	cur.<span class="hljs-property">next</span> = head;<br><br>	<span class="hljs-comment">// loop again</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; len - (k % len); i++) &#123;<br>		head = head.<span class="hljs-property">next</span>;<br>	&#125;<br>	<span class="hljs-keyword">let</span> res = head.<span class="hljs-property">next</span>;<br>	head.<span class="hljs-property">next</span> = <span class="hljs-literal">null</span>;<br>	<span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -303,15 +307,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
-      
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
       
     </div>
   
@@ -323,8 +325,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1838. Frequency of the Most Frequent Element</div>
-      <div>https://shurui91.github.io/posts/2171882472.html</div>
+      <div>[LeetCode] 61. Rotate List</div>
+      <div>https://shurui91.github.io/posts/493219566.html</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +338,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 26, 2021</div>
+          <div>November 5, 2019</div>
         </div>
       
       
@@ -368,9 +370,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/41030754.html" title="[LeetCode] 1244. Design A Leaderboard">
+                      <a href="/posts/2412012849.html" title="[LeetCode] 19. Remove Nth Node From End of List">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1244. Design A Leaderboard</span>
+                        <span class="hidden-mobile">[LeetCode] 19. Remove Nth Node From End of List</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -378,8 +380,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3222341826.html" title="[LeetCode] 1670. Design Front Middle Back Queue">
-                        <span class="hidden-mobile">[LeetCode] 1670. Design Front Middle Back Queue</span>
+                      <a href="/posts/2917377662.html" title="[LeetCode] 162. Find Peak Element">
+                        <span class="hidden-mobile">[LeetCode] 162. Find Peak Element</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -399,8 +401,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2171882472.html';
-          this.page.identifier = '/posts/2171882472.html';
+          this.page.url = 'https://shurui91.github.io/posts/493219566.html';
+          this.page.identifier = '/posts/493219566.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
