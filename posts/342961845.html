@@ -16,27 +16,30 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="The frequency of an element is the number of times it occurs in an array. You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the elem">
+    <meta name="description" content="You are given two integers m and n representing a 0-indexed m x n grid. You are also given two 2D integer arrays guards and walls where guards[i] &#x3D; [rowi, coli] and walls[j] &#x3D; [rowj, colj] r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1838. Frequency of the Most Frequent Element">
-<meta property="og:url" content="https://shurui91.github.io/posts/2171882472.html">
+<meta property="og:title" content="[LeetCode] 2257. Count Unguarded Cells in the Grid">
+<meta property="og:url" content="https://shurui91.github.io/posts/342961845.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="The frequency of an element is the number of times it occurs in an array. You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the elem">
+<meta property="og:description" content="You are given two integers m and n representing a 0-indexed m x n grid. You are also given two 2D integer arrays guards and walls where guards[i] &#x3D; [rowi, coli] and walls[j] &#x3D; [rowj, colj] r">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-26T11:54:21.000Z">
-<meta property="article:modified_time" content="2023-11-18T19:28:19.695Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/03/10/example1drawio2.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/03/10/example2drawio.png">
+<meta property="article:published_time" content="2024-11-21T20:46:14.000Z">
+<meta property="article:modified_time" content="2024-11-21T20:50:18.573Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="sort">
-<meta property="article:tag" content="sliding window">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="matrix">
+<meta property="article:tag" content="simulation">
+<meta property="article:tag" content="flood fill">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2022/03/10/example1drawio2.png">
   
   
   
-  <title>[LeetCode] 1838. Frequency of the Most Frequent Element - CNoodle</title>
+  <title>[LeetCode] 2257. Count Unguarded Cells in the Grid - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1838. Frequency of the Most Frequent Element"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2257. Count Unguarded Cells in the Grid"></span>
           
         </div>
 
@@ -201,8 +204,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-04-26 04:54" pubdate>
-          April 26, 2021 am
+        <time datetime="2024-11-21 12:46" pubdate>
+          November 21, 2024 pm
         </time>
       </span>
     
@@ -213,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          2.6k words
         
       </span>
     
@@ -224,7 +227,7 @@
         
         
         
-          17 mins
+          22 mins
         
       </span>
     
@@ -261,34 +264,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1838. Frequency of the Most Frequent Element</h1>
+            <h1 id="seo-header">[LeetCode] 2257. Count Unguarded Cells in the Grid</h1>
             
             
               <div class="markdown-body">
                 
-                <p>The frequency of an element is the number of times it occurs in an array.</p>
-<p>You are given an integer array nums and an integer k. In one operation, you can choose an index of nums and increment the element at that index by 1.</p>
-<p>Return the maximum possible frequency of an element after performing at most k operations.</p>
-<p>Example 1:<br>Input: nums &#x3D; [1,2,4], k &#x3D; 5<br>Output: 3<br>Explanation: Increment the first element three times and the second element two times to make nums &#x3D; [4,4,4].<br>4 has a frequency of 3.</p>
-<p>Example 2:<br>Input: nums &#x3D; [1,4,8,13], k &#x3D; 5<br>Output: 2<br>Explanation: There are multiple optimal solutions:</p>
-<ul>
-<li>Increment the first element three times to make nums &#x3D; [4,4,8,13]. 4 has a frequency of 2.</li>
-<li>Increment the second element four times to make nums &#x3D; [1,8,8,13]. 8 has a frequency of 2.</li>
-<li>Increment the third element five times to make nums &#x3D; [1,4,13,13]. 13 has a frequency of 2.</li>
-</ul>
-<p>Example 3:<br>Input: nums &#x3D; [3,9,6], k &#x3D; 2<br>Output: 1</p>
-<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; 105</p>
-<p>最高频元素的频数。</p>
+                <p>You are given two integers m and n representing a 0-indexed m x n grid. You are also given two 2D integer arrays guards and walls where guards[i] &#x3D; [rowi, coli] and walls[j] &#x3D; [rowj, colj] represent the positions of the ith guard and jth wall respectively.</p>
+<p>A guard can see every cell in the four cardinal directions (north, east, south, or west) starting from their position unless obstructed by a wall or another guard. A cell is guarded if there is at least one guard that can see it.</p>
+<p>Return the number of unoccupied cells that are not guarded.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/03/10/example1drawio2.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: m &#x3D; 4, n &#x3D; 6, guards &#x3D; [[0,0],[1,1],[2,3]], walls &#x3D; [[0,1],[2,2],[1,4]]<br>Output: 7<br>Explanation: The guarded and unguarded cells are shown in red and green respectively in the above diagram.<br>There are a total of 7 unguarded cells, so we return 7.</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2022/03/10/example2drawio.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: m &#x3D; 3, n &#x3D; 3, guards &#x3D; [[1,1]], walls &#x3D; [[0,1],[1,0],[2,1],[1,2]]<br>Output: 4<br>Explanation: The unguarded cells are shown in green in the above diagram.<br>There are a total of 4 unguarded cells, so we return 4.</p>
+<p>Constraints:<br>1 &lt;&#x3D; m, n &lt;&#x3D; 105<br>2 &lt;&#x3D; m * n &lt;&#x3D; 105<br>1 &lt;&#x3D; guards.length, walls.length &lt;&#x3D; 5 * 104<br>2 &lt;&#x3D; guards.length + walls.length &lt;&#x3D; m * n<br>guards[i].length &#x3D;&#x3D; walls[j].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; rowi, rowj &lt; m<br>0 &lt;&#x3D; coli, colj &lt; n<br>All the positions in guards and walls are unique.</p>
+<p>统计网格图中没有被保卫的格子数。</p>
 <blockquote>
-<p>元素的 频数 是该元素在一个数组中出现的次数。<br>给你一个整数数组 nums 和一个整数 k 。在一步操作中，你可以选择 nums 的一个下标，并将该下标对应元素的值增加 1 。<br>执行最多 k 次操作后，返回数组中最高频元素的 最大可能频数。<br>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element">https://leetcode-cn.com/problems/frequency-of-the-most-frequent-element</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+给你两个整数 m 和 n 表示一个下标从 0 开始的 m x n 网格图。同时给你两个二维整数数组 guards 和 walls ，其中 guards[i] = [rowi, coli] 且 walls[j] = [rowj, colj] ，分别表示第 i 个警卫和第 j 座墙所在的位置。
+
+<p>一个警卫能看到 4 个坐标轴方向（即东、南、西、北）的 所有 格子，除非他们被一座墙或者另外一个警卫 挡住 了视线。如果一个格子能被 至少 一个警卫看到，那么我们说这个格子被 保卫 了。</p>
+<p>请你返回空格子中，有多少个格子是 没被保卫 的。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题我暂时提供一个滑动窗口的思路，不太好想。注意题目的解释有一点问题，不是只能对着一个元素做加一操作，而是你可以找若干个元素，对这若干个元素分别做加一操作，做 k 次操作。这些元素中有的可以做不止一次操作，只要全局操作次数为 k 即可。但是对哪些元素做加一操作，这就需要用到滑动窗口了。</p>
-<p>首先我们需要对 input 数组排序，之后还是用经典的滑动窗口模板，给出 start 和 end 两个指针。对于 end 指针指向的元素 nums[end]，我们可以把它视为一个 target number，意思是我们试图把其他小于 nums[end] 的元素都通过加一操作变为 nums[end]，从而使得 nums[end] 是出现次数最多的元素。对于 start 和 end 指针夹住的这一段元素，他们的加和很好算；但是如果他们的加和 sum + k 次操作之后的和大于这一段计划中的和的话，则需要移动 start 指针缩短窗口的距离。通过这个方法我们可以算出符合条件的最大的子数组的长度。</p>
-<p>这一段计划中的和应该是<code>出现次数最多的元素 * 个数 = nums[end] * (end - start)</code>。这里 end - start 这个范围不一定准，取决于滑动窗口的代码如何写。</p>
-<p>最后注意数据范围，计算 sum 的时候要用 long 型。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>需要创建一个额外的 m x n 二维数组，用来记录每个格子上是否有守卫，是否有墙和是否有被警卫看到，如果都不是，则说明这个格子是<code>没被保卫的</code>。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxFrequency</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		Arrays.sort(nums);<br>		<span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>			sum += nums[end];<br>			<span class="hljs-keyword">while</span> (sum + k &lt; (<span class="hljs-type">long</span>) nums[end] * (end - start + <span class="hljs-number">1</span>)) &#123;<br>				sum -= nums[start];<br>				start++;<br>			&#125;<br>			res = Math.max(res, end - start + <span class="hljs-number">1</span>);<br>			end++;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][] &#123;&#123;-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, &#123;<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>&#125;, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;&#125;;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countUnguarded</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] guards, <span class="hljs-type">int</span>[][] walls)</span> &#123;<br>        <span class="hljs-type">char</span>[][] grid = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[m][n];<br>		<span class="hljs-comment">// 标注guard和wall的位置</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] g : guards) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> g[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> g[<span class="hljs-number">1</span>];<br>            grid[x][y] = <span class="hljs-string">&#x27;G&#x27;</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] w : walls) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> w[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> w[<span class="hljs-number">1</span>];<br>            grid[x][y] = <span class="hljs-string">&#x27;W&#x27;</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>				<span class="hljs-comment">// 往guard的四个方向看</span><br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&#x27;G&#x27;</span>) &#123;<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>                        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> i + dir[<span class="hljs-number">0</span>];<br>                        <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> j + dir[<span class="hljs-number">1</span>];<br>                        <span class="hljs-keyword">while</span> (x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; n &amp;&amp; grid[x][y] != <span class="hljs-string">&#x27;G&#x27;</span> &amp;&amp; grid[x][y] != <span class="hljs-string">&#x27;W&#x27;</span>) &#123;<br>                            grid[x][y] = <span class="hljs-string">&#x27;I&#x27;</span>;<br>                            x += dir[<span class="hljs-number">0</span>];<br>                            y += dir[<span class="hljs-number">1</span>];<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] != <span class="hljs-string">&#x27;I&#x27;</span> &amp;&amp; grid[i][j] != <span class="hljs-string">&#x27;G&#x27;</span> &amp;&amp; grid[i][j] != <span class="hljs-string">&#x27;W&#x27;</span>) &#123;<br>                    res++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -305,13 +304,13 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
       
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/flood-fill/" class="print-no-link">#flood fill</a>
       
     </div>
   
@@ -323,8 +322,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1838. Frequency of the Most Frequent Element</div>
-      <div>https://shurui91.github.io/posts/2171882472.html</div>
+      <div>[LeetCode] 2257. Count Unguarded Cells in the Grid</div>
+      <div>https://shurui91.github.io/posts/342961845.html</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 26, 2021</div>
+          <div>November 21, 2024</div>
         </div>
       
       
@@ -368,18 +367,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/41030754.html" title="[LeetCode] 1244. Design A Leaderboard">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1244. Design A Leaderboard</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3222341826.html" title="[LeetCode] 1670. Design Front Middle Back Queue">
-                        <span class="hidden-mobile">[LeetCode] 1670. Design Front Middle Back Queue</span>
+                      <a href="/posts/976364709.html" title="[LeetCode] 2516. Take K of Each Character From Left and Right">
+                        <span class="hidden-mobile">[LeetCode] 2516. Take K of Each Character From Left and Right</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -399,8 +392,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2171882472.html';
-          this.page.identifier = '/posts/2171882472.html';
+          this.page.url = 'https://shurui91.github.io/posts/342961845.html';
+          this.page.identifier = '/posts/342961845.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
