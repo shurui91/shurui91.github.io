@@ -3695,6 +3695,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1072. Flip Columns For Maximum Number of Equal Rows</title>
+    <link href="/posts/1497371720.html"/>
+    <url>/posts/1497371720.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an m x n binary matrix matrix.</p><p>You can choose any number of columns in the matrix and flip every cell in that column (i.e., Change the value of the cell from 0 to 1 or vice versa).</p><p>Return the maximum number of rows that have all values equal after some number of flips.</p><p>Example 1:<br>Input: matrix &#x3D; [[0,1],[1,1]]<br>Output: 1<br>Explanation: After flipping no values, 1 row has all values equal.</p><p>Example 2:<br>Input: matrix &#x3D; [[0,1],[1,0]]<br>Output: 2<br>Explanation: After flipping values in the first column, both rows have equal values.</p><p>Example 3:<br>Input: matrix &#x3D; [[0,0,0],[0,0,1],[1,1,0]]<br>Output: 2<br>Explanation: After flipping values in the first two columns, the last two rows have equal values.</p><p>Constraints:<br>m &#x3D;&#x3D; matrix.length<br>n &#x3D;&#x3D; matrix[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 300<br>matrix[i][j] is either 0 or 1.</p><p>按列翻转得到最大值等行数。</p><blockquote>给定由若干 0 和 1 组成的矩阵 matrix，从中选出任意数量的列并翻转其上的 每个 单元格。翻转后，单元格的值从 0 变成 1，或者从 1 变为 0 。<p>回经过一些翻转后，行与行之间所有值都相等的最大行数。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/flip-columns-for-maximum-number-of-equal-rows">https://leetcode-cn.com/problems/flip-columns-for-maximum-number-of-equal-rows</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h2><p>这道题的思路我参考了美版 discussion 的<a href="https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/discuss/303897/Java-easy-solution-+-explanation">最高票答案</a>。</p><p>题目给的是一个只有 0 和 1 的矩阵，问你能否通过翻转任意列（竖着从上到下）里所有的单元格（从 0 变 1 或者从 1 变 0），从而使得经过翻转操作后的矩阵里有尽可能多的行（横着从左到右）的值是一样的（全是 0 或者全是 1）。假设这样一种情况，如果在经过某次翻转操作后，使得第 i 行都为 0 了，那么我们可以得到如下结论</p><p>如果此时第 j 行上所有的值也为 0，说明第 j 行在翻转前跟第 i 行应该是一样的<br>如果此时有一个第 k 行上所有的值为 1，说明第 k 行在翻转前跟第 i 行应该是恰好相反的<br>所以这个问题可以转化为找到一个第 i 行使得与这个 row 完全相同的 row 或者完全相反的 row 最多。</p><p>具体的做法是我们需要扫描这个二维矩阵，对于当前要扫描的行 row 的所有值我们取反，记为 row2，比如 000110 我们找到 111001，然后去矩阵里找看有多少行是和 row 或者 row2 相同的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxEqualRowsAfterFlips</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span>[] flip = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                flip[j] = <span class="hljs-number">1</span> - matrix[i][j];<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> i; k &lt; m; k++) &#123;<br>                <span class="hljs-keyword">if</span> (Arrays.equals(matrix[k], matrix[i]) || Arrays.equals(matrix[k], flip)) &#123;<br>                    count++;<br>                &#125;<br>            &#125;<br>            res = Math.max(res, count);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h2><p>二刷我参考了<a href="https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/discuss/1218248/C++-or-HashMap-or-Find-maximum-occuring-pattern-or-explanation">另一个思路</a>，我个人觉得这个思路更容易记住。他的具体做法是对于每一行，我们做一下转化，以每行第一个元素为准，记为 T，如果之后的元素跟第一个元素相同，也记为 T，否则记为 F。这样，对于如下的矩阵，</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[[0,0,0],<br>[0,0,1],<br>[1,1,0]]<br></code></pre></td></tr></table></figure><p>他的模式其实是，</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[[T,T,T],<br>[T,T,F],<br>[T,T,F]]<br></code></pre></td></tr></table></figure><p>对于这个例子而言，他最终返回的是 2，因为第二行和第三行可以通过将第三列反转过来变成</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[[0,0,1],<br>[0,0,0],<br>[1,1,1]]<br></code></pre></td></tr></table></figure><p>这样第二行和第三行所有值都相等。</p><p>具体的做法是我们需要用一个 hashmap 记录每一行是什么字符串。对于每一行，我们将第一个数字作为标准，记为 T，如果之后的元素跟第一个元素相同，也记为 T，否则记为 F。最后把这个字符串存入 hashmap。遍历 hashmap 的所有 key，找到出现次数最多的那个 key，他背后的出现次数就是我们最终能得到的最大行数。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxEqualRowsAfterFlips</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> &#123;<br>HashMap&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br><span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br><span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br><span class="hljs-type">int</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> matrix[i][<span class="hljs-number">0</span>];<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br><span class="hljs-keyword">if</span> (matrix[i][j] == first) &#123;<br>sb.append(<span class="hljs-string">&#x27;T&#x27;</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>sb.append(<span class="hljs-string">&#x27;F&#x27;</span>);<br>&#125;<br>&#125;<br><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> sb.toString();<br>map.put(str, map.getOrDefault(str, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>max = Math.max(max, map.get(str));<br>&#125;<br><span class="hljs-keyword">return</span> max;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>matrix</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1436. Destination City</title>
     <link href="/posts/803566732.html"/>
     <url>/posts/803566732.html</url>
@@ -3998,9 +4025,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
       <tag>greedy</tag>
       
@@ -5335,9 +5362,9 @@
       
       <tag>java</tag>
       
-      <tag>dynamic programming</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>dynamic programming</tag>
       
     </tags>
     
@@ -5763,9 +5790,9 @@
       
       <tag>java</tag>
       
-      <tag>dynamic programming</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>dynamic programming</tag>
       
     </tags>
     
