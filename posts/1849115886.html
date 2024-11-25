@@ -16,26 +16,30 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given an integer n representing the number of players in a game and a 2D array pick where pick[i] &#x3D; [xi, yi] represents that the player x picked a ball of color y. Player i wins the game">
+    <meta name="description" content="You are given an m x n matrix of characters box representing a side-view of a box. Each cell of the box is one of the following:A stone ‘#’A stationary obstacle ‘*’Empty ‘.’ The box is rotated 90 degr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 3238. Find the Number of Winning Players">
-<meta property="og:url" content="https://shurui91.github.io/posts/364551423.html">
+<meta property="og:title" content="[LeetCode] 1861. Rotating the Box">
+<meta property="og:url" content="https://shurui91.github.io/posts/1849115886.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given an integer n representing the number of players in a game and a 2D array pick where pick[i] &#x3D; [xi, yi] represents that the player x picked a ball of color y. Player i wins the game">
+<meta property="og:description" content="You are given an m x n matrix of characters box representing a side-view of a box. Each cell of the box is one of the following:A stone ‘#’A stationary obstacle ‘*’Empty ‘.’ The box is rotated 90 degr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-11-22T18:36:51.000Z">
-<meta property="article:modified_time" content="2024-11-22T18:42:37.314Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcodewithstones.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcode2withstones.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcode3withstone.png">
+<meta property="article:published_time" content="2024-11-25T05:01:58.000Z">
+<meta property="article:modified_time" content="2024-11-25T05:07:17.777Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="counting sort">
+<meta property="article:tag" content="matrix">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcodewithstones.png">
   
   
   
-  <title>[LeetCode] 3238. Find the Number of Winning Players - CNoodle</title>
+  <title>[LeetCode] 1861. Rotating the Box - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +193,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 3238. Find the Number of Winning Players"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1861. Rotating the Box"></span>
           
         </div>
 
@@ -200,8 +204,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-22 10:36" pubdate>
-          November 22, 2024 am
+        <time datetime="2024-11-24 21:01" pubdate>
+          November 24, 2024 pm
         </time>
       </span>
     
@@ -212,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          2k words
         
       </span>
     
@@ -223,7 +227,7 @@
         
         
         
-          15 mins
+          17 mins
         
       </span>
     
@@ -260,36 +264,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 3238. Find the Number of Winning Players</h1>
+            <h1 id="seo-header">[LeetCode] 1861. Rotating the Box</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given an integer n representing the number of players in a game and a 2D array pick where pick[i] &#x3D; [xi, yi] represents that the player x picked a ball of color y.</p>
-<p>Player i wins the game if they pick strictly more than i balls of the same color. In other words,</p>
-<p>Player 0 wins if they pick any ball.<br>Player 1 wins if they pick at least two balls of the same color.<br>…<br>Player i wins if they pick at least i + 1 balls of the same color.<br>Return the number of players who win the game.</p>
-<p>Note that multiple players can win the game.</p>
-<p>Example 1:<br>Input: n &#x3D; 4, pick &#x3D; [[0,0],[1,0],[1,0],[2,1],[2,1],[2,0]]<br>Output: 2</p>
-<p>Explanation:<br>Player 0 and player 1 win the game, while players 2 and 3 do not win.</p>
-<p>Example 2:<br>Input: n &#x3D; 5, pick &#x3D; [[1,1],[1,2],[1,3],[1,4]]<br>Output: 0</p>
-<p>Explanation:<br>No player wins the game.</p>
-<p>Example 3:<br>Input: n &#x3D; 5, pick &#x3D; [[1,1],[2,4],[2,4],[2,4]]<br>Output: 1</p>
-<p>Explanation:<br>Player 2 wins the game by picking 3 balls with color 4.</p>
-<p>Constraints:<br>2 &lt;&#x3D; n &lt;&#x3D; 10<br>1 &lt;&#x3D; pick.length &lt;&#x3D; 100<br>pick[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; xi &lt;&#x3D; n - 1<br>0 &lt;&#x3D; yi &lt;&#x3D; 10</p>
-<p>求出胜利玩家的数目。</p>
+                <p>You are given an m x n matrix of characters box representing a side-view of a box. Each cell of the box is one of the following:<br>A stone ‘#’<br>A stationary obstacle ‘*’<br>Empty ‘.’</p>
+<p>The box is rotated 90 degrees clockwise, causing some of the stones to fall due to gravity. Each stone falls down until it lands on an obstacle, another stone, or the bottom of the box. Gravity does not affect the obstacles’ positions, and the inertia from the box’s rotation does not affect the stones’ horizontal positions.</p>
+<p>It is guaranteed that each stone in box rests on an obstacle, another stone, or the bottom of the box.</p>
+<p>Return an n x m matrix representing the box after the rotation described above.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcodewithstones.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: box &#x3D; [[“#”,”.”,”#”]]<br>Output: [[“.”],<br>         [“#”],<br>         [“#”]]</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcode2withstones.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: box &#x3D; [[“#”,”.”,”<em>“,”.”],<br>              [“#”,”#”,”</em>“,”.”]]<br>Output: [[“#”,”.”],<br>         [“#”,”#”],<br>         [“<em>“,”</em>“],<br>         [“.”,”.”]]</p>
+<p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2021/04/08/rotatingtheboxleetcode3withstone.png" srcset="/img/loading.gif" lazyload alt="Example 3"><br>Input: box &#x3D; [[“#”,”#”,”<em>“,”.”,”</em>“,”.”],<br>              [“#”,”#”,”#”,”<em>“,”.”,”.”],<br>              [“#”,”#”,”#”,”.”,”#”,”.”]]<br>Output: [[“.”,”#”,”#”],<br>         [“.”,”#”,”#”],<br>         [“#”,”#”,”</em>“],<br>         [“#”,”<em>“,”.”],<br>         [“#”,”.”,”</em>“],<br>         [“#”,”.”,”.”]]</p>
+<p>Constraints:<br>m &#x3D;&#x3D; box.length<br>n &#x3D;&#x3D; box[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 500<br>box[i][j] is either ‘#’, ‘*’, or ‘.’.</p>
+<p>旋转盒子。</p>
 <blockquote>
-给你一个整数 n ，表示在一个游戏中的玩家数目。同时给你一个二维整数数组 pick ，其中 pick[i] = [xi, yi] 表示玩家 xi 获得了一个颜色为 yi 的球。
+给你一个 m x n 的字符矩阵 box ，它表示一个箱子的侧视图。箱子的每一个格子可能为：
 
-<p>如果玩家 i 获得的球中任何一种颜色球的数目 严格大于 i 个，那么我们说玩家 i 是胜利玩家。换句话说：</p>
-<p>如果玩家 0 获得了任何的球，那么玩家 0 是胜利玩家。<br>如果玩家 1 获得了至少 2 个相同颜色的球，那么玩家 1 是胜利玩家。<br>…<br>如果玩家 i 获得了至少 i + 1 个相同颜色的球，那么玩家 i 是胜利玩家。<br>请你返回游戏中 胜利玩家 的数目。</p>
-<p>注意，可能有多个玩家是胜利玩家。</p>
+<p>‘#’ 表示石头<br>‘*’ 表示固定的障碍物<br>‘.’ 表示空位置</p>
+<p>这个箱子被 顺时针旋转 90 度 ，由于重力原因，部分石头的位置会发生改变。每个石头会垂直掉落，直到它遇到障碍物，另一个石头或者箱子的底部。重力 不会 影响障碍物的位置，同时箱子旋转不会产生惯性 ，也就是说石头的水平位置不会发生改变。</p>
+<p>题目保证初始时 box 中的石头要么在一个障碍物上，要么在另一个石头上，要么在箱子的底部。</p>
+<p>请你返回一个 n x m的矩阵，表示按照上述旋转后，箱子内的结果。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路是统计&#x2F;counting sort。因为玩家有 n 个，球的颜色至多有 10 种，所以这里我创建一个二维数组记录过程中每个玩家拿到的不同颜色的球的数量。这里我同时创建了一个 boolean 数组记录每个玩家是否胜利，如果某个玩家已经胜利了，他之后拿再多的球都不要再重复计算了。当然这里也可以扫描两次，第一次先把二维数组里球的数量统计完毕，再次扫描二维数组，看玩家是否满足胜利条件。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(nm) - n个玩家，m种颜色的球</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题考察的是双指针和对矩阵的转换。<br>对于 input 矩阵的每一行，我们需要从右往左看，，在跳过障碍物的前提下，尽量把石头往右边摆放。<br>对于<code>顺时针旋转 90 度</code>这个环节，考察的是我们对矩阵坐标转换的熟悉程度。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1) - 除output外不需要额外空间</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">winningPlayerCount</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] pick)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">boolean</span>[] win = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span>[][] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>][<span class="hljs-number">11</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] p : pick) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">player</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">1</span>];<br>            map[player][color]++;<br>            <span class="hljs-keyword">if</span> (map[player][color] &gt; player &amp;&amp; !win[player]) &#123;<br>                res++;<br>                win[player] = <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">char</span>[][] rotateTheBox(<span class="hljs-type">char</span>[][] box) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> box.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> box[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">pos</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; j--) &#123;<br>                <span class="hljs-keyword">if</span> (box[i][j] == <span class="hljs-string">&#x27;#&#x27;</span>) &#123;<br>                    box[i][pos] = <span class="hljs-string">&#x27;#&#x27;</span>;<br>                    <span class="hljs-keyword">if</span> (j != pos) &#123;<br>                        box[i][j] = <span class="hljs-string">&#x27;.&#x27;</span>;<br>                    &#125;<br>                    pos--;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (box[i][j] == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    pos = j - <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">char</span>[][] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[n][m];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                res[j][m - <span class="hljs-number">1</span> - i] = box[i][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -306,11 +308,11 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
+        <a href="/tags/matrix/" class="print-no-link">#matrix</a>
       
     </div>
   
@@ -322,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 3238. Find the Number of Winning Players</div>
-      <div>https://shurui91.github.io/posts/364551423.html</div>
+      <div>[LeetCode] 1861. Rotating the Box</div>
+      <div>https://shurui91.github.io/posts/1849115886.html</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 22, 2024</div>
+          <div>November 24, 2024</div>
         </div>
       
       
@@ -367,18 +369,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1849115886.html" title="[LeetCode] 1861. Rotating the Box">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1861. Rotating the Box</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/342961845.html" title="[LeetCode] 2257. Count Unguarded Cells in the Grid">
-                        <span class="hidden-mobile">[LeetCode] 2257. Count Unguarded Cells in the Grid</span>
+                      <a href="/posts/364551423.html" title="[LeetCode] 3238. Find the Number of Winning Players">
+                        <span class="hidden-mobile">[LeetCode] 3238. Find the Number of Winning Players</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -398,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/364551423.html';
-          this.page.identifier = '/posts/364551423.html';
+          this.page.url = 'https://shurui91.github.io/posts/1849115886.html';
+          this.page.identifier = '/posts/1849115886.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
