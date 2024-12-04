@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings. Machine 1 (sender) has the function:">
+    <meta name="description" content="You are given two 0-indexed strings str1 and str2. In an operation, you select a set of indices in str1, and for each index i in the set, increment str1[i] to the next character cyclically. That is ‘a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 271. Encode and Decode Strings">
-<meta property="og:url" content="https://shurui91.github.io/posts/2813401652.html">
+<meta property="og:title" content="[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments">
+<meta property="og:url" content="https://shurui91.github.io/posts/1899303866.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings. Machine 1 (sender) has the function:">
+<meta property="og:description" content="You are given two 0-indexed strings str1 and str2. In an operation, you select a set of indices in str1, and for each index i in the set, increment str1[i] to the next character cyclically. That is ‘a">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-05T14:43:06.000Z">
-<meta property="article:modified_time" content="2024-04-02T16:20:07.617Z">
+<meta property="article:published_time" content="2024-12-04T16:03:35.000Z">
+<meta property="article:modified_time" content="2024-12-04T16:14:57.669Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="design">
 <meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 271. Encode and Decode Strings - CNoodle</title>
+  <title>[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 271. Encode and Decode Strings"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments"></span>
           
         </div>
 
@@ -200,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-07-05 07:43" pubdate>
-          July 5, 2020 am
+        <time datetime="2024-12-04 08:03" pubdate>
+          December 4, 2024 am
         </time>
       </span>
     
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k words
+          2.1k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          28 mins
+          18 mins
         
       </span>
     
@@ -260,49 +259,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 271. Encode and Decode Strings</h1>
+            <h1 id="seo-header">[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Design an algorithm to encode a list of strings to a string. The encoded string is then sent over the network and is decoded back to the original list of strings.</p>
-<p>Machine 1 (sender) has the function:</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-built_in">string</span> <span class="hljs-title function_">encode</span>(<span class="hljs-params">vector&lt;<span class="hljs-built_in">string</span>&gt; strs</span>) &#123;<br>  <span class="hljs-comment">// ... your code</span><br>  <span class="hljs-keyword">return</span> encoded_string;<br>&#125;<br><span class="hljs-title class_">Machine</span> <span class="hljs-number">2</span> (receiver) has the <span class="hljs-attr">function</span>:<br>vector&lt;<span class="hljs-built_in">string</span>&gt; <span class="hljs-title function_">decode</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>) &#123;<br>  <span class="hljs-comment">//... your code</span><br>  <span class="hljs-keyword">return</span> strs;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>You are given two 0-indexed strings str1 and str2.</p>
+<p>In an operation, you select a set of indices in str1, and for each index i in the set, increment str1[i] to the next character cyclically. That is ‘a’ becomes ‘b’, ‘b’ becomes ‘c’, and so on, and ‘z’ becomes ‘a’.</p>
+<p>Return true if it is possible to make str2 a subsequence of str1 by performing the operation at most once, and false otherwise.</p>
+<p>Note: A subsequence of a string is a new string that is formed from the original string by deleting some (possibly none) of the characters without disturbing the relative positions of the remaining characters.</p>
+<p>Example 1:<br>Input: str1 &#x3D; “abc”, str2 &#x3D; “ad”<br>Output: true<br>Explanation: Select index 2 in str1.<br>Increment str1[2] to become ‘d’.<br>Hence, str1 becomes “abd” and str2 is now a subsequence. Therefore, true is returned.</p>
+<p>Example 2:<br>Input: str1 &#x3D; “zc”, str2 &#x3D; “ad”<br>Output: true<br>Explanation: Select indices 0 and 1 in str1.<br>Increment str1[0] to become ‘a’.<br>Increment str1[1] to become ‘d’.<br>Hence, str1 becomes “ad” and str2 is now a subsequence. Therefore, true is returned.</p>
+<p>Example 3:<br>Input: str1 &#x3D; “ab”, str2 &#x3D; “d”<br>Output: false<br>Explanation: In this example, it can be shown that it is impossible to make str2 a subsequence of str1 using the operation at most once.<br>Therefore, false is returned.</p>
+<p>Constraints:<br>1 &lt;&#x3D; str1.length &lt;&#x3D; 105<br>1 &lt;&#x3D; str2.length &lt;&#x3D; 105<br>str1 and str2 consist of only lowercase English letters.</p>
+<p>循环增长使字符串子序列等于另一个字符串。</p>
+<blockquote>
+给你一个下标从 0 开始的字符串 str1 和 str2 。
 
-<p>So Machine 1 does:</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">string encoded_string <span class="hljs-operator">=</span> encode(strs)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<p>一次操作中，你选择 str1 中的若干下标。对于选中的每一个下标 i ，你将 str1[i] 循环 递增，变成下一个字符。也就是说 ‘a’ 变成 ‘b’ ，’b’ 变成 ‘c’ ，以此类推，’z’ 变成 ‘a’ 。</p>
+<p>如果执行以上操作 至多一次 ，可以让 str2 成为 str1 的子序列，请你返回 true ，否则返回 false 。</p>
+<p>注意：一个字符串的子序列指的是从原字符串中删除一些（可以一个字符也不删）字符后，剩下字符按照原本先后顺序组成的新字符串。</p>
+</blockquote>
 
-<p>and Machine 2 does:</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">vector&lt;string&gt; strs2 <span class="hljs-operator">=</span> decode(encoded_string)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
-<p>strs2 in Machine 2 should be the same as strs in Machine 1.</p>
-<p>Implement the encode and decode methods.</p>
-<p>You are not allowed to solve the problem using any serialize methods (such as eval).</p>
-<p>Example 1:<br>Input: dummy_input &#x3D; [“Hello”,”World”]<br>Output: [“Hello”,”World”]<br>Explanation:<br>Machine 1:<br>Codec encoder &#x3D; new Codec();<br>String msg &#x3D; encoder.encode(strs);<br>Machine 1 —msg—&gt; Machine 2</p>
-<p>Machine 2:<br>Codec decoder &#x3D; new Codec();<br>String[] strs &#x3D; decoder.decode(msg);</p>
-<p>Example 2:<br>Input: dummy_input &#x3D; [“”]<br>Output: [“”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; strs.length &lt;&#x3D; 200<br>0 &lt;&#x3D; strs[i].length &lt;&#x3D; 200<br>strs[i] contains any possible characters out of 256 valid ASCII characters.</p>
-<p>Follow up: Could you write a generalized algorithm to work on any possible set of characters?</p>
-<p>字符串的编码与解码。</p>
-<blockquote>
-<p>请你设计一个算法，可以将一个 字符串列表 编码成为一个 字符串。这个编码后的字符串是可以通过网络进行高效传送的，并且可以在接收端被解码回原来的字符串列表。</p>
-</blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>对于 input 给的字符串列表，我们可以把他压缩成这种形式</p>
-<blockquote>
-<p>单词长度size + ‘,’ + 单词</p>
-</blockquote>
-<p>那么对于一个单词列表 [hello, world, hello, world] 而言，他将会被压缩成这个样子。</p>
-<blockquote>
-<p>5,hello5,world5,hello5,world</p>
-</blockquote>
-<p>所以当我们试着再把这个字符串变回 字符串列表 的时候，我们可以用 string.indexOf(‘,’) 找到每一个逗号的位置，找到逗号之后，当前位置到逗号 [i, comma) 就是单词的长度 size，[comma + 1, comma + 1 + size) 则是单词本身。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是同向双指针，一个指针指向 str1，一个指针指向 str2。如果str1[i] &#x3D;&#x3D; str2[j]，则 i 和 j 同时向后移动，直到 str1[i]!&#x3D; str2[j]。当 str1[i]!&#x3D; str2[j] 的时候，因为题目只允许我们修改 str1 中的字符，所以我们只能移动 i 指针，判断他是否能和 str2[j] 相等。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Codec</span> &#123;<br><br>    <span class="hljs-comment">// Encodes a list of strings to a single string.</span><br>    <span class="hljs-comment">// hello,world,hello,world</span><br>    <span class="hljs-comment">// 5,hello5,world5,hello5,world</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">String</span> <span class="hljs-title">encode</span><span class="hljs-params">(List&lt;<span class="hljs-type">String</span>&gt; strs)</span> </span>&#123;<br>        StringBuilder sb = <span class="hljs-keyword">new</span> <span class="hljs-built_in">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">String</span> <span class="hljs-type">word</span> : strs) &#123;<br>            <span class="hljs-type">int</span> size = <span class="hljs-type">word</span>.<span class="hljs-built_in">length</span>();<br>            sb.<span class="hljs-built_in">append</span>(size).<span class="hljs-built_in">append</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-built_in">append</span>(<span class="hljs-type">word</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.<span class="hljs-built_in">toString</span>();<br>    &#125;<br><br>    <span class="hljs-comment">// Decodes a single string to a list of strings.</span><br>    <span class="hljs-comment">// hello,world,hello,world</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;<span class="hljs-type">String</span>&gt; <span class="hljs-title">decode</span><span class="hljs-params">(<span class="hljs-type">String</span> s)</span> </span>&#123;<br>        List&lt;<span class="hljs-type">String</span>&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; s.<span class="hljs-built_in">length</span>()) &#123;<br>            <span class="hljs-type">int</span> comma = s.<span class="hljs-built_in">indexOf</span>(<span class="hljs-string">&#x27;,&#x27;</span>, i);<br>            <span class="hljs-type">int</span> size = Integer.<span class="hljs-built_in">valueOf</span>(s.<span class="hljs-built_in">substring</span>(i, comma));<br>            res.<span class="hljs-built_in">add</span>(s.<span class="hljs-built_in">substring</span>(comma + <span class="hljs-number">1</span>, comma + <span class="hljs-number">1</span> + size));<br>            i = comma + <span class="hljs-number">1</span> + size;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// Your Codec object will be instantiated and called as such:</span><br><span class="hljs-comment">// Codec codec = new Codec();</span><br><span class="hljs-comment">// codec.decode(codec.encode(strs));</span><br></code></pre></td></tr></table></figure>
-
-<p>JavaScript实现</p>
-<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Encodes a list of strings to a single string.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;string[]&#125; strs</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;string&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> encode = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(strs)</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> sb = [];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> str of strs) &#123;<br>        sb.push(str.length);<br>        sb.push(<span class="hljs-string">&#x27;/&#x27;</span>);<br>        sb.push(str);<br>    &#125;<br>    <span class="hljs-keyword">return</span> sb.join(<span class="hljs-string">&#x27;&#x27;</span>);<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Decodes a single string to a list of strings.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;string&#125; s</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;string[]&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> decode = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(s)</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> res = [];<br>    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (i &lt; s.length) &#123;<br>        <span class="hljs-keyword">let</span> slash = s.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>, i);<br>        <span class="hljs-keyword">let</span> len = parseInt(s.substring(i, slash));<br>        <span class="hljs-keyword">let</span> str = s.substring(slash + <span class="hljs-number">1</span>, slash + <span class="hljs-number">1</span> + len);<br>        res.push(str);<br>        i = slash + <span class="hljs-number">1</span> + len;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your functions will be called as such:</span><br><span class="hljs-comment"> * decode(encode(strs));</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">38. Count and Say<br>271. Encode and Decode Strings<br>443. String Compression<br>604. Design Compressed String Iterator<br>1313. Decompress Run-Length Encoded List<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canMakeSubsequence</span><span class="hljs-params">(String str1, String str2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> str1.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> str2.length();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (n &gt; m) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m &amp;&amp; j &lt; n) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> str1.charAt(i);<br>            <span class="hljs-type">char</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> str2.charAt(j);<br>            <span class="hljs-keyword">if</span> (a == b || (a + <span class="hljs-number">1</span> - <span class="hljs-string">&#x27;a&#x27;</span>) % <span class="hljs-number">26</span> == b - <span class="hljs-string">&#x27;a&#x27;</span>) &#123;<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (j == n) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -317,11 +300,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
-      
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
-      
-        <a href="/tags/design/" class="print-no-link">#design</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
       
@@ -335,8 +316,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 271. Encode and Decode Strings</div>
-      <div>https://shurui91.github.io/posts/2813401652.html</div>
+      <div>[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments</div>
+      <div>https://shurui91.github.io/posts/1899303866.html</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +329,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 5, 2020</div>
+          <div>December 4, 2024</div>
         </div>
       
       
@@ -380,18 +361,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2043097135.html" title="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2946513692.html" title="[LeetCode] 38. Count and Say">
-                        <span class="hidden-mobile">[LeetCode] 38. Count and Say</span>
+                      <a href="/posts/2490180647.html" title="[LeetCode] 3206. Alternating Groups I">
+                        <span class="hidden-mobile">[LeetCode] 3206. Alternating Groups I</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -411,8 +386,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2813401652.html';
-          this.page.identifier = '/posts/2813401652.html';
+          this.page.url = 'https://shurui91.github.io/posts/1899303866.html';
+          this.page.identifier = '/posts/1899303866.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2825. Make String a Subsequence Using Cyclic Increments</title>
+    <link href="/posts/1899303866.html"/>
+    <url>/posts/1899303866.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two 0-indexed strings str1 and str2.</p><p>In an operation, you select a set of indices in str1, and for each index i in the set, increment str1[i] to the next character cyclically. That is ‘a’ becomes ‘b’, ‘b’ becomes ‘c’, and so on, and ‘z’ becomes ‘a’.</p><p>Return true if it is possible to make str2 a subsequence of str1 by performing the operation at most once, and false otherwise.</p><p>Note: A subsequence of a string is a new string that is formed from the original string by deleting some (possibly none) of the characters without disturbing the relative positions of the remaining characters.</p><p>Example 1:<br>Input: str1 &#x3D; “abc”, str2 &#x3D; “ad”<br>Output: true<br>Explanation: Select index 2 in str1.<br>Increment str1[2] to become ‘d’.<br>Hence, str1 becomes “abd” and str2 is now a subsequence. Therefore, true is returned.</p><p>Example 2:<br>Input: str1 &#x3D; “zc”, str2 &#x3D; “ad”<br>Output: true<br>Explanation: Select indices 0 and 1 in str1.<br>Increment str1[0] to become ‘a’.<br>Increment str1[1] to become ‘d’.<br>Hence, str1 becomes “ad” and str2 is now a subsequence. Therefore, true is returned.</p><p>Example 3:<br>Input: str1 &#x3D; “ab”, str2 &#x3D; “d”<br>Output: false<br>Explanation: In this example, it can be shown that it is impossible to make str2 a subsequence of str1 using the operation at most once.<br>Therefore, false is returned.</p><p>Constraints:<br>1 &lt;&#x3D; str1.length &lt;&#x3D; 105<br>1 &lt;&#x3D; str2.length &lt;&#x3D; 105<br>str1 and str2 consist of only lowercase English letters.</p><p>循环增长使字符串子序列等于另一个字符串。</p><blockquote>给你一个下标从 0 开始的字符串 str1 和 str2 。<p>一次操作中，你选择 str1 中的若干下标。对于选中的每一个下标 i ，你将 str1[i] 循环 递增，变成下一个字符。也就是说 ‘a’ 变成 ‘b’ ，’b’ 变成 ‘c’ ，以此类推，’z’ 变成 ‘a’ 。</p><p>如果执行以上操作 至多一次 ，可以让 str2 成为 str1 的子序列，请你返回 true ，否则返回 false 。</p><p>注意：一个字符串的子序列指的是从原字符串中删除一些（可以一个字符也不删）字符后，剩下字符按照原本先后顺序组成的新字符串。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是同向双指针，一个指针指向 str1，一个指针指向 str2。如果str1[i] &#x3D;&#x3D; str2[j]，则 i 和 j 同时向后移动，直到 str1[i]!&#x3D; str2[j]。当 str1[i]!&#x3D; str2[j] 的时候，因为题目只允许我们修改 str1 中的字符，所以我们只能移动 i 指针，判断他是否能和 str2[j] 相等。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canMakeSubsequence</span><span class="hljs-params">(String str1, String str2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> str1.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> str2.length();<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (n &gt; m) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m &amp;&amp; j &lt; n) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> str1.charAt(i);<br>            <span class="hljs-type">char</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> str2.charAt(j);<br>            <span class="hljs-keyword">if</span> (a == b || (a + <span class="hljs-number">1</span> - <span class="hljs-string">&#x27;a&#x27;</span>) % <span class="hljs-number">26</span> == b - <span class="hljs-string">&#x27;a&#x27;</span>) &#123;<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (j == n) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3206. Alternating Groups I</title>
     <link href="/posts/2490180647.html"/>
     <url>/posts/2490180647.html</url>
@@ -4106,9 +4131,9 @@
       
       <tag>sort</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sliding window</tag>
       
       <tag>prefix sum</tag>
       
@@ -5335,9 +5360,9 @@
       
       <tag>javascript</tag>
       
-      <tag>string</tag>
-      
       <tag>design</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -5611,11 +5636,11 @@
       
       <tag>treemap</tag>
       
-      <tag>string</tag>
-      
       <tag>binary search</tag>
       
       <tag>design</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
