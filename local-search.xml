@@ -2951,9 +2951,9 @@
       
       <tag>java</tag>
       
-      <tag>heap</tag>
-      
       <tag>simulation</tag>
+      
+      <tag>heap</tag>
       
     </tags>
     
@@ -4347,9 +4347,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>design</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6424,6 +6424,33 @@
       <tag>hashmap</tag>
       
       <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 999. Available Captures for Rooks</title>
+    <link href="/posts/1415125802.html"/>
+    <url>/posts/1415125802.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an 8 x 8 matrix representing a chessboard. There is exactly one white rook represented by ‘R’, some number of white bishops ‘B’, and some number of black pawns ‘p’. Empty squares are represented by ‘.’.</p><p>A rook can move any number of squares horizontally or vertically (up, down, left, right) until it reaches another piece or the edge of the board. A rook is attacking a pawn if it can move to the pawn’s square in one move.</p><p>Note: A rook cannot move through other pieces, such as bishops or pawns. This means a rook cannot attack a pawn if there is another piece blocking the path.</p><p>Return the number of pawns the white rook is attacking.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2019/02/20/1253_example_1_improved.PNG" alt="Example 1"><br>Input: board &#x3D; [[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”p”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”R”,”.”,”.”,”.”,”p”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”p”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”]]<br>Output: 3</p><p>Explanation:<br>In this example, the rook is attacking all the pawns.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2019/02/19/1253_example_2_improved.PNG" alt="Example 2"><br>Input: board &#x3D; [[“.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”p”,”p”,”p”,”p”,”p”,”.”,”.”],[“.”,”p”,”p”,”B”,”p”,”p”,”.”,”.”],[“.”,”p”,”B”,”R”,”B”,”p”,”.”,”.”],[“.”,”p”,”p”,”B”,”p”,”p”,”.”,”.”],[“.”,”p”,”p”,”p”,”p”,”p”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”]]<br>Output: 0</p><p>Explanation:<br>The bishops are blocking the rook from attacking any of the pawns.</p><p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2019/02/20/1253_example_3_improved.PNG" alt="Example 3"><br>Input: board &#x3D; [[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”p”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”p”,”.”,”.”,”.”,”.”],[“p”,”p”,”.”,”R”,”.”,”p”,”B”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”B”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”p”,”.”,”.”,”.”,”.”],[“.”,”.”,”.”,”.”,”.”,”.”,”.”,”.”]]<br>Output: 3</p><p>Explanation:<br>The rook is attacking the pawns at positions b5, d6, and f5.</p><p>Constraints:<br>board.length &#x3D;&#x3D; 8<br>board[i].length &#x3D;&#x3D; 8<br>board[i][j] is either ‘R’, ‘.’, ‘B’, or ‘p’<br>There is exactly one cell with board[i][j] &#x3D;&#x3D; ‘R’</p><p>可以被一步捕获的棋子数。</p><blockquote>给定一个 8 x 8 的棋盘，只有一个 白色的车，用字符 'R' 表示。棋盘上还可能存在白色的象 'B' 以及黑色的卒 'p'。空方块用字符 '.' 表示。<p>车可以按水平或竖直方向（上，下，左，右）移动任意个方格直到它遇到另一个棋子或棋盘的边界。如果它能够在一次移动中移动到棋子的方格，则能够 吃掉 棋子。</p><p>注意：车不能穿过其它棋子，比如象和卒。这意味着如果有其它棋子挡住了路径，车就不能够吃掉棋子。</p><p>返回白车将能 吃掉 的 卒的数量。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这个题没有什么算法，就是按规则从车所在的位置开始扫描 4 个不同的方向，遇到小写的 p 则 res++，遇到边缘和大写的字母（因为是白色棋子）则停下。这个题就是考你在矩阵中如何一直往一个方向走的技巧。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(64) - 最极端情况需要扫描整个棋盘<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numRookCaptures</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] board)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> board.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> board[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[][] dirs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[][] &#123; &#123; -<span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;, &#123; <span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;, &#123; <span class="hljs-number">0</span>, -<span class="hljs-number">1</span> &#125;, &#123; <span class="hljs-number">0</span>, <span class="hljs-number">1</span> &#125; &#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-comment">// when find the rook</span><br>                <span class="hljs-keyword">if</span> (board[i][j] == <span class="hljs-string">&#x27;R&#x27;</span>) &#123;<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>                        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> i;<br>                        <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> j;<br>                        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>                            x += dir[<span class="hljs-number">0</span>];<br>                            y += dir[<span class="hljs-number">1</span>];<br>                            <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || y &lt; <span class="hljs-number">0</span> || x &gt;= m || y &gt;= n || board[x][y] == <span class="hljs-string">&#x27;B&#x27;</span>) &#123;<br>                                <span class="hljs-keyword">break</span>;<br>                            &#125;<br>                            <span class="hljs-keyword">if</span> (board[x][y] == <span class="hljs-string">&#x27;p&#x27;</span>) &#123;<br>                                res++;<br>                                <span class="hljs-keyword">break</span>;<br>                            &#125;<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>matrix</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
