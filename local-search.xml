@@ -2951,9 +2951,9 @@
       
       <tag>java</tag>
       
-      <tag>simulation</tag>
-      
       <tag>heap</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -3008,6 +3008,31 @@
       <tag>sort</tag>
       
       <tag>greedy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 2337. Move Pieces to Obtain a String</title>
+    <link href="/posts/2721484664.html"/>
+    <url>/posts/2721484664.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given two strings start and target, both of length n. Each string consists only of the characters ‘L’, ‘R’, and ‘_’ where:</p><p>The characters ‘L’ and ‘R’ represent pieces, where a piece ‘L’ can move to the left only if there is a blank space directly to its left, and a piece ‘R’ can move to the right only if there is a blank space directly to its right.<br>The character ‘_’ represents a blank space that can be occupied by any of the ‘L’ or ‘R’ pieces.<br>Return true if it is possible to obtain the string target by moving the pieces of the string start any number of times. Otherwise, return false.</p><p>Example 1:<br>Input: start &#x3D; “<em>L__R__R</em>“, target &#x3D; “L______RR”<br>Output: true<br>Explanation: We can obtain the string target from start by doing the following moves:</p><ul><li>Move the first piece one step to the left, start becomes equal to “L___R__R_”.</li><li>Move the last piece one step to the right, start becomes equal to “L___R___R”.</li><li>Move the second piece three steps to the right, start becomes equal to “L______RR”.<br>Since it is possible to get the string target from start, we return true.</li></ul><p>Example 2:<br>Input: start &#x3D; “R_L_”, target &#x3D; “__LR”<br>Output: false<br>Explanation: The ‘R’ piece in the string start can move one step to the right to obtain “<em>RL</em>“.<br>After that, no pieces can move anymore, so it is impossible to obtain the string target from start.</p><p>Example 3:<br>Input: start &#x3D; “<em>R”, target &#x3D; “R</em>“<br>Output: false<br>Explanation: The piece in the string start can move only to the right, so it is impossible to obtain the string target from start.</p><p>Constraints:<br>n &#x3D;&#x3D; start.length &#x3D;&#x3D; target.length<br>1 &lt;&#x3D; n &lt;&#x3D; 105<br>start and target consist of the characters ‘L’, ‘R’, and ‘_’.</p><p>移动片段得到字符串。</p><blockquote>给你两个字符串 start 和 target ，长度均为 n 。每个字符串 仅 由字符 'L'、'R' 和 '_' 组成，其中：<p>字符 ‘L’ 和 ‘R’ 表示片段，其中片段 ‘L’ 只有在其左侧直接存在一个 空位 时才能向 左 移动，而片段 ‘R’ 只有在其右侧直接存在一个 空位 时才能向 右 移动。</p><p>字符 ‘_’ 表示可以被 任意 ‘L’ 或 ‘R’ 片段占据的空位。</p><p>如果在移动字符串 start 中的片段任意次之后可以得到字符串 target ，返回 true ；否则，返回 false 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是双指针。</p><p>注意 L 只能往左移动，R 只能往右移动，而且不能让任何的 L 跨过 R，也不能让任何的 R 跨过 L，所以本质上如果去掉所有的下划线，start 和 target 最后剩下的部分应该是一样的。所以这里我们用两个指针 i, j 分别指向 start 和 target，如果遇到下划线就跳过，如果两边都不是下划线，则比较两边的字母是否一样，如果不一样就返回 false；还有一种情形是两个指针都指向了字母，但是因为题目只允许 start 中 L 左移，R 右移，那么如下这两种情形就需要返回 false</p><p>如果 start 中遇到的 L 的下标比 target 中遇到的 L 的下标小，那么这个 L 是不能通过左移移动到 target 中对应位置的，所以返回 false<br>如果 start 中遇到的 R 的下标比 target 中遇到的 R 的下标大，那么这个 R 是不能通过右移移动到 target 中对应位置的，所以返回 false</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canChange</span><span class="hljs-params">(String start, String target)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> target.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n || j &lt; n) &#123;<br>            <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; start.charAt(i) == <span class="hljs-string">&#x27;_&#x27;</span>) &#123;<br>                i++;<br>            &#125;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; target.charAt(j) == <span class="hljs-string">&#x27;_&#x27;</span>) &#123;<br>                j++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (i == n || j == n) &#123;<br>                <span class="hljs-keyword">return</span> i == n &amp;&amp; j == n;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) != target.charAt(j)) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;L&#x27;</span> &amp;&amp; i &lt; j) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (start.charAt(i) == <span class="hljs-string">&#x27;R&#x27;</span> &amp;&amp; i &gt; j) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            i++;<br>            j++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> i == n &amp;&amp; j == n;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4131,9 +4156,9 @@
       
       <tag>sort</tag>
       
-      <tag>greedy</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>greedy</tag>
       
       <tag>prefix sum</tag>
       
@@ -4322,9 +4347,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5360,9 +5385,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>string</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -5636,11 +5661,11 @@
       
       <tag>treemap</tag>
       
+      <tag>string</tag>
+      
       <tag>binary search</tag>
       
       <tag>design</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
