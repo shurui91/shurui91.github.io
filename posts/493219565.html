@@ -16,25 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the e">
+    <meta name="description" content="You are given an m x n binary matrix grid, where 0 represents a sea cell and 1 represents a land cell. A move consists of walking from one land cell to another adjacent (4-directionally) land cell or">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1768. Merge Strings Alternately">
+<meta property="og:title" content="[LeetCode] 100. Same Tree">
 <meta property="og:url" content="https://shurui91.github.io/posts/493219565.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the e">
+<meta property="og:description" content="You are given an m x n binary matrix grid, where 0 represents a sea cell and 1 represents a land cell. A move consists of walking from one land cell to another adjacent (4-directionally) land cell or">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-23T11:22:51.000Z">
-<meta property="article:modified_time" content="2024-05-23T08:27:38.564Z">
+<meta property="article:published_time" content="2020-12-22T23:51:50.000Z">
+<meta property="article:modified_time" content="2024-12-07T22:22:05.092Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="bfs">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="flood fill">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1768. Merge Strings Alternately - CNoodle</title>
+  <title>[LeetCode] 100. Same Tree - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1768. Merge Strings Alternately"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 100. Same Tree"></span>
           
         </div>
 
@@ -199,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-23 04:22" pubdate>
-          October 23, 2022 am
+        <time datetime="2020-12-22 15:51" pubdate>
+          December 22, 2020 pm
         </time>
       </span>
     
@@ -211,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          2.9k words
         
       </span>
     
@@ -222,7 +223,7 @@
         
         
         
-          13 mins
+          24 mins
         
       </span>
     
@@ -259,30 +260,36 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1768. Merge Strings Alternately</h1>
+            <h1 id="seo-header">[LeetCode] 100. Same Tree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.</p>
-<p>Return the merged string.</p>
-<p>Example 1:<br>Input: word1 &#x3D; “abc”, word2 &#x3D; “pqr”<br>Output: “apbqcr”<br>Explanation: The merged string will be merged as so:<br>word1:  a   b   c<br>word2:    p   q   r<br>merged: a p b q c r</p>
-<p>Example 2:<br>Input: word1 &#x3D; “ab”, word2 &#x3D; “pqrs”<br>Output: “apbqrs”<br>Explanation: Notice that as word2 is longer, “rs” is appended to the end.<br>word1:  a   b<br>word2:    p   q   r   s<br>merged: a p b q   r   s</p>
-<p>Example 3:<br>Input: word1 &#x3D; “abcd”, word2 &#x3D; “pq”<br>Output: “apbqcd”<br>Explanation: Notice that as word1 is longer, “cd” is appended to the end.<br>word1:  a   b   c   d<br>word2:    p   q<br>merged: a p b q c   d</p>
-<p>Constraints:<br>1 &lt;&#x3D; word1.length, word2.length &lt;&#x3D; 100<br>word1 and word2 consist of lowercase English letters.</p>
-<p>交替合并字符串。</p>
+                <p>You are given an m x n binary matrix grid, where 0 represents a sea cell and 1 represents a land cell.</p>
+<p>A move consists of walking from one land cell to another adjacent (4-directionally) land cell or walking off the boundary of the grid.</p>
+<p>Return the number of land cells in grid for which we cannot walk off the boundary of the grid in any number of moves.</p>
+<p>Example 1:</p>
+<p>Input: grid &#x3D; [[0,0,0,0],[1,0,1,0],[0,1,1,0],[0,0,0,0]]<br>Output: 3<br>Explanation: There are three 1s that are enclosed by 0s, and one 1 that is not enclosed because its on the boundary.</p>
+<p>Example 2:</p>
+<p>Input: grid &#x3D; [[0,1,1,0],[0,0,1,0],[0,0,1,0],[0,0,0,0]]<br>Output: 0<br>Explanation: All 1s are either on the boundary or can reach the boundary.</p>
+<p>Constraints:<br>m &#x3D;&#x3D; grid.length<br>n &#x3D;&#x3D; grid[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 500<br>grid[i][j] is either 0 or 1.</p>
+<p>飞地的数量。</p>
 <blockquote>
-给你两个字符串 word1 和 word2 。请你从 word1 开始，通过交替添加字母来合并字符串。如果一个字符串比另一个字符串长，就将多出来的字母追加到合并后字符串的末尾。
+给你一个大小为 m x n 的二进制矩阵 grid ，其中 0 表示一个海洋单元格、1 表示一个陆地单元格。
 
-<p>返回 合并后的字符串。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-strings-alternately">https://leetcode.cn/problems/merge-strings-alternately</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>一次 移动 是指从一个陆地单元格走到另一个相邻（上、下、左、右）的陆地单元格或跨过 grid 的边界。</p>
+<p>返回网格中 无法 在任意次数的移动中离开网格边界的陆地单元格的数量。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-enclaves">https://leetcode.cn/problems/number-of-enclaves</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题考察字符串的基本操作。我直接给代码。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m+n) - 需要合并两个字符串<br>空间O(m+n) - 最后返回的字符串长度</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">mergeAlternately</span><span class="hljs-params">(String word1, String word2)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (word1 == <span class="hljs-literal">null</span> || word1.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> word2;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (word2 == <span class="hljs-literal">null</span> || word2.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> word1;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> word1.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> word2.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; m || j &lt; n) &#123;<br>            <span class="hljs-keyword">if</span> (i &lt; m) &#123;<br>                sb.append(word1.charAt(i++));<br>            &#125;<br>            <span class="hljs-keyword">if</span> (j &lt; n) &#123;<br>                sb.append(word2.charAt(j++));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意不难理解，就是变相的 flood fill 类型的题目。这里我给出 BFS 和 DFS 两种解法，时间复杂度均为O(mn)，空间复杂度均为O(n)。如果代码看不懂，请先移步 200 题。无论是哪种做法，都需要遍历 matrix 两遍。第一遍先找 matrix 边界上的 1，然后 traverse，把遇到的所有的 1 改成 0。再一次遍历 matrix，如果 matrix 中还有 1，就说明这些 1 是飞地，无法离开 matrix 的。注意这道题其实让你求的是飞地的面积而不是飞地的数量，所以要累加所有遇到的 1。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p>
+<h2 id="BFS代码"><a href="#BFS代码" class="headerlink" title="BFS代码"></a>BFS代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-type">int</span> m;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-type">int</span>[] dx = &#123;-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span>[] dy = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numEnclaves</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>		m = grid.length;<br>		n = grid[<span class="hljs-number">0</span>].length;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>				<span class="hljs-comment">// 处理边界上的1</span><br>				<span class="hljs-keyword">if</span> ((i == <span class="hljs-number">0</span> || i == m - <span class="hljs-number">1</span> || j == <span class="hljs-number">0</span> || j == n - <span class="hljs-number">1</span>) &amp;&amp; grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>					bfs(grid, i, j);<br>				&#125;<br>			&#125;<br>		&#125;<br><br>		<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    count++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">bfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>		Queue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; i, j &#125;);<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] cur = queue.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">1</span>];<br>            grid[x][y] = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">4</span>; k++) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">newX</span> <span class="hljs-operator">=</span> x + dx[k];<br>                <span class="hljs-type">int</span> <span class="hljs-variable">newY</span> <span class="hljs-operator">=</span> y + dy[k];<br>                <span class="hljs-keyword">if</span> (newX &gt;= <span class="hljs-number">0</span> &amp;&amp; newX &lt; m &amp;&amp; newY &gt;= <span class="hljs-number">0</span> &amp;&amp; newY &lt; n &amp;&amp; grid[newX][newY] == <span class="hljs-number">1</span>) &#123;<br>                    queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; newX, newY &#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="DFS代码"><a href="#DFS代码" class="headerlink" title="DFS代码"></a>DFS代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-type">int</span> n;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numEnclaves</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        m = grid.length;<br>        n = grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-comment">// 处理边界上的 1</span><br>                <span class="hljs-keyword">if</span> ((i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span> || i == m - <span class="hljs-number">1</span> || j == n - <span class="hljs-number">1</span>) &amp;&amp; grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    dfs(grid, i, j);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 处理不能触及边界的 1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    res++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span> || i &gt;= m || j &gt;= n || grid[i][j] == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        grid[i][j] = <span class="hljs-number">0</span>;<br>        dfs(grid, i - <span class="hljs-number">1</span>, j);<br>        dfs(grid, i + <span class="hljs-number">1</span>, j);<br>        dfs(grid, i, j - <span class="hljs-number">1</span>);<br>        dfs(grid, i, j + <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,11 +304,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/bfs/" class="print-no-link">#bfs</a>
+      
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
+      
+        <a href="/tags/flood-fill/" class="print-no-link">#flood fill</a>
       
     </div>
   
@@ -313,7 +322,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1768. Merge Strings Alternately</div>
+      <div>[LeetCode] 100. Same Tree</div>
       <div>https://shurui91.github.io/posts/493219565.html</div>
     </div>
     <div class="license-meta">
@@ -326,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 23, 2022</div>
+          <div>December 22, 2020</div>
         </div>
       
       
@@ -358,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2127834529.html" title="[LeetCode] 2225. Find Players With Zero or One Losses">
+                      <a href="/posts/805821143.html" title="[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2225. Find Players With Zero or One Losses</span>
+                        <span class="hidden-mobile">[LeetCode] 1457. Pseudo-Palindromic Paths in a Binary Tree</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -368,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3320885080.html" title="[LeetCode] 1700. Number of Students Unable to Eat Lunch">
-                        <span class="hidden-mobile">[LeetCode] 1700. Number of Students Unable to Eat Lunch</span>
+                      <a href="/posts/2414888932.html" title="[LeetCode] 921. Minimum Add to Make Parentheses Valid">
+                        <span class="hidden-mobile">[LeetCode] 921. Minimum Add to Make Parentheses Valid</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
