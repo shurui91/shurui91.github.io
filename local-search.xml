@@ -3621,9 +3621,9 @@
       
       <tag>sort</tag>
       
-      <tag>binary search</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
@@ -4285,6 +4285,35 @@
   
   
   <entry>
+    <title>[LeetCode] 930. Binary Subarrays With Sum</title>
+    <link href="/posts/4050545082.html"/>
+    <url>/posts/4050545082.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.</p><p>A subarray is a contiguous part of the array.</p><p>Example 1:<br>Input: nums &#x3D; [1,0,1,0,1], goal &#x3D; 2<br>Output: 4<br>Explanation: The 4 subarrays are bolded and underlined below:<br>[1,0,1,0,1]<br>[1,0,1,0,1]<br>[1,0,1,0,1]<br>[1,0,1,0,1]</p><p>Example 2:<br>Input: nums &#x3D; [0,0,0,0,0], goal &#x3D; 0<br>Output: 15</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 3 * 104<br>nums[i] is either 0 or 1.<br>0 &lt;&#x3D; goal &lt;&#x3D; nums.length</p><p>和相同的二元子数组。</p><blockquote>给你一个二元数组 nums ，和一个整数 goal ，请你统计并返回有多少个和为 goal 的 非空 子数组。<p>子数组 是数组的一段连续部分。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题我提供两种做法，一是前缀和，二是滑动窗口。最优解是前缀和。</p><h2 id="思路一-前缀和"><a href="#思路一-前缀和" class="headerlink" title="思路一 - 前缀和"></a>思路一 - 前缀和</h2><p>创建一个变量 sum，在遍历 input 数组的同时把每个数字累加到 sum 上，并把每个 sum 和当前的 index 存到一个 map 中。如果在 map 中存在一个 key &#x3D; sum - goal，说明存在一个子数组和为 goal，我们可以把 key 背后的 value 累加到结果里。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现一</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubarraysWithSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> goal)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            sum += nums[i];<br>            res += map.getOrDefault(sum - goal, <span class="hljs-number">0</span>);<br>            map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Java实现二</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubarraysWithSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> goal)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>map[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>sum += num;<br><span class="hljs-keyword">if</span> (sum &gt;= goal) &#123;<br>res += map[sum - goal];<br>&#125;<br>map[sum]++;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-滑动窗口"><a href="#思路二-滑动窗口" class="headerlink" title="思路二 - 滑动窗口"></a>思路二 - 滑动窗口</h2><p>这道题可以用类似 992 题那样的滑动窗口的思路做，来找到子数组的和<code>恰巧</code>等于 goal 的子数组个数。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - 接近于O(n^2)<br>空间O(1)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubarraysWithSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> goal)</span> &#123;<br>        <span class="hljs-keyword">return</span> helper(nums, goal) - helper(nums, goal - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> limit)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; len) &#123;<br>            sum += nums[end];<br>            end++;<br>            <span class="hljs-keyword">while</span> (start &lt; end &amp;&amp; sum &gt; limit) &#123;<br>                sum -= nums[start];<br>                start++;<br>            &#125;<br>            res += end - start + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1845. Seat Reservation Manager</title>
     <link href="/posts/3294691136.html"/>
     <url>/posts/3294691136.html</url>
@@ -4571,9 +4600,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
