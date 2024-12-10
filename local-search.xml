@@ -20,9 +20,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -1269,11 +1269,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -2643,9 +2643,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3279,9 +3279,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3671,11 +3671,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>binary search</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4355,9 +4355,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4434,11 +4434,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4625,11 +4625,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4652,9 +4652,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>design</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4789,9 +4789,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6099,9 +6099,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>bit manipulation</tag>
       
@@ -6652,6 +6652,37 @@
   
   
   <entry>
+    <title>[LeetCode] 523. Continuous Subarray Sum</title>
+    <link href="/posts/2013424535.html"/>
+    <url>/posts/2013424535.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an integer array nums and an integer k, return true if nums has a good subarray or false otherwise.</p><p>A good subarray is a subarray where:<br>its length is at least two, and<br>the sum of the elements of the subarray is a multiple of k.</p><p>Note that:<br>A subarray is a contiguous part of the array.<br>An integer x is a multiple of k if there exists an integer n such that x &#x3D; n * k. 0 is always a multiple of k.</p><p>Example 1:<br>Input: nums &#x3D; [23,2,4,6,7], k &#x3D; 6<br>Output: true<br>Explanation: [2, 4] is a continuous subarray of size 2 whose elements sum up to 6.</p><p>Example 2:<br>Input: nums &#x3D; [23,2,6,4,7], k &#x3D; 6<br>Output: true<br>Explanation: [23, 2, 6, 4, 7] is an continuous subarray of size 5 whose elements sum up to 42.<br>42 is a multiple of 6 because 42 &#x3D; 7 * 6 and 7 is an integer.</p><p>Example 3:<br>Input: nums &#x3D; [23,2,6,4,7], k &#x3D; 13<br>Output: false</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>0 &lt;&#x3D; sum(nums[i]) &lt;&#x3D; 231 - 1<br>1 &lt;&#x3D; k &lt;&#x3D; 231 - 1</p><p>连续的子数组和。</p><blockquote>给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：<p>子数组大小 至少为 2 ，且<br>子数组元素总和为 k 的倍数。<br>如果存在，返回 true ；否则，返回 false 。</p><p>如果存在一个整数 n ，令整数 x 符合 x &#x3D; n * k ，则称 x 是 k 的一个倍数。0 始终视为 k 的一个倍数。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/continuous-subarray-sum">https://leetcode.cn/problems/continuous-subarray-sum</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给定一个包含非负数的数组和一个目标整数 k，编写一个函数来判断该数组是否含有连续的子数组，其大小至少为 2，总和为 k 的倍数，即总和为 n*k，其中 n 也是一个整数。</p><p>思路是前缀和。注意题目的要求，子数组的长度至少为 2，所以类似如下这样的情形，应该是要 return false 的。</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">input</span>: <span class="hljs-selector-attr">[0]</span>, k = <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure><p>既然是前缀和的思路，所以还是需要创建一个 hashmap，存<code>前缀和</code>以及当前这个前缀和<code>第一次出现的下标</code>。既然是找 sum 为 k 的倍数，所以自然而然想到取模的操作。注意这里有一个关于取模的公式需要知道（引用）。如果 sum[j] - sum[i] &#x3D; n * k, 那么两边同时除以 k 我们可以得到 sum[j] &#x2F; k - sum[i] &#x2F; k &#x3D; n。如果要使这个等式成立，我们需要满足 sum[j] % k &#x3D;&#x3D; sum[i] % k。</p><p>所以我们在得到每一个前缀和之后，我们做 sum %&#x3D; k，把余数当做 key 存入 hashmap。当我们再次遇到一个相同的 key 的时候，我们再判断这个 key 上一次出现的位置是否在两个位置以外即可。</p><p>另外一道跟前缀和 + 取模有关的题是 974 题。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">checkSubarraySum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            sum = (sum + num) % k;<br>            <span class="hljs-keyword">if</span> (sum &lt; <span class="hljs-number">0</span>) &#123;<br>                sum += k;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (map.containsKey(sum)) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">lastIndex</span> <span class="hljs-operator">=</span> map.get(sum);<br>                <span class="hljs-keyword">if</span> (i - lastIndex &gt;= <span class="hljs-number">2</span>) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                map.put(sum, i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">boolean</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> checkSubarraySum = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    map.<span class="hljs-title function_">set</span>(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum += nums[i];<br>        <span class="hljs-keyword">if</span> (k !== <span class="hljs-number">0</span>) &#123;<br>            sum %= k;<br>        &#125;<br>        <span class="hljs-keyword">let</span> prev = map.<span class="hljs-title function_">get</span>(sum);<br>        <span class="hljs-keyword">if</span> (prev !== <span class="hljs-literal">undefined</span>) &#123;<br>            <span class="hljs-keyword">if</span> (i - prev &gt; <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, i);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">523. Continuous Subarray Sum<br>974. Subarray Sums Divisible by K<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+      <tag>math</tag>
+      
+      <tag>prefix sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 560. Subarray Sum Equals K</title>
     <link href="/posts/135141854.html"/>
     <url>/posts/135141854.html</url>
@@ -6803,9 +6834,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
