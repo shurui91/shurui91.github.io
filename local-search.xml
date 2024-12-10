@@ -20,9 +20,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -1269,11 +1269,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -2643,9 +2643,9 @@
       
       <tag>array</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3279,9 +3279,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3609,9 +3609,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -3640,9 +3640,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -3671,11 +3671,11 @@
       
       <tag>greedy</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sort</tag>
       
       <tag>binary search</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4355,9 +4355,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -4434,11 +4434,11 @@
       
       <tag>greedy</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4538,9 +4538,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -4625,11 +4625,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4652,9 +4652,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -4789,9 +4789,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -6099,9 +6099,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>string</tag>
       
       <tag>bit manipulation</tag>
       
@@ -6672,9 +6672,9 @@
       
       <tag>javascript</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -6688,6 +6688,35 @@
     <url>/posts/135141854.html</url>
     
     <content type="html"><![CDATA[<p>Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.</p><p>A subarray is a contiguous non-empty sequence of elements within an array.</p><p>Example 1:<br>Input: nums &#x3D; [1,1,1], k &#x3D; 2<br>Output: 2</p><p>Example 2:<br>Input: nums &#x3D; [1,2,3], k &#x3D; 3<br>Output: 2</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 2 * 104<br>-1000 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>-107 &lt;&#x3D; k &lt;&#x3D; 107</p><p>和为 K 的子数组。</p><blockquote>给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的子数组的个数 。<p>子数组是数组中元素的连续非空序列。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/subarray-sum-equals-k">https://leetcode.cn/problems/subarray-sum-equals-k</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路一-暴力解"><a href="#思路一-暴力解" class="headerlink" title="思路一 - 暴力解"></a>思路一 - 暴力解</h2><p>题意是给一个数组和一个数字 K，请求出 input 数组中有多少个子数组的和为 K。两种做法，一种是暴力解；一种会用到 hashmap。</p><p>暴力解的思路是用两个 for loop 扫描 input 数组，扫描的时候记录累加和 sum，再用一个变量记录是否有满足条件的子数组满足 sum &#x3D;&#x3D; k，若有就++。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> subarraySum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = i; j &lt; nums.<span class="hljs-property">length</span>; j++) &#123;<br>            sum += nums[j];<br>            <span class="hljs-keyword">if</span> (sum === k) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="思路二-前缀和"><a href="#思路二-前缀和" class="headerlink" title="思路二 - 前缀和"></a>思路二 - 前缀和</h2><p>用一个数组 sum 记录从 0 到 i 之间所有元素的累积总和。如果累积总和在索引 i 和索引 j 之间相差 k，即 sum[i] - sum[j] &#x3D; k，则位于索引 i 和索引 j 之间的元素之和是 k。</p><p>根据这个思路，我们可以用 hashmap 记录数组所有的前 N 项的前缀和。key 是前缀和，value 是这个前缀和出现的次数。扫描的时候，如果 map 存在 sum（下图黄色部分） 和 sum - k（下图红色部分），就说明有满足条件的子数组，因为他们的差值是 k。同时因为数组可能存在负数的关系，加入前缀和的时候需要判断 key 是否存在过。举个例子，比如前 N 项的和是 sum，前 N-1 项的和是 sum - k，那么前 N 项的和 - 前 N-1 项的和 &#x3D; K。</p><p><span style="background:yellow">x, x, x, x, x, x, x, x</span> - sum<br><span style="background:red">x, x, x, x, x, x, x</span>, k - sum - k</p><p>这个思路很好，能帮助解决很多求子数组，子区间的问题。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">subarraySum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// &lt;unique的前缀和，这个前缀和出现了多少次&gt;</span><br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>            sum += nums[i];<br>            <span class="hljs-keyword">if</span> (map.containsKey(sum - k)) &#123;<br>                res += map.get(sum - k);<br>            &#125;<br>            map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> subarraySum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (nums.<span class="hljs-property">length</span> &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]]);<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum += nums[i];<br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(sum - k)) &#123;<br>            count += map.<span class="hljs-title function_">get</span>(sum - k);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!map.<span class="hljs-title function_">has</span>(sum)) &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, <span class="hljs-number">1</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, map.<span class="hljs-title function_">get</span>(sum) + <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+      <tag>prefix sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 525. Contiguous Array</title>
+    <link href="/posts/357721324.html"/>
+    <url>/posts/357721324.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.</p><p>Example 1:<br>Input: nums &#x3D; [0,1]<br>Output: 2<br>Explanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.</p><p>Example 2:<br>Input: nums &#x3D; [0,1,0]<br>Output: 2<br>Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>nums[i] is either 0 or 1.</p><p>连续数组。</p><blockquote>给定一个二进制数组 nums , 找到含有相同数量的 0 和 1 的最长连续子数组，并返回该子数组的长度。<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/contiguous-array">https://leetcode.cn/problems/contiguous-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这个题目看似简单但是这个思路比较难想到。这个题的 tag 是 hash table，感觉可以往前缀和为 0 的思路上去靠。题目问的是包含相同数量的 0 和 1 的子数组的长度，这里我们需要灵活运用前缀和这个思路。如果把 0 替换成 -1，也就把题目转化为满足条件的子数组的和会是 0，因为 -1 和 1 是成对出现的。所以做法是创建一个 hashmap 记录前缀和和他最后一次出现的位置的 index。扫描的时候就按照加前缀和的方式做，当遇到某一个前缀和 X 已经存在于 hashmap 的时候，就知道这一段区间内的子数组的和为 0 了，否则这个前缀和不可能重复出现。举个例子，比如 [0,1,0] 好了，一开始往 hashmap 存入了初始值 0 和他的下标 -1（这是大多数前缀和的题都需要做的初始化），当遍历完前两个元素 0（-1）和1之后，此时又得到这个 prefix sum &#x3D; 0，此时去看一下 i - map.get(sum) 的值是否能更大，以得出这个最长的子数组的长度。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxLength</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>map.put(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>sum += (nums[i] == <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : -<span class="hljs-number">1</span>);<br><span class="hljs-keyword">if</span> (map.containsKey(sum)) &#123;<br>res = Math.max(res, i - map.get(sum));<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>map.put(sum, i);<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findMaxLength = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums</span>) &#123;<br>    <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>    map.<span class="hljs-title function_">set</span>(<span class="hljs-number">0</span>, -<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum += nums[i] == <span class="hljs-number">0</span> ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(sum)) &#123;<br>            res = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(res, i - map.<span class="hljs-title function_">get</span>(sum));<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, i);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -6834,9 +6863,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
