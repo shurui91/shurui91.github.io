@@ -16,25 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+    <meta name="description" content="Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k. A subarray is a contiguous non-empty sequence of elements within an array. Example 1:Input">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1002. Find Common Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/92520130.html">
+<meta property="og:title" content="[LeetCode] 560. Subarray Sum Equals K">
+<meta property="og:url" content="https://shurui91.github.io/posts/135141854.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+<meta property="og:description" content="Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k. A subarray is a contiguous non-empty sequence of elements within an array. Example 1:Input">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-31T15:45:05.000Z">
-<meta property="article:modified_time" content="2024-06-05T16:26:22.354Z">
+<meta property="article:published_time" content="2020-04-14T19:28:48.000Z">
+<meta property="article:modified_time" content="2024-12-10T04:15:54.349Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="javascript">
 <meta property="article:tag" content="array">
 <meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="prefix sum">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1002. Find Common Characters - CNoodle</title>
+  <title>[LeetCode] 560. Subarray Sum Equals K - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1002. Find Common Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 560. Subarray Sum Equals K"></span>
           
         </div>
 
@@ -199,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-31 08:45" pubdate>
-          March 31, 2020 am
+        <time datetime="2020-04-14 12:28" pubdate>
+          April 14, 2020 pm
         </time>
       </span>
     
@@ -211,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.3k words
         
       </span>
     
@@ -222,7 +224,7 @@
         
         
         
-          12 mins
+          20 mins
         
       </span>
     
@@ -259,26 +261,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1002. Find Common Characters</h1>
+            <h1 id="seo-header">[LeetCode] 560. Subarray Sum Equals K</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.</p>
-<p>Example 1:<br>Input: words &#x3D; [“bella”,”label”,”roller”]<br>Output: [“e”,”l”,”l”]</p>
-<p>Example 2:<br>Input: words &#x3D; [“cool”,”lock”,”cook”]<br>Output: [“c”,”o”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consists of lowercase English letters.</p>
-<p>查找共用字符。</p>
+                <p>Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k.</p>
+<p>A subarray is a contiguous non-empty sequence of elements within an array.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,1,1], k &#x3D; 2<br>Output: 2</p>
+<p>Example 2:<br>Input: nums &#x3D; [1,2,3], k &#x3D; 3<br>Output: 2</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 2 * 104<br>-1000 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>-107 &lt;&#x3D; k &lt;&#x3D; 107</p>
+<p>和为 K 的子数组。</p>
 <blockquote>
-给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。
+给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的子数组的个数 。
+
+<p>子数组是数组中元素的连续非空序列。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k">https://leetcode.cn/problems/subarray-sum-equals-k</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个装了单词的数组，请求出这些单词里面共同的字母，以 list 形式输出。如果有多个相同的字母也需要多次输出。</p>
-<p>思路是用 hashmap 记录 input 中第一个单词里面每个字母的出现次数，然后从第二个单词开始，也是去计算每个字母出现的次数，但是把某个字母在某个单词中出现的最少的次数加入结果集。举个例子，比如 cool 里面 o 出现了两次，但是在 lock 里面 o 只出现了一次，记录 o 的时候只记录最少的出现次数。最后遍历结果集里面每个单词，根据次数拼接成最后要输出的 list。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n) - n 个单词 * 每个单词的平均长度 m<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">commonChars</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : first.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">int</span>[] letters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cur.toCharArray()) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++) &#123;<br>                map[j] = Math.min(map[j], letters[j]);<br>            &#125;<br>        &#125;<br><br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (i + <span class="hljs-string">&#x27;a&#x27;</span>);<br>                res.add(c + <span class="hljs-string">&quot;&quot;</span>);<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="思路一-暴力解"><a href="#思路一-暴力解" class="headerlink" title="思路一 - 暴力解"></a>思路一 - 暴力解</h2><p>题意是给一个数组和一个数字 K，请求出 input 数组中有多少个子数组的和为 K。两种做法，一种是暴力解；一种会用到 hashmap。</p>
+<p>暴力解的思路是用两个 for loop 扫描 input 数组，扫描的时候记录累加和 sum，再用一个变量记录是否有满足条件的子数组满足 sum &#x3D;&#x3D; k，若有就++。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> subarraySum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = i; j &lt; nums.<span class="hljs-property">length</span>; j++) &#123;<br>            sum += nums[j];<br>            <span class="hljs-keyword">if</span> (sum === k) &#123;<br>                res++;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路二-前缀和"><a href="#思路二-前缀和" class="headerlink" title="思路二 - 前缀和"></a>思路二 - 前缀和</h2><p>用一个数组 sum 记录从 0 到 i 之间所有元素的累积总和。如果累积总和在索引 i 和索引 j 之间相差 k，即 sum[i] - sum[j] &#x3D; k，则位于索引 i 和索引 j 之间的元素之和是 k。</p>
+<p>根据这个思路，我们可以用 hashmap 记录数组所有的前 N 项的前缀和。key 是前缀和，value 是这个前缀和出现的次数。扫描的时候，如果 map 存在 sum（下图黄色部分） 和 sum - k（下图红色部分），就说明有满足条件的子数组，因为他们的差值是 k。同时因为数组可能存在负数的关系，加入前缀和的时候需要判断 key 是否存在过。举个例子，比如前 N 项的和是 sum，前 N-1 项的和是 sum - k，那么前 N 项的和 - 前 N-1 项的和 &#x3D; K。</p>
+<p><span style="background:yellow">x, x, x, x, x, x, x, x</span> - sum<br><span style="background:red">x, x, x, x, x, x, x</span>, k - sum - k</p>
+<p>这个思路很好，能帮助解决很多求子数组，子区间的问题。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">subarraySum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// &lt;unique的前缀和，这个前缀和出现了多少次&gt;</span><br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>            sum += nums[i];<br>            <span class="hljs-keyword">if</span> (map.containsKey(sum - k)) &#123;<br>                res += map.get(sum - k);<br>            &#125;<br>            map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> subarraySum = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (nums.<span class="hljs-property">length</span> &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]]);<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum += nums[i];<br>        <span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(sum - k)) &#123;<br>            count += map.<span class="hljs-title function_">get</span>(sum - k);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!map.<span class="hljs-title function_">has</span>(sum)) &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, <span class="hljs-number">1</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            map.<span class="hljs-title function_">set</span>(sum, map.<span class="hljs-title function_">get</span>(sum) + <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> count;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -295,9 +313,13 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+      
         <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+      
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
     </div>
   
@@ -309,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1002. Find Common Characters</div>
-      <div>https://shurui91.github.io/posts/92520130.html</div>
+      <div>[LeetCode] 560. Subarray Sum Equals K</div>
+      <div>https://shurui91.github.io/posts/135141854.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 31, 2020</div>
+          <div>April 14, 2020</div>
         </div>
       
       
@@ -354,9 +376,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1351088998.html" title="[LeetCode] 419. Battleships in a Board">
+                      <a href="/posts/3792472226.html" title="[LeetCode] 78. Subsets">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 419. Battleships in a Board</span>
+                        <span class="hidden-mobile">[LeetCode] 78. Subsets</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +386,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1415125802.html" title="[LeetCode] 999. Available Captures for Rooks">
-                        <span class="hidden-mobile">[LeetCode] 999. Available Captures for Rooks</span>
+                      <a href="/posts/3607955859.html" title="[LeetCode] 362. Design Hit Counter">
+                        <span class="hidden-mobile">[LeetCode] 362. Design Hit Counter</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +407,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/92520130.html';
-          this.page.identifier = '/posts/92520130.html';
+          this.page.url = 'https://shurui91.github.io/posts/135141854.html';
+          this.page.identifier = '/posts/135141854.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
