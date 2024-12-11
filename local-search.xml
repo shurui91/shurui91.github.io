@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 3111. Minimum Rectangles to Cover Points</title>
+    <link href="/posts/972602496.html"/>
+    <url>/posts/972602496.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 2D integer array points, where points[i] &#x3D; [xi, yi]. You are also given an integer w. Your task is to cover all the given points with rectangles.</p><p>Each rectangle has its lower end at some point (x1, 0) and its upper end at some point (x2, y2), where x1 &lt;&#x3D; x2, y2 &gt;&#x3D; 0, and the condition x2 - x1 &lt;&#x3D; w must be satisfied for each rectangle.</p><p>A point is considered covered by a rectangle if it lies within or on the boundary of the rectangle.</p><p>Return an integer denoting the minimum number of rectangles needed so that each point is covered by at least one rectangle.</p><p>Note: A point may be covered by more than one rectangle.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2024/03/04/screenshot-from-2024-03-04-20-33-05.png" alt="Example 1"><br>Input: points &#x3D; [[2,1],[1,0],[1,4],[1,8],[3,5],[4,6]], w &#x3D; 1<br>Output: 2</p><p>Explanation:<br>The image above shows one possible placement of rectangles to cover the points:<br>A rectangle with a lower end at (1, 0) and its upper end at (2, 8)<br>A rectangle with a lower end at (3, 0) and its upper end at (4, 8)</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2024/03/04/screenshot-from-2024-03-04-18-59-12.png" alt="Example 2"><br>Input: points &#x3D; [[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]], w &#x3D; 2<br>Output: 3</p><p>Explanation:<br>The image above shows one possible placement of rectangles to cover the points:<br>A rectangle with a lower end at (0, 0) and its upper end at (2, 2)<br>A rectangle with a lower end at (3, 0) and its upper end at (5, 5)<br>A rectangle with a lower end at (6, 0) and its upper end at (6, 6)</p><p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2024/03/04/screenshot-from-2024-03-04-20-24-03.png" alt="Example 3"><br>Input: points &#x3D; [[2,3],[1,2]], w &#x3D; 0<br>Output: 2</p><p>Explanation:<br>The image above shows one possible placement of rectangles to cover the points:<br>A rectangle with a lower end at (1, 0) and its upper end at (1, 2)<br>A rectangle with a lower end at (2, 0) and its upper end at (2, 3)</p><p>Constraints:<br>1 &lt;&#x3D; points.length &lt;&#x3D; 105<br>points[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; xi &#x3D;&#x3D; points[i][0] &lt;&#x3D; 109<br>0 &lt;&#x3D; yi &#x3D;&#x3D; points[i][1] &lt;&#x3D; 109<br>0 &lt;&#x3D; w &lt;&#x3D; 109<br>All pairs (xi, yi) are distinct.</p><p>覆盖所有点的最少矩形数目。</p><blockquote>给你一个二维整数数组 point ，其中 points[i] = [xi, yi] 表示二维平面内的一个点。同时给你一个整数 w 。你需要用矩形 覆盖所有 点。<p>每个矩形的左下角在某个点 (x1, 0) 处，且右上角在某个点 (x2, y2) 处，其中 x1 &lt;&#x3D; x2 且 y2 &gt;&#x3D; 0 ，同时对于每个矩形都 必须 满足 x2 - x1 &lt;&#x3D; w 。</p><p>如果一个点在矩形内或者在边上，我们说这个点被矩形覆盖了。</p><p>请你在确保每个点都 至少 被一个矩形覆盖的前提下，最少 需要多少个矩形。</p><p>注意：一个点可以被多个矩形覆盖。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是对所有的点的<code>横坐标</code>排序。用矩形覆盖所有的点，因为不用考虑矩形的高度，所以只要考虑所有的点的横坐标即可。</p><p>排序过后我们来遍历所有的点的横坐标。如果挡板的<code>左端点 + 宽度 w</code> 够不到当前这个点的横坐标，则需要下一块板了；否则就遍历到下一个点，看挡板能否够得到下一个点。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minRectanglesToCoverPoints</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] points, <span class="hljs-type">int</span> w)</span> &#123;<br>        Arrays.sort(points, (a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> points.length;<br><span class="hljs-comment">// 挡板的左边界</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">bound</span> <span class="hljs-operator">=</span> points[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br><span class="hljs-comment">// 如果挡板的宽度够不到当前这个点的横坐标，则一定需要另一块板</span><br>            <span class="hljs-keyword">if</span> (bound + w &lt; points[i][<span class="hljs-number">0</span>]) &#123;<br>                count++;<br>                bound = points[i][<span class="hljs-number">0</span>];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                i++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1524. Number of Sub-arrays With Odd Sum</title>
     <link href="/posts/3778862743.html"/>
     <url>/posts/3778862743.html</url>
@@ -3609,9 +3636,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -3640,9 +3667,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -4538,9 +4565,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
