@@ -24,14 +24,14 @@
 <meta property="og:description" content="Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array. Example 1:Input: data &#x3D; [1,0,1,0,1]Output: 1Explan">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-11T11:04:05.000Z">
-<meta property="article:modified_time" content="2024-08-03T18:53:43.925Z">
+<meta property="article:modified_time" content="2024-12-13T17:47:21.919Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="java">
 <meta property="article:tag" content="sliding window">
 <meta property="article:tag" content="sliding window with fixed size">
+<meta property="article:tag" content="prefix sum">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          2.1k words
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          19 mins
+          18 mins
         
       </span>
     
@@ -272,16 +272,21 @@
 <p>Example 3:<br>Input: data &#x3D; [1,0,1,0,1,0,0,1,1,0,1]<br>Output: 3<br>Explanation: One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].</p>
 <p>Constraints:<br>1 &lt;&#x3D; data.length &lt;&#x3D; 105<br>data[i] is either 0 or 1.</p>
 <p>最少交换次数来组合所有的 1。</p>
-<p>给出一个二进制数组 data，你需要通过交换位置，将数组中所有的 1 组合到一起，并返回所有可能中所需最少的交换次数。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题问的是 swap 的次数，注意 swap 的策略是有好坏的，这也就是为什么例子一有三种 swap 的结果但是这三种策略的代价是不一样的。我这里提供一个滑动窗口的思路。这道题前缀和也能做，日后有时间我再补充。注意这道题的滑动窗口尺寸是固定的。滑动窗口的尺寸就是 1 的个数。</p>
+<blockquote>
+给出一个二进制数组 data，你需要通过交换位置，将数组中所有的 1 组合到一起，并返回所有可能中所需最少的交换次数。
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题问的是 swap 的次数，注意 swap 的策略是有好坏的，这也就是为什么例子一有三种 swap 的结果但是这三种策略的代价是不一样的。思路是固定尺寸的滑动窗口。滑动窗口的尺寸就是 1 的个数。</p>
 <p>首先我们用一个变量 ones 记录 input 数组中一共有多少个 1。然后我们用滑动窗口的模板开始扫描 input 数组，当 end 指针遇到 1 的时候，count++；当 end 和 start 两个指针的距离 &#x3D;&#x3D; ones 的时候，此时我们看一下 end 和 start 之间有几个 1，此时 ones 和 count 的差值就是需要 swap 的次数。遍历整个数组，找到全局最小的 swap 次数即可。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h2><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d : data) &#123;<br>            <span class="hljs-keyword">if</span> (d == <span class="hljs-number">1</span>) &#123;<br>                ones++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (ones == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-keyword">while</span> (end &lt; data.length) &#123;<br>            <span class="hljs-keyword">if</span> (data[end] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">if</span> (end - start == ones) &#123;<br>                res = Math.min(res, ones - count);<br>                <span class="hljs-keyword">if</span> (data[start] == <span class="hljs-number">1</span>) &#123;<br>                    count--;<br>                &#125;<br>                start++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h2><p>这里我再提供一个 for 循环的代码。因为这道题滑动窗口的 size 是固定的，所以 for 循环也能做。<br>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-comment">// 统计一共有多少个1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d : data) &#123;<br>            <span class="hljs-keyword">if</span> (d == <span class="hljs-number">1</span>) &#123;<br>                ones++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 统计前ones个位置上有多少个1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; ones; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                c++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-comment">// 如果1都在一开始的位置上，则无需swap</span><br>        <span class="hljs-keyword">if</span> (c == ones) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-comment">// min是一开始的位置上需要swap的次数</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> ones - c;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> c;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> ones; j &lt; data.length; j++) &#123;<br>            <span class="hljs-keyword">if</span> (data[j] == <span class="hljs-number">1</span>) &#123;<br>                k++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (data[j - ones] == <span class="hljs-number">1</span>) &#123;<br>                k--;<br>            &#125;<br>            min = Math.min(min, ones - k);<br>        &#125;<br>        <span class="hljs-keyword">return</span> min;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h2><p>我再提供一个固定尺寸的滑动窗口的做法。如果全局一共有 k 个 1，那么我们先看前 k 个元素里有几个 1，得到一个 swap 的次数。之后我们遍历完之后所有的数字，看看过程中 swap 的次数是不是最小的，如果是的话，我们更新最小的 swap 次数。</p>
+<p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> data.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : data) &#123;<br>            <span class="hljs-keyword">if</span> (num == <span class="hljs-number">1</span>) &#123;<br>                k++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">swap</span> <span class="hljs-operator">=</span> k - count;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (data[i - k] == <span class="hljs-number">1</span>) &#123;<br>                count--;<br>            &#125;<br>            swap = Math.min(swap, k - count);<br>        &#125;<br>        <span class="hljs-keyword">return</span> swap;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">1151. Minimum Swaps to Group All 1s Together<br>2134. Minimum Swaps to Group All 1s Together II<br></code></pre></td></tr></table></figure>
                 
@@ -297,15 +302,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
         <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
+      
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
     </div>
   
