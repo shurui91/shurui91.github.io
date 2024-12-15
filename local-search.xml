@@ -153,11 +153,11 @@
       
       <tag>java</tag>
       
+      <tag>dynamic programming</tag>
+      
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>dynamic programming</tag>
       
       <tag>matrix</tag>
       
@@ -1909,9 +1909,9 @@
       
       <tag>MOD</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -1994,9 +1994,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2526,9 +2526,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3117,9 +3117,9 @@
       
       <tag>java</tag>
       
-      <tag>simulation</tag>
-      
       <tag>heap</tag>
+      
+      <tag>simulation</tag>
       
     </tags>
     
@@ -3304,11 +3304,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>math</tag>
       
       <tag>gcd</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -3717,9 +3717,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -3748,9 +3748,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -4544,9 +4544,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4646,9 +4646,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -4954,6 +4954,37 @@
       <tag>java</tag>
       
       <tag>greedy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1338. Reduce Array Size to The Half</title>
+    <link href="/posts/4045788427.html"/>
+    <url>/posts/4045788427.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array arr. You can choose a set of integers and remove all the occurrences of these integers in the array.</p><p>Return the minimum size of the set so that at least half of the integers of the array are removed.</p><p>Example 1:<br>Input: arr &#x3D; [3,3,3,3,5,5,5,2,2,7]<br>Output: 2<br>Explanation: Choosing {3,7} will make the new array [5,5,5,2,2] which has size 5 (i.e equal to half of the size of the old array).<br>Possible sets of size 2 are {3,5},{3,2},{5,2}.<br>Choosing set {2,7} is not possible as it will make the new array [3,3,3,3,5,5,5] which has a size greater than half of the size of the old array.</p><p>Example 2:<br>Input: arr &#x3D; [7,7,7,7,7,7]<br>Output: 1<br>Explanation: The only possible set you can choose is {7}. This will make the new array empty.</p><p>Constraints:<br>2 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>arr.length is even.<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 105</p><p>数组大小减半。</p><blockquote>给你一个整数数组 arr。你可以从中选出一个整数集合，并删除这些整数在数组中的每次出现。<p>返回 至少 能删除数组中的一半整数的整数集合的最小大小。</p></blockquote><h2 id="思路一-counting-sort"><a href="#思路一-counting-sort" class="headerlink" title="思路一 - counting sort"></a>思路一 - counting sort</h2><p>首先我们看一下数组中出现的最大元素是什么，记录为 max。之后我们创建一个长度为 max + 1 的数组 count，记录所有元素的出现次数，并在记录完毕之后对其排序。当这个 count 数组有序之后，我们从元素最大的地方开始统计，计算一下每个元素的出现次数，当统计到数组中一半整数为止。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSetSize</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Integer.MIN_VALUE;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            max = Math.max(max, num);<br>        &#125;<br><br>        <span class="hljs-type">int</span>[] count = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[max + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            count[num]++;<br>        &#125;<br>        Arrays.sort(count);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">half</span> <span class="hljs-operator">=</span> arr.length / <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> count.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            half -= count[i];<br>            res++;<br>            <span class="hljs-keyword">if</span> (half &lt;= <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">return</span> res;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> arr.length;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-最大堆"><a href="#思路二-最大堆" class="headerlink" title="思路二 - 最大堆"></a>思路二 - 最大堆</h2><p>既然是试图删除数组中的一些 unique 的元素，使得删除的元素数量尽量大，但是这个集合尽量小，那么我们就需要统计每个元素在 input 数组中的出现次数。这里我们用 hashmap 统计，统计好的结果我们存入一个以 priority queue 表示的最大堆，堆顶是出现次数最多的数字。这样每次堆顶元素弹出的时候，他的出现次数是当前最多的，这样才能尽快地删除数组中一半整数。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSetSize</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : arr) &#123;<br>            map.put(num, map.getOrDefault(num, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br><br>        <span class="hljs-comment">// [key, value]</span><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; b[<span class="hljs-number">1</span>] - a[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : map.keySet()) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">val</span> <span class="hljs-operator">=</span> map.get(num);<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; num, val &#125;);<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (count &lt; n / <span class="hljs-number">2</span>) &#123;<br>            count += queue.poll()[<span class="hljs-number">1</span>];<br>            res++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
+      
+      <tag>heap</tag>
       
     </tags>
     
@@ -8019,9 +8050,9 @@
       
       <tag>tree</tag>
       
-      <tag>inorder</tag>
-      
       <tag>bst</tag>
+      
+      <tag>inorder</tag>
       
     </tags>
     
