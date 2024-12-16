@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2730. Find the Longest Semi-Repetitive Substring</title>
+    <link href="/posts/4004168145.html"/>
+    <url>/posts/4004168145.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a digit string s that consists of digits from 0 to 9.</p><p>A string is called semi-repetitive if there is at most one adjacent pair of the same digit. For example, “0010”, “002020”, “0123”, “2002”, and “54944” are semi-repetitive while the following are not: “00101022” (adjacent same digit pairs are 00 and 22), and “1101234883” (adjacent same digit pairs are 11 and 88).</p><p>Return the length of the longest semi-repetitive substring of s.</p><p>Example 1:<br>Input: s &#x3D; “52233”<br>Output: 4</p><p>Explanation:<br>The longest semi-repetitive substring is “5223”. Picking the whole string “52233” has two adjacent same digit pairs 22 and 33, but at most one is allowed.</p><p>Example 2:<br>Input: s &#x3D; “5494”<br>Output: 4</p><p>Explanation:<br>s is a semi-repetitive string.</p><p>Example 3:<br>Input: s &#x3D; “1111111”<br>Output: 2</p><p>Explanation:<br>The longest semi-repetitive substring is “11”. Picking the substring “111” has two adjacent same digit pairs, but at most one is allowed.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 50<br>‘0’ &lt;&#x3D; s[i] &lt;&#x3D; ‘9’</p><p>找到最长的半重复子字符串。</p><blockquote>给你一个下标从 0 开始的字符串 s ，这个字符串只包含 0 到 9 的数字字符。<p>如果一个字符串 t 中至多有一对相邻字符是相等的，那么称这个字符串 t 是 半重复的 。例如，”0010” 、”002020” 、”0123” 、”2002” 和 “54944” 是半重复字符串，而 “00101022” （相邻的相同数字对是 00 和 22）和 “1101234883” （相邻的相同数字对是 11 和 88）不是半重复字符串。</p><p>请你返回 s 中最长 半重复子字符串的长度。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道可以用 76 题模板解决的滑动窗口题。思路没什么需要特别结实的，可直接参见代码。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestSemiRepetitiveSubstring</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span>[] nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            nums[i] = c - <span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">same</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; n) &#123;<br>            <span class="hljs-keyword">if</span> (nums[end] == nums[end - <span class="hljs-number">1</span>]) &#123;<br>                same++;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">while</span> (same == <span class="hljs-number">2</span>) &#123;<br>                <span class="hljs-keyword">if</span> (nums[start] == nums[start - <span class="hljs-number">1</span>]) &#123;<br>                    same--;<br>                &#125;<br>                start++;<br>            &#125;<br>            res = Math.max(res, end - start + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2593. Find Score of an Array After Marking All Elements</title>
     <link href="/posts/433946550.html"/>
     <url>/posts/433946550.html</url>
@@ -4573,9 +4600,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>sort</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5943,9 +5970,9 @@
       
       <tag>array</tag>
       
-      <tag>matrix</tag>
-      
       <tag>memoization</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
