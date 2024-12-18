@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2779. Maximum Beauty of an Array After Applying Operation</title>
+    <link href="/posts/3808757599.html"/>
+    <url>/posts/3808757599.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed array nums and a non-negative integer k.</p><p>In one operation, you can do the following:<br>Choose an index i that hasn’t been chosen before from the range [0, nums.length - 1].<br>Replace nums[i] with any integer from the range [nums[i] - k, nums[i] + k].<br>The beauty of the array is the length of the longest subsequence consisting of equal elements.</p><p>Return the maximum possible beauty of the array nums after applying the operation any number of times.</p><p>Note that you can apply the operation to each index only once.</p><p>A subsequence of an array is a new array generated from the original array by deleting some elements (possibly none) without changing the order of the remaining elements.</p><p>Example 1:<br>Input: nums &#x3D; [4,6,1,2], k &#x3D; 2<br>Output: 3<br>Explanation: In this example, we apply the following operations:</p><ul><li>Choose index 1, replace it with 4 (from range [4,8]), nums &#x3D; [4,4,1,2].</li><li>Choose index 3, replace it with 4 (from range [0,4]), nums &#x3D; [4,4,1,4].<br>After the applied operations, the beauty of the array nums is 3 (subsequence consisting of indices 0, 1, and 3).<br>It can be proven that 3 is the maximum possible length we can achieve.</li></ul><p>Example 2:<br>Input: nums &#x3D; [1,1,1,1], k &#x3D; 10<br>Output: 4<br>Explanation: In this example we don’t have to apply any operations.<br>The beauty of the array nums is 4 (whole array).</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i], k &lt;&#x3D; 105</p><p>数组的最大美丽值。</p><blockquote>给你一个下标从 0 开始的整数数组 nums 和一个 非负 整数 k 。<p>在一步操作中，你可以执行下述指令：</p><p>在范围 [0, nums.length - 1] 中选择一个 此前没有选过 的下标 i 。<br>将 nums[i] 替换为范围 [nums[i] - k, nums[i] + k] 内的任一整数。<br>数组的 美丽值 定义为数组中由相等元素组成的最长子序列的长度。</p><p>对数组 nums 执行上述操作任意次后，返回数组可能取得的 最大 美丽值。</p><p>注意：你只能对每个下标执行 一次 此操作。</p><p>数组的 子序列 定义是：经由原数组删除一些元素（也可能不删除）得到的一个新数组，且在此过程中剩余元素的顺序不发生改变。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题有多种思路，这里我提供一个滑动窗口的思路。我参考了<a href="https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/solutions/2345805/pai-xu-shuang-zhi-zhen-by-endlesscheng-hbqx">这个帖子</a>。</p><p>题目允许我们把数组中的每一个数字 nums[i] 替换成 [nums[i] - k, nums[i] + k] 范围内的任意整数，且让我们找的是一个最长的子序列。因为找的是子序列，而且数字是可以改的，所以这里我们可以对 input 数组<code>排序</code>。</p><p>排序过后，假如我们最终找到的最长子序列是 [left, left + 1, left + 2,…, right]，那么这段子序列需要满足<code>最小值 left + k &gt;= 最大值 right - k</code>。把这个式子变一下，就是<code>right - left &lt;= 2k</code>。这样一来，当我们把 input 数组排过序之后，我们就可以用滑动窗口了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumBeauty</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; n) &#123;<br>            <span class="hljs-keyword">while</span> (nums[end] - nums[start] &gt; k * <span class="hljs-number">2</span>) &#123;<br>                start++;<br>            &#125;<br>            res = Math.max(res, end - start + <span class="hljs-number">1</span>);<br>            end++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><span class="hljs-comment">// sliding window</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2958. Length of Longest Subarray With at Most K Frequency</title>
     <link href="/posts/3219240172.html"/>
     <url>/posts/3219240172.html</url>
