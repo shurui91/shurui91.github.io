@@ -24,7 +24,7 @@
 <meta property="og:description" content="Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.Example 1:Input: nums &#x3D; [2,2,3,4]Output: 3Ex">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-02T09:08:03.000Z">
-<meta property="article:modified_time" content="2024-02-15T02:25:47.316Z">
+<meta property="article:modified_time" content="2025-01-06T23:34:42.090Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1.2k words
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          11 mins
+          10 mins
         
       </span>
     
@@ -269,14 +269,16 @@
                 <p>Given an integer array nums, return the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.<br>Example 1:<br>Input: nums &#x3D; [2,2,3,4]<br>Output: 3<br>Explanation: Valid combinations are:<br>2,3,4 (using the first 2)<br>2,3,4 (using the second 2)<br>2,2,3<br>Example 2:<br>Input: nums &#x3D; [4,2,3,4]<br>Output: 4<br>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p>
 <p>有效三角形的个数。</p>
 <blockquote>
-<p>给定一个包含非负整数的数组 nums ，返回其中可以组成三角形三条边的三元组个数。</p>
+给定一个包含非负整数的数组 nums ，返回其中可以组成三角形三条边的三元组个数。
 </blockquote>
+
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路有点类似 3sum。因为是要找能组成三角形的三条边，所以一定要满足 a + b &gt; c，其中两条边的和要大于第三条边。所以思路是先 sort input数组（a &lt; b &lt; c），然后从数组末端开始扫描，把当前遍历到的数字当做三角形的最长的边 c，然后再用 two pointer 找另外两条边 a 和 b。找的方式是，如果 a + b &gt; c 则说明当 c 是最长边的时候，abc 这个组合是满足题意的，res +&#x3D; b - a。为什么 a - b 之间的所有组合都能累加进去是因为这里我们考虑的是 b 和 c 不变的情况下，把 a 右移的情况，计算完这些情况之后 b 左移；如果 a + b &lt; c 的话，那么只能是 a 右移，因为长度不够。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - worst case<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">triangleNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length &lt; <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(nums);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">2</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>                <span class="hljs-keyword">if</span> (nums[left] + nums[right] &gt; nums[i]) &#123;<br>                    count += right - left;<br>                    right--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    left++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">triangleNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">2</span>; i--) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">lo</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">hi</span> <span class="hljs-operator">=</span> i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (lo &lt; hi) &#123;<br>                <span class="hljs-keyword">if</span> (nums[lo] + nums[hi] &gt; nums[i]) &#123;<br>                    count += hi - lo;<br>                    hi--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    lo++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">259. 3Sum Smaller<br>611. Valid Triangle Number<br>2563. Count the Number of Fair Pairs<br>2824. Count Pairs Whose Sum is Less than Target<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
