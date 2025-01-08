@@ -16,27 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part. Note that the partition is done so that after concatenating al">
+    <meta name="description" content="You are given a binary string s and an integer k. A binary string satisfies the k-constraint if either of the following conditions holds:The number of 0’s in the string is at most k.The number of 1’s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 763. Partition Labels">
-<meta property="og:url" content="https://shurui91.github.io/posts/3622449764.html">
+<meta property="og:title" content="[LeetCode] 3258. Count Substrings That Satisfy K-Constraint I">
+<meta property="og:url" content="https://shurui91.github.io/posts/1590389426.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part. Note that the partition is done so that after concatenating al">
+<meta property="og:description" content="You are given a binary string s and an integer k. A binary string satisfies the k-constraint if either of the following conditions holds:The number of 0’s in the string is at most k.The number of 1’s">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-10T19:17:34.000Z">
-<meta property="article:modified_time" content="2024-11-28T06:03:21.535Z">
+<meta property="article:published_time" content="2025-01-08T23:10:04.000Z">
+<meta property="article:modified_time" content="2025-01-08T23:19:48.373Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="hashmap">
-<meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="sliding window">
 <meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 763. Partition Labels - CNoodle</title>
+  <title>[LeetCode] 3258. Count Substrings That Satisfy K-Constraint I - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 763. Partition Labels"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 3258. Count Substrings That Satisfy K-Constraint I"></span>
           
         </div>
 
@@ -201,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-07-10 12:17" pubdate>
-          July 10, 2020 pm
+        <time datetime="2025-01-08 15:10" pubdate>
+          January 8, 2025 pm
         </time>
       </span>
     
@@ -213,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          1.4k words
         
       </span>
     
@@ -224,7 +222,7 @@
         
         
         
-          15 mins
+          13 mins
         
       </span>
     
@@ -261,32 +259,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 763. Partition Labels</h1>
+            <h1 id="seo-header">[LeetCode] 3258. Count Substrings That Satisfy K-Constraint I</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part.</p>
-<p>Note that the partition is done so that after concatenating all the parts in order, the resultant string should be s.</p>
-<p>Return a list of integers representing the size of these parts.</p>
-<p>Example 1:<br>Input: s &#x3D; “ababcbacadefegdehijhklij”<br>Output: [9,7,8]<br>Explanation:<br>The partition is “ababcbaca”, “defegde”, “hijhklij”.<br>This is a partition so that each letter appears in at most one part.<br>A partition like “ababcbacadefegde”, “hijhklij” is incorrect, because it splits s into less parts.</p>
-<p>Example 2:<br>Input: s &#x3D; “eccbbbbdec”<br>Output: [10]</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 500<br>s consists of lowercase English letters.</p>
-<p>划分字母区间。</p>
+                <p>You are given a binary string s and an integer k.</p>
+<p>A binary string satisfies the k-constraint if either of the following conditions holds:<br>The number of 0’s in the string is at most k.<br>The number of 1’s in the string is at most k.</p>
+<p>Return an integer denoting the number of substrings of s that satisfy the k-constraint.</p>
+<p>Example 1:<br>Input: s &#x3D; “10101”, k &#x3D; 1<br>Output: 12</p>
+<p>Explanation:<br>Every substring of s except the substrings “1010”, “10101”, and “0101” satisfies the k-constraint.</p>
+<p>Example 2:<br>Input: s &#x3D; “1010101”, k &#x3D; 2<br>Output: 25</p>
+<p>Explanation:<br>Every substring of s except the substrings with a length greater than 5 satisfies the k-constraint.</p>
+<p>Example 3:<br>Input: s &#x3D; “11111”, k &#x3D; 1<br>Output: 15</p>
+<p>Explanation:<br>All substrings of s satisfy the k-constraint.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 50<br>1 &lt;&#x3D; k &lt;&#x3D; s.length<br>s[i] is either ‘0’ or ‘1’.</p>
+<p>统计满足 K 约束的子字符串数量 I。</p>
 <blockquote>
-给你一个字符串 s 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。
+给你一个 二进制 字符串 s 和一个整数 k。
 
-<p>注意，划分结果需要满足：将所有划分结果按顺序连接，得到的字符串仍然是 s 。</p>
-<p>返回一个表示每个字符串片段的长度的列表。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels">https://leetcode.cn/problems/partition-labels</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>如果一个 二进制字符串 满足以下任一条件，则认为该字符串满足 k 约束：</p>
+<p>字符串中 0 的数量最多为 k。<br>字符串中 1 的数量最多为 k。</p>
+<p>返回一个整数，表示 s 的所有满足 k 约束 的子字符串的数量。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心 + 双指针。首先遍历一次字符串，将每个字符最后一次出现的 index 记录下来。再遍历一次字符串，这一次需要用到两个指针，start 指针一开始在字符串的起始部位，end 指针一点点随着 i 指针往后走，每次看到一个字母，end 就更新为当前遍历到的所有字母中间的最后一个出现的位置。如果在某一个 i 发现这是当前字母最后一次出现的位置，则说明当前 i 位置上这个字母之后再也不可能遇到，可以开始分割 input 了，(start, i)，然后下一个分段则是从 i + 1 开始。</p>
-<p>这里我引用<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/solution/763-hua-fen-zi-mu-qu-jian-ji-lu-zui-yuan-wei-zhi-y/">一个截图</a>以帮助理解。我们用 end 指针扫描字符串的时候，比如一开始的 a，我们根据 last 数组可知最后一次出现 a 的下标是 8，我们就可以将 end 指针更新到 8 的位置。如果在下标 1 - 8 之间有其他字母的最后一次出现位置的下标 &gt; 8 的话，我们还需要再更新 end 指针的位置，这样才能确保 start - end 之间所有的字母在同一个被分割的片段里。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口。注意这道题要我们找的是满足如下这两个条件<code>之一</code>就行的子串。所以代码中只要跳出 while 循环，就可以累加结果。</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tap">字符串中<span class="hljs-number"> 0 </span>的数量最多为 k。<br>字符串中<span class="hljs-number"> 1 </span>的数量最多为 k。<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">partitionLabels</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>] = i;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            end = Math.max(end, map[c - <span class="hljs-string">&#x27;a&#x27;</span>]);<br>            <span class="hljs-keyword">if</span> (i == end) &#123;<br>                res.add(end - start + <span class="hljs-number">1</span>);<br>                start = i + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countKConstraintSubstrings</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; s.length()) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> s.charAt(end);<br>            <span class="hljs-keyword">if</span> (c1 == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                zero++;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">while</span> (zero &gt; k &amp;&amp; one &gt; k) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c2</span> <span class="hljs-operator">=</span> s.charAt(start);<br>                <span class="hljs-keyword">if</span> (c2 == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                    one--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    zero--;<br>                &#125;<br>                start++;<br>            &#125;<br>            res += end - start;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -303,11 +307,7 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
-      
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
       
@@ -321,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 763. Partition Labels</div>
-      <div>https://shurui91.github.io/posts/3622449764.html</div>
+      <div>[LeetCode] 3258. Count Substrings That Satisfy K-Constraint I</div>
+      <div>https://shurui91.github.io/posts/1590389426.html</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 10, 2020</div>
+          <div>January 8, 2025</div>
         </div>
       
       
@@ -366,18 +366,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3395820766.html" title="[LeetCode] 1512. Number of Good Pairs">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1512. Number of Good Pairs</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2043097135.html" title="[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank">
-                        <span class="hidden-mobile">[LeetCode] 1503. Last Moment Before All Ants Fall Out of a Plank</span>
+                      <a href="/posts/1420677911.html" title="[LeetCode] 3325. Count Substrings With K-Frequency Characters I">
+                        <span class="hidden-mobile">[LeetCode] 3325. Count Substrings With K-Frequency Characters I</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -397,8 +391,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3622449764.html';
-          this.page.identifier = '/posts/3622449764.html';
+          this.page.url = 'https://shurui91.github.io/posts/1590389426.html';
+          this.page.identifier = '/posts/1590389426.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
