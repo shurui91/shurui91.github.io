@@ -527,9 +527,9 @@
       
       <tag>java</tag>
       
-      <tag>binary search</tag>
-      
       <tag>design</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
@@ -558,9 +558,9 @@
       
       <tag>treemap</tag>
       
-      <tag>binary search</tag>
-      
       <tag>design</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
@@ -587,9 +587,9 @@
       
       <tag>java</tag>
       
-      <tag>binary search</tag>
-      
       <tag>design</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
@@ -1859,9 +1859,9 @@
       
       <tag>stack</tag>
       
-      <tag>recursion</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>recursion</tag>
       
       <tag>monotonic stack</tag>
       
@@ -6632,9 +6632,9 @@
       
       <tag>string</tag>
       
-      <tag>binary search</tag>
-      
       <tag>design</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
@@ -7061,6 +7061,35 @@
       <tag>java</tag>
       
       <tag>javascript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1248. Count Number of Nice Subarrays</title>
+    <link href="/posts/1581090087.html"/>
+    <url>/posts/1581090087.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.</p><p>Return the number of nice sub-arrays.</p><p>Example 1:<br>Input: nums &#x3D; [1,1,2,1,1], k &#x3D; 3<br>Output: 2<br>Explanation: The only sub-arrays with 3 odd numbers are [1,1,2,1] and [1,2,1,1].</p><p>Example 2:<br>Input: nums &#x3D; [2,4,6], k &#x3D; 1<br>Output: 0<br>Explanation: There are no odd numbers in the array.</p><p>Example 3:<br>Input: nums &#x3D; [2,2,2,1,2,2,1,2,2,2], k &#x3D; 2<br>Output: 16</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 50000<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 10^5<br>1 &lt;&#x3D; k &lt;&#x3D; nums.length</p><p>统计「优美子数组」。</p><blockquote>题意是给你一个整数数组 nums 和一个整数 k。如果某个 连续 子数组中恰好有 k 个奇数数字，我们就认为这个子数组是「优美子数组」。请返回这个数组中「优美子数组」的数目。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>子数组的题一般可以试图往 sliding window 或者前缀和 prefix sum 上靠，本题我两种解法都给出。</p><h2 id="思路一-前缀和"><a href="#思路一-前缀和" class="headerlink" title="思路一 - 前缀和"></a>思路一 - 前缀和</h2><p>首先前缀和的思路是遍历 input 里面的每个数字，把他们的<code>前缀和 sum</code> 和<code>出现次数</code>加到 hashmap 里面，但是这一题跟 560 题的区别在于，560 是在找一个特别的子数组的和 k，而本题是在找有多少个包含 k 个奇数的子数组，他并不在意子数组的和或者长度是多少。所以思路是遇到奇数的时候可以把这个数字改成 1，遇到偶数的时候可以把这个数字改成 0。当累加 prefix sum 的时候，因为从 0 到当前位置的前缀和为 sum，所以如果找到一个前缀和 sum - k，则说明存在这样一个优美子数组。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numberOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            sum += nums[i] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>            map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            res += map.getOrDefault(sum - k, <span class="hljs-number">0</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二-滑动窗口"><a href="#思路二-滑动窗口" class="headerlink" title="思路二 - 滑动窗口"></a>思路二 - 滑动窗口</h2><p>既然题目说找的是<code>恰好</code>k 个奇数数字的子数组，那么我们可以沿用 992 题的思路。即最多 k 个奇数数字的子数组 - 最多 k - 1 个奇数数字的子数组 &#x3D; 正好 k 个奇数的子数组。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numberOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">return</span> helper(nums, k) - helper(nums, k - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>            <span class="hljs-keyword">if</span> (nums[end] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                k--;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">while</span> (k &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">if</span> (nums[start] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                    k++;<br>                &#125;<br>                start++;<br>            &#125;<br>            res += end - start + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9283,9 +9312,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     

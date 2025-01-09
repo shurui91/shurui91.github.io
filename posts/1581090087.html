@@ -16,28 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the head of a singly linked list, reverse the list, and return the reversed list. Example 1:Input: head &#x3D; [1,2,3,4,5]Output: [5,4,3,2,1] Example 2:Input: head &#x3D; [1,2]Output: [2,1] Exam">
+    <meta name="description" content="Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it. Return the number of nice sub-arrays. Example 1:Input: nums &#x3D; [1,1,2,1,1],">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 206. Reverse Linked List">
-<meta property="og:url" content="https://shurui91.github.io/posts/2655630186.html">
+<meta property="og:title" content="[LeetCode] 1248. Count Number of Nice Subarrays">
+<meta property="og:url" content="https://shurui91.github.io/posts/1581090087.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the head of a singly linked list, reverse the list, and return the reversed list. Example 1:Input: head &#x3D; [1,2,3,4,5]Output: [5,4,3,2,1] Example 2:Input: head &#x3D; [1,2]Output: [2,1] Exam">
+<meta property="og:description" content="Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it. Return the number of nice sub-arrays. Example 1:Input: nums &#x3D; [1,1,2,1,1],">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
-<meta property="article:published_time" content="2019-10-14T18:51:22.000Z">
-<meta property="article:modified_time" content="2024-02-09T06:52:35.746Z">
+<meta property="article:published_time" content="2020-04-21T14:58:04.000Z">
+<meta property="article:modified_time" content="2025-01-09T06:18:07.864Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="two pointer">
+<meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="linked list">
-<meta property="article:tag" content="recursion">
+<meta property="article:tag" content="prefix sum">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
   
   
   
-  <title>[LeetCode] 206. Reverse Linked List - CNoodle</title>
+  <title>[LeetCode] 1248. Count Number of Nice Subarrays - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 206. Reverse Linked List"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1248. Count Number of Nice Subarrays"></span>
           
         </div>
 
@@ -202,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2019-10-14 11:51" pubdate>
-          October 14, 2019 am
+        <time datetime="2020-04-21 07:58" pubdate>
+          April 21, 2020 am
         </time>
       </span>
     
@@ -214,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          1.8k words
         
       </span>
     
@@ -225,7 +224,7 @@
         
         
         
-          17 mins
+          15 mins
         
       </span>
     
@@ -262,33 +261,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 206. Reverse Linked List</h1>
+            <h1 id="seo-header">[LeetCode] 1248. Count Number of Nice Subarrays</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the head of a singly linked list, reverse the list, and return the reversed list.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: head &#x3D; [1,2,3,4,5]<br>Output: [5,4,3,2,1]</p>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: head &#x3D; [1,2]<br>Output: [2,1]</p>
-<p>Example 3:<br>Input: head &#x3D; []<br>Output: []</p>
-<p>Constraints:<br>The number of nodes in the list is the range [0, 5000].<br>-5000 &lt;&#x3D; Node.val &lt;&#x3D; 5000</p>
-<p>Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?</p>
-<p>反转链表。<br>这类reverse的题不会写，会写homebrew也枉然。</p>
-<h2 id="思路-迭代"><a href="#思路-迭代" class="headerlink" title="思路 - 迭代"></a>思路 - 迭代</h2><p>首先是 iterative 的思路，创建一个空的指针 pre。当 head 不为空的时候，先存住 head.next，然后 head.next 指向 pre，最后 pre，head，next 三个指针整体往后移动一位。</p>
-<p>也分享一个注释写的比较好的<a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-linked-list/discuss/375450/Javascript-Iterative-with-explanationcomments">discussion</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/solution/dong-hua-yan-shi-206-fan-zhuan-lian-biao-by-user74/">一个动图</a>帮助理解。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+                <p>Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.</p>
+<p>Return the number of nice sub-arrays.</p>
+<p>Example 1:<br>Input: nums &#x3D; [1,1,2,1,1], k &#x3D; 3<br>Output: 2<br>Explanation: The only sub-arrays with 3 odd numbers are [1,1,2,1] and [1,2,1,1].</p>
+<p>Example 2:<br>Input: nums &#x3D; [2,4,6], k &#x3D; 1<br>Output: 0<br>Explanation: There are no odd numbers in the array.</p>
+<p>Example 3:<br>Input: nums &#x3D; [2,2,2,1,2,2,1,2,2,2], k &#x3D; 2<br>Output: 16</p>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 50000<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 10^5<br>1 &lt;&#x3D; k &lt;&#x3D; nums.length</p>
+<p>统计「优美子数组」。</p>
+<blockquote>
+题意是给你一个整数数组 nums 和一个整数 k。如果某个 连续 子数组中恰好有 k 个奇数数字，我们就认为这个子数组是「优美子数组」。请返回这个数组中「优美子数组」的数目。
+</blockquote>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>子数组的题一般可以试图往 sliding window 或者前缀和 prefix sum 上靠，本题我两种解法都给出。</p>
+<h2 id="思路一-前缀和"><a href="#思路一-前缀和" class="headerlink" title="思路一 - 前缀和"></a>思路一 - 前缀和</h2><p>首先前缀和的思路是遍历 input 里面的每个数字，把他们的<code>前缀和 sum</code> 和<code>出现次数</code>加到 hashmap 里面，但是这一题跟 560 题的区别在于，560 是在找一个特别的子数组的和 k，而本题是在找有多少个包含 k 个奇数的子数组，他并不在意子数组的和或者长度是多少。所以思路是遇到奇数的时候可以把这个数字改成 1，遇到偶数的时候可以把这个数字改成 0。当累加 prefix sum 的时候，因为从 0 到当前位置的前缀和为 sum，所以如果找到一个前缀和 sum - k，则说明存在这样一个优美子数组。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">reverseList</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (head != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">ListNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> head.next;<br>            head.next = pre;<br>            pre = head;<br>            head = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> pre;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numberOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        HashMap&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            sum += nums[i] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>            map.put(sum, map.getOrDefault(sum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>            res += map.getOrDefault(sum - k, <span class="hljs-number">0</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> reverseList = <span class="hljs-keyword">function</span>(<span class="hljs-params">head</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (head === <span class="hljs-literal">null</span> || head.<span class="hljs-property">next</span> === <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> pre = <span class="hljs-literal">null</span>;<br>    <span class="hljs-keyword">while</span> (head !== <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">let</span> next = head.<span class="hljs-property">next</span>;<br>        head.<span class="hljs-property">next</span> = pre;<br>        pre = head;<br>        head = next;<br>    &#125;<br>    <span class="hljs-keyword">return</span> pre;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="思路-递归"><a href="#思路-递归" class="headerlink" title="思路 - 递归"></a>思路 - 递归</h2><p>这道题还有递归的做法。递归的思想是把大的问题拆解成足够小的问题，小的问题解决了，大的问题也就能解决。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - 递归栈空间</p>
+<h2 id="思路二-滑动窗口"><a href="#思路二-滑动窗口" class="headerlink" title="思路二 - 滑动窗口"></a>思路二 - 滑动窗口</h2><p>既然题目说找的是<code>恰好</code>k 个奇数数字的子数组，那么我们可以沿用 992 题的思路。即最多 k 个奇数数字的子数组 - 最多 k - 1 个奇数数字的子数组 &#x3D; 正好 k 个奇数的子数组。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">reverseList</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// 递归终止条件</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// 存住next节点</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> head.next;<br>        <span class="hljs-comment">// 递归函数处理next以及之后的部分</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">newHead</span> <span class="hljs-operator">=</span> reverseList(next);<br>        <span class="hljs-comment">// 处理当前节点和next之间的指针</span><br>        <span class="hljs-comment">// 本来head的next指针是指向next的，现在要反过来</span><br>        next.next = head;<br>        head.next = <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">return</span> newHead;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">206. Reverse Linked List<br>92. Reverse Linked List II<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numberOfSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">return</span> helper(nums, k) - helper(nums, k - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; nums.length) &#123;<br>            <span class="hljs-keyword">if</span> (nums[end] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                k--;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">while</span> (k &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">if</span> (nums[start] % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>                    k++;<br>                &#125;<br>                start++;<br>            &#125;<br>            res += end - start + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -303,11 +303,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+      
+        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
-      
-        <a href="/tags/recursion/" class="print-no-link">#recursion</a>
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
     </div>
   
@@ -319,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 206. Reverse Linked List</div>
-      <div>https://shurui91.github.io/posts/2655630186.html</div>
+      <div>[LeetCode] 1248. Count Number of Nice Subarrays</div>
+      <div>https://shurui91.github.io/posts/1581090087.html</div>
     </div>
     <div class="license-meta">
       
@@ -332,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 14, 2019</div>
+          <div>April 21, 2020</div>
         </div>
       
       
@@ -364,9 +368,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2691339022.html" title="[LeetCode] 191. Number of 1 Bits">
+                      <a href="/posts/3921215091.html" title="[LeetCode] 80. Remove Duplicates from Sorted Array II">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 191. Number of 1 Bits</span>
+                        <span class="hidden-mobile">[LeetCode] 80. Remove Duplicates from Sorted Array II</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -374,8 +378,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2038292781.html" title="[LeetCode] 202. Happy Number">
-                        <span class="hidden-mobile">[LeetCode] 202. Happy Number</span>
+                      <a href="/posts/1704254951.html" title="[LeetCode] 36. Valid Sudoku">
+                        <span class="hidden-mobile">[LeetCode] 36. Valid Sudoku</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -395,8 +399,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2655630186.html';
-          this.page.identifier = '/posts/2655630186.html';
+          this.page.url = 'https://shurui91.github.io/posts/1581090087.html';
+          this.page.identifier = '/posts/1581090087.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
