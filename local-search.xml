@@ -3964,9 +3964,9 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>binary search</tag>
       
@@ -4727,9 +4727,9 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>sliding window</tag>
       
@@ -5240,8 +5240,8 @@
   
   <entry>
     <title>[LeetCode] 1471. The k Strongest Values in an Array</title>
-    <link href="/posts/493219566.html"/>
-    <url>/posts/493219566.html</url>
+    <link href="/posts/119670836.html"/>
+    <url>/posts/119670836.html</url>
     
     <content type="html"><![CDATA[<p>Given an array of integers arr and an integer k.</p><p>A value arr[i] is said to be stronger than a value arr[j] if |arr[i] - m| &gt; |arr[j] - m| where m is the median of the array.<br>If |arr[i] - m| &#x3D;&#x3D; |arr[j] - m|, then arr[i] is said to be stronger than arr[j] if arr[i] &gt; arr[j].</p><p>Return a list of the strongest k values in the array. return the answer in any arbitrary order.</p><p>Median is the middle value in an ordered integer list. More formally, if the length of the list is n, the median is the element in position ((n - 1) &#x2F; 2) in the sorted list (0-indexed).</p><p>For arr &#x3D; [6, -3, 7, 2, 11], n &#x3D; 5 and the median is obtained by sorting the array arr &#x3D; [-3, 2, 6, 7, 11] and the median is arr[m] where m &#x3D; ((5 - 1) &#x2F; 2) &#x3D; 2. The median is 6.<br>For arr &#x3D; [-7, 22, 17, 3], n &#x3D; 4 and the median is obtained by sorting the array arr &#x3D; [-7, 3, 17, 22] and the median is arr[m] where m &#x3D; ((4 - 1) &#x2F; 2) &#x3D; 1. The median is 3.</p><p>Example 1:<br>Input: arr &#x3D; [1,2,3,4,5], k &#x3D; 2<br>Output: [5,1]<br>Explanation: Median is 3, the elements of the array sorted by the strongest are [5,1,4,2,3]. The strongest 2 elements are [5, 1]. [1, 5] is also accepted answer.<br>Please note that although |5 - 3| &#x3D;&#x3D; |1 - 3| but 5 is stronger than 1 because 5 &gt; 1.</p><p>Example 2:<br>Input: arr &#x3D; [1,1,3,5,5], k &#x3D; 2<br>Output: [5,5]<br>Explanation: Median is 3, the elements of the array sorted by the strongest are [5,5,1,1,3]. The strongest 2 elements are [5, 5].</p><p>Example 3:<br>Input: arr &#x3D; [6,7,11,7,6,8], k &#x3D; 5<br>Output: [11,8,6,6,7]<br>Explanation: Median is 7, the elements of the array sorted by the strongest are [11,8,6,6,7,7].<br>Any permutation of [11,8,6,6,7] is accepted.</p><p>Constraints:<br>1 &lt;&#x3D; arr.length &lt;&#x3D; 105<br>-105 &lt;&#x3D; arr[i] &lt;&#x3D; 105<br>1 &lt;&#x3D; k &lt;&#x3D; arr.length</p><p>数组中的 k 个最强值。</p><blockquote>给你一个整数数组 arr 和一个整数 k 。<p>设 m 为数组的中位数，只要满足下述两个前提之一，就可以判定 arr[i] 的值比 arr[j] 的值更强：</p><p>|arr[i] - m| &gt; |arr[j] - m|<br>|arr[i] - m| &#x3D;&#x3D; |arr[j] - m|，且 arr[i] &gt; arr[j]<br>请返回由数组中最强的 k 个值组成的列表。答案可以以 任意顺序 返回。</p><p>中位数 是一个有序整数列表中处于中间位置的值。形式上，如果列表的长度为 n ，那么中位数就是该有序列表（下标从 0 开始）中位于 ((n - 1) &#x2F; 2) 的元素。</p><p>例如 arr &#x3D; [6, -3, 7, 2, 11]，n &#x3D; 5：数组排序后得到 arr &#x3D; [-3, 2, 6, 7, 11] ，数组的中间位置为 m &#x3D; ((5 - 1) &#x2F; 2) &#x3D; 2 ，中位数 arr[m] 的值为 6 。<br>例如 arr &#x3D; [-7, 22, 17, 3]，n &#x3D; 4：数组排序后得到 arr &#x3D; [-7, 3, 17, 22] ，数组的中间位置为 m &#x3D; ((4 - 1) &#x2F; 2) &#x3D; 1 ，中位数 arr[m] 的值为 3 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/the-k-strongest-values-in-an-array">https://leetcode-cn.com/problems/the-k-strongest-values-in-an-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是 two pointer。首先为了求中位数，对input数组排序是不可避免的了，排序完之后就可以找到中位数。注意这道题的中位数有<code>自己的定义</code>。因为 input 数组被排序了所以我们可以利用左右两个指针，分别根据规则计算左右指针指向的元素的强度。因为中位数一定是在排序后的数组中比较中间的位置，同时强度的计算又和数字与中位数的距离挂钩，所以数组两端的数字应该是 input 数组中强度最大的。接下来我们就可以按照规则计算找到强度最大的前 k 个元素，并视情况而定去移动左右指针。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] getStrongest(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k) &#123;<br>        Arrays.sort(arr);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">median</span> <span class="hljs-operator">=</span> arr[(arr.length - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>];<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> arr.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right &amp;&amp; i &lt; k) &#123;<br>            <span class="hljs-keyword">if</span> (median - arr[left] &gt; arr[right] - median) &#123;<br>                res[i] = arr[left];<br>                i++;<br>                left++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res[i] = arr[right];<br>                i++;<br>                right--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
@@ -6655,9 +6655,9 @@
       
       <tag>java</tag>
       
-      <tag>treemap</tag>
-      
       <tag>string</tag>
+      
+      <tag>treemap</tag>
       
       <tag>binary search</tag>
       
