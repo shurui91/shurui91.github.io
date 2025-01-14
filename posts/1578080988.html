@@ -16,29 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a 2D integer array orders, where each orders[i] &#x3D; [price, amount, orderType] denotes that amount orders have been placed of type orderType at the price price. The orderTyp is:0 if i">
+    <meta name="description" content="(This problem is an interactive problem.) You may recall that an array arr is a mountain array if and only if: arr.length &gt;&#x3D; 3There exists some i with 0 &lt; i &lt; arr.length - 1 such that:ar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1801. Number of Orders in the Backlog">
-<meta property="og:url" content="https://shurui91.github.io/posts/3380811999.html">
+<meta property="og:title" content="[LeetCode] 1095. Find in Mountain Array">
+<meta property="og:url" content="https://shurui91.github.io/posts/1578080988.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a 2D integer array orders, where each orders[i] &#x3D; [price, amount, orderType] denotes that amount orders have been placed of type orderType at the price price. The orderTyp is:0 if i">
+<meta property="og:description" content="(This problem is an interactive problem.) You may recall that an array arr is a mountain array if and only if: arr.length &gt;&#x3D; 3There exists some i with 0 &lt; i &lt; arr.length - 1 such that:ar">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/11/ex1.png">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/11/ex2.png">
-<meta property="article:published_time" content="2021-03-22T22:23:48.000Z">
-<meta property="article:modified_time" content="2024-05-14T19:43:33.174Z">
+<meta property="article:published_time" content="2020-04-29T15:54:23.000Z">
+<meta property="article:modified_time" content="2025-01-14T04:57:31.299Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="MOD">
-<meta property="article:tag" content="heap">
+<meta property="article:tag" content="array">
+<meta property="article:tag" content="binary search">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/03/11/ex1.png">
   
   
   
-  <title>[LeetCode] 1801. Number of Orders in the Backlog - CNoodle</title>
+  <title>[LeetCode] 1095. Find in Mountain Array - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1801. Number of Orders in the Backlog"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1095. Find in Mountain Array"></span>
           
         </div>
 
@@ -203,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-03-22 15:23" pubdate>
-          March 22, 2021 pm
+        <time datetime="2020-04-29 08:54" pubdate>
+          April 29, 2020 am
         </time>
       </span>
     
@@ -215,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5k words
+          3.6k words
         
       </span>
     
@@ -226,7 +222,7 @@
         
         
         
-          42 mins
+          31 mins
         
       </span>
     
@@ -263,47 +259,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1801. Number of Orders in the Backlog</h1>
+            <h1 id="seo-header">[LeetCode] 1095. Find in Mountain Array</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a 2D integer array orders, where each orders[i] &#x3D; [price, amount, orderType] denotes that amount orders have been placed of type orderType at the price price. The orderTyp is:<br>0 if it is a batch of buy orders, or<br>1 if it is a batch of sell orders.<br>Note that orders[i] represents a batch of amount independent orders with the same price and order type. All orders represented by orders[i] will be placed before all orders represented by orders[i+1] for all valid i.</p>
-<p>There is a backlog that consists of orders that have not been executed. The backlog is initially empty. When an order is placed, the following happens:<br>If the order is a buy order, you look at the sell order with the smallest price in the backlog. If that sell order’s price is smaller than or equal to the current buy order’s price, they will match and be executed, and that sell order will be removed from the backlog. Else, the buy order is added to the backlog.</p>
-<p>Vice versa, if the order is a sell order, you look at the buy order with the largest price in the backlog. If that buy order’s price is larger than or equal to the current sell order’s price, they will match and be executed, and that buy order will be removed from the backlog. Else, the sell order is added to the backlog.</p>
-<p>Return the total amount of orders in the backlog after placing all the orders from the input. Since this number can be large, return it modulo 109 + 7.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/03/11/ex1.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: orders &#x3D; [[10,5,0],[15,2,1],[25,1,1],[30,4,0]]<br>Output: 6<br>Explanation: Here is what happens with the orders:</p>
-<ul>
-<li>5 orders of type buy with price 10 are placed. There are no sell orders, so the 5 orders are added to the backlog.</li>
-<li>2 orders of type sell with price 15 are placed. There are no buy orders with prices larger than or equal to 15, so the 2 orders are added to the backlog.</li>
-<li>1 order of type sell with price 25 is placed. There are no buy orders with prices larger than or equal to 25 in the backlog, so this order is added to the backlog.</li>
-<li>4 orders of type buy with price 30 are placed. The first 2 orders are matched with the 2 sell orders of the least price, which is 15 and these 2 sell orders are removed from the backlog. The 3rd order is matched with the sell order of the least price, which is 25 and this sell order is removed from the backlog. Then, there are no more sell orders in the backlog, so the 4th order is added to the backlog.<br>Finally, the backlog has 5 buy orders with price 10, and 1 buy order with price 30. So the total number of orders in the backlog is 6.</li>
-</ul>
-<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/03/11/ex2.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: orders &#x3D; [[7,1000000000,1],[15,3,0],[5,999999995,0],[5,1,1]]<br>Output: 999999984<br>Explanation: Here is what happens with the orders:</p>
-<ul>
-<li>109 orders of type sell with price 7 are placed. There are no buy orders, so the 109 orders are added to the backlog.</li>
-<li>3 orders of type buy with price 15 are placed. They are matched with the 3 sell orders with the least price which is 7, and those 3 sell orders are removed from the backlog.</li>
-<li>999999995 orders of type buy with price 5 are placed. The least price of a sell order is 7, so the 999999995 orders are added to the backlog.</li>
-<li>1 order of type sell with price 5 is placed. It is matched with the buy order of the highest price, which is 5, and that buy order is removed from the backlog.<br>Finally, the backlog has (1000000000-3) sell orders with price 7, and (999999995-1) buy orders with price 5. So the total number of orders &#x3D; 1999999991, which is equal to 999999984 % (109 + 7).</li>
-</ul>
-<p>Constraints:<br>1 &lt;&#x3D; orders.length &lt;&#x3D; 105<br>orders[i].length &#x3D;&#x3D; 3<br>1 &lt;&#x3D; pricei, amounti &lt;&#x3D; 109<br>orderTypei is either 0 or 1.</p>
-<p>积压订单中的订单总数。</p>
+                <p>(This problem is an interactive problem.)</p>
+<p>You may recall that an array arr is a mountain array if and only if:</p>
+<p>arr.length &gt;&#x3D; 3<br>There exists some i with 0 &lt; i &lt; arr.length - 1 such that:<br>arr[0] &lt; arr[1] &lt; … &lt; arr[i - 1] &lt; arr[i]<br>arr[i] &gt; arr[i + 1] &gt; … &gt; arr[arr.length - 1]<br>Given a mountain array mountainArr, return the minimum index such that mountainArr.get(index) &#x3D;&#x3D; target. If such an index does not exist, return -1.</p>
+<p>You cannot access the mountain array directly. You may only access the array using a MountainArray interface:</p>
+<p>MountainArray.get(k) returns the element of the array at index k (0-indexed).<br>MountainArray.length() returns the length of the array.<br>Submissions making more than 100 calls to MountainArray.get will be judged Wrong Answer. Also, any solutions that attempt to circumvent the judge will result in disqualification.</p>
+<p>Example 1:<br>Input: mountainArr &#x3D; [1,2,3,4,5,3,1], target &#x3D; 3<br>Output: 2<br>Explanation: 3 exists in the array, at index&#x3D;2 and index&#x3D;5. Return the minimum index, which is 2.</p>
+<p>Example 2:<br>Input: mountainArr &#x3D; [0,1,2,4,2,1], target &#x3D; 3<br>Output: -1<br>Explanation: 3 does not exist in the array, so we return -1.</p>
+<p>Constraints:<br>3 &lt;&#x3D; mountainArr.length() &lt;&#x3D; 104<br>0 &lt;&#x3D; target &lt;&#x3D; 109<br>0 &lt;&#x3D; mountainArr.get(index) &lt;&#x3D; 109</p>
+<p>山脉数组中查找目标值。</p>
 <blockquote>
-给你一个二维整数数组 orders ，其中每个 orders[i] = [price, amount, orderType] 表示有 amount 笔类型为 orderType 、价格为 price 的订单。
+（这是一个 交互式问题 ）
 
-<p>订单类型 orderType 可以分为两种：<br>0 表示这是一批采购订单 buy<br>1 表示这是一批销售订单 sell<br>注意，orders[i] 表示一批共计 amount 笔的独立订单，这些订单的价格和类型相同。对于所有有效的 i ，由 orders[i] 表示的所有订单提交时间均早于 orders[i+1] 表示的所有订单。</p>
-<p>存在由未执行订单组成的 积压订单 。积压订单最初是空的。提交订单时，会发生以下情况：<br>如果该订单是一笔采购订单 buy ，则可以查看积压订单中价格 最低 的销售订单 sell 。如果该销售订单 sell 的价格 低于或等于 当前采购订单 buy 的价格，则匹配并执行这两笔订单，并将销售订单 sell 从积压订单中删除。否则，采购订单 buy 将会添加到积压订单中。</p>
-<p>反之亦然，如果该订单是一笔销售订单 sell ，则可以查看积压订单中价格 最高 的采购订单 buy 。如果该采购订单 buy 的价格 高于或等于 当前销售订单 sell 的价格，则匹配并执行这两笔订单，并将采购订单 buy 从积压订单中删除。否则，销售订单 sell 将会添加到积压订单中。</p>
-<p>输入所有订单后，返回积压订单中的 订单总数 。由于数字可能很大，所以需要返回对 109 + 7 取余的结果。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-orders-in-the-backlog">https://leetcode-cn.com/problems/number-of-orders-in-the-backlog</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给你一个 山脉数组 mountainArr，请你返回能够使得 mountainArr.get(index) 等于 target 最小 的下标 index 值。</p>
+<p>如果不存在这样的下标 index，就请返回 -1。</p>
+<p>何为山脉数组？如果数组 A 是一个山脉数组的话，那它满足如下条件：</p>
+<p>首先，A.length &gt;&#x3D; 3</p>
+<p>其次，在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：</p>
+<p>A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br>A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]</p>
+<p>你将 不能直接访问该山脉数组，必须通过 MountainArray 接口来获取数据：</p>
+<p>MountainArray.get(k) - 会返回数组中索引为k 的元素（下标从 0 开始）<br>MountainArray.length() - 会返回该数组的长度</p>
+<p>注意：</p>
+<p>对 MountainArray.get 发起超过 100 次调用的提交将被视为错误答案。此外，任何试图规避判题系统的解决方案都将会导致比赛资格被取消。</p>
+<p>为了帮助大家更好地理解交互式问题，我们准备了一个样例 “答案”：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/playground/RKhe3ave%EF%BC%8C%E8%AF%B7%E6%B3%A8%E6%84%8F%E8%BF%99">https://leetcode-cn.com/playground/RKhe3ave，请注意这</a> 不是一个正确答案。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-in-mountain-array">https://leetcode.cn/problems/find-in-mountain-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心，具体做法需要用到两个堆，一个最大堆一个最小堆。题目描述里没有明确说明，但是抵消订单是没有先后顺序的，也就是说如果一张可以被抵消的订单出现的比较晚，他还是可以被合适的订单抵消掉。同时这里我们无需考虑订单抵消的合理性，比如一个 buy 订单的 price 很大，他也可以拿来抵消一个 price 很小的 sell 订单。因为我们最后考虑的只是积压订单的数量而不是数额。</p>
-<p>我们为采购订单 buys 创建一个最大堆（相当于是买价最大的买单在顶部），为销售订单 sells 创建一个最小堆（相当于是卖价最小的订单在顶部），然后根据订单的 orderType 来区分到底是采购订单还是销售订单，把订单根据类型分别放到两个堆中。当两个堆都不为空的时候，如果最小堆堆顶元素的 sell price &lt; 最大堆堆顶元素的 buy price，两者就可以匹配，匹配的订单数为两边订单的较小值。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>做这个题如果对山脉数组的定义不是很明确，可以先做一下852题。这个题可以跟162，852一起做。山脉数组就是只有<code>一个峰值 peak</code>，峰值左边的元素是单调递增的，右边的元素是单调递减的。本题不允许你直接访问 input 数组，你只能通过<code>length()</code>函数知道数组的长度，通过<code>get()</code>函数得知某一个数字的值。只能用二分法做。</p>
+<p>这个题的思路会用到三次二分法，第一次帮助找到 peak 元素，第二次去找 peak 元素左半边是否存在 target，第三次在 peak 元素右半边查找 target。注意体会不同模板比较适合的场景。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(logn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getNumberOfBacklogOrders</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] orders)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">MOD</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">10</span>, <span class="hljs-number">9</span>) + <span class="hljs-number">7</span>;<br>        <span class="hljs-comment">// [price, amount, buy/sell]</span><br>        <span class="hljs-comment">// maxheap</span><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; buys = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; b[<span class="hljs-number">0</span>] - a[<span class="hljs-number">0</span>]);<br>        <span class="hljs-comment">// minheap</span><br>        PriorityQueue&lt;<span class="hljs-type">int</span>[]&gt; sells = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] order : orders) &#123;<br>            <span class="hljs-keyword">if</span> (order[<span class="hljs-number">2</span>] == <span class="hljs-number">0</span>) &#123;<br>                buys.offer(order);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                sells.offer(order);<br>            &#125;<br>            <span class="hljs-keyword">while</span> (!buys.isEmpty() &amp;&amp; !sells.isEmpty() &amp;&amp; sells.peek()[<span class="hljs-number">0</span>] &lt;= buys.peek()[<span class="hljs-number">0</span>]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> Math.min(buys.peek()[<span class="hljs-number">1</span>], sells.peek()[<span class="hljs-number">1</span>]);<br>                buys.peek()[<span class="hljs-number">1</span>] -= k;<br>                sells.peek()[<span class="hljs-number">1</span>] -= k;<br>                <span class="hljs-keyword">if</span> (buys.peek()[<span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) &#123;<br>                    buys.poll();<br>                &#125;<br>                <span class="hljs-keyword">if</span> (sells.peek()[<span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) &#123;<br>                    sells.poll();<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] order : buys) &#123;<br>            res = (res + order[<span class="hljs-number">1</span>]) % MOD;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] order : sells) &#123;<br>            res = (res + order[<span class="hljs-number">1</span>]) % MOD;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * // This is MountainArray&#x27;s API interface.</span><br><span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span><br><span class="hljs-comment"> * interface MountainArray &#123;</span><br><span class="hljs-comment"> *     public int get(int index) &#123;&#125;</span><br><span class="hljs-comment"> *     public int length() &#123;&#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findInMountainArray</span><span class="hljs-params">(<span class="hljs-type">int</span> target, MountainArray mountainArr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mountainArr.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">peak</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// find index of peak</span><br>        <span class="hljs-comment">// 因为mid + 1可能会有越界的情况所以这里给了闭区间</span><br>        <span class="hljs-comment">// 下标都在index范围内</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; mountainArr.get(mid + <span class="hljs-number">1</span>)) &#123;<br>                left = peak = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right = mid;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">        找peak元素部分的二分也可以这样写，需要仔细体会</span><br><span class="hljs-comment">        int left = 0;</span><br><span class="hljs-comment">        int right = n - 1;</span><br><span class="hljs-comment">        while (left + 1 &lt; right) &#123;</span><br><span class="hljs-comment">            mid = left + (right - left) / 2;</span><br><span class="hljs-comment">            if (mountainArr.get(mid) &lt; mountainArr.get(mid + 1)) &#123;</span><br><span class="hljs-comment">                left = mid;</span><br><span class="hljs-comment">            &#125; else &#123;</span><br><span class="hljs-comment">                right = mid;</span><br><span class="hljs-comment">            &#125;</span><br><span class="hljs-comment">        &#125;</span><br><span class="hljs-comment">        if (mountainArr.get(left) &gt; mountainArr.get(right)) &#123;</span><br><span class="hljs-comment">            peak = left;</span><br><span class="hljs-comment">        &#125; else &#123;</span><br><span class="hljs-comment">            peak = right;</span><br><span class="hljs-comment">        &#125;</span><br><span class="hljs-comment">        */</span><br><br>        <span class="hljs-comment">// find target in the left of peak</span><br>        left = <span class="hljs-number">0</span>;<br>        right = peak;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; target) &#123;<br>                left = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mountainArr.get(mid) &gt; target) &#123;<br>                right = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// find target in the right of peak</span><br>        left = peak;<br>        right = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &gt; target) &#123;<br>                left = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; target) &#123;<br>                right = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -320,11 +312,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/MOD/" class="print-no-link">#MOD</a>
-      
-        <a href="/tags/heap/" class="print-no-link">#heap</a>
+        <a href="/tags/binary-search/" class="print-no-link">#binary search</a>
       
     </div>
   
@@ -336,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1801. Number of Orders in the Backlog</div>
-      <div>https://shurui91.github.io/posts/3380811999.html</div>
+      <div>[LeetCode] 1095. Find in Mountain Array</div>
+      <div>https://shurui91.github.io/posts/1578080988.html</div>
     </div>
     <div class="license-meta">
       
@@ -349,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 22, 2021</div>
+          <div>April 29, 2020</div>
         </div>
       
       
@@ -381,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2509629052.html" title="[LeetCode] 1749. Maximum Absolute Sum of Any Subarray">
+                      <a href="/posts/2567862819.html" title="[LeetCode] 130. Surrounded Regions">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1749. Maximum Absolute Sum of Any Subarray</span>
+                        <span class="hidden-mobile">[LeetCode] 130. Surrounded Regions</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -391,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2897332235.html" title="[LeetCode] 670. Maximum Swap">
-                        <span class="hidden-mobile">[LeetCode] 670. Maximum Swap</span>
+                      <a href="/posts/3240947674.html" title="[LeetCode] 704. Binary Search">
+                        <span class="hidden-mobile">[LeetCode] 704. Binary Search</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -412,8 +402,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3380811999.html';
-          this.page.identifier = '/posts/3380811999.html';
+          this.page.url = 'https://shurui91.github.io/posts/1578080988.html';
+          this.page.identifier = '/posts/1578080988.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

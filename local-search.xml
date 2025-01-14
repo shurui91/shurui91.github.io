@@ -3902,9 +3902,9 @@
       
       <tag>array</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -3933,9 +3933,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -4887,9 +4887,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5221,9 +5221,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
@@ -7011,6 +7011,31 @@
       <tag>array</tag>
       
       <tag>matrix</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1095. Find in Mountain Array</title>
+    <link href="/posts/1578080988.html"/>
+    <url>/posts/1578080988.html</url>
+    
+    <content type="html"><![CDATA[<p>(This problem is an interactive problem.)</p><p>You may recall that an array arr is a mountain array if and only if:</p><p>arr.length &gt;&#x3D; 3<br>There exists some i with 0 &lt; i &lt; arr.length - 1 such that:<br>arr[0] &lt; arr[1] &lt; … &lt; arr[i - 1] &lt; arr[i]<br>arr[i] &gt; arr[i + 1] &gt; … &gt; arr[arr.length - 1]<br>Given a mountain array mountainArr, return the minimum index such that mountainArr.get(index) &#x3D;&#x3D; target. If such an index does not exist, return -1.</p><p>You cannot access the mountain array directly. You may only access the array using a MountainArray interface:</p><p>MountainArray.get(k) returns the element of the array at index k (0-indexed).<br>MountainArray.length() returns the length of the array.<br>Submissions making more than 100 calls to MountainArray.get will be judged Wrong Answer. Also, any solutions that attempt to circumvent the judge will result in disqualification.</p><p>Example 1:<br>Input: mountainArr &#x3D; [1,2,3,4,5,3,1], target &#x3D; 3<br>Output: 2<br>Explanation: 3 exists in the array, at index&#x3D;2 and index&#x3D;5. Return the minimum index, which is 2.</p><p>Example 2:<br>Input: mountainArr &#x3D; [0,1,2,4,2,1], target &#x3D; 3<br>Output: -1<br>Explanation: 3 does not exist in the array, so we return -1.</p><p>Constraints:<br>3 &lt;&#x3D; mountainArr.length() &lt;&#x3D; 104<br>0 &lt;&#x3D; target &lt;&#x3D; 109<br>0 &lt;&#x3D; mountainArr.get(index) &lt;&#x3D; 109</p><p>山脉数组中查找目标值。</p><blockquote>（这是一个 交互式问题 ）<p>给你一个 山脉数组 mountainArr，请你返回能够使得 mountainArr.get(index) 等于 target 最小 的下标 index 值。</p><p>如果不存在这样的下标 index，就请返回 -1。</p><p>何为山脉数组？如果数组 A 是一个山脉数组的话，那它满足如下条件：</p><p>首先，A.length &gt;&#x3D; 3</p><p>其次，在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：</p><p>A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br>A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]</p><p>你将 不能直接访问该山脉数组，必须通过 MountainArray 接口来获取数据：</p><p>MountainArray.get(k) - 会返回数组中索引为k 的元素（下标从 0 开始）<br>MountainArray.length() - 会返回该数组的长度</p><p>注意：</p><p>对 MountainArray.get 发起超过 100 次调用的提交将被视为错误答案。此外，任何试图规避判题系统的解决方案都将会导致比赛资格被取消。</p><p>为了帮助大家更好地理解交互式问题，我们准备了一个样例 “答案”：<a href="https://leetcode-cn.com/playground/RKhe3ave%EF%BC%8C%E8%AF%B7%E6%B3%A8%E6%84%8F%E8%BF%99">https://leetcode-cn.com/playground/RKhe3ave，请注意这</a> 不是一个正确答案。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/find-in-mountain-array">https://leetcode.cn/problems/find-in-mountain-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>做这个题如果对山脉数组的定义不是很明确，可以先做一下852题。这个题可以跟162，852一起做。山脉数组就是只有<code>一个峰值 peak</code>，峰值左边的元素是单调递增的，右边的元素是单调递减的。本题不允许你直接访问 input 数组，你只能通过<code>length()</code>函数知道数组的长度，通过<code>get()</code>函数得知某一个数字的值。只能用二分法做。</p><p>这个题的思路会用到三次二分法，第一次帮助找到 peak 元素，第二次去找 peak 元素左半边是否存在 target，第三次在 peak 元素右半边查找 target。注意体会不同模板比较适合的场景。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(logn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * // This is MountainArray&#x27;s API interface.</span><br><span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span><br><span class="hljs-comment"> * interface MountainArray &#123;</span><br><span class="hljs-comment"> *     public int get(int index) &#123;&#125;</span><br><span class="hljs-comment"> *     public int length() &#123;&#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findInMountainArray</span><span class="hljs-params">(<span class="hljs-type">int</span> target, MountainArray mountainArr)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mountainArr.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">peak</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// find index of peak</span><br>        <span class="hljs-comment">// 因为mid + 1可能会有越界的情况所以这里给了闭区间</span><br>        <span class="hljs-comment">// 下标都在index范围内</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt; right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; mountainArr.get(mid + <span class="hljs-number">1</span>)) &#123;<br>                left = peak = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right = mid;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">        找peak元素部分的二分也可以这样写，需要仔细体会</span><br><span class="hljs-comment">        int left = 0;</span><br><span class="hljs-comment">        int right = n - 1;</span><br><span class="hljs-comment">        while (left + 1 &lt; right) &#123;</span><br><span class="hljs-comment">            mid = left + (right - left) / 2;</span><br><span class="hljs-comment">            if (mountainArr.get(mid) &lt; mountainArr.get(mid + 1)) &#123;</span><br><span class="hljs-comment">                left = mid;</span><br><span class="hljs-comment">            &#125; else &#123;</span><br><span class="hljs-comment">                right = mid;</span><br><span class="hljs-comment">            &#125;</span><br><span class="hljs-comment">        &#125;</span><br><span class="hljs-comment">        if (mountainArr.get(left) &gt; mountainArr.get(right)) &#123;</span><br><span class="hljs-comment">            peak = left;</span><br><span class="hljs-comment">        &#125; else &#123;</span><br><span class="hljs-comment">            peak = right;</span><br><span class="hljs-comment">        &#125;</span><br><span class="hljs-comment">        */</span><br><br>        <span class="hljs-comment">// find target in the left of peak</span><br>        left = <span class="hljs-number">0</span>;<br>        right = peak;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; target) &#123;<br>                left = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mountainArr.get(mid) &gt; target) &#123;<br>                right = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// find target in the right of peak</span><br>        left = peak;<br>        right = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            mid = left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (mountainArr.get(mid) &gt; target) &#123;<br>                left = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mountainArr.get(mid) &lt; target) &#123;<br>                right = mid - <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
