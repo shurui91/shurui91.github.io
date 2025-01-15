@@ -24,11 +24,11 @@
 <meta property="og:description" content="Given an array of integers arr, return the number of subarrays with an odd sum. Since the answer can be very large, return it modulo 109 + 7. Example 1:Input: arr &#x3D; [1,3,5]Output: 4Explanation: A">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-10T05:57:15.000Z">
-<meta property="article:modified_time" content="2024-12-10T06:11:22.311Z">
+<meta property="article:modified_time" content="2025-01-15T17:40:43.252Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="prefix sum">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,7 +283,7 @@
 <p>再创建两个变量，分别叫做 odd 和 even，代表 presum 中<code>前缀和是奇数</code>的个数和<code>前缀和是偶数</code>的个数。</p>
 <p>遍历 presum 数组，对于每个位置 i，如果这个位置上的前缀和 presum[i] 是偶数，那么 even++；如果这个位置上的前缀和 presum[i] 是奇数，那么 odd++。</p>
 <p>在对 presum[i] 判断奇偶的时候，如果 presum[i] 是偶数，那么我们看看在这个位置之前出现过几次奇数，把此时的 odd 累加到 res 上；如果 presum[i] 是奇数，那么我们看看在这个位置之前出现过几次偶数，把此时的 even 累加到 res 上。举个例子，</p>
-<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> j<span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">x</span><span class="hljs-punctuation">,</span> i<br></code></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">0, x, x, j, x, x, x, x, x, i<br></code></pre></td></tr></table></figure>
 
 <p>对于任意一段子数组 [j, i] 我们如何判断他的奇偶性呢？如果 [0, i] 这一段是偶数，如果想让 [j, i] 这一段为奇数，那么 [0, j] 这一段就必须要是奇数。因为奇数 + 奇数 &#x3D; 偶数。</p>
 <p>同理，如果 [0, i] 这一段是奇数，如果想让 [j, i] 这一段为奇数，那么 [0, j] 这一段就必须要是偶数。因为偶数 + 奇数 &#x3D; 奇数。</p>
@@ -304,9 +304,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
+      
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
