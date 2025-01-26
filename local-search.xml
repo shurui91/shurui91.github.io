@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 1310. XOR Queries of a Subarray</title>
+    <link href="/posts/2713414642.html"/>
+    <url>/posts/2713414642.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an array arr of positive integers. You are also given the array queries where queries[i] &#x3D; [left, right].</p><p>For each query i compute the XOR of elements from left to right (that is, arr[left] XOR arr[left + 1] XOR … XOR arr[right] ).</p><p>Return an array answer where answer[i] is the answer to the ith query.</p><p>Example 1:<br>Input: arr &#x3D; [1,3,4,8], queries &#x3D; [[0,1],[1,2],[0,3],[3,3]]<br>Output: [2,7,14,8]<br>Explanation:<br>The binary representation of the elements in the array are:<br>1 &#x3D; 0001<br>3 &#x3D; 0011<br>4 &#x3D; 0100<br>8 &#x3D; 1000<br>The XOR values for queries are:<br>[0,1] &#x3D; 1 xor 3 &#x3D; 2<br>[1,2] &#x3D; 3 xor 4 &#x3D; 7<br>[0,3] &#x3D; 1 xor 3 xor 4 xor 8 &#x3D; 14<br>[3,3] &#x3D; 8</p><p>Example 2:<br>Input: arr &#x3D; [4,8,2,10], queries &#x3D; [[2,3],[1,3],[0,0],[0,3]]<br>Output: [8,0,4,4]</p><p>Constraints:<br>1 &lt;&#x3D; arr.length, queries.length &lt;&#x3D; 3 * 104<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 109<br>queries[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; lefti &lt;&#x3D; righti &lt; arr.length</p><p>子数组异或查询。</p><blockquote>有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] = [Li, Ri]。<p>对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor … xor arr[Ri]）作为本次查询的结果。</p><p>并返回一个包含给定查询 queries 所有结果的数组。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是前缀和，而且是一道位运算的前缀和题目。因为题目要我们返回一些 queries 的结果，queries 都是一些区间，所以大概率是前缀和做。同时异或运算（XOR）是怎么处理前缀和的呢？假如 input 数组的前 i 项的 XOR 前缀和为 a, 前 j 项的 XOR 前缀和为 b, 那么 <code>a xor b</code> 就是 input 数组的 [i + 1, j) 项的 XOR 结果。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] xorQueries(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span>[][] queries) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span>[] presum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        presum[<span class="hljs-number">0</span>] = arr[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            presum[i + <span class="hljs-number">1</span>] = presum[i] ^ arr[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[queries.length];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; queries.length; i++) &#123;<br>            <span class="hljs-type">int</span>[] query = queries[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> query[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> query[<span class="hljs-number">1</span>];<br>            res[i] = presum[left] ^ presum[right + <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>prefix sum</tag>
+      
+      <tag>bit manipulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2909. Minimum Sum of Mountain Triplets II</title>
     <link href="/posts/1599691927.html"/>
     <url>/posts/1599691927.html</url>
@@ -45,9 +72,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -72,9 +99,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -151,9 +178,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -203,11 +230,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -475,9 +502,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -747,9 +774,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -3462,9 +3489,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -3931,9 +3958,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -3962,9 +3989,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -3991,9 +4018,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -4860,9 +4887,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -4941,9 +4968,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -4966,9 +4993,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -5300,9 +5327,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -5469,9 +5496,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5556,9 +5583,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5766,9 +5793,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
       <tag>divide and conquer</tag>
       
@@ -6377,11 +6404,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -6763,9 +6790,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -6790,9 +6817,9 @@
       
       <tag>java</tag>
       
-      <tag>treemap</tag>
-      
       <tag>string</tag>
+      
+      <tag>treemap</tag>
       
       <tag>binary search</tag>
       
@@ -7548,9 +7575,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7610,9 +7637,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7641,9 +7668,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7672,9 +7699,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7703,9 +7730,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7734,9 +7761,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>string</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     

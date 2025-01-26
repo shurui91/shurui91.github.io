@@ -16,28 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given two strings s and p, return an array of all the start indices of p’s anagrams in s. You may return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a">
+    <meta name="description" content="You are given an array arr of positive integers. You are also given the array queries where queries[i] &#x3D; [left, right]. For each query i compute the XOR of elements from left to right (that is, a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 438. Find All Anagrams in a String">
-<meta property="og:url" content="https://shurui91.github.io/posts/1543913520.html">
+<meta property="og:title" content="[LeetCode] 1310. XOR Queries of a Subarray">
+<meta property="og:url" content="https://shurui91.github.io/posts/2713414642.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given two strings s and p, return an array of all the start indices of p’s anagrams in s. You may return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a">
+<meta property="og:description" content="You are given an array arr of positive integers. You are also given the array queries where queries[i] &#x3D; [left, right]. For each query i compute the XOR of elements from left to right (that is, a">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-03T21:57:18.000Z">
-<meta property="article:modified_time" content="2024-12-14T05:52:13.272Z">
+<meta property="article:published_time" content="2025-01-26T06:33:06.000Z">
+<meta property="article:modified_time" content="2025-01-26T06:40:53.140Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="string">
-<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="bit manipulation">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 438. Find All Anagrams in a String - CNoodle</title>
+  <title>[LeetCode] 1310. XOR Queries of a Subarray - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 438. Find All Anagrams in a String"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1310. XOR Queries of a Subarray"></span>
           
         </div>
 
@@ -202,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-04-03 14:57" pubdate>
-          April 3, 2020 pm
+        <time datetime="2025-01-25 22:33" pubdate>
+          January 25, 2025 pm
         </time>
       </span>
     
@@ -214,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          1.6k words
         
       </span>
     
@@ -225,7 +223,7 @@
         
         
         
-          23 mins
+          14 mins
         
       </span>
     
@@ -262,33 +260,31 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 438. Find All Anagrams in a String</h1>
+            <h1 id="seo-header">[LeetCode] 1310. XOR Queries of a Subarray</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given two strings s and p, return an array of all the start indices of p’s anagrams in s. You may return the answer in any order.</p>
-<p>An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
-<p>Example 1:<br>Input: s &#x3D; “cbaebabacd”, p &#x3D; “abc”<br>Output: [0,6]<br>Explanation:<br>The substring with start index &#x3D; 0 is “cba”, which is an anagram of “abc”.<br>The substring with start index &#x3D; 6 is “bac”, which is an anagram of “abc”.</p>
-<p>Example 2:<br>Input: s &#x3D; “abab”, p &#x3D; “ab”<br>Output: [0,1,2]<br>Explanation:<br>The substring with start index &#x3D; 0 is “ab”, which is an anagram of “ab”.<br>The substring with start index &#x3D; 1 is “ba”, which is an anagram of “ab”.<br>The substring with start index &#x3D; 2 is “ab”, which is an anagram of “ab”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length, p.length &lt;&#x3D; 3 * 104<br>s and p consist of lowercase English letters.</p>
-<p>找到字符串中所有字母异位词。</p>
+                <p>You are given an array arr of positive integers. You are also given the array queries where queries[i] &#x3D; [left, right].</p>
+<p>For each query i compute the XOR of elements from left to right (that is, arr[left] XOR arr[left + 1] XOR … XOR arr[right] ).</p>
+<p>Return an array answer where answer[i] is the answer to the ith query.</p>
+<p>Example 1:<br>Input: arr &#x3D; [1,3,4,8], queries &#x3D; [[0,1],[1,2],[0,3],[3,3]]<br>Output: [2,7,14,8]<br>Explanation:<br>The binary representation of the elements in the array are:<br>1 &#x3D; 0001<br>3 &#x3D; 0011<br>4 &#x3D; 0100<br>8 &#x3D; 1000<br>The XOR values for queries are:<br>[0,1] &#x3D; 1 xor 3 &#x3D; 2<br>[1,2] &#x3D; 3 xor 4 &#x3D; 7<br>[0,3] &#x3D; 1 xor 3 xor 4 xor 8 &#x3D; 14<br>[3,3] &#x3D; 8</p>
+<p>Example 2:<br>Input: arr &#x3D; [4,8,2,10], queries &#x3D; [[2,3],[1,3],[0,0],[0,3]]<br>Output: [8,0,4,4]</p>
+<p>Constraints:<br>1 &lt;&#x3D; arr.length, queries.length &lt;&#x3D; 3 * 104<br>1 &lt;&#x3D; arr[i] &lt;&#x3D; 109<br>queries[i].length &#x3D;&#x3D; 2<br>0 &lt;&#x3D; lefti &lt;&#x3D; righti &lt; arr.length</p>
+<p>子数组异或查询。</p>
 <blockquote>
-给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+有一个正整数数组 arr，现给你一个对应的查询数组 queries，其中 queries[i] = [Li, Ri]。
 
-<p>异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string">https://leetcode.cn/problems/find-all-anagrams-in-a-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>对于每个查询 i，请你计算从 Li 到 Ri 的 XOR 值（即 arr[Li] xor arr[Li+1] xor … xor arr[Ri]）作为本次查询的结果。</p>
+<p>并返回一个包含给定查询 queries 所有结果的数组。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。思路是滑动窗口（sliding window）。这个题也可以用之前的模板做，参见76，159，340。先遍历p，得到 p 中每个字母和他们对应的出现次数。再去遍历 s，用 start 和 end 指针，end 在前，当某个字母的出现次数被减少到 0 的时候，counter 才能–。当 counter &#x3D;&#x3D; 0 的时候，判断 end - begin 是否等于p的长度，若是，才能将此时 begin 的坐标加入结果集。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是前缀和，而且是一道位运算的前缀和题目。因为题目要我们返回一些 queries 的结果，queries 都是一些区间，所以大概率是前缀和做。同时异或运算（XOR）是怎么处理前缀和的呢？假如 input 数组的前 i 项的 XOR 前缀和为 a, 前 j 项的 XOR 前缀和为 b, 那么 <code>a xor b</code> 就是 input 数组的 [i + 1, j) 项的 XOR 结果。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">findAnagrams</span><span class="hljs-params">(String s, String p)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">256</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : p.toCharArray()) &#123;<br>            map[c]++;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">counter</span> <span class="hljs-operator">=</span> p.length();<br>        <br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s.length() &lt; p.length()) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (end &lt; s.length()) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> s.charAt(end);<br>            <span class="hljs-keyword">if</span> (map[c1] &gt; <span class="hljs-number">0</span>) &#123;<br>                counter--;<br>            &#125;<br>            map[c1]--;<br>            end++;<br>            <span class="hljs-keyword">while</span> (counter == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c2</span> <span class="hljs-operator">=</span> s.charAt(start);<br>                map[c2]++;<br>                <span class="hljs-keyword">if</span> (map[c2] &gt; <span class="hljs-number">0</span>) &#123;<br>                    counter++;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (end - start == p.length()) &#123;<br>                    res.add(start);<br>                &#125;<br>                start++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<p>JavaScript实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">p</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number[]</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findAnagrams = <span class="hljs-keyword">function</span>(<span class="hljs-params">s, p</span>) &#123;<br>	<span class="hljs-keyword">let</span> res = [];<br>	<span class="hljs-keyword">if</span> (p.<span class="hljs-property">length</span> &gt; s.<span class="hljs-property">length</span>) &#123;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br><br>	<span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> c <span class="hljs-keyword">of</span> p) &#123;<br>		map.<span class="hljs-title function_">set</span>(c, (map.<span class="hljs-title function_">get</span>(c) | <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>	&#125;<br><br>	<span class="hljs-keyword">let</span> begin = <span class="hljs-number">0</span>,<br>		end = <span class="hljs-number">0</span>,<br>		counter = map.<span class="hljs-property">size</span>;<br>	<span class="hljs-keyword">while</span> (end &lt; s.<span class="hljs-property">length</span>) &#123;<br>		<span class="hljs-keyword">let</span> c = s.<span class="hljs-title function_">charAt</span>(end);<br>		<span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(c)) &#123;<br>			map.<span class="hljs-title function_">set</span>(c, map.<span class="hljs-title function_">get</span>(c) - <span class="hljs-number">1</span>);<br>			<span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">get</span>(c) === <span class="hljs-number">0</span>) &#123;<br>				counter--;<br>			&#125;<br>		&#125;<br>		end++;<br>		<span class="hljs-keyword">while</span> (counter === <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-keyword">let</span> d = s.<span class="hljs-title function_">charAt</span>(begin);<br>			<span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">has</span>(d)) &#123;<br>				map.<span class="hljs-title function_">set</span>(d, map.<span class="hljs-title function_">get</span>(d) + <span class="hljs-number">1</span>);<br>				<span class="hljs-keyword">if</span> (map.<span class="hljs-title function_">get</span>(d) &gt; <span class="hljs-number">0</span>) &#123;<br>					counter++;<br>				&#125;<br>			&#125;<br>			<span class="hljs-keyword">if</span> (end - begin == p.<span class="hljs-property">length</span>) &#123;<br>				res.<span class="hljs-title function_">push</span>(begin);<br>			&#125;<br>			begin++;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] xorQueries(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span>[][] queries) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">int</span>[] presum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        presum[<span class="hljs-number">0</span>] = arr[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            presum[i + <span class="hljs-number">1</span>] = presum[i] ^ arr[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[queries.length];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; queries.length; i++) &#123;<br>            <span class="hljs-type">int</span>[] query = queries[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> query[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> query[<span class="hljs-number">1</span>];<br>            res[i] = presum[left] ^ presum[right + <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -303,17 +299,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/array/" class="print-no-link">#array</a>
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+        <a href="/tags/bit-manipulation/" class="print-no-link">#bit manipulation</a>
       
     </div>
   
@@ -325,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 438. Find All Anagrams in a String</div>
-      <div>https://shurui91.github.io/posts/1543913520.html</div>
+      <div>[LeetCode] 1310. XOR Queries of a Subarray</div>
+      <div>https://shurui91.github.io/posts/2713414642.html</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 3, 2020</div>
+          <div>January 25, 2025</div>
         </div>
       
       
@@ -370,18 +362,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/4170399115.html" title="[LeetCode] 209. Minimum Size Subarray Sum">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 209. Minimum Size Subarray Sum</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2079065207.html" title="[LeetCode] 159. Longest Substring with At Most Two Distinct Characters">
-                        <span class="hidden-mobile">[LeetCode] 159. Longest Substring with At Most Two Distinct Characters</span>
+                      <a href="/posts/1599691927.html" title="[LeetCode] 2909. Minimum Sum of Mountain Triplets II">
+                        <span class="hidden-mobile">[LeetCode] 2909. Minimum Sum of Mountain Triplets II</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -401,8 +387,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1543913520.html';
-          this.page.identifier = '/posts/1543913520.html';
+          this.page.url = 'https://shurui91.github.io/posts/2713414642.html';
+          this.page.identifier = '/posts/2713414642.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
