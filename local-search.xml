@@ -3931,9 +3931,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -3962,9 +3962,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -4742,6 +4742,29 @@
   
   
   <entry>
+    <title>[LeetCode] 1720. Decode XORed Array</title>
+    <link href="/posts/1853229639.html"/>
+    <url>/posts/1853229639.html</url>
+    
+    <content type="html"><![CDATA[<p>There is a hidden integer array arr that consists of n non-negative integers.</p><p>It was encoded into another integer array encoded of length n - 1, such that encoded[i] &#x3D; arr[i] XOR arr[i + 1]. For example, if arr &#x3D; [1,0,2,1], then encoded &#x3D; [1,2,3].</p><p>You are given the encoded array. You are also given an integer first, that is the first element of arr, i.e. arr[0].</p><p>Return the original array arr. It can be proved that the answer exists and is unique.</p><p>Example 1:<br>Input: encoded &#x3D; [1,2,3], first &#x3D; 1<br>Output: [1,0,2,1]<br>Explanation: If arr &#x3D; [1,0,2,1], then first &#x3D; 1 and encoded &#x3D; [1 XOR 0, 0 XOR 2, 2 XOR 1] &#x3D; [1,2,3]</p><p>Example 2:<br>Input: encoded &#x3D; [6,2,7,3], first &#x3D; 4<br>Output: [4,2,0,7,4]</p><p>Constraints:<br>2 &lt;&#x3D; n &lt;&#x3D; 104<br>encoded.length &#x3D;&#x3D; n - 1<br>0 &lt;&#x3D; encoded[i] &lt;&#x3D; 105<br>0 &lt;&#x3D; first &lt;&#x3D; 105</p><p>解码异或后的数组。</p><blockquote>未知 整数数组 arr 由 n 个非负整数组成。<p>经编码后变为长度为 n - 1 的另一个整数数组 encoded ，其中 encoded[i] &#x3D; arr[i] XOR arr[i + 1] 。例如，arr &#x3D; [1,0,2,1] 经编码后得到 encoded &#x3D; [1,2,3] 。</p><p>给你编码后的数组 encoded 和原数组 arr 的第一个元素 first（arr[0]）。</p><p>请解码返回原数组 arr 。可以证明答案存在并且是唯一的。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/decode-xored-array">https://leetcode-cn.com/problems/decode-xored-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是位运算，跟题目提到的XOR异或运算有关。学习位运算的时候，我们学过位运算的如下几条规律</p><ul><li>相同的数字互相做XOR运算等于0 - <code>N XOR N = 0</code></li><li>任何非零数字与0做异或运算等于这个数字本身 - <code>N XOR 0 = N</code></li><li>异或满足交换律，比如如果 <code>a XOR b = c</code>, 那么 <code>b XOR c = a</code></li></ul><p>复习过如上这几条规律之后，这道题就好做了。因为题目给的 encoded 数组是由原数组数字之间通过 XOR 运算的来的（encoded[i - 1] &#x3D; arr[i - 1] XOR arr[i]），那么对于原数组里的每个数字 arr[i]而言，我们把这个式子变一下，就得到了：<br><code>arr[i] = encoded[i - 1] XOR arr[i - 1]</code></p><p>对于这道题，因为 encoded 数组里的每一个元素 encoded[i] &#x3D; encoded[i - 1] ^ arr[i]，那么当我们得到原数组的第一个元素 nums[0]，我们可以计算 <code>encoded[1] ^ nums[0]</code> 来得到 <code>nums[1]</code>。这个方法推广到后面所有的元素就是 <code>nums[i] = encoded[i - 1] ^ nums[i - 1]</code>。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1) - 不包含output数组</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] decode(<span class="hljs-type">int</span>[] encoded, <span class="hljs-type">int</span> first) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> encoded.length;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        res[<span class="hljs-number">0</span>] = first;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; res.length; i++) &#123;<br>            res[i] = first ^ encoded[i - <span class="hljs-number">1</span>];<br>            first = res[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>bit manipulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 930. Binary Subarrays With Sum</title>
     <link href="/posts/4050545082.html"/>
     <url>/posts/4050545082.html</url>
@@ -4943,9 +4966,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5277,9 +5300,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
