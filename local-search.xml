@@ -3983,9 +3983,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -4014,9 +4014,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -5018,9 +5018,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -5352,9 +5352,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6878,6 +6878,31 @@
       <tag>stack</tag>
       
       <tag>monotonic stack</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 119. Pascal&#39;s Triangle II</title>
+    <link href="/posts/2036957589.html"/>
+    <url>/posts/2036957589.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal’s triangle.</p><p>In Pascal’s triangle, each number is the sum of the two numbers directly above it as shown:</p><p>Example 1:<br><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif" alt="Example 1"><br>Input: rowIndex &#x3D; 3<br>Output: [1,3,3,1]</p><p>Example 2:<br>Input: rowIndex &#x3D; 0<br>Output: [1]</p><p>Example 3:<br>Input: rowIndex &#x3D; 1<br>Output: [1,1]</p><p>Constraints:<br>0 &lt;&#x3D; rowIndex &lt;&#x3D; 33</p><p>Follow up: Could you optimize your algorithm to use only O(rowIndex) extra space?</p><p>杨辉三角 II。</p><blockquote>给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。<p>在「杨辉三角」中，每个数是它左上方和右上方的数的和。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>跟版本一类似，也是计算杨辉三角，但是只需要输出某一行的结果即可，规定只允许使用 O(n) 级别的额外空间。</p><p>参考版本一的思路二，重复利用 list 数组即可。版本一的思路是当前 index &#x3D; j 上的数字是之前一行的 j 和 j - 1 的和。但是这道题的 followup 是只能使用固定的额外空间，按照版本一的做法是会覆盖之前的结果的。所以对于每一行，我们从右往左开始算，这样就不会覆盖之前的结果了。记得最后加上每一行的最后一个 1。</p><h2 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h2><p>参考版本一的思路二，重复利用 list 数组即可。版本一的思路是当前 index &#x3D; j 上的数字是之前一行的 j 和 j - 1 的和。但是这道题的 followup 是只能使用固定的额外空间，按照版本一的做法是会覆盖之前的结果的。所以对于每一行，我们从右往左开始算，这样就不会覆盖之前的结果了。记得最后加上每一行的最后一个 1。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">getRow</span><span class="hljs-params">(<span class="hljs-type">int</span> rowIndex)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        res.add(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= rowIndex; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> res.size() - <span class="hljs-number">1</span>; j &gt; <span class="hljs-number">0</span>; j--) &#123;<br>                res.set(j, res.get(j - <span class="hljs-number">1</span>) + res.get(j));<br>            &#125;<br>            res.add(<span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h2><p>这里还有一种思路，是从左往右算。我们可以把题目给的例子三角形转化一下，如果我们试着把他看做一个直角三角形，那么数字的排列会是如下。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">1<br>11<br>121<br>1331<br>14641<br></code></pre></td></tr></table></figure><p>注意到除了头两行情况比较特殊，只有 1 组成，从第三行开始，中间某个位置 i 上的数字 &#x3D; 上一行同位置 i 上的数字 + 上一行 i - 1 位置上的数字。我在代码中的几个地方做了 print，参见 print 的结果。处理当前行的时候，我们先在 list 的头部加一个 1，然后对于 index j 上的数字，我们把它修改为 (index j) + (index j + 1)。注意 j 的 for 循环要小于 i，因为第 i 行只能有 i 个元素。从第三行开始，所有非零的数字都是通过上一行 index 相同的数字计算而来。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">getRow</span><span class="hljs-params">(<span class="hljs-type">int</span> rowIndex)</span> &#123;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= rowIndex; i++) &#123;<br>            <span class="hljs-comment">// first 1 at each row</span><br>            list.add(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; list.size() - <span class="hljs-number">1</span>; j++) &#123;<br>                list.set(j, list.get(j) + list.get(j + <span class="hljs-number">1</span>));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
