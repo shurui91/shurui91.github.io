@@ -16,16 +16,17 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given an m x n binary matrix grid. An island is a group of 1’s (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded">
+    <meta name="description" content="You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) represents:A land cell if grid[r][c] &#x3D; 0, orA water cell containing grid[r][c] fish, if grid[r][c] &gt; 0.A fisher can start a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 695. Max Area of Island">
-<meta property="og:url" content="https://shurui91.github.io/posts/988496489.html">
+<meta property="og:title" content="[LeetCode] 2658. Maximum Number of Fish in a Grid">
+<meta property="og:url" content="https://shurui91.github.io/posts/2867469525.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given an m x n binary matrix grid. An island is a group of 1’s (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded">
+<meta property="og:description" content="You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) represents:A land cell if grid[r][c] &#x3D; 0, orA water cell containing grid[r][c] fish, if grid[r][c] &gt; 0.A fisher can start a">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/05/01/maxarea1-grid.jpg">
-<meta property="article:published_time" content="2020-04-16T21:29:15.000Z">
-<meta property="article:modified_time" content="2025-02-17T02:32:55.898Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/03/29/example.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2023/03/29/example2.png">
+<meta property="article:published_time" content="2025-02-17T02:47:30.000Z">
+<meta property="article:modified_time" content="2025-02-17T02:55:01.901Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
@@ -33,11 +34,11 @@
 <meta property="article:tag" content="dfs">
 <meta property="article:tag" content="flood fill">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/05/01/maxarea1-grid.jpg">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2023/03/29/example.png">
   
   
   
-  <title>[LeetCode] 695. Max Area of Island - CNoodle</title>
+  <title>[LeetCode] 2658. Maximum Number of Fish in a Grid - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 695. Max Area of Island"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2658. Maximum Number of Fish in a Grid"></span>
           
         </div>
 
@@ -202,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-04-16 14:29" pubdate>
-          April 16, 2020 pm
+        <time datetime="2025-02-16 18:47" pubdate>
+          February 16, 2025 pm
         </time>
       </span>
     
@@ -214,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k words
+          2.7k words
         
       </span>
     
@@ -225,7 +226,7 @@
         
         
         
-          24 mins
+          23 mins
         
       </span>
     
@@ -262,45 +263,36 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 695. Max Area of Island</h1>
+            <h1 id="seo-header">[LeetCode] 2658. Maximum Number of Fish in a Grid</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given an m x n binary matrix grid. An island is a group of 1’s (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.</p>
-<p>The area of an island is the number of cells with a value 1 in the island.</p>
-<p>Return the maximum area of an island in grid. If there is no island, return 0.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/05/01/maxarea1-grid.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: grid &#x3D; [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]<br>Output: 6<br>Explanation: The answer is not 11, because the island must be connected 4-directionally.</p>
-<p>Example 2:<br>Input: grid &#x3D; [[0,0,0,0,0,0,0,0]]<br>Output: 0</p>
-<p>Constraints:<br>m &#x3D;&#x3D; grid.length<br>n &#x3D;&#x3D; grid[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 50<br>grid[i][j] is either 0 or 1.</p>
-<p>岛屿的最大面积。</p>
+                <p>You are given a 0-indexed 2D matrix grid of size m x n, where (r, c) represents:<br>A land cell if grid[r][c] &#x3D; 0, or<br>A water cell containing grid[r][c] fish, if grid[r][c] &gt; 0.<br>A fisher can start at any water cell (r, c) and can do the following operations any number of times:</p>
+<p>Catch all the fish at cell (r, c), or<br>Move to any adjacent water cell.<br>Return the maximum number of fish the fisher can catch if he chooses his starting cell optimally, or 0 if no water cell exists.</p>
+<p>An adjacent cell of the cell (r, c), is one of the cells (r, c + 1), (r, c - 1), (r + 1, c) or (r - 1, c) if it exists.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2023/03/29/example.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: grid &#x3D; [[0,2,1,0],[4,0,0,3],[1,0,0,4],[0,3,2,0]]<br>Output: 7<br>Explanation: The fisher can start at cell (1,3) and collect 3 fish, then move to cell (2,3) and collect 4 fish.</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2023/03/29/example2.png" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: grid &#x3D; [[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,1]]<br>Output: 1<br>Explanation: The fisher can start at cells (0,0) or (3,3) and collect a single fish. </p>
+<p>Constraints:<br>m &#x3D;&#x3D; grid.length<br>n &#x3D;&#x3D; grid[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 10<br>0 &lt;&#x3D; grid[i][j] &lt;&#x3D; 10</p>
+<p>网格图中鱼的最大数目。</p>
 <blockquote>
-给你一个大小为 m x n 的二进制矩阵 grid 。
+给你一个下标从 0 开始大小为 m x n 的二维整数数组 grid ，其中下标在 (r, c) 处的整数表示：
 
-<p>岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在 水平或者竖直的四个方向上 相邻。你可以假设 grid 的四个边缘都被 0（代表水）包围着。</p>
-<p>岛屿的面积是岛上值为 1 的单元格的数目。</p>
-<p>计算并返回 grid 中最大的岛屿面积。如果没有岛屿，则返回面积为 0 。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-area-of-island">https://leetcode-cn.com/problems/max-area-of-island</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>如果 grid[r][c] &#x3D; 0 ，那么它是一块 陆地 。<br>如果 grid[r][c] &gt; 0 ，那么它是一块 水域 ，且包含 grid[r][c] 条鱼。<br>一位渔夫可以从任意 水域 格子 (r, c) 出发，然后执行以下操作任意次：</p>
+<p>捕捞格子 (r, c) 处所有的鱼，或者<br>移动到相邻的 水域 格子。<br>请你返回渔夫最优策略下， 最多 可以捕捞多少条鱼。如果没有水域格子，请你返回 0 。</p>
+<p>格子 (r, c) 相邻 的格子为 (r, c + 1) ，(r, c - 1) ，(r + 1, c) 和 (r - 1, c) ，前提是相邻格子在网格图内。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道 flood fill 类型的题。我这里还是给出 DFS 和 BFS 两种做法。</p>
-<p>无论是那种做法，search 一开始找的是值为 1 的坐标，这没有什么疑问。但是找到 1 之后，则需要把这个 1 当做一个岛的起点开始做 dfs。注意以下几点，同时也是 DFS 模板题都需要注意的</p>
-<ul>
-<li>碰到边界就 return 0</li>
-<li>把当前坐标的值 mark 成 0（或者一个极值，看情况而定，这是为了防止重复访问造成死循环）</li>
-<li>四个方向递归调用 DFS 函数</li>
-</ul>
-<p>这个题唯一多的一个步骤就是当找到第一个 1 的时候，需要把递归调用里面所有能找到的岛屿面积累加起来。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题是 flood fill 类型的题目。这道题是让我们在矩阵内找一个面积最大的岛屿。<br>695题几乎是一模一样的。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(n)</p>
-<h2 id="DFS代码"><a href="#DFS代码" class="headerlink" title="DFS代码"></a>DFS代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxAreaOfIsland</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    res = Math.max(res, dfs(i, j, grid));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j, <span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span> || i &gt;= grid.length || j &gt;= grid[i].length || grid[i][j] == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        grid[i][j] = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        num += dfs(i + <span class="hljs-number">1</span>, j, grid);<br>        num += dfs(i - <span class="hljs-number">1</span>, j, grid);<br>        num += dfs(i, j + <span class="hljs-number">1</span>, grid);<br>        num += dfs(i, j - <span class="hljs-number">1</span>, grid);<br>        <span class="hljs-keyword">return</span> num;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>BFS实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-type">int</span> m;<br>	<span class="hljs-type">int</span> n;<br>	<span class="hljs-type">int</span>[][] dirs = &#123; &#123; <span class="hljs-number">0</span>, <span class="hljs-number">1</span> &#125;, &#123; <span class="hljs-number">0</span>, -<span class="hljs-number">1</span> &#125;, &#123; <span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;, &#123; -<span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125; &#125;;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxFish</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>		m = grid.length;<br>		n = grid[<span class="hljs-number">0</span>].length;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>				<span class="hljs-keyword">if</span> (grid[i][j] &gt; <span class="hljs-number">0</span>) &#123;<br>					res = Math.max(res, bfs(grid, i, j));<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> res;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">bfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>		Queue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>		queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; i, j &#125;);<br>		<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> grid[i][j];<br>		grid[i][j] = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>			<span class="hljs-type">int</span>[] cur = queue.poll();<br>			<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">0</span>] + dir[<span class="hljs-number">0</span>];<br>				<span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">1</span>] + dir[<span class="hljs-number">1</span>];<br>				<span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; n &amp;&amp; grid[x][y] &gt; <span class="hljs-number">0</span>) &#123;<br>					queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; x, y &#125;);<br>					count += grid[x][y];<br>					grid[x][y] = <span class="hljs-number">0</span>;<br>				&#125;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> count;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="BFS代码"><a href="#BFS代码" class="headerlink" title="BFS代码"></a>BFS代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] dirs = &#123; &#123; <span class="hljs-number">0</span>, <span class="hljs-number">1</span> &#125;, &#123; <span class="hljs-number">0</span>, -<span class="hljs-number">1</span> &#125;, &#123; <span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;, &#123; -<span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125; &#125;;<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-type">int</span> n;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxAreaOfIsland</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        m = grid.length;<br>        n = grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    res = Math.max(res, helper(grid, i, j));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        Queue&lt;<span class="hljs-type">int</span>[]&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; i, j &#125;);<br>        grid[i][j] = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (!queue.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] cur = queue.poll();<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] dir : dirs) &#123;<br>				<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">0</span>] + dir[<span class="hljs-number">0</span>];<br>				<span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> cur[<span class="hljs-number">1</span>] + dir[<span class="hljs-number">1</span>];<br>				<span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; n &amp;&amp; grid[x][y] == <span class="hljs-number">1</span>) &#123;<br>					queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; x, y &#125;);<br>					grid[x][y] = <span class="hljs-number">0</span>;<br>					count++;<br>				&#125;<br>			&#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>DFS实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-type">int</span> n;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxFish</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        m = grid.length;<br>        n = grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] &gt; <span class="hljs-number">0</span>) &#123;<br>                    res = Math.max(res, dfs(grid, i, j));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span> || i &gt;= m || j &gt;= n || grid[i][j] == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> grid[i][j];<br>        grid[i][j] = <span class="hljs-number">0</span>;<br>        count += dfs(grid, i - <span class="hljs-number">1</span>, j);<br>        count += dfs(grid, i + <span class="hljs-number">1</span>, j);<br>        count += dfs(grid, i, j - <span class="hljs-number">1</span>);<br>        count += dfs(grid, i, j + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">695. Max Area of Island<br>2658. Maximum Number of Fish in a Grid<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -332,8 +324,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 695. Max Area of Island</div>
-      <div>https://shurui91.github.io/posts/988496489.html</div>
+      <div>[LeetCode] 2658. Maximum Number of Fish in a Grid</div>
+      <div>https://shurui91.github.io/posts/2867469525.html</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +337,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 16, 2020</div>
+          <div>February 16, 2025</div>
         </div>
       
       
@@ -377,18 +369,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1704254951.html" title="[LeetCode] 36. Valid Sudoku">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 36. Valid Sudoku</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1521853294.html" title="[LeetCode] 994. Rotting Oranges">
-                        <span class="hidden-mobile">[LeetCode] 994. Rotting Oranges</span>
+                      <a href="/posts/4089744146.html" title="[LeetCode] 2342. Max Sum of a Pair With Equal Sum of Digits">
+                        <span class="hidden-mobile">[LeetCode] 2342. Max Sum of a Pair With Equal Sum of Digits</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -408,8 +394,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/988496489.html';
-          this.page.identifier = '/posts/988496489.html';
+          this.page.url = 'https://shurui91.github.io/posts/2867469525.html';
+          this.page.identifier = '/posts/2867469525.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
