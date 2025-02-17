@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2023/03/29/example.png">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2023/03/29/example2.png">
 <meta property="article:published_time" content="2025-02-17T02:47:30.000Z">
-<meta property="article:modified_time" content="2025-02-17T02:55:01.901Z">
+<meta property="article:modified_time" content="2025-02-17T02:56:43.359Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
@@ -215,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k words
+          2.8k words
         
       </span>
     
@@ -226,7 +226,7 @@
         
         
         
-          23 mins
+          24 mins
         
       </span>
     
@@ -292,6 +292,8 @@
 
 <p>DFS实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> m;<br>    <span class="hljs-type">int</span> n;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxFish</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        m = grid.length;<br>        n = grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] &gt; <span class="hljs-number">0</span>) &#123;<br>                    res = Math.max(res, dfs(grid, i, j));<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span> || i &gt;= m || j &gt;= n || grid[i][j] == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> grid[i][j];<br>        grid[i][j] = <span class="hljs-number">0</span>;<br>        count += dfs(grid, i - <span class="hljs-number">1</span>, j);<br>        count += dfs(grid, i + <span class="hljs-number">1</span>, j);<br>        count += dfs(grid, i, j - <span class="hljs-number">1</span>);<br>        count += dfs(grid, i, j + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">695. Max Area of Island<br>2658. Maximum Number of Fish in a Grid<br></code></pre></td></tr></table></figure>
 
                 
               </div>
