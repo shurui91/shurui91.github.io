@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>[LeetCode] 2506. Count Pairs Of Similar Strings</title>
+    <link href="/posts/736386976.html"/>
+    <url>/posts/736386976.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed string array words.</p><p>Two strings are similar if they consist of the same characters.</p><p>For example, “abca” and “cba” are similar since both consist of characters ‘a’, ‘b’, and ‘c’.<br>However, “abacba” and “bcfd” are not similar since they do not consist of the same characters.<br>Return the number of pairs (i, j) such that 0 &lt;&#x3D; i &lt; j &lt;&#x3D; word.length - 1 and the two strings words[i] and words[j] are similar.</p><p>Example 1:<br>Input: words &#x3D; [“aba”,”aabb”,”abcd”,”bac”,”aabc”]<br>Output: 2<br>Explanation: There are 2 pairs that satisfy the conditions:</p><ul><li>i &#x3D; 0 and j &#x3D; 1 : both words[0] and words[1] only consist of characters ‘a’ and ‘b’. </li><li>i &#x3D; 3 and j &#x3D; 4 : both words[3] and words[4] only consist of characters ‘a’, ‘b’, and ‘c’.</li></ul><p>Example 2:<br>Input: words &#x3D; [“aabb”,”ab”,”ba”]<br>Output: 3<br>Explanation: There are 3 pairs that satisfy the conditions:</p><ul><li>i &#x3D; 0 and j &#x3D; 1 : both words[0] and words[1] only consist of characters ‘a’ and ‘b’. </li><li>i &#x3D; 0 and j &#x3D; 2 : both words[0] and words[2] only consist of characters ‘a’ and ‘b’.</li><li>i &#x3D; 1 and j &#x3D; 2 : both words[1] and words[2] only consist of characters ‘a’ and ‘b’.</li></ul><p>Example 3:<br>Input: words &#x3D; [“nba”,”cba”,”dba”]<br>Output: 0<br>Explanation: Since there does not exist any pair that satisfies the conditions, we return 0.</p><p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consist of only lowercase English letters.</p><p>统计相似字符串对的数目。</p><blockquote>给你一个下标从 0 开始的字符串数组 words 。<p>如果两个字符串由相同的字符组成，则认为这两个字符串 相似 。</p><p>例如，”abca” 和 “cba” 相似，因为它们都由字符 ‘a’、’b’、’c’ 组成。<br>然而，”abacba” 和 “bcfd” 不相似，因为它们不是相同字符组成的。<br>请你找出满足字符串 words[i] 和 words[j] 相似的下标对 (i, j) ，并返回下标对的数目，其中 0 &lt;&#x3D; i &lt; j &lt;&#x3D; words.length - 1 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是类似 two sum 的做法。</p><p>暴力解的做法是把每两个不同的字符串拿出来作比较，如果他们构成题目定义的<code>相似</code>，则结果加一。这个做法肯定是<code>O(n^2)</code>的复杂度。</p><p>优化的思路需要考虑能否用空间换时间。这里我们用 hashmap 把每个字符串里的字符统计出来，然后用一个字符串的字符统计结果作为 key，然后遍历所有字符串，如果有相同的 key，则结果加一。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">similarPairs</span><span class="hljs-params">(String[] words)</span> &#123;<br>        HashMap&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">word</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> helper(word);<br>            res += map.getOrDefault(key, <span class="hljs-number">0</span>);<br>            map.put(key, map.getOrDefault(key, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> String <span class="hljs-title function_">helper</span><span class="hljs-params">(String word)</span> &#123;<br>        <span class="hljs-type">char</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : word.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (map[c - <span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-number">0</span>) &#123;<br>                map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(map);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2658. Maximum Number of Fish in a Grid</title>
     <link href="/posts/2867469525.html"/>
     <url>/posts/2867469525.html</url>
@@ -3979,9 +4010,9 @@
       
       <tag>dfs</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -5843,9 +5874,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
