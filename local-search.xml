@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2588. Count the Number of Beautiful Subarrays</title>
+    <link href="/posts/804582017.html"/>
+    <url>/posts/804582017.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array nums. In one operation, you can:<br>Choose two different indices i and j such that 0 &lt;&#x3D; i, j &lt; nums.length.<br>Choose a non-negative integer k such that the kth bit (0-indexed) in the binary representation of nums[i] and nums[j] is 1.<br>Subtract 2k from nums[i] and nums[j].</p><p>A subarray is beautiful if it is possible to make all of its elements equal to 0 after applying the above operation any number of times.</p><p>Return the number of beautiful subarrays in the array nums.</p><p>A subarray is a contiguous non-empty sequence of elements within an array.</p><p>Example 1:<br>Input: nums &#x3D; [4,3,1,2,4]<br>Output: 2<br>Explanation: There are 2 beautiful subarrays in nums: [4,3,1,2,4] and [4,3,1,2,4].</p><ul><li>We can make all elements in the subarray [3,1,2] equal to 0 in the following way:<ul><li>Choose [3, 1, 2] and k &#x3D; 1. Subtract 21 from both numbers. The subarray becomes [1, 1, 0].</li><li>Choose [1, 1, 0] and k &#x3D; 0. Subtract 20 from both numbers. The subarray becomes [0, 0, 0].</li></ul></li><li>We can make all elements in the subarray [4,3,1,2,4] equal to 0 in the following way:<ul><li>Choose [4, 3, 1, 2, 4] and k &#x3D; 2. Subtract 22 from both numbers. The subarray becomes [0, 3, 1, 2, 0].</li><li>Choose [0, 3, 1, 2, 0] and k &#x3D; 0. Subtract 20 from both numbers. The subarray becomes [0, 2, 0, 2, 0].</li><li>Choose [0, 2, 0, 2, 0] and k &#x3D; 1. Subtract 21 from both numbers. The subarray becomes [0, 0, 0, 0, 0].</li></ul></li></ul><p>Example 2:<br>Input: nums &#x3D; [1,10,4]<br>Output: 0<br>Explanation: There are no beautiful subarrays in nums.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 106</p><p>统计美丽子数组数目。</p><blockquote>给你一个下标从 0 开始的整数数组nums 。每次操作中，你可以：<ul><li>选择两个满足 0 &lt;&#x3D; i, j &lt; nums.length 的不同下标 i 和 j 。</li><li>选择一个非负整数 k ，满足 nums[i] 和 nums[j] 在二进制下的第 k 位（下标编号从 0 开始）是 1 。</li><li>将 nums[i] 和 nums[j] 都减去 2k 。</li></ul><p>如果一个子数组内执行上述操作若干次后，该子数组可以变成一个全为 0 的数组，那么我们称它是一个 美丽 的子数组。</p><p>请你返回数组 nums 中 美丽子数组 的数目。</p><p>子数组是一个数组中一段连续 非空 的元素序列。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是前缀和。注意题目要我们找的是<code>子数组</code>，子数组的特点是连续的。但是这种题一般不会允许你用<code>O(n^2)</code>的复杂度去解决，同时这道题还牵涉到如何把数字变成0，所以应该不是暴力解做。</p><p>我们可以把数字转换成二进制，看看是否能找到规律。比如对于数组<code>[4,3,1,2,4]</code>而言，他的二进制是</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">100<br>011<br>001<br>010<br>100<br></code></pre></td></tr></table></figure><p>因为题目要求我们每次只能选择两个不同数字来把他们某一位上的 1 变成 0，那么我们可以看每一位上 1 的个数是否为偶数个。如果某一位上有奇数个 1 的话就不行，因为题目要求我们找的是连续的子数组。那么既然是找连续的子数组他们在某一位上 1 的个数为偶数个的话，我们就可以用前缀和的思路解决。如果某一些数字他们的前缀和为0的话，就说明他们的二进制表达在每一位上 1 的个数为偶数个。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">beautifulSubarrays</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] presum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            presum[i + <span class="hljs-number">1</span>] = presum[i] ^ nums[i];<br>        &#125;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n + <span class="hljs-number">1</span>; i++) &#123;<br>            count += map.getOrDefault(presum[i], <span class="hljs-number">0</span>);<br>            map.put(presum[i], map.getOrDefault(presum[i], <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>prefix sum</tag>
+      
+      <tag>bit manipulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2506. Count Pairs Of Similar Strings</title>
     <link href="/posts/736386976.html"/>
     <url>/posts/736386976.html</url>
@@ -637,9 +664,9 @@
       
       <tag>java</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>flood fill</tag>
       
       <tag>simulation</tag>
       
