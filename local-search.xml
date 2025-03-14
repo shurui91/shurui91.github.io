@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2226. Maximum Candies Allocated to K Children</title>
+    <link href="/posts/2826717247.html"/>
+    <url>/posts/2826717247.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array candies. Each element in the array denotes a pile of candies of size candies[i]. You can divide each pile into any number of sub piles, but you cannot merge two piles together.</p><p>You are also given an integer k. You should allocate piles of candies to k children such that each child gets the same number of candies. Each child can be allocated candies from only one pile of candies and some piles of candies may go unused.</p><p>Return the maximum number of candies each child can get.</p><p>Example 1:<br>Input: candies &#x3D; [5,8,6], k &#x3D; 3<br>Output: 5<br>Explanation: We can divide candies[1] into 2 piles of size 5 and 3, and candies[2] into 2 piles of size 5 and 1. We now have five piles of candies of sizes 5, 5, 3, 5, and 1. We can allocate the 3 piles of size 5 to 3 children. It can be proven that each child cannot receive more than 5 candies.</p><p>Example 2:<br>Input: candies &#x3D; [2,5], k &#x3D; 11<br>Output: 0<br>Explanation: There are 11 children but only 7 candies in total, so it is impossible to ensure each child receives at least one candy. Thus, each child gets no candy and the answer is 0.</p><p>Constraints:<br>1 &lt;&#x3D; candies.length &lt;&#x3D; 105<br>1 &lt;&#x3D; candies[i] &lt;&#x3D; 107<br>1 &lt;&#x3D; k &lt;&#x3D; 1012</p><p>每个小孩最多能分到多少糖果。</p><blockquote>给你一个 下标从 0 开始 的整数数组 candies 。数组中的每个元素表示大小为 candies[i] 的一堆糖果。你可以将每堆糖果分成任意数量的 子堆 ，但 无法 再将两堆合并到一起。<p>另给你一个整数 k 。你需要将这些糖果分配给 k 个小孩，使每个小孩分到 相同 数量的糖果。每个小孩可以拿走 至多一堆 糖果，有些糖果可能会不被分配。</p><p>返回每个小孩可以拿走的 最大糖果数目。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是二分，而且是在答案上二分。</p><p>题目只允许我们把一堆糖果分成多个更小的堆，所以最后每个小孩能拿走的糖果数最大是不会超过糖果堆中的最大值的。所以我们可以二分这个最大值，然后判断是否能够分配给k个小孩。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumCandies</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candies, <span class="hljs-type">long</span> k)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> candy : candies) &#123;<br>            max = Math.max(max, candy);<br>            sum += candy;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-comment">// 总糖果数都不够 k 个孩子分配至少 1 颗，直接返回 0</span><br>        <span class="hljs-keyword">if</span> (sum &lt; k) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> max;<br>        <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (helper(candies, mid, k)) &#123;<br>                left = mid + <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                right = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> right;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] candies, <span class="hljs-type">long</span> count, <span class="hljs-type">long</span> k)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> candy : candies) &#123;<br>            res += candy / count;<br>            <span class="hljs-keyword">if</span> (res &gt;= k) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res &gt;= k;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>binary search</tag>
+      
+      <tag>binary search on answer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3101. Count Alternating Subarrays</title>
     <link href="/posts/3020850910.html"/>
     <url>/posts/3020850910.html</url>
@@ -128,9 +155,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>string</tag>
       
@@ -1323,9 +1350,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -1965,9 +1992,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
       <tag>sliding window</tag>
       
@@ -4116,9 +4143,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4228,9 +4255,9 @@
       
       <tag>array</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4259,9 +4286,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -5186,9 +5213,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5288,9 +5315,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5649,9 +5676,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
@@ -5814,9 +5841,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -5845,9 +5872,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -5901,9 +5928,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -6032,9 +6059,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -6086,9 +6113,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -6780,9 +6807,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>greedy</tag>
       
@@ -7108,9 +7135,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -7617,9 +7644,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -7698,9 +7725,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>prefix sum</tag>
       
@@ -7997,9 +8024,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8059,9 +8086,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8090,9 +8117,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8121,9 +8148,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8152,9 +8179,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8183,9 +8210,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -10156,11 +10183,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>two sum</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
