@@ -178,9 +178,9 @@
       
       <tag>sliding window with fixed size</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2470,9 +2470,9 @@
       
       <tag>MOD</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2555,9 +2555,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3087,9 +3087,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3890,11 +3890,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>math</tag>
       
       <tag>gcd</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -4222,9 +4222,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6138,9 +6138,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -7738,7 +7738,7 @@
     <link href="/posts/3921215091.html"/>
     <url>/posts/3921215091.html</url>
     
-    <content type="html"><![CDATA[<p>Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. The relative order of the elements should be kept the same.</p><p>Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.</p><p>Return k after placing the final result in the first k slots of nums.</p><p>Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.</p><p>Custom Judge:</p><p>The judge will test your solution with the following code:</p><p>int[] nums &#x3D; […]; &#x2F;&#x2F; Input array<br>int[] expectedNums &#x3D; […]; &#x2F;&#x2F; The expected answer with correct length</p><p>int k &#x3D; removeDuplicates(nums); &#x2F;&#x2F; Calls your implementation</p><p>assert k &#x3D;&#x3D; expectedNums.length;<br>for (int i &#x3D; 0; i &lt; k; i++) {<br>    assert nums[i] &#x3D;&#x3D; expectedNums[i];<br>}<br>If all assertions pass, then your solution will be accepted.</p><p>Example 1:<br>Input: nums &#x3D; [1,1,1,2,2,3]<br>Output: 5, nums &#x3D; [1,1,2,2,3,_]<br>Explanation: Your function should return k &#x3D; 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively.<br>It does not matter what you leave beyond the returned k (hence they are underscores).</p><p>Example 2:<br>Input: nums &#x3D; [0,0,1,1,1,1,2,3,3]<br>Output: 7, nums &#x3D; [0,0,1,1,2,3,3,<em>,</em>]<br>Explanation: Your function should return k &#x3D; 7, with the first seven elements of nums being 0, 0, 1, 1, 2, 3 and 3 respectively.<br>It does not matter what you leave beyond the returned k (hence they are underscores).</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 3 * 104<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104<br>nums is sorted in non-decreasing order.</p><p>删除排序数组中的重复项 II。</p><blockquote><p>给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。</p><p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii">https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p><p>思路跟 26 题版本一差不多，也是双指针，但是本题要求元素最多只能重复两次。这里我创建两个指针，其中 i 指向原数组，用这个指针遍历 input 数组中的元素；j 指向要写入的 index。i 和 j 初始化的时候都可设置成 2，因为前两个元素可以重复，不用考虑。从 index &#x3D; 2 的地方开始，我们看如果 nums[i] !&#x3D; nums[j - 2]，那么可以把 nums[i] 放到 j 位置。意思是如果 nums[i] 与写入位置 j 的前两个位置 j - 2 上的元素不同，则可以把这个元素写入结果。</p><p>这个思路可以延伸到元素最多只能重复 k 次的情况。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">removeDuplicates</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; nums.length) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != nums[j - <span class="hljs-number">2</span>]) &#123;<br>                nums[j] = nums[i];<br>                j++;<br>            &#125;<br>            i++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> removeDuplicates = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) &#123;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (nums.<span class="hljs-property">length</span> &lt;= <span class="hljs-number">2</span>) &#123;<br><span class="hljs-keyword">return</span> nums.<span class="hljs-property">length</span>;<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-keyword">let</span> j = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br><span class="hljs-keyword">if</span> (nums[i] !== nums[j - <span class="hljs-number">2</span>]) &#123;<br>nums[j] = nums[i];<br>j++;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> j;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. The relative order of the elements should be kept the same.</p><p>Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.</p><p>Return k after placing the final result in the first k slots of nums.</p><p>Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.</p><p>Custom Judge:</p><p>The judge will test your solution with the following code:</p><p>int[] nums &#x3D; […]; &#x2F;&#x2F; Input array<br>int[] expectedNums &#x3D; […]; &#x2F;&#x2F; The expected answer with correct length</p><p>int k &#x3D; removeDuplicates(nums); &#x2F;&#x2F; Calls your implementation</p><p>assert k &#x3D;&#x3D; expectedNums.length;<br>for (int i &#x3D; 0; i &lt; k; i++) {<br>    assert nums[i] &#x3D;&#x3D; expectedNums[i];<br>}<br>If all assertions pass, then your solution will be accepted.</p><p>Example 1:<br>Input: nums &#x3D; [1,1,1,2,2,3]<br>Output: 5, nums &#x3D; [1,1,2,2,3,_]<br>Explanation: Your function should return k &#x3D; 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively.<br>It does not matter what you leave beyond the returned k (hence they are underscores).</p><p>Example 2:<br>Input: nums &#x3D; [0,0,1,1,1,1,2,3,3]<br>Output: 7, nums &#x3D; [0,0,1,1,2,3,3,<em>,</em>]<br>Explanation: Your function should return k &#x3D; 7, with the first seven elements of nums being 0, 0, 1, 1, 2, 3 and 3 respectively.<br>It does not matter what you leave beyond the returned k (hence they are underscores).</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 3 * 104<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104<br>nums is sorted in non-decreasing order.</p><p>删除排序数组中的重复项 II。</p><blockquote><p>给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。</p><p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii">https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素最多出现两次，返回移除后数组的新长度。不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。</p><p>思路跟 26 题版本一差不多，也是双指针，但是本题要求元素最多只能重复两次。这里我创建两个指针，其中 i 指向原数组，用这个指针遍历 input 数组中的元素；j 指向要写入的 index。i 和 j 初始化的时候都可设置成 2，因为前两个元素可以重复，不用考虑。从 index &#x3D; 2 的地方开始，我们看如果 nums[i] !&#x3D; nums[j - 2]，那么可以把 nums[i] 放到 j 位置。意思是如果 nums[i] 与写入位置 j 的前两个位置 j - 2 上的元素不同，则可以把这个元素写入结果。</p><p>这个思路可以延伸到元素最多只能重复 k 次的情况。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">removeDuplicates</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != nums[j - <span class="hljs-number">2</span>]) &#123;<br>                nums[j++] = nums[i];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> removeDuplicates = <span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) &#123;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (nums.<span class="hljs-property">length</span> &lt;= <span class="hljs-number">2</span>) &#123;<br><span class="hljs-keyword">return</span> nums.<span class="hljs-property">length</span>;<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-keyword">let</span> j = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">2</span>; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br><span class="hljs-keyword">if</span> (nums[i] !== nums[j - <span class="hljs-number">2</span>]) &#123;<br>nums[j] = nums[i];<br>j++;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> j;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
