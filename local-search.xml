@@ -5292,9 +5292,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>sort</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -7726,6 +7726,37 @@
       <tag>javascript</tag>
       
       <tag>two sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 380. Insert Delete GetRandom O(1)</title>
+    <link href="/posts/2624115962.html"/>
+    <url>/posts/2624115962.html</url>
+    
+    <content type="html"><![CDATA[<p>Design a data structure that supports all following operations in average O(1) time.</p><p>insert(val): Inserts an item val to the set if not already present.<br>remove(val): Removes an item val from the set if present.<br>getRandom: Returns a random element from current set of elements.<br>Each element must have the same probability of being returned.</p><p>Example:<br>&#x2F;&#x2F; Init an empty set.<br>RandomizedSet randomSet &#x3D; new RandomizedSet();</p><p>&#x2F;&#x2F; Inserts 1 to the set. Returns true as 1 was inserted successfully.<br>randomSet.insert(1);</p><p>&#x2F;&#x2F; Returns false as 2 does not exist in the set.<br>randomSet.remove(2);</p><p>&#x2F;&#x2F; Inserts 2 to the set, returns true. Set now contains [1,2].<br>randomSet.insert(2);</p><p>&#x2F;&#x2F; getRandom should return either 1 or 2 randomly.<br>randomSet.getRandom();</p><p>&#x2F;&#x2F; Removes 1 from the set, returns true. Set now contains [2].<br>randomSet.remove(1);</p><p>&#x2F;&#x2F; 2 was already in the set, so return false.<br>randomSet.insert(2);</p><p>&#x2F;&#x2F; Since 2 is the only number in the set, getRandom always return 2.<br>randomSet.getRandom();</p><p>O(1) 时间插入、删除和获取随机元素。</p><blockquote>实现RandomizedSet 类：<p>RandomizedSet() 初始化 RandomizedSet 对象<br>bool insert(int val) 当元素 val 不存在时，向集合中插入该项，并返回 true ；否则，返回 false 。<br>bool remove(int val) 当元素 val 存在时，从集合中移除该项，并返回 true ；否则，返回 false 。<br>int getRandom() 随机返回现有集合中的一项（测试用例保证调用此方法时集合中至少存在一个元素）。每个元素应该有 相同的概率 被返回。<br>你必须实现类的所有函数，并满足每个函数的 平均 时间复杂度为 O(1) 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/insert-delete-getrandom-o1">https://leetcode.cn/problems/insert-delete-getrandom-o1</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>大致思路是用一个 hashmap 和一个 list 来实现。其中 list 只是存元素，hashmap 存的是&lt;元素，他在 list 里的下标&gt;。</p><p>既然题目对所有操作的复杂度要求都是 O(1)，那么大概率需要用到 hashmap，因为元素本身在 list 中，在不知道 list 下标的情况下去删除一个元素的复杂度肯定是不止 O(1) 的。又因为我们是没有一个数据结构既能支持 O(1) 级别的读取，又能做到有序，所以这里 hashmap 里存的是&lt;元素，他在 list 里的下标&gt;。同时再创建一个 list，只存储元素。</p><p>insert 元素的时候，将 val 和当前 list 的 size 当做 key 和 value 加入 hashmap；同时将 val 加入 list，注意此时 list 的 size 跟加入元素的 index 的关系，list 的 size 始终比 index 大 1，因为 index 是从 0 开始的。</p><p>remove 的时候，如果这个元素不在 hashmap 自然是 return false，若存在，则把 val 从 hashmap 中移除，同时 map.remove() 函数也能得到当时这个元素在 list 中的 index。如果这个 index 不等于当前 list 的 size 则说明这个要被移除的元素在 list 中不是位于最后一个元素，此时要做的是移除 list 的最后一个元素，并把他覆盖到被移除元素所在的 index 上去。这样才能做到 list 的其他操作为 O(1)，而且这里把最后一个元素替换被移除的元素的位置上是不影响最后结果的，这里我们的重点是不要让 list 的相关操作大于 O(1) 的复杂度。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">跑一个例子吧，比如一开始加了 1,2,3,4,5 五个数字，他们被加入的时候，hashmap 和 list 应该长类似这样<br><br>map: &#123;1:0, 2:1, 3:2, 4:3, 5:4&#125;<br>list: 1-&gt;2-&gt;3-&gt;4-&gt;5<br><br>此时如果删除了数字 2，hashmap 和 list 会变成这样，最后一个元素 5 会被覆盖到 list 上 index 为 2 的地方。<br>map: &#123;1:0, 5:1, 3:2, 4:3&#125;<br>list: 1-&gt;5-&gt;3-&gt;4<br></code></pre></td></tr></table></figure><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomizedSet</span> &#123;<br>HashMap&lt;Integer, Integer&gt; map;<br>List&lt;Integer&gt; list;<br>Random rmd;<br><br><span class="hljs-comment">/** Initialize your data structure here. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">RandomizedSet</span><span class="hljs-params">()</span> &#123;<br>map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>rmd = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>&#125;<br><br><span class="hljs-comment">/** Inserts a value to the set. Returns true if the set did not already contain the specified element. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br><span class="hljs-keyword">if</span> (map.containsKey(val)) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br>map.put(val, list.size());<br>list.add(val);<br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">/** Removes a value from the set. Returns true if the set contained the specified element. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> &#123;<br><span class="hljs-keyword">if</span> (!map.containsKey(val)) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><span class="hljs-comment">// the index of the removed key</span><br><span class="hljs-type">int</span> <span class="hljs-variable">removedKeyIndex</span> <span class="hljs-operator">=</span> map.remove(val);<br><span class="hljs-type">int</span> <span class="hljs-variable">lastVal</span> <span class="hljs-operator">=</span> list.remove(list.size() - <span class="hljs-number">1</span>);<br><span class="hljs-keyword">if</span> (removedKeyIndex != list.size()) &#123;<br>list.set(removedKeyIndex, lastVal);<br>map.put(lastVal, removedKeyIndex);<br>&#125;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">/** Get a random element from the set. */</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRandom</span><span class="hljs-params">()</span> &#123;<br><span class="hljs-keyword">return</span> list.get(rmd.nextInt(list.size()));<br>&#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your RandomizedSet object will be instantiated and called as such:</span><br><span class="hljs-comment"> * RandomizedSet obj = new RandomizedSet();</span><br><span class="hljs-comment"> * boolean param_1 = obj.insert(val);</span><br><span class="hljs-comment"> * boolean param_2 = obj.remove(val);</span><br><span class="hljs-comment"> * int param_3 = obj.getRandom();</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+      <tag>math</tag>
+      
+      <tag>design</tag>
+      
+      <tag>random</tag>
       
     </tags>
     
