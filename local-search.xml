@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2712. Minimum Cost to Make All Characters Equal</title>
+    <link href="/posts/1386992953.html"/>
+    <url>/posts/1386992953.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed binary string s of length n on which you can apply two types of operations:</p><p>Choose an index i and invert all characters from index 0 to index i (both inclusive), with a cost of i + 1<br>Choose an index i and invert all characters from index i to index n - 1 (both inclusive), with a cost of n - i<br>Return the minimum cost to make all characters of the string equal.</p><p>Invert a character means if its value is ‘0’ it becomes ‘1’ and vice-versa.</p><p>Example 1:<br>Input: s &#x3D; “0011”<br>Output: 2<br>Explanation: Apply the second operation with i &#x3D; 2 to obtain s &#x3D; “0000” for a cost of 2. It can be shown that 2 is the minimum cost to make all characters equal.</p><p>Example 2:<br>Input: s &#x3D; “010101”<br>Output: 9<br>Explanation: Apply the first operation with i &#x3D; 2 to obtain s &#x3D; “101101” for a cost of 3.<br>Apply the first operation with i &#x3D; 1 to obtain s &#x3D; “011101” for a cost of 2.<br>Apply the first operation with i &#x3D; 0 to obtain s &#x3D; “111101” for a cost of 1.<br>Apply the second operation with i &#x3D; 4 to obtain s &#x3D; “111110” for a cost of 2.<br>Apply the second operation with i &#x3D; 5 to obtain s &#x3D; “111111” for a cost of 1.<br>The total cost to make all characters equal is 9. It can be shown that 9 is the minimum cost to make all characters equal.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &#x3D;&#x3D; n &lt;&#x3D; 105<br>s[i] is either ‘0’ or ‘1’</p><p>使所有字符相等的最小成本。</p><blockquote>给你一个下标从 0 开始、长度为 n 的二进制字符串 s ，你可以对其执行两种操作：<p>选中一个下标 i 并且反转从下标 0 到下标 i（包括下标 0 和下标 i ）的所有字符，成本为 i + 1 。<br>选中一个下标 i 并且反转从下标 i 到下标 n - 1（包括下标 i 和下标 n - 1 ）的所有字符，成本为 n - i 。<br>返回使字符串内所有字符 相等 需要的 最小成本 。</p><p>反转 字符意味着：如果原来的值是 ‘0’ ，则反转后值变为 ‘1’ ，反之亦然。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。题目定义了在下标 i 处反转的成本是 i + 1 或 n - i。如果在某个下标 i 处我们发现他与前一个位置 i - 1 处的字符不一样，那么我们一定要做一次翻转操作。翻转的成本是翻转<code>从下标 0 到下标 i</code>与<code>从下标 i 到下标 n - 1</code>的最小值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n) - char array</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">minimumCost</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">char</span>[] letters = s.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (letters[i] != letters[i - <span class="hljs-number">1</span>]) &#123;<br>                res += Math.min(i, n - i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>dynamic programming</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3191. Minimum Operations to Make Binary Array Elements Equal to One I</title>
     <link href="/posts/142150626.html"/>
     <url>/posts/142150626.html</url>
@@ -4334,9 +4361,9 @@
       
       <tag>array</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4365,9 +4392,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -5394,9 +5421,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5755,9 +5782,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
