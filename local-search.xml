@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2780. Minimum Index of a Valid Split</title>
+    <link href="/posts/2582969194.html"/>
+    <url>/posts/2582969194.html</url>
+    
+    <content type="html"><![CDATA[<p>An element x of an integer array arr of length m is dominant if more than half the elements of arr have a value of x.</p><p>You are given a 0-indexed integer array nums of length n with one dominant element.</p><p>You can split nums at an index i into two arrays nums[0, …, i] and nums[i + 1, …, n - 1], but the split is only valid if:<br>0 &lt;&#x3D; i &lt; n - 1</p><p>nums[0, …, i], and nums[i + 1, …, n - 1] have the same dominant element.<br>Here, nums[i, …, j] denotes the subarray of nums starting at index i and ending at index j, both ends being inclusive. Particularly, if j &lt; i then nums[i, …, j] denotes an empty subarray.</p><p>Return the minimum index of a valid split. If no valid split exists, return -1.</p><p>Example 1:<br>Input: nums &#x3D; [1,2,2,2]<br>Output: 2<br>Explanation: We can split the array at index 2 to obtain arrays [1,2,2] and [2].<br>In array [1,2,2], element 2 is dominant since it occurs twice in the array and 2 * 2 &gt; 3.<br>In array [2], element 2 is dominant since it occurs once in the array and 1 * 2 &gt; 1.<br>Both [1,2,2] and [2] have the same dominant element as nums, so this is a valid split.<br>It can be shown that index 2 is the minimum index of a valid split. </p><p>Example 2:<br>Input: nums &#x3D; [2,1,3,1,1,1,7,1,2,1]<br>Output: 4<br>Explanation: We can split the array at index 4 to obtain arrays [2,1,3,1,1] and [1,7,1,2,1].<br>In array [2,1,3,1,1], element 1 is dominant since it occurs thrice in the array and 3 * 2 &gt; 5.<br>In array [1,7,1,2,1], element 1 is dominant since it occurs thrice in the array and 3 * 2 &gt; 5.<br>Both [2,1,3,1,1] and [1,7,1,2,1] have the same dominant element as nums, so this is a valid split.<br>It can be shown that index 4 is the minimum index of a valid split.</p><p>Example 3:<br>Input: nums &#x3D; [3,3,3,3,7,2,2]<br>Output: -1<br>Explanation: It can be shown that there is no valid split.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 109<br>nums has exactly one dominant element.</p><p>合法分割的最小下标。</p><blockquote>如果在长度为 m 的整数数组 arr 中 超过一半 的元素值为 x，那么我们称 x 是 支配元素 。<p>给你一个下标从 0 开始长度为 n 的整数数组 nums ，数据保证它含有一个 支配 元素。</p><p>你需要在下标 i 处将 nums 分割成两个数组 nums[0, …, i] 和 nums[i + 1, …, n - 1] ，如果一个分割满足以下条件，我们称它是 合法 的：</p><ul><li>0 &lt;&#x3D; i &lt; n - 1</li><li>nums[0, …, i] 和 nums[i + 1, …, n - 1] 的支配元素相同。<br>这里， nums[i, …, j] 表示 nums 的一个子数组，它开始于下标 i ，结束于下标 j ，两个端点都包含在子数组内。特别地，如果 j &lt; i ，那么 nums[i, …, j] 表示一个空数组。</li></ul><p>请你返回一个 合法分割 的 最小 下标。如果合法分割不存在，返回 -1 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>遍历两遍数组。第一遍扫描的时候用投票法找到 input 数组里的众数，记为 <code>candidate</code>。第二遍扫描的时候，根据当前的下标 i 分别计算 i 左侧和右侧的众数是不是依然是<code>candidate</code>，如果是，那么这个下标 i 就是一个合法的分割点。找到第一个分割点即可返回了。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumIndex</span><span class="hljs-params">(List&lt;Integer&gt; nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> nums.get(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.size();<br><br>        <span class="hljs-comment">// 使用 Boyer-Moore 投票法找到可能的众数</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums.get(i) == candidate) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                count--;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (count == <span class="hljs-number">0</span>) &#123;<br>                candidate = nums.get(i);<br>                count = <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 计算 candidate 在整个 nums 数组中出现的真实次数</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">totalCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            <span class="hljs-keyword">if</span> (num == candidate) &#123;<br>                totalCount++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 再次遍历数组，寻找符合条件的最小索引</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums.get(i) == candidate) &#123;<br>                left++;<br>            &#125;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> totalCount - left; <span class="hljs-comment">// 右侧 candidate 的个数</span><br>            <span class="hljs-keyword">if</span> ((left * <span class="hljs-number">2</span> &gt; i + <span class="hljs-number">1</span>) &amp;&amp; (right * <span class="hljs-number">2</span> &gt; n - i - <span class="hljs-number">1</span>)) &#123;<br>                <span class="hljs-keyword">return</span> i;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">169. Majority Element<br>229. Majority Element II<br>2780. Minimum Index of a Valid Split<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2033. Minimum Operations to Make a Uni-Value Grid</title>
     <link href="/posts/1353802250.html"/>
     <url>/posts/1353802250.html</url>
@@ -20,11 +45,11 @@
       
       <tag>java</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
       
       <tag>math</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -234,9 +259,9 @@
       
       <tag>sliding window with fixed size</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2526,9 +2551,9 @@
       
       <tag>MOD</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2611,9 +2636,9 @@
       
       <tag>greedy</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3143,9 +3168,9 @@
       
       <tag>greedy</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3316,9 +3341,9 @@
       
       <tag>greedy</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -3368,9 +3393,9 @@
       
       <tag>java</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -3946,11 +3971,11 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
       
       <tag>gcd</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4278,9 +4303,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -5348,9 +5373,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>sort</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -6194,9 +6219,9 @@
       
       <tag>tree</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
