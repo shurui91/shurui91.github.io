@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2874. Maximum Value of an Ordered Triplet II</title>
+    <link href="/posts/2040191415.html"/>
+    <url>/posts/2040191415.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array nums.</p><p>Return the maximum value over all triplets of indices (i, j, k) such that i &lt; j &lt; k. If all such triplets have a negative value, return 0.</p><p>The value of a triplet of indices (i, j, k) is equal to (nums[i] - nums[j]) * nums[k].</p><p>Example 1:<br>Input: nums &#x3D; [12,6,1,2,7]<br>Output: 77<br>Explanation: The value of the triplet (0, 2, 4) is (nums[0] - nums[2]) * nums[4] &#x3D; 77.<br>It can be shown that there are no ordered triplets of indices with a value greater than 77. </p><p>Example 2:<br>Input: nums &#x3D; [1,10,3,4,19]<br>Output: 133<br>Explanation: The value of the triplet (1, 2, 4) is (nums[1] - nums[2]) * nums[4] &#x3D; 133.<br>It can be shown that there are no ordered triplets of indices with a value greater than 133.</p><p>Example 3:<br>Input: nums &#x3D; [1,2,3]<br>Output: 0<br>Explanation: The only ordered triplet of indices (0, 1, 2) has a negative value of (nums[0] - nums[1]) * nums[2] &#x3D; -3. Hence, the answer would be 0.</p><p>Constraints:<br>3 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 106</p><p>有序三元组中的最大值 II。</p><blockquote>给你一个下标从 0 开始的整数数组 nums 。<p>请你从所有满足 i &lt; j &lt; k 的下标三元组 (i, j, k) 中，找出并返回下标三元组的最大值。如果所有满足条件的三元组的值都是负数，则返回 0 。</p><p>下标三元组 (i, j, k) 的值等于 (nums[i] - nums[j]) * nums[k] 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>注意题目要求我们找的是一个<code>有序</code>的三元组，满足 i &lt; j &lt; k。那就意味着我们不能对 input 数组排序。</p><p>不能排序的话，乍一看这个题是需要三个 for 循环，但是我们可以通过维护两边的最大值，然后枚举中间的值，这样就可以在 <code>O(n)</code> 的时间复杂度内解决这个问题。而且因为计算的公式是<code>(nums[i] - nums[j]) * nums[k]</code>，所以我们可以以 j 为基准，找最大的 nums[i] 和 nums[k]。</p><p>所以具体做法是，创建两个和 input 数组等长的数组，记录对于每个 index 上的元素，它<code>左侧</code>和<code>右侧</code>最大的元素。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">maximumTripletValue</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] preMax = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            preMax[i] = max;<br>            max = Math.max(max, nums[i]);<br>        &#125;<br><br>        <span class="hljs-type">int</span>[] sufMax = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        max = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            sufMax[i] = max;<br>            max = Math.max(max, nums[i]);<br>        &#125;<br><br>        <span class="hljs-type">long</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; n - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span> * (preMax[j] - nums[j]) * sufMax[j];<br>            res = Math.max(res, cur);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">2873. Maximum Value of an Ordered Triplet I<br>2874. Maximum Value of an Ordered Triplet II<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>array</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>two sum</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2780. Minimum Index of a Valid Split</title>
     <link href="/posts/2582969194.html"/>
     <url>/posts/2582969194.html</url>
@@ -47,9 +74,9 @@
       
       <tag>sort</tag>
       
-      <tag>math</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -259,9 +286,9 @@
       
       <tag>sliding window with fixed size</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -315,9 +342,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>two sum</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>two sum</tag>
       
       <tag>string</tag>
       
@@ -425,9 +452,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>treemap</tag>
-      
       <tag>design</tag>
+      
+      <tag>treemap</tag>
       
     </tags>
     
@@ -1067,11 +1094,11 @@
       
       <tag>hashmap</tag>
       
-      <tag>treemap</tag>
-      
       <tag>binary search</tag>
       
       <tag>design</tag>
+      
+      <tag>treemap</tag>
       
     </tags>
     
@@ -1510,9 +1537,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>two sum</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>two sum</tag>
       
       <tag>MOD</tag>
       
@@ -2152,9 +2179,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -2551,9 +2578,9 @@
       
       <tag>MOD</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2636,9 +2663,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2692,9 +2719,9 @@
       
       <tag>array</tag>
       
-      <tag>treemap</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>treemap</tag>
       
       <tag>bst</tag>
       
@@ -3168,9 +3195,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3971,11 +3998,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>math</tag>
       
       <tag>gcd</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -4303,9 +4330,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4475,9 +4502,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>sort</tag>
       
@@ -4789,9 +4816,9 @@
       
       <tag>java</tag>
       
-      <tag>treemap</tag>
-      
       <tag>design</tag>
+      
+      <tag>treemap</tag>
       
     </tags>
     
@@ -5369,9 +5396,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>sliding window</tag>
       
@@ -5450,9 +5477,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6001,9 +6028,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -6032,9 +6059,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -6088,9 +6115,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -6219,9 +6246,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6273,9 +6300,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>two sum</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>two sum</tag>
       
       <tag>MOD</tag>
       
@@ -6992,9 +7019,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>greedy</tag>
       
@@ -7320,9 +7347,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -7351,13 +7378,13 @@
       
       <tag>hashmap</tag>
       
-      <tag>treemap</tag>
+      <tag>binary search</tag>
       
       <tag>string</tag>
       
-      <tag>binary search</tag>
-      
       <tag>design</tag>
+      
+      <tag>treemap</tag>
       
     </tags>
     
@@ -7829,9 +7856,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
@@ -7941,9 +7968,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>prefix sum</tag>
       
@@ -8240,9 +8267,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -8302,9 +8329,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -8333,9 +8360,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -8364,9 +8391,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -8395,9 +8422,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -8426,9 +8453,9 @@
       
       <tag>javascript</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sliding window</tag>
       
@@ -10511,11 +10538,11 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>hashmap</tag>
       
       <tag>two sum</tag>
+      
+      <tag>two pointer</tag>
       
     </tags>
     
