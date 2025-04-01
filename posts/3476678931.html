@@ -16,25 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+    <meta name="description" content="There are a number of spherical balloons spread in two-dimensional space. For each balloon, provided input is the start and end coordinates of the horizontal diameter. Since it’s horizontal, y-coordin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1002. Find Common Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/92520130.html">
+<meta property="og:title" content="[LeetCode] 452. Minimum Number of Arrows to Burst Balloons">
+<meta property="og:url" content="https://shurui91.github.io/posts/3476678931.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+<meta property="og:description" content="There are a number of spherical balloons spread in two-dimensional space. For each balloon, provided input is the start and end coordinates of the horizontal diameter. Since it’s horizontal, y-coordin">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-31T15:45:05.000Z">
-<meta property="article:modified_time" content="2024-06-05T16:26:22.354Z">
+<meta property="article:published_time" content="2020-03-04T21:09:25.000Z">
+<meta property="article:modified_time" content="2025-04-01T02:28:03.448Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="sort">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1002. Find Common Characters - CNoodle</title>
+  <title>[LeetCode] 452. Minimum Number of Arrows to Burst Balloons - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1002. Find Common Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 452. Minimum Number of Arrows to Burst Balloons"></span>
           
         </div>
 
@@ -199,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-31 08:45" pubdate>
-          March 31, 2020 am
+        <time datetime="2020-03-04 13:09" pubdate>
+          March 4, 2020 pm
         </time>
       </span>
     
@@ -211,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.3k words
         
       </span>
     
@@ -222,7 +223,7 @@
         
         
         
-          12 mins
+          19 mins
         
       </span>
     
@@ -259,26 +260,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1002. Find Common Characters</h1>
+            <h1 id="seo-header">[LeetCode] 452. Minimum Number of Arrows to Burst Balloons</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.</p>
-<p>Example 1:<br>Input: words &#x3D; [“bella”,”label”,”roller”]<br>Output: [“e”,”l”,”l”]</p>
-<p>Example 2:<br>Input: words &#x3D; [“cool”,”lock”,”cook”]<br>Output: [“c”,”o”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consists of lowercase English letters.</p>
-<p>查找共用字符。</p>
+                <p>There are a number of spherical balloons spread in two-dimensional space. For each balloon, provided input is the start and end coordinates of the horizontal diameter. Since it’s horizontal, y-coordinates don’t matter and hence the x-coordinates of start and end of the diameter suffice. Start is always smaller than end. There will be at most 104 balloons.</p>
+<p>An arrow can be shot up exactly vertically from different points along the x-axis. A balloon with xstart and xend bursts by an arrow shot at x if xstart ≤ x ≤ xend. There is no limit to the number of arrows that can be shot. An arrow once shot keeps travelling up infinitely. The problem is to find the minimum number of arrows that must be shot to burst all balloons.</p>
+<p>Example:<br>Input:<br>[[10,16], [2,8], [1,6], [7,12]]</p>
+<p>Output:<br>2</p>
+<p>Explanation:<br>One way is to shoot one arrow for example at x &#x3D; 6 (bursting the balloons [2,8] and [1,6]) and another arrow at x &#x3D; 11 (bursting the other two balloons).</p>
+<p>用最少数量的箭引爆气球。</p>
 <blockquote>
-给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。
+有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组 points ，其中points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend之间的气球。你不知道气球的确切 y 坐标。
+
+<p>一支弓箭可以沿着 x 轴从不同点 完全垂直 地射出。在坐标 x 处射出一支箭，若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，则该气球会被 引爆 。可以射出的弓箭的数量 没有限制 。 弓箭一旦被射出之后，可以无限地前进。</p>
+<p>给你一个数组 points ，返回引爆所有气球所必须射出的 最小 弓箭数 。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons">https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个装了单词的数组，请求出这些单词里面共同的字母，以 list 形式输出。如果有多个相同的字母也需要多次输出。</p>
-<p>思路是用 hashmap 记录 input 中第一个单词里面每个字母的出现次数，然后从第二个单词开始，也是去计算每个字母出现的次数，但是把某个字母在某个单词中出现的最少的次数加入结果集。举个例子，比如 cool 里面 o 出现了两次，但是在 lock 里面 o 只出现了一次，记录 o 的时候只记录最少的出现次数。最后遍历结果集里面每个单词，根据次数拼接成最后要输出的 list。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n) - n 个单词 * 每个单词的平均长度 m<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给一个数组，数组里面存的是类似 [left, right] 这样的区间，left 和 right 分别代表气球直径的起点和终点。求问如果要引爆所有的气球最少需要几只箭。</p>
+<p>思路是贪心，类似会议室二。先对所有气球直径的终点排序，然后以第一个气球的终点为起点开始看，如果第二个气球的起点大于第一个气球的终点，就说明两个气球不重叠，则需要另一个箭；同时挪动 end 指针到第二个气球的终点。end 指针可以理解为箭指向的位置，如果下一个气球的起点跟箭不重叠，则需要下一个箭了。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">commonChars</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : first.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">int</span>[] letters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cur.toCharArray()) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++) &#123;<br>                map[j] = Math.min(map[j], letters[j]);<br>            &#125;<br>        &#125;<br><br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (i + <span class="hljs-string">&#x27;a&#x27;</span>);<br>                res.add(c + <span class="hljs-string">&quot;&quot;</span>);<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMinArrowShots</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] points)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> points.length;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (points == <span class="hljs-literal">null</span> || len == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        Arrays.sort(points, (a, b) -&gt; Integer.compare(a[<span class="hljs-number">1</span>], b[<span class="hljs-number">1</span>]));<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> points[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; len; i++) &#123;<br>            <span class="hljs-keyword">if</span> (end &lt; points[i][<span class="hljs-number">0</span>]) &#123;<br>                res++;<br>                end = points[i][<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[][]</span>&#125; <span class="hljs-variable">points</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findMinArrowShots = <span class="hljs-keyword">function</span> (<span class="hljs-params">points</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (points === <span class="hljs-literal">null</span> || points.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">// normal case</span><br>    points = points.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">let</span> firstEnd = points[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; points.<span class="hljs-property">length</span>; i++) &#123;<br>        <span class="hljs-keyword">if</span> (points[i][<span class="hljs-number">0</span>] &gt; firstEnd) &#123;<br>            res++;<br>            firstEnd = points[i][<span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -297,7 +307,9 @@
       
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+      
+        <a href="/tags/sort/" class="print-no-link">#sort</a>
       
     </div>
   
@@ -309,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1002. Find Common Characters</div>
-      <div>https://shurui91.github.io/posts/92520130.html</div>
+      <div>[LeetCode] 452. Minimum Number of Arrows to Burst Balloons</div>
+      <div>https://shurui91.github.io/posts/3476678931.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 31, 2020</div>
+          <div>March 4, 2020</div>
         </div>
       
       
@@ -354,9 +366,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1351088998.html" title="[LeetCode] 419. Battleships in a Board">
+                      <a href="/posts/811798551.html" title="[LeetCode] 55. Jump Game">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 419. Battleships in a Board</span>
+                        <span class="hidden-mobile">[LeetCode] 55. Jump Game</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +376,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1415125802.html" title="[LeetCode] 999. Available Captures for Rooks">
-                        <span class="hidden-mobile">[LeetCode] 999. Available Captures for Rooks</span>
+                      <a href="/posts/479904417.html" title="[LeetCode] 225. Implement Stack using Queues">
+                        <span class="hidden-mobile">[LeetCode] 225. Implement Stack using Queues</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +397,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/92520130.html';
-          this.page.identifier = '/posts/92520130.html';
+          this.page.url = 'https://shurui91.github.io/posts/3476678931.html';
+          this.page.identifier = '/posts/3476678931.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
