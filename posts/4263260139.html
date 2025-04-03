@@ -16,26 +16,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="Given an input string, reverse the string word by word. Example 1:Input: “the sky is blue”Output: “blue is sky the” Example 2:Input: “  hello world!  “Output: “world! hello”Explanation: Your reversed">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 151. Reverse Words in a String">
+<meta property="og:url" content="https://shurui91.github.io/posts/4263260139.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="Given an input string, reverse the string word by word. Example 1:Input: “the sky is blue”Output: “blue is sky the” Example 2:Input: “  hello world!  “Output: “world! hello”Explanation: Your reversed">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2020-03-24T12:19:33.000Z">
+<meta property="article:modified_time" content="2025-04-03T18:50:16.280Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 151. Reverse Words in a String - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 151. Reverse Words in a String"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2020-03-24 05:19" pubdate>
+          March 24, 2020 am
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.7k words
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          12 mins
+          23 mins
         
       </span>
     
@@ -260,26 +260,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 151. Reverse Words in a String</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>Given an input string, reverse the string word by word.</p>
+<p>Example 1:<br>Input: “the sky is blue”<br>Output: “blue is sky the”</p>
+<p>Example 2:<br>Input: “  hello world!  “<br>Output: “world! hello”<br>Explanation: Your reversed string should not contain leading or trailing spaces.</p>
+<p>Example 3:<br>Input: “a good   example”<br>Output: “example good a”<br>Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.</p>
+<p>Note:<br>A word is defined as a sequence of non-space characters.<br>Input string may contain leading or trailing spaces. However, your reversed string should not contain leading or trailing spaces.<br>You need to reduce multiple spaces between two words to a single space in the reversed string.</p>
+<p>翻转字符串中的单词。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
+给你一个字符串 s ，请你反转字符串中 单词 的顺序。
+
+<p>单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开。</p>
+<p>返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。</p>
+<p>注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string">https://leetcode.cn/problems/reverse-words-in-a-string</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+
+<h2 id="思路一-正则表达"><a href="#思路一-正则表达" class="headerlink" title="思路一 - 正则表达"></a>思路一 - 正则表达</h2><p>题意不难理解，我感觉这道题就是要考察代码熟练程度的。</p>
+<p>我们要对 input 做预处理，一种情况是去掉 input 前后多余的空格，还有就是单词之间的多余空格也要去掉，每两个单词之间只留一个空格即可。思路是先把 input 字符串分开成数组，再将数组 reverse，最后将数组的每个元素拼接成字符串。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseWords</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> s;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-comment">// trim 前后 skip 中间的回车 空格之类的东西</span><br>        String[] words = s.trim().split(<span class="hljs-string">&quot;\\s+&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> words.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            sb.append(words[i] + <span class="hljs-string">&quot; &quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString().trim();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路二-双指针"><a href="#思路二-双指针" class="headerlink" title="思路二 - 双指针"></a>思路二 - 双指针</h2><p>这种思路是 trim 完 input 之后，从后往前开始遍历 input，用双指针卡住单词。先移动其中一个指针，当遇到空格的时候就需要截取单词了；将单词加入结果集之后记得要跳过单词之间的空格。具体参见代码注释。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">reverseWords</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> s;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-comment">// 去掉input边缘无效的空格</span><br>        <span class="hljs-comment">// &quot; test   &quot;</span><br>        s = s.trim();<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-comment">// 卡住每个单词的左右指针</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> s.length() - <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> start;<br>        <span class="hljs-keyword">while</span> (start &gt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-comment">// 未遇到空格之前，左指针一直往左走</span><br>            <span class="hljs-keyword">while</span> (start &gt;= <span class="hljs-number">0</span> &amp;&amp; s.charAt(start) != <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                start--;<br>            &#125;<br>            <span class="hljs-comment">// 卡住单词，注意subtring是左闭右开的</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">word</span> <span class="hljs-operator">=</span> s.substring(start + <span class="hljs-number">1</span>, end + <span class="hljs-number">1</span>);<br>            sb.append(word);<br>            sb.append(<span class="hljs-string">&#x27; &#x27;</span>);<br>            <span class="hljs-comment">// 把左右指针移动到下一个不是空格的位置上接着找下一个单词</span><br>            <span class="hljs-keyword">while</span> (start &gt;= <span class="hljs-number">0</span> &amp;&amp; s.charAt(start) == <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                start--;<br>            &#125;<br>            end = start;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString().trim();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">string</span>&#125; <span class="hljs-variable">s</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">string</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> reverseWords = <span class="hljs-keyword">function</span> (<span class="hljs-params">s</span>) &#123;<br>    <span class="hljs-keyword">return</span> s<br>        .<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27; &#x27;</span>)               <span class="hljs-comment">//create an array of words separated based by spaces</span><br>        .<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> string) <span class="hljs-comment">//remove empty strings to take care of extra whitespace</span><br>        .<span class="hljs-title function_">reverse</span>()                <span class="hljs-comment">//reverse the array of words</span><br>        .<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27; &#x27;</span>);               <span class="hljs-comment">//join the words back together with spaces inbetween</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">151. Reverse Words in a String<br>186. Reverse Words in a String II<br>344. Reverse String<br>541. Reverse String II<br>557. Reverse Words in a String III<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -296,9 +315,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
       
@@ -312,8 +331,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 151. Reverse Words in a String</div>
+      <div>https://shurui91.github.io/posts/4263260139.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>March 24, 2020</div>
         </div>
       
       
@@ -357,9 +376,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
+                      <a href="/posts/298596106.html" title="[LeetCode] 201. Bitwise AND of Numbers Range">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
+                        <span class="hidden-mobile">[LeetCode] 201. Bitwise AND of Numbers Range</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -367,8 +386,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/946488007.html" title="[LeetCode] 876. Middle of the Linked List">
+                        <span class="hidden-mobile">[LeetCode] 876. Middle of the Linked List</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +407,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/4263260139.html';
+          this.page.identifier = '/posts/4263260139.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
