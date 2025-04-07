@@ -16,25 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+    <meta name="description" content="Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1002. Find Common Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/92520130.html">
+<meta property="og:title" content="[LeetCode] 16. 3Sum Closest">
+<meta property="og:url" content="https://shurui91.github.io/posts/1495533668.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+<meta property="og:description" content="Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-31T15:45:05.000Z">
-<meta property="article:modified_time" content="2024-06-05T16:26:22.354Z">
+<meta property="article:published_time" content="2019-11-13T17:08:02.000Z">
+<meta property="article:modified_time" content="2025-04-07T22:01:16.792Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="javascript">
 <meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="two pointer">
+<meta property="article:tag" content="two sum">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1002. Find Common Characters - CNoodle</title>
+  <title>[LeetCode] 16. 3Sum Closest - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1002. Find Common Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 16. 3Sum Closest"></span>
           
         </div>
 
@@ -199,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-31 08:45" pubdate>
-          March 31, 2020 am
+        <time datetime="2019-11-13 09:08" pubdate>
+          November 13, 2019 am
         </time>
       </span>
     
@@ -211,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.1k words
         
       </span>
     
@@ -222,7 +224,7 @@
         
         
         
-          12 mins
+          18 mins
         
       </span>
     
@@ -259,26 +261,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1002. Find Common Characters</h1>
+            <h1 id="seo-header">[LeetCode] 16. 3Sum Closest</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.</p>
-<p>Example 1:<br>Input: words &#x3D; [“bella”,”label”,”roller”]<br>Output: [“e”,”l”,”l”]</p>
-<p>Example 2:<br>Input: words &#x3D; [“cool”,”lock”,”cook”]<br>Output: [“c”,”o”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consists of lowercase English letters.</p>
-<p>查找共用字符。</p>
+                <p>Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.</p>
+<p>Return the sum of the three integers.</p>
+<p>You may assume that each input would have exactly one solution.</p>
+<p>Example 1:<br>Input: nums &#x3D; [-1,2,1,-4], target &#x3D; 1<br>Output: 2<br>Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 &#x3D; 2).</p>
+<p>Example 2:<br>Input: nums &#x3D; [0,0,0], target &#x3D; 1<br>Output: 0<br>Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 &#x3D; 0).</p>
+<p>Constraints:<br>3 &lt;&#x3D; nums.length &lt;&#x3D; 500<br>-1000 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>-104 &lt;&#x3D; target &lt;&#x3D; 104</p>
+<p>最接近的三数之和。</p>
 <blockquote>
-给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。
+给你一个长度为 n 的整数数组 nums 和 一个目标值 target。请你从 nums 中选出三个整数，使它们的和与 target 最接近。
+
+<p>返回这三个数的和。</p>
+<p>假定每组输入只存在恰好一个解。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum-closest">https://leetcode.cn/problems/3sum-closest</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个装了单词的数组，请求出这些单词里面共同的字母，以 list 形式输出。如果有多个相同的字母也需要多次输出。</p>
-<p>思路是用 hashmap 记录 input 中第一个单词里面每个字母的出现次数，然后从第二个单词开始，也是去计算每个字母出现的次数，但是把某个字母在某个单词中出现的最少的次数加入结果集。举个例子，比如 cool 里面 o 出现了两次，但是在 lock 里面 o 只出现了一次，记录 o 的时候只记录最少的出现次数。最后遍历结果集里面每个单词，根据次数拼接成最后要输出的 list。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n) - n 个单词 * 每个单词的平均长度 m<br>空间O(n)</p>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个数组和一个 target 数字，返回一个三数之和使得 nums[A] + nums[B] + nums[C] &#x3D; target 或尽可能接近 target。</p>
+<p>思路跟15题类似，也是需要先排序。排序之后，先固定第一个数字，然后后两个数字之间做 two pointer 逼近。逼近的方式是如果</p>
+<ul>
+<li>res &#x3D; nums[A] + nums[B] + nums[C] &#x3D; target，则直接返回这个res；</li>
+<li>如果res大于target，C–</li>
+<li>如果res小于target，B++</li>
+</ul>
+<p>注意在排序过后， res 的初始化是 res &#x3D; nums[0] + nums[1] + nums[nums.length - 1]。因为这个值是全局最小的三数之和。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n^2) - worst case<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">commonChars</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : first.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">int</span>[] letters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cur.toCharArray()) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++) &#123;<br>                map[j] = Math.min(map[j], letters[j]);<br>            &#125;<br>        &#125;<br><br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (i + <span class="hljs-string">&#x27;a&#x27;</span>);<br>                res.add(c + <span class="hljs-string">&quot;&quot;</span>);<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">threeSumClosest</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> nums[<span class="hljs-number">0</span>] + nums[<span class="hljs-number">1</span>] + nums[n - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">2</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">lo</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">hi</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (lo &lt; hi) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> nums[i] + nums[lo] + nums[hi];<br>                <span class="hljs-keyword">if</span> (Math.abs(sum - target) &lt; Math.abs(res - target)) &#123;<br>                    res = sum;<br>                &#125;<br>                <span class="hljs-keyword">if</span> (sum &gt; target) &#123;<br>                    hi--;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    lo++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">target</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> threeSumClosest = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) &#123;<br>    nums = nums.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>    <span class="hljs-keyword">const</span> len = nums.<span class="hljs-property">length</span>;<br>    <span class="hljs-keyword">let</span> res = nums[<span class="hljs-number">0</span>] + nums[<span class="hljs-number">1</span>] + nums[len - <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">let</span> low, high, sum;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-property">length</span> - <span class="hljs-number">2</span>; i++) &#123;<br>        low = i + <span class="hljs-number">1</span>;<br>        high = nums.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (low &lt; high) &#123;<br>            sum = nums[i] + nums[low] + nums[high];<br>            <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(target - sum) &lt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(target - res)) &#123;<br>                res = sum;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (sum &gt; target) &#123;<br>                high--;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                low++;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -295,9 +314,13 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+      
         <a href="/tags/array/" class="print-no-link">#array</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
+      
+        <a href="/tags/two-sum/" class="print-no-link">#two sum</a>
       
     </div>
   
@@ -309,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1002. Find Common Characters</div>
-      <div>https://shurui91.github.io/posts/92520130.html</div>
+      <div>[LeetCode] 16. 3Sum Closest</div>
+      <div>https://shurui91.github.io/posts/1495533668.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +345,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 31, 2020</div>
+          <div>November 13, 2019</div>
         </div>
       
       
@@ -354,9 +377,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1351088998.html" title="[LeetCode] 419. Battleships in a Board">
+                      <a href="/posts/2352395276.html" title="[Leetcode] 58. Length of Last Word">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 419. Battleships in a Board</span>
+                        <span class="hidden-mobile">[Leetcode] 58. Length of Last Word</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +387,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1415125802.html" title="[LeetCode] 999. Available Captures for Rooks">
-                        <span class="hidden-mobile">[LeetCode] 999. Available Captures for Rooks</span>
+                      <a href="/posts/2054055723.html" title="[LeetCode] 143. Reorder List">
+                        <span class="hidden-mobile">[LeetCode] 143. Reorder List</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +408,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/92520130.html';
-          this.page.identifier = '/posts/92520130.html';
+          this.page.url = 'https://shurui91.github.io/posts/1495533668.html';
+          this.page.identifier = '/posts/1495533668.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
