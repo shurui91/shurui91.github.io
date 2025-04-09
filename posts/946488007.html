@@ -26,12 +26,12 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist2.jpg">
 <meta property="article:published_time" content="2020-03-23T21:32:04.000Z">
-<meta property="article:modified_time" content="2024-03-07T06:14:50.394Z">
+<meta property="article:modified_time" content="2025-04-09T23:26:38.286Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="javascript">
+<meta property="article:tag" content="two pointer">
 <meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/07/23/lc-midlist1.jpg">
@@ -215,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          1.4k words
         
       </span>
     
@@ -276,10 +276,10 @@
 <blockquote>
 <p>给你单链表的头结点 head ，请你找出并返回链表的中间结点。<br>如果有两个中间结点，则返回第二个中间结点。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是快慢指针，快指针停下的时候，慢指针所在的位置即是所求。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是快慢指针，快指针停下的时候，慢指针所在的位置即是所求。<br>注意如果链表的长度是偶数，返回的是第二个中间结点。同时思考，如果要求返回第一个中间节点应该怎么做。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">middleNode</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">slow</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">fast</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">null</span> &amp;&amp; fast.next != <span class="hljs-literal">null</span>) &#123;<br>            slow = slow.next;<br>            fast = fast.next.next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> slow;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">middleNode</span><span class="hljs-params">(ListNode head)</span> &#123;<br>		<span class="hljs-comment">// 注意是从哪里开始</span><br>		<span class="hljs-comment">// 为什么不从dummy开始（dummy.next = head）</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">slow</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">fast</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">null</span> &amp;&amp; fast.next != <span class="hljs-literal">null</span>) &#123;<br>            slow = slow.next;<br>            fast = fast.next.next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> slow;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>JavaScript实现</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> middleNode = <span class="hljs-keyword">function</span>(<span class="hljs-params">head</span>) &#123;<br>    <span class="hljs-keyword">let</span> slow = head;<br>    <span class="hljs-keyword">let</span> fast = head;<br>    <span class="hljs-keyword">while</span> (fast !== <span class="hljs-literal">null</span> &amp;&amp; fast.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span>) &#123;<br>        slow = slow.<span class="hljs-property">next</span>;<br>        fast = fast.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> slow;<br>&#125;;<br></code></pre></td></tr></table></figure>
@@ -300,11 +300,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/javascript/" class="print-no-link">#javascript</a>
+      
+        <a href="/tags/two-pointer/" class="print-no-link">#two pointer</a>
       
         <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
       
