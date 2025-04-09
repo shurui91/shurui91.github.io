@@ -72,11 +72,11 @@
       
       <tag>java</tag>
       
+      <tag>matrix</tag>
+      
       <tag>sort</tag>
       
       <tag>math</tag>
-      
-      <tag>matrix</tag>
       
     </tags>
     
@@ -286,9 +286,9 @@
       
       <tag>sliding window with fixed size</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2578,9 +2578,9 @@
       
       <tag>MOD</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2663,9 +2663,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3195,9 +3195,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>string</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -3368,9 +3368,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3420,9 +3420,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3998,11 +3998,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>math</tag>
       
       <tag>gcd</tag>
-      
-      <tag>string</tag>
       
     </tags>
     
@@ -4442,9 +4442,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4473,9 +4473,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -5400,9 +5400,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5502,9 +5502,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5863,9 +5863,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
@@ -7885,9 +7885,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>design</tag>
+      
+      <tag>math</tag>
       
       <tag>random</tag>
       
@@ -9454,9 +9454,9 @@
       
       <tag>tree</tag>
       
-      <tag>inorder</tag>
-      
       <tag>bst</tag>
+      
+      <tag>inorder</tag>
       
     </tags>
     
@@ -10085,7 +10085,7 @@
     <link href="/posts/2412012849.html"/>
     <url>/posts/2412012849.html</url>
     
-    <content type="html"><![CDATA[<p>Given the head of a linked list, remove the nth node from the end of the list and return its head.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" alt="Exapmle 1"><br>Input: head &#x3D; [1,2,3,4,5], n &#x3D; 2<br>Output: [1,2,3,5]</p><p>Example 2:<br>Input: head &#x3D; [1], n &#x3D; 1<br>Output: []</p><p>Example 3:<br>Input: head &#x3D; [1,2], n &#x3D; 1<br>Output: [1]</p><p>Constraints:<br>The number of nodes in the list is sz.<br>1 &lt;&#x3D; sz &lt;&#x3D; 30<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>1 &lt;&#x3D; n &lt;&#x3D; sz</p><p>Follow up: Could you do this in one pass?</p><p>移除链表倒数第N个节点。</p><blockquote>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是在头结点之前（一般我们创建dummy节点的位置）创建两个节点分别叫做 slow 和 fast。先让 fast 前移 N + 1 个节点，这样使得 slow 和 fast 之间有 N + 1 个节点的距离。然后同时让 slow 和 fast 前移，直到 fast 遍历到链表尾部。此刻 slow 停下来的位置就是需要移除的节点之前的那个节点。为什么需要使 slow 和 fast 之间有 N + 1 个节点的距离是因为我们移除的是 slow.next 这个节点。可以参考<a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solution/dong-hua-tu-jie-leetcode-di-19-hao-wen-ti-shan-chu/">这个动图</a>帮助理解。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">slow</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">fast</span> <span class="hljs-operator">=</span> dummy;<br>        dummy.next = head;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>            fast = fast.next;<br>            <span class="hljs-comment">// System.out.println(fast.val);</span><br>        &#125;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">null</span>) &#123;<br>            fast = fast.next;<br>            slow = slow.next;<br>        &#125;<br>        slow.next = slow.next.next;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> removeNthFromEnd = <span class="hljs-keyword">function</span>(<span class="hljs-params">head, n</span>) &#123;<br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">let</span> slow = dummy;<br>    <span class="hljs-keyword">let</span> fast = dummy;<br>    dummy.<span class="hljs-property">next</span> = head;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (fast !== <span class="hljs-literal">null</span>) &#123;<br>        slow = slow.<span class="hljs-property">next</span>;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    slow.<span class="hljs-property">next</span> = slow.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given the head of a linked list, remove the nth node from the end of the list and return its head.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg" alt="Exapmle 1"><br>Input: head &#x3D; [1,2,3,4,5], n &#x3D; 2<br>Output: [1,2,3,5]</p><p>Example 2:<br>Input: head &#x3D; [1], n &#x3D; 1<br>Output: []</p><p>Example 3:<br>Input: head &#x3D; [1,2], n &#x3D; 1<br>Output: [1]</p><p>Constraints:<br>The number of nodes in the list is sz.<br>1 &lt;&#x3D; sz &lt;&#x3D; 30<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>1 &lt;&#x3D; n &lt;&#x3D; sz</p><p>Follow up: Could you do this in one pass?</p><p>移除链表倒数第N个节点。</p><blockquote>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是在头结点之前（一般我们创建dummy节点的位置）创建两个节点分别叫做 slow 和 fast。先让 fast 前移 N + 1 个节点，这样使得 slow 和 fast 之间有 N + 1 个节点的距离。然后同时让 slow 和 fast 前移，直到 fast 遍历到链表尾部。此刻 slow 停下来的位置就是需要移除的节点之前的那个节点。为什么需要使 slow 和 fast 之间有 N + 1 个节点的距离是因为我们移除的是 slow.next 这个节点。可以参考<a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solution/dong-hua-tu-jie-leetcode-di-19-hao-wen-ti-shan-chu/">这个动图</a>帮助理解。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">removeNthFromEnd</span><span class="hljs-params">(ListNode head, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">slow</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">fast</span> <span class="hljs-operator">=</span> dummy;<br>        dummy.next = head;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n + <span class="hljs-number">1</span>; i++) &#123;<br>            fast = fast.next;<br>            <span class="hljs-comment">// System.out.println(fast.val);</span><br>        &#125;<br>        <span class="hljs-keyword">while</span> (fast != <span class="hljs-literal">null</span>) &#123;<br>            fast = fast.next;<br>            slow = slow.next;<br>        &#125;<br>        slow.next = slow.next.next;<br><span class="hljs-comment">// 思考这里能否返回head</span><br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> removeNthFromEnd = <span class="hljs-keyword">function</span>(<span class="hljs-params">head, n</span>) &#123;<br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">let</span> slow = dummy;<br>    <span class="hljs-keyword">let</span> fast = dummy;<br>    dummy.<span class="hljs-property">next</span> = head;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span> (fast !== <span class="hljs-literal">null</span>) &#123;<br>        slow = slow.<span class="hljs-property">next</span>;<br>        fast = fast.<span class="hljs-property">next</span>;<br>    &#125;<br>    slow.<span class="hljs-property">next</span> = slow.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
