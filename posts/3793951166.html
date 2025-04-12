@@ -24,13 +24,15 @@
 <meta property="og:description" content="You are given an array nums of non-negative integers. nums is considered special if there exists a number x such that there are exactly x numbers in nums that are greater than or equal to x. Notice th">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-09-13T06:46:38.000Z">
-<meta property="article:modified_time" content="2024-05-27T22:55:27.865Z">
+<meta property="article:modified_time" content="2025-04-12T18:21:57.679Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="counting sort">
 <meta property="article:tag" content="sort">
+<meta property="article:tag" content="binary search">
+<meta property="article:tag" content="binary search on answer">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          2.7k words
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          18 mins
+          23 mins
         
       </span>
     
@@ -292,6 +294,13 @@
 <h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">specialArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">1001</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            map[num]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>            sum += map[i];<br>            <span class="hljs-keyword">if</span> (sum == i) &#123;<br>                <span class="hljs-keyword">return</span> i;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路三-在答案上二分查找"><a href="#思路三-在答案上二分查找" class="headerlink" title="思路三 - 在答案上二分查找"></a>思路三 - 在答案上二分查找</h2><p>数字给的范围是[0, 1000]，我们找的目标值也是介于这个区间。那么我们可以通过二分查找答案的方式来找到这个目标值。</p>
+<h2 id="复杂度-2"><a href="#复杂度-2" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">specialArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;<br>		<span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left + (right - left) / <span class="hljs-number">2</span>;<br>			<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> helper(nums, mid);<br>			<span class="hljs-keyword">if</span> (mid == count) &#123;<br>				<span class="hljs-keyword">return</span> mid;<br>			&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (count &gt; mid) &#123;<br>				left = mid + <span class="hljs-number">1</span>;<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				right = mid - <span class="hljs-number">1</span>;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>			<span class="hljs-keyword">if</span> (num &gt;= target) &#123;<br>				count++;<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">return</span> count;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -312,6 +321,10 @@
         <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
       
         <a href="/tags/sort/" class="print-no-link">#sort</a>
+      
+        <a href="/tags/binary-search/" class="print-no-link">#binary search</a>
+      
+        <a href="/tags/binary-search-on-answer/" class="print-no-link">#binary search on answer</a>
       
     </div>
   
