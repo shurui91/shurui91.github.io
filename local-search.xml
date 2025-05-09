@@ -4245,9 +4245,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4330,9 +4330,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4442,9 +4442,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -4473,9 +4473,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -5506,9 +5506,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -5867,9 +5867,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6250,9 +6250,9 @@
       
       <tag>java</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -8144,9 +8144,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>math</tag>
       
@@ -9286,7 +9286,7 @@
     <link href="/posts/3904628621.html"/>
     <url>/posts/3904628621.html</url>
     
-    <content type="html"><![CDATA[<p>Given an m x n matrix mat, return an array of all the elements of the array in a diagonal order.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/04/10/diag1-grid.jpg" alt="Image"><br>Input: mat &#x3D; [[1,2,3],[4,5,6],[7,8,9]]<br>Output: [1,2,4,7,5,3,6,8,9]</p><p>Example 2:<br>Input: mat &#x3D; [[1,2],[3,4]]<br>Output: [1,2,3,4]</p><p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 104<br>1 &lt;&#x3D; m * n &lt;&#x3D; 104<br>-105 &lt;&#x3D; mat[i][j] &lt;&#x3D; 105</p><p>对角线遍历。</p><blockquote><p>给你一个大小为 m x n 的矩阵 mat ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这个题没有什么算法，难点是如何判断到底是往上扫描还是往下扫描以及如何判断边界条件。</p><p>首先发现如果是从左下往右上遍历，每个遍历到的点的横纵坐标的加和（x+y）% 2 &#x3D;&#x3D; 0，比如1的坐标是（0,0），7的坐标是（0,2），5的坐标是（1,1）；如果是从右上往左下遍历，遍历到的点的横纵坐标的加和（x+y）% 2 &#x3D;&#x3D; 1，比如2的坐标（1，0），4的坐标（0,1）。这是一个仅限于这一题的结论。碰到边界条件只有两种可能，一是左下往右上走的时候确保纵坐标不要超出右边的边界和横坐标不要小于0；二是右上往左下走的时候确保横坐标不要大于矩阵的高和纵坐标不要超出左边的边界。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn) - 存储output</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] findDiagonalOrder(<span class="hljs-type">int</span>[][] matrix) &#123;<br><span class="hljs-comment">// corner case</span><br><span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">0</span>];<br>&#125;<br><br><span class="hljs-comment">// normal case</span><br><span class="hljs-type">int</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> matrix.length;<br><span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> matrix[<span class="hljs-number">0</span>].length;<br><span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; res.length; i++) &#123;<br>res[i] = matrix[row][col];<br><span class="hljs-comment">// moving up</span><br><span class="hljs-keyword">if</span> ((row + col) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">if</span> (col == n - <span class="hljs-number">1</span>) &#123;<br>row++;<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (row == <span class="hljs-number">0</span>) &#123;<br>col++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>row--;<br>col++;<br>&#125;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-keyword">if</span> (row == m - <span class="hljs-number">1</span>) &#123;<br>col++;<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (col == <span class="hljs-number">0</span>) &#123;<br>row++;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>row++;<br>col--;<br>&#125;<br>&#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>Given an m x n matrix mat, return an array of all the elements of the array in a diagonal order.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/04/10/diag1-grid.jpg" alt="Image"><br>Input: mat &#x3D; [[1,2,3],[4,5,6],[7,8,9]]<br>Output: [1,2,4,7,5,3,6,8,9]</p><p>Example 2:<br>Input: mat &#x3D; [[1,2],[3,4]]<br>Output: [1,2,3,4]</p><p>Constraints:<br>m &#x3D;&#x3D; mat.length<br>n &#x3D;&#x3D; mat[i].length<br>1 &lt;&#x3D; m, n &lt;&#x3D; 104<br>1 &lt;&#x3D; m * n &lt;&#x3D; 104<br>-105 &lt;&#x3D; mat[i][j] &lt;&#x3D; 105</p><p>对角线遍历。</p><blockquote>给你一个大小为 m x n 的矩阵 mat ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道实现题，难点是如何判断到底是往上扫描还是往下扫描以及如何判断边界条件。</p><p>我们可以定义一个变量 dir 表示是往右上还是往左下。起点是<code>mat[0][0]</code>。唯一需要注意的是往右上走的时候，当我们碰到矩阵的边界的时候，应该先判断 col 再判断 row。因为如果我们在第一行，row&#x3D;0，col++，那么 row 还是 0，所以我们应该先判断 col 是否到达边界。往左下走的时候，我们应该先判断 row 再判断 col，因为如果我们在第一列，col&#x3D;0，row++，那么 col 还是 0，所以我们应该先判断 row 是否到达边界。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn) - 存储output</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] findDiagonalOrder(<span class="hljs-type">int</span>[][] mat) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; res.length; i++) &#123;<br>            res[i] = mat[row][col];<br>            <span class="hljs-comment">// up</span><br>            <span class="hljs-keyword">if</span> (dir == <span class="hljs-number">1</span>) &#123;<br>                <span class="hljs-keyword">if</span> (col == n - <span class="hljs-number">1</span>) &#123;<br>                    row++;<br>                    dir = -<span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (row == <span class="hljs-number">0</span>) &#123;<br>                    col++;<br>                    dir = -<span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    row--;<br>                    col++;<br>                &#125;<br>            &#125;<br>            <span class="hljs-comment">// down</span><br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (row == m - <span class="hljs-number">1</span>) &#123;<br>                    col++;<br>                    dir = <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (col == <span class="hljs-number">0</span>) &#123;<br>                    row++;<br>                    dir = <span class="hljs-number">1</span>;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    row++;<br>                    col--;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
