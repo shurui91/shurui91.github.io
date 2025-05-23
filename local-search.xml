@@ -101,9 +101,9 @@
       
       <tag>sort</tag>
       
-      <tag>matrix</tag>
-      
       <tag>math</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -369,9 +369,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>string</tag>
       
@@ -1564,9 +1564,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -2150,9 +2150,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -2206,9 +2206,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
       <tag>sliding window</tag>
       
@@ -3574,9 +3574,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -3944,9 +3944,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -4469,9 +4469,9 @@
       
       <tag>array</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4498,11 +4498,11 @@
       
       <tag>array</tag>
       
+      <tag>greedy</tag>
+      
       <tag>hashmap</tag>
       
       <tag>counting sort</tag>
-      
-      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -4741,9 +4741,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -5533,9 +5533,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5616,9 +5616,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -5699,9 +5699,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -5865,9 +5865,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
     </tags>
     
@@ -5892,11 +5892,11 @@
       
       <tag>array</tag>
       
+      <tag>greedy</tag>
+      
       <tag>hashmap</tag>
       
       <tag>counting sort</tag>
-      
-      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6059,9 +6059,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -6090,9 +6090,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -6146,9 +6146,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -6261,6 +6261,33 @@
   
   
   <entry>
+    <title>[LeetCode] 897. Increasing Order Search Tree</title>
+    <link href="/posts/1227851573.html"/>
+    <url>/posts/1227851573.html</url>
+    
+    <content type="html"><![CDATA[<p>Given the root of a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/11/17/ex1.jpg" alt="Example 1"><br>Input: root &#x3D; [5,3,6,2,4,null,8,1,null,null,null,7,9]<br>Output: [1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9]</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/11/17/ex2.jpg" alt="Example 2"><br>Input: root &#x3D; [5,1,7]<br>Output: [1,null,5,null,7]</p><p>Constraints:<br>The number of nodes in the given tree will be in the range [1, 100].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 1000</p><p>递增顺序搜索树。</p><blockquote>给你一个树，请你 按中序遍历 重新排列树，使树中最左边的结点现在是树的根，并且每个结点没有左子结点，只有一个右子结点。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题跟之前的114题很像，也是属于需要把树做扁平化处理的题目。既然题目都说了用<code>中序遍历</code>，我这里给出两种做法，迭代和递归。时间空间复杂度均是 O(n)。看代码应该能明白思路，只是需要注意当处理节点的时候，需要找到新的 head 节点，以及把处理过的每个节点的左指针设置成 <code>null</code>，新的树里面每个节点都只有右指针。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java迭代实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">increasingBST</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">// 虚拟头节点</span><br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> dummy;<br>        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> root;<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty() || cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>                stack.push(cur);<br>                cur = cur.left;<br>            &#125;<br>            cur = stack.pop();<br>            cur.left = <span class="hljs-literal">null</span>;<br>            pre.right = cur;<br>            pre = cur;<br>            cur = cur.right;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.right;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Java递归实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-type">TreeNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-type">TreeNode</span> <span class="hljs-variable">head</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">increasingBST</span><span class="hljs-params">(TreeNode root)</span> &#123;<br><span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br>increasingBST(root.left);<br><span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) &#123;<br>head = root;<br>&#125;<br><span class="hljs-keyword">if</span> (pre != <span class="hljs-literal">null</span>) &#123;<br>root.left = <span class="hljs-literal">null</span>;<br>pre.right = root;<br>&#125;<br>pre = root;<br>increasingBST(root.right);<br><span class="hljs-keyword">return</span> head;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">114. Flatten Binary Tree to Linked List<br>430. Flatten a Multilevel Doubly Linked List<br>897. Increasing Order Search Tree<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>tree</tag>
+      
+      <tag>java</tag>
+      
+      <tag>linked list</tag>
+      
+      <tag>inorder</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1325. Delete Leaves With a Given Value</title>
     <link href="/posts/1215096328.html"/>
     <url>/posts/1215096328.html</url>
@@ -6331,9 +6358,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -6595,9 +6622,9 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -6674,9 +6701,9 @@
       
       <tag>array</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>sort</tag>
       
@@ -7040,7 +7067,7 @@
     <link href="/posts/2281211084.html"/>
     <url>/posts/2281211084.html</url>
     
-    <content type="html"><![CDATA[<p>You are given a doubly linked list, which contains nodes that have a next pointer, a previous pointer, and an additional child pointer. This child pointer may or may not point to a separate doubly linked list, also containing these special nodes. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure as shown in the example below.</p><p>Given the head of the first level of the list, flatten the list so that all the nodes appear in a single-level, doubly linked list. Let curr be a node with a child list. The nodes in the child list should appear after curr and before curr.next in the flattened list.</p><p>Return the head of the flattened list. The nodes in the list must have all of their child pointers set to null.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten11.jpg" alt="Example 1"><br>Input: head &#x3D; [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]<br>Output: [1,2,3,7,8,11,12,9,10,4,5,6]<br>Explanation: The multilevel linked list in the input is shown.<br>After flattening the multilevel linked list it becomes:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten12.jpg" alt="Example 1"></p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten2.1jpg" alt="Example 2"><br>Input: head &#x3D; [1,2,null,3]<br>Output: [1,3,2]<br>Explanation: The multilevel linked list in the input is shown.<br>After flattening the multilevel linked list it becomes:<br><img src="https://assets.leetcode.com/uploads/2021/11/24/list.jpg" alt="Example 2"></p><p>Example 3:<br>Input: head &#x3D; []<br>Output: []<br>Explanation: There could be empty list in the input.</p><p>Constraints:<br>The number of Nodes will not exceed 1000.<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 105</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs text">How the multilevel linked list is represented in test cases:<br><br>We use the multilevel linked list from Example 1 above:<br><br> 1---2---3---4---5---6--NULL<br>         |<br>         7---8---9---10--NULL<br>             |<br>             11--12--NULL<br>The serialization of each level is as follows:<br><br>[1,2,3,4,5,6,null]<br>[7,8,9,10,null]<br>[11,12,null]<br>To serialize all levels together, we will add nulls in each level to signify no node connects to the upper node of the previous level. The serialization becomes:<br><br>[1,    2,    3, 4, 5, 6, null]<br>             |<br>[null, null, 7,    8, 9, 10, null]<br>                   |<br>[            null, 11, 12, null]<br>Merging the serialization of each level and removing trailing nulls we obtain:<br><br>[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]<br></code></pre></td></tr></table></figure><p>扁平化多级双向链表。</p><blockquote>你会得到一个双链表，其中包含的节点有一个下一个指针、一个前一个指针和一个额外的 子指针 。这个子指针可能指向一个单独的双向链表，也包含这些特殊的节点。这些子列表可以有一个或多个自己的子列表，以此类推，以生成如下面的示例所示的 多层数据结构 。<p>给定链表的头节点 head ，将链表 扁平化 ，以便所有节点都出现在单层双链表中。让 curr 是一个带有子列表的节点。子列表中的节点应该出现在扁平化列表中的 curr 之后 和 curr.next 之前 。</p><p>返回 扁平列表的 head 。列表中的节点必须将其 所有 子指针设置为 null 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list">https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是请你将这个多维的链表转化成一个一维的链表。</p><p>我参考了<a href="https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/discuss/150321/Easy-Understanding-Java-beat-95.7-with-Explanation">discussion的最高票答案</a>，无需额外空间。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">// Definition for a Node.</span><br><span class="hljs-comment">class Node &#123;</span><br><span class="hljs-comment">    public int val;</span><br><span class="hljs-comment">    public Node prev;</span><br><span class="hljs-comment">    public Node next;</span><br><span class="hljs-comment">    public Node child;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">flatten</span><span class="hljs-params">(Node head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        dfs(head);<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">dfs</span><span class="hljs-params">(Node node)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> node;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur.next;<br>            <span class="hljs-keyword">if</span> (cur.child != <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-comment">// 拿到child的尾结点</span><br>                <span class="hljs-type">Node</span> <span class="hljs-variable">childTail</span> <span class="hljs-operator">=</span> dfs(cur.child);<br>                cur.next = cur.child;<br>                cur.child.prev = cur;<br>                cur.child = <span class="hljs-literal">null</span>;<br><span class="hljs-comment">// 如果有下一个节点，则把下一个节点接到child的尾结点上</span><br>                <span class="hljs-keyword">if</span> (next != <span class="hljs-literal">null</span>) &#123;<br>                    childTail.next = next;<br>                    next.prev = childTail;<br>                &#125;<br>                last = childTail;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-comment">// 如果没有 child，则当前节点就是当前链表的最后节点</span><br>                last = cur;<br>            &#125;<br>            <span class="hljs-comment">// 继续处理下一个节点（注意：如果有 child，则 current.next 已经被修改）</span><br>            cur = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> last;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>You are given a doubly linked list, which contains nodes that have a next pointer, a previous pointer, and an additional child pointer. This child pointer may or may not point to a separate doubly linked list, also containing these special nodes. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure as shown in the example below.</p><p>Given the head of the first level of the list, flatten the list so that all the nodes appear in a single-level, doubly linked list. Let curr be a node with a child list. The nodes in the child list should appear after curr and before curr.next in the flattened list.</p><p>Return the head of the flattened list. The nodes in the list must have all of their child pointers set to null.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten11.jpg" alt="Example 1"><br>Input: head &#x3D; [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]<br>Output: [1,2,3,7,8,11,12,9,10,4,5,6]<br>Explanation: The multilevel linked list in the input is shown.<br>After flattening the multilevel linked list it becomes:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten12.jpg" alt="Example 1"></p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/11/09/flatten2.1jpg" alt="Example 2"><br>Input: head &#x3D; [1,2,null,3]<br>Output: [1,3,2]<br>Explanation: The multilevel linked list in the input is shown.<br>After flattening the multilevel linked list it becomes:<br><img src="https://assets.leetcode.com/uploads/2021/11/24/list.jpg" alt="Example 2"></p><p>Example 3:<br>Input: head &#x3D; []<br>Output: []<br>Explanation: There could be empty list in the input.</p><p>Constraints:<br>The number of Nodes will not exceed 1000.<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 105</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs text">How the multilevel linked list is represented in test cases:<br><br>We use the multilevel linked list from Example 1 above:<br><br> 1---2---3---4---5---6--NULL<br>         |<br>         7---8---9---10--NULL<br>             |<br>             11--12--NULL<br>The serialization of each level is as follows:<br><br>[1,2,3,4,5,6,null]<br>[7,8,9,10,null]<br>[11,12,null]<br>To serialize all levels together, we will add nulls in each level to signify no node connects to the upper node of the previous level. The serialization becomes:<br><br>[1,    2,    3, 4, 5, 6, null]<br>             |<br>[null, null, 7,    8, 9, 10, null]<br>                   |<br>[            null, 11, 12, null]<br>Merging the serialization of each level and removing trailing nulls we obtain:<br><br>[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]<br></code></pre></td></tr></table></figure><p>扁平化多级双向链表。</p><blockquote>你会得到一个双链表，其中包含的节点有一个下一个指针、一个前一个指针和一个额外的 子指针 。这个子指针可能指向一个单独的双向链表，也包含这些特殊的节点。这些子列表可以有一个或多个自己的子列表，以此类推，以生成如下面的示例所示的 多层数据结构 。<p>给定链表的头节点 head ，将链表 扁平化 ，以便所有节点都出现在单层双链表中。让 curr 是一个带有子列表的节点。子列表中的节点应该出现在扁平化列表中的 curr 之后 和 curr.next 之前 。</p><p>返回 扁平列表的 head 。列表中的节点必须将其 所有 子指针设置为 null 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list">https://leetcode.cn/problems/flatten-a-multilevel-doubly-linked-list</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是请你将这个多维的链表转化成一个一维的链表。</p><p>我参考了<a href="https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/discuss/150321/Easy-Understanding-Java-beat-95.7-with-Explanation">discussion的最高票答案</a>，无需额外空间。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">// Definition for a Node.</span><br><span class="hljs-comment">class Node &#123;</span><br><span class="hljs-comment">    public int val;</span><br><span class="hljs-comment">    public Node prev;</span><br><span class="hljs-comment">    public Node next;</span><br><span class="hljs-comment">    public Node child;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">flatten</span><span class="hljs-params">(Node head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        dfs(head);<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">dfs</span><span class="hljs-params">(Node node)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> node;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur.next;<br>            <span class="hljs-keyword">if</span> (cur.child != <span class="hljs-literal">null</span>) &#123;<br><span class="hljs-comment">// 拿到child的尾结点</span><br>                <span class="hljs-type">Node</span> <span class="hljs-variable">childTail</span> <span class="hljs-operator">=</span> dfs(cur.child);<br>                cur.next = cur.child;<br>                cur.child.prev = cur;<br>                cur.child = <span class="hljs-literal">null</span>;<br><span class="hljs-comment">// 如果有下一个节点，则把下一个节点接到child的尾结点上</span><br>                <span class="hljs-keyword">if</span> (next != <span class="hljs-literal">null</span>) &#123;<br>                    childTail.next = next;<br>                    next.prev = childTail;<br>                &#125;<br>                last = childTail;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br><span class="hljs-comment">// 如果没有 child，则当前节点就是当前链表的最后节点</span><br>                last = cur;<br>            &#125;<br>            <span class="hljs-comment">// 继续处理下一个节点（注意：如果有 child，则 current.next 已经被修改）</span><br>            cur = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> last;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">114. Flatten Binary Tree to Linked List<br>430. Flatten a Multilevel Doubly Linked List<br>897. Increasing Order Search Tree<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -7075,11 +7102,11 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
+      <tag>greedy</tag>
       
       <tag>two pointer</tag>
       
-      <tag>greedy</tag>
+      <tag>hashmap</tag>
       
       <tag>string</tag>
       
@@ -7239,11 +7266,11 @@
       
       <tag>java</tag>
       
-      <tag>two pointer</tag>
-      
       <tag>dynamic programming</tag>
       
       <tag>greedy</tag>
+      
+      <tag>two pointer</tag>
       
       <tag>binary search</tag>
       
@@ -7430,9 +7457,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -7463,9 +7490,9 @@
       
       <tag>treemap</tag>
       
-      <tag>binary search</tag>
-      
       <tag>string</tag>
+      
+      <tag>binary search</tag>
       
       <tag>design</tag>
       
@@ -7939,9 +7966,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>heap</tag>
       
@@ -7970,9 +7997,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -8082,9 +8109,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>prefix sum</tag>
       
@@ -8381,9 +8408,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8443,9 +8470,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8474,9 +8501,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8505,9 +8532,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8536,9 +8563,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -8567,9 +8594,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -10159,9 +10186,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -10872,11 +10899,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>two sum</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     

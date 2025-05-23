@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/11/09/flatten2.1jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/11/24/list.jpg">
 <meta property="article:published_time" content="2020-07-11T08:58:45.000Z">
-<meta property="article:modified_time" content="2025-05-22T23:15:28.495Z">
+<meta property="article:modified_time" content="2025-05-23T00:20:06.778Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="dfs">
@@ -216,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k words
+          3.1k words
         
       </span>
     
@@ -227,7 +227,7 @@
         
         
         
-          25 mins
+          26 mins
         
       </span>
     
@@ -295,6 +295,8 @@
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/*</span><br><span class="hljs-comment">// Definition for a Node.</span><br><span class="hljs-comment">class Node &#123;</span><br><span class="hljs-comment">    public int val;</span><br><span class="hljs-comment">    public Node prev;</span><br><span class="hljs-comment">    public Node next;</span><br><span class="hljs-comment">    public Node child;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> Node <span class="hljs-title function_">flatten</span><span class="hljs-params">(Node head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br>        dfs(head);<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">dfs</span><span class="hljs-params">(Node node)</span> &#123;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> node;<br>        <span class="hljs-type">Node</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">while</span> (cur != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">Node</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur.next;<br>            <span class="hljs-keyword">if</span> (cur.child != <span class="hljs-literal">null</span>) &#123;<br>				<span class="hljs-comment">// 拿到child的尾结点</span><br>                <span class="hljs-type">Node</span> <span class="hljs-variable">childTail</span> <span class="hljs-operator">=</span> dfs(cur.child);<br>                cur.next = cur.child;<br>                cur.child.prev = cur;<br>                cur.child = <span class="hljs-literal">null</span>;<br>				<span class="hljs-comment">// 如果有下一个节点，则把下一个节点接到child的尾结点上</span><br>                <span class="hljs-keyword">if</span> (next != <span class="hljs-literal">null</span>) &#123;<br>                    childTail.next = next;<br>                    next.prev = childTail;<br>                &#125;<br>                last = childTail;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>				<span class="hljs-comment">// 如果没有 child，则当前节点就是当前链表的最后节点</span><br>                last = cur;<br>            &#125;<br>            <span class="hljs-comment">// 继续处理下一个节点（注意：如果有 child，则 current.next 已经被修改）</span><br>            cur = next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> last;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">114. Flatten Binary Tree to Linked List<br>430. Flatten a Multilevel Doubly Linked List<br>897. Increasing Order Search Tree<br></code></pre></td></tr></table></figure>
 
                 
               </div>
