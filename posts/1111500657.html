@@ -16,25 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+    <meta name="description" content="Given two strings s and t, return the number of distinct subsequences of s which equals t. A string’s subsequence is a new string formed from the original string by deleting some (can be none) of the">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1002. Find Common Characters">
-<meta property="og:url" content="https://shurui91.github.io/posts/92520130.html">
+<meta property="og:title" content="[LeetCode] 115. Distinct Subsequences">
+<meta property="og:url" content="https://shurui91.github.io/posts/1111500657.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order. Example 1:Input: words &#x3D;">
+<meta property="og:description" content="Given two strings s and t, return the number of distinct subsequences of s which equals t. A string’s subsequence is a new string formed from the original string by deleting some (can be none) of the">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-31T15:45:05.000Z">
-<meta property="article:modified_time" content="2024-06-05T16:26:22.354Z">
+<meta property="article:published_time" content="2021-03-17T09:35:41.000Z">
+<meta property="article:modified_time" content="2025-05-28T21:00:45.551Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="array">
-<meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="dynamic programming">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 1002. Find Common Characters - CNoodle</title>
+  <title>[LeetCode] 115. Distinct Subsequences - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1002. Find Common Characters"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 115. Distinct Subsequences"></span>
           
         </div>
 
@@ -199,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-03-31 08:45" pubdate>
-          March 31, 2020 am
+        <time datetime="2021-03-17 02:35" pubdate>
+          March 17, 2021 am
         </time>
       </span>
     
@@ -211,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          2.1k words
         
       </span>
     
@@ -222,7 +222,7 @@
         
         
         
-          12 mins
+          18 mins
         
       </span>
     
@@ -259,26 +259,45 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1002. Find Common Characters</h1>
+            <h1 id="seo-header">[LeetCode] 115. Distinct Subsequences</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a string array words, return an array of all characters that show up in all strings within the words (including duplicates). You may return the answer in any order.</p>
-<p>Example 1:<br>Input: words &#x3D; [“bella”,”label”,”roller”]<br>Output: [“e”,”l”,”l”]</p>
-<p>Example 2:<br>Input: words &#x3D; [“cool”,”lock”,”cook”]<br>Output: [“c”,”o”]</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 100<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 100<br>words[i] consists of lowercase English letters.</p>
-<p>查找共用字符。</p>
+                <p>Given two strings <code>s</code> and <code>t</code>, return <em>the number of distinct subsequences of <code>s</code> which equals <code>t</code></em>.</p>
+<p>A string’s subsequence is a new string formed from the original string by deleting some (can be none) of the characters without disturbing the remaining characters’ relative positions. (i.e., <code>&quot;ACE&quot;</code> is a subsequence of <code>&quot;ABCDE&quot;</code> while <code>&quot;AEC&quot;</code> is not).</p>
+<p>It is guaranteed the answer fits on a 32-bit signed integer.</p>
+<p>Example 1:<br>Input: s &#x3D; “rabbbit”, t &#x3D; “rabbit”<br>Output: 3<br>Explanation:<br>As shown below, there are 3 ways you can generate “rabbit” from S.<br><code>rabbbit</code><br><code>rabbbit</code><br><code>rabbbit</code></p>
+<p>Example 2:<br>Input: s &#x3D; “babgbag”, t &#x3D; “bag”<br>Output: 5<br>Explanation:<br>As shown below, there are 5 ways you can generate “bag” from S.<br><code>babgbag</code><br><code>babgbag</code><br><code>babgbag</code><br><code>babgbag</code><br><code>babgbag</code></p>
+<p>Constraints:</p>
+<ul>
+<li><code>0 &lt;= s.length, t.length &lt;= 1000</code></li>
+<li><code>s</code> and <code>t</code> consist of English letters.</li>
+</ul>
+<p>不同的子序列。</p>
 <blockquote>
-给你一个字符串数组 words ，请你找出所有在 words 的每个字符串中都出现的共用字符（ 包括重复字符），并以数组形式返回。你可以按 任意顺序 返回答案。
+给定一个字符串 s 和一个字符串 t ，计算在 s 的子序列中 t 出现的个数。
+
+<p>字符串的一个 子序列 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，”ACE” 是 “ABCDE” 的一个子序列，而 “AEC” 不是）</p>
+<p>题目数据保证答案符合 32 位带符号整数范围。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences">https://leetcode-cn.com/problems/distinct-subsequences</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个装了单词的数组，请求出这些单词里面共同的字母，以 list 形式输出。如果有多个相同的字母也需要多次输出。</p>
-<p>思路是用 hashmap 记录 input 中第一个单词里面每个字母的出现次数，然后从第二个单词开始，也是去计算每个字母出现的次数，但是把某个字母在某个单词中出现的最少的次数加入结果集。举个例子，比如 cool 里面 o 出现了两次，但是在 lock 里面 o 只出现了一次，记录 o 的时候只记录最少的出现次数。最后遍历结果集里面每个单词，根据次数拼接成最后要输出的 list。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n) - n 个单词 * 每个单词的平均长度 m<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是二维DP。我们首先创建一个二维数组，长度是 int[][] dp &#x3D; new int[s.length() + 1][t.length() + 1]。+1 的部分是DP类型的题的经典操作，<strong>这个DP数组的含义是当 S 以 i 结尾，T 以 j 结尾的时候，满足题意的 subsequence 的个数是多少。</strong></p>
+<p>这里有<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences/solution/pythonti-jie-yi-kan-jiu-dong-de-fen-xi-yao-yao-yao/">几个重点</a>需要提及</p>
+<ul>
+<li>首先如果 T 为空的时候，因为一个空串是任何非空字符串的 subsequence 所以 dp[i][0] &#x3D; 1</li>
+<li>如果 T 不为空，又分如下两种情况，我们用这个例子理解，S &#x3D; ABCC, T &#x3D; ABC<br>如果s.charAt(i - 1) &#x3D;&#x3D; t.charAt(j - 1)，也就是两边字母相同的时候，dp[i][j] &#x3D; dp[i - 1][j] + dp[i - 1][j - 1]。比如例子中如果S和T都走到了各自最后的字母C的时候，这里有匹配，需要比较的是ABCC中含有多少个不同的ABC，这里分两种情况<ul>
+<li>如果我们考虑使用当前这个匹配，我们看一下前面的子串 ABC 和 AB 的匹配情况，对应dp[i - 1][j - 1]</li>
+<li>如果不使用当前这个匹配，也就是说 S 中不包含标红的 C 的时候，我们看一下 S &#x3D; ABC 里面有多少能有多少subsequence能匹配 T，对应dp[i - 1][j]</li>
+</ul>
+</li>
+<li>把如上这两种情况加起来，dp[i][j] &#x3D; dp[i - 1][j - 1] + dp[i - 1][j]<br>如果s.charAt(i - 1) !&#x3D; t.charAt(j - 1)，也就是当前字母不匹配的情况下，我们只需要看 dp[i][j - 1]</li>
+</ul>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(mn)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">commonChars</span><span class="hljs-params">(String[] words)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> words[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span>[] map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : first.toCharArray()) &#123;<br>            map[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> words[i];<br>            <span class="hljs-type">int</span>[] letters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : cur.toCharArray()) &#123;<br>                letters[c - <span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            &#125;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">26</span>; j++) &#123;<br>                map[j] = Math.min(map[j], letters[j]);<br>            &#125;<br>        &#125;<br><br>        List&lt;String&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (map[i] != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (i + <span class="hljs-string">&#x27;a&#x27;</span>);<br>                res.add(c + <span class="hljs-string">&quot;&quot;</span>);<br>                map[i]--;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numDistinct</span><span class="hljs-params">(String s, String t)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> t.length();<br>        <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>];<br><br>        <span class="hljs-comment">// 初始化：空串匹配</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 状态转移</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt;= n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (s.charAt(i - <span class="hljs-number">1</span>) == t.charAt(j - <span class="hljs-number">1</span>)) &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">1</span>][j];<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m][n];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -295,9 +314,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
+        <a href="/tags/dynamic-programming/" class="print-no-link">#dynamic programming</a>
       
-        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
     </div>
   
@@ -309,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1002. Find Common Characters</div>
-      <div>https://shurui91.github.io/posts/92520130.html</div>
+      <div>[LeetCode] 115. Distinct Subsequences</div>
+      <div>https://shurui91.github.io/posts/1111500657.html</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 31, 2020</div>
+          <div>March 17, 2021</div>
         </div>
       
       
@@ -354,9 +373,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1351088998.html" title="[LeetCode] 419. Battleships in a Board">
+                      <a href="/posts/2897332235.html" title="[LeetCode] 670. Maximum Swap">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 419. Battleships in a Board</span>
+                        <span class="hidden-mobile">[LeetCode] 670. Maximum Swap</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -364,8 +383,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1415125802.html" title="[LeetCode] 999. Available Captures for Rooks">
-                        <span class="hidden-mobile">[LeetCode] 999. Available Captures for Rooks</span>
+                      <a href="/posts/3860343257.html" title="[LeetCode] 1461. Check If a String Contains All Binary Codes of Size K">
+                        <span class="hidden-mobile">[LeetCode] 1461. Check If a String Contains All Binary Codes of Size K</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -385,8 +404,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/92520130.html';
-          this.page.identifier = '/posts/92520130.html';
+          this.page.url = 'https://shurui91.github.io/posts/1111500657.html';
+          this.page.identifier = '/posts/1111500657.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
