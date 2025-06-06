@@ -4,31 +4,6 @@
   
   
   <entry>
-    <title>[LeetCode] 223. Rectangle Area</title>
-    <link href="/posts/2125874500.html"/>
-    <url>/posts/2125874500.html</url>
-    
-    <content type="html"><![CDATA[<p>Given the coordinates of two rectilinear rectangles in a 2D plane, return the total area covered by the two rectangles.</p><p>The first rectangle is defined by its bottom-left corner (ax1, ay1) and its top-right corner (ax2, ay2).</p><p>The second rectangle is defined by its bottom-left corner (bx1, by1) and its top-right corner (bx2, by2).</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/05/08/rectangle-plane.png" alt="Example 1"><br>Rectangle Area<br>Input: ax1 &#x3D; -3, ay1 &#x3D; 0, ax2 &#x3D; 3, ay2 &#x3D; 4, bx1 &#x3D; 0, by1 &#x3D; -1, bx2 &#x3D; 9, by2 &#x3D; 2<br>Output: 45</p><p>Example 2:<br>Input: ax1 &#x3D; -2, ay1 &#x3D; -2, ax2 &#x3D; 2, ay2 &#x3D; 2, bx1 &#x3D; -2, by1 &#x3D; -2, bx2 &#x3D; 2, by2 &#x3D; 2<br>Output: 16</p><p>Constraints:<br>-104 &lt;&#x3D; ax1 &lt;&#x3D; ax2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; ay1 &lt;&#x3D; ay2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; bx1 &lt;&#x3D; bx2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; by1 &lt;&#x3D; by2 &lt;&#x3D; 104</p><p>矩形面积。</p><blockquote>给你 二维 平面上两个 由直线构成且边与坐标轴平行/垂直 的矩形，请你计算并返回两个矩形覆盖的总面积。<p>每个矩形由其 左下 顶点和 右上 顶点坐标表示：</p><p>第一个矩形由其左下顶点 (ax1, ay1) 和右上顶点 (ax2, ay2) 定义。<br>第二个矩形由其左下顶点 (bx1, by1) 和右上顶点 (bx2, by2) 定义。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/rectangle-area">https://leetcode.cn/problems/rectangle-area</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给两个矩形的左下角的坐标和右上角的坐标，请你返回由这两个矩形组成的多边形的面积。</p><p>思路是先计算两个矩形各自的面积，再计算两者重叠的部分，最后用两个矩形各自的面积 - 两者重叠的部分即可。各自计算两个长方形的面积这个很好处理，但是如何计算重叠部分的面积呢？这个题不要想复杂了，可以就参照题目给的例子来计算重叠部分的面积。对于这个重叠的部分，左下角的横坐标是A和E的较大值，右上角的横坐标是C和G的较小值，所以重叠部分的长是Math.min(ax2, bx2) - Math.max(ax1, bx1)。同理，重叠部分的高 &#x3D; Math.min(ay2, by2) - Math.max(ay1, by1)。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">computeArea</span><span class="hljs-params">(<span class="hljs-type">int</span> ax1, <span class="hljs-type">int</span> ay1, <span class="hljs-type">int</span> ax2, <span class="hljs-type">int</span> ay2, <span class="hljs-type">int</span> bx1, <span class="hljs-type">int</span> by1, <span class="hljs-type">int</span> bx2, <span class="hljs-type">int</span> by2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">areaA</span> <span class="hljs-operator">=</span> (ax2 - ax1) * (ay2 - ay1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">areaB</span> <span class="hljs-operator">=</span> (bx2 - bx1) * (by2 - by1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">overlap</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> Math.max(ax1, bx1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> Math.min(ax2, bx2);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> Math.min(ay2, by2);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">bottom</span> <span class="hljs-operator">=</span> Math.max(ay1, by1);<br>        <span class="hljs-keyword">if</span> (right &gt; left &amp;&amp; top &gt; bottom) &#123;<br>            overlap = (right - left) * (top - bottom);<br>        &#125;<br>        <span class="hljs-keyword">return</span> areaA + areaB - overlap;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">223. Rectangle Area<br>836. Rectangle Overlap<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>leetcode</tag>
-      
-      <tag>java</tag>
-      
-      <tag>math</tag>
-      
-      <tag>geometry</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>[LeetCode] 2434. Using a Robot to Print the Lexicographically Smallest String</title>
     <link href="/posts/1478144800.html"/>
     <url>/posts/1478144800.html</url>
@@ -4544,9 +4519,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4575,9 +4550,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -5608,9 +5583,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5994,9 +5969,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
@@ -6937,6 +6912,31 @@
       <tag>binary search</tag>
       
       <tag>binary search on answer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 223. Rectangle Area</title>
+    <link href="/posts/2125874500.html"/>
+    <url>/posts/2125874500.html</url>
+    
+    <content type="html"><![CDATA[<p>Given the coordinates of two rectilinear rectangles in a 2D plane, return the total area covered by the two rectangles.</p><p>The first rectangle is defined by its bottom-left corner (ax1, ay1) and its top-right corner (ax2, ay2).</p><p>The second rectangle is defined by its bottom-left corner (bx1, by1) and its top-right corner (bx2, by2).</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/05/08/rectangle-plane.png" alt="Example 1"><br>Rectangle Area<br>Input: ax1 &#x3D; -3, ay1 &#x3D; 0, ax2 &#x3D; 3, ay2 &#x3D; 4, bx1 &#x3D; 0, by1 &#x3D; -1, bx2 &#x3D; 9, by2 &#x3D; 2<br>Output: 45</p><p>Example 2:<br>Input: ax1 &#x3D; -2, ay1 &#x3D; -2, ax2 &#x3D; 2, ay2 &#x3D; 2, bx1 &#x3D; -2, by1 &#x3D; -2, bx2 &#x3D; 2, by2 &#x3D; 2<br>Output: 16</p><p>Constraints:<br>-104 &lt;&#x3D; ax1 &lt;&#x3D; ax2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; ay1 &lt;&#x3D; ay2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; bx1 &lt;&#x3D; bx2 &lt;&#x3D; 104<br>-104 &lt;&#x3D; by1 &lt;&#x3D; by2 &lt;&#x3D; 104</p><p>矩形面积。</p><blockquote>给你 二维 平面上两个 由直线构成且边与坐标轴平行/垂直 的矩形，请你计算并返回两个矩形覆盖的总面积。<p>每个矩形由其 左下 顶点和 右上 顶点坐标表示：</p><p>第一个矩形由其左下顶点 (ax1, ay1) 和右上顶点 (ax2, ay2) 定义。<br>第二个矩形由其左下顶点 (bx1, by1) 和右上顶点 (bx2, by2) 定义。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/rectangle-area">https://leetcode.cn/problems/rectangle-area</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给两个矩形的左下角的坐标和右上角的坐标，请你返回由这两个矩形组成的多边形的面积。</p><p>思路是先计算两个矩形各自的面积，再计算两者重叠的部分，最后用两个矩形各自的面积 - 两者重叠的部分即可。各自计算两个长方形的面积这个很好处理，但是如何计算重叠部分的面积呢？这个题不要想复杂了，可以就参照题目给的例子来计算重叠部分的面积。对于这个重叠的部分，左下角的横坐标是A和E的较大值，右上角的横坐标是C和G的较小值，所以重叠部分的长是Math.min(ax2, bx2) - Math.max(ax1, bx1)。同理，重叠部分的高 &#x3D; Math.min(ay2, by2) - Math.max(ay1, by1)。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">computeArea</span><span class="hljs-params">(<span class="hljs-type">int</span> ax1, <span class="hljs-type">int</span> ay1, <span class="hljs-type">int</span> ax2, <span class="hljs-type">int</span> ay2, <span class="hljs-type">int</span> bx1, <span class="hljs-type">int</span> by1, <span class="hljs-type">int</span> bx2, <span class="hljs-type">int</span> by2)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">areaA</span> <span class="hljs-operator">=</span> (ax2 - ax1) * (ay2 - ay1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">areaB</span> <span class="hljs-operator">=</span> (bx2 - bx1) * (by2 - by1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">overlap</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> Math.max(ax1, bx1);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> Math.min(ax2, bx2);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> Math.min(ay2, by2);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">bottom</span> <span class="hljs-operator">=</span> Math.max(ay1, by1);<br>        <span class="hljs-keyword">if</span> (right &gt; left &amp;&amp; top &gt; bottom) &#123;<br>            overlap = (right - left) * (top - bottom);<br>        &#125;<br>        <span class="hljs-keyword">return</span> areaA + areaB - overlap;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">223. Rectangle Area<br>836. Rectangle Overlap<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>math</tag>
+      
+      <tag>geometry</tag>
       
     </tags>
     
