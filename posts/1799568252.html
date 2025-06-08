@@ -16,29 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given the root of a full binary tree with the following properties:Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.Non-leaf nodes have either the value">
+    <meta name="description" content="You are given row x col grid representing a map where grid[i][j] &#x3D; 1 represents land and grid[i][j] &#x3D; 0 represents water. Grid cells are connected horizontally&#x2F;vertically (not diagonall">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2331. Evaluate Boolean Binary Tree">
-<meta property="og:url" content="https://shurui91.github.io/posts/1989222089.html">
+<meta property="og:title" content="[LeetCode] 463. Island Perimeter">
+<meta property="og:url" content="https://shurui91.github.io/posts/1799568252.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given the root of a full binary tree with the following properties:Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.Non-leaf nodes have either the value">
+<meta property="og:description" content="You are given row x col grid representing a map where grid[i][j] &#x3D; 1 represents land and grid[i][j] &#x3D; 0 represents water. Grid cells are connected horizontally&#x2F;vertically (not diagonall">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2022/05/16/example1drawio1.png">
-<meta property="article:published_time" content="2023-02-06T14:16:26.000Z">
-<meta property="article:modified_time" content="2024-05-16T02:24:43.011Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2018/10/12/island.png">
+<meta property="article:published_time" content="2020-05-08T21:38:28.000Z">
+<meta property="article:modified_time" content="2025-06-08T02:10:32.316Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="hashmap">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="dfs">
-<meta property="article:tag" content="recursion">
-<meta property="article:tag" content="postorder">
+<meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2022/05/16/example1drawio1.png">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2018/10/12/island.png">
   
   
   
-  <title>[LeetCode] 2331. Evaluate Boolean Binary Tree - CNoodle</title>
+  <title>[LeetCode] 463. Island Perimeter - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2331. Evaluate Boolean Binary Tree"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 463. Island Perimeter"></span>
           
         </div>
 
@@ -203,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-06 06:16" pubdate>
-          February 6, 2023 am
+        <time datetime="2020-05-08 14:38" pubdate>
+          May 8, 2020 pm
         </time>
       </span>
     
@@ -215,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k words
+          2.1k words
         
       </span>
     
@@ -226,7 +224,7 @@
         
         
         
-          26 mins
+          18 mins
         
       </span>
     
@@ -263,41 +261,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2331. Evaluate Boolean Binary Tree</h1>
+            <h1 id="seo-header">[LeetCode] 463. Island Perimeter</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given the root of a full binary tree with the following properties:<br>Leaf nodes have either the value 0 or 1, where 0 represents False and 1 represents True.<br>Non-leaf nodes have either the value 2 or 3, where 2 represents the boolean OR and 3 represents the boolean AND.</p>
-<p>The evaluation of a node is as follows:<br>If the node is a leaf node, the evaluation is the value of the node, i.e. True or False.<br>Otherwise, evaluate the node’s two children and apply the boolean operation of its value with the children’s evaluations.</p>
-<p>Return the boolean result of evaluating the root node.</p>
-<p>A full binary tree is a binary tree where each node has either 0 or 2 children.</p>
-<p>A leaf node is a node that has zero children.</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2022/05/16/example1drawio1.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [2,1,3,null,null,0,1]<br>Output: true<br>Explanation: The above diagram illustrates the evaluation process.<br>The AND node evaluates to False AND True &#x3D; False.<br>The OR node evaluates to True OR False &#x3D; True.<br>The root node evaluates to True, so we return true.</p>
-<p>Example 2:<br>Input: root &#x3D; [0]<br>Output: false<br>Explanation: The root node is a leaf node and it evaluates to false, so we return false.</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [1, 1000].<br>0 &lt;&#x3D; Node.val &lt;&#x3D; 3<br>Every node has either 0 or 2 children.<br>Leaf nodes have a value of 0 or 1.<br>Non-leaf nodes have a value of 2 or 3.</p>
-<p>计算布尔二叉树的值。</p>
+                <p>You are given row x col grid representing a map where grid[i][j] &#x3D; 1 represents land and grid[i][j] &#x3D; 0 represents water.</p>
+<p>Grid cells are connected horizontally&#x2F;vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells).</p>
+<p>The island doesn’t have “lakes”, meaning the water inside isn’t connected to the water around the island. One cell is a square with side length 1. The grid is rectangular, width and height don’t exceed 100. Determine the perimeter of the island.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2018/10/12/island.png" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: grid &#x3D; [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]<br>Output: 16<br>Explanation: The perimeter is the 16 yellow stripes in the image above.</p>
+<p>Example 2:<br>Input: grid &#x3D; [[1]]<br>Output: 4</p>
+<p>Example 3:<br>Input: grid &#x3D; [[1,0]]<br>Output: 4</p>
+<p>Constraints:<br>row &#x3D;&#x3D; grid.length<br>col &#x3D;&#x3D; grid[i].length<br>1 &lt;&#x3D; row, col &lt;&#x3D; 100<br>grid[i][j] is 0 or 1.<br>There is exactly one island in grid.</p>
+<p>岛屿的周长。</p>
 <blockquote>
-给你一棵 完整二叉树 的根，这棵树有以下特征：
+给定一个 row x col 的二维网格地图 grid ，其中：grid[i][j] = 1 表示陆地， grid[i][j] = 0 表示水域。
 
-<p>叶子节点 要么值为 0 要么值为 1 ，其中 0 表示 False ，1 表示 True 。<br>非叶子节点 要么值为 2 要么值为 3 ，其中 2 表示逻辑或 OR ，3 表示逻辑与 AND 。<br>计算 一个节点的值方式如下：</p>
-<p>如果节点是个叶子节点，那么节点的 值 为它本身，即 True 或者 False 。<br>否则，计算 两个孩子的节点值，然后将该节点的运算符对两个孩子值进行 运算 。<br>返回根节点 root 的布尔运算值。</p>
-<p>完整二叉树 是每个节点有 0 个或者 2 个孩子的二叉树。</p>
-<p>叶子节点 是没有孩子的节点。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-boolean-binary-tree">https://leetcode.cn/problems/evaluate-boolean-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>网格中的格子 水平和垂直 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。</p>
+<p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。</p>
 </blockquote>
 
 
-<h2 id="思路一-后序遍历"><a href="#思路一-后序遍历" class="headerlink" title="思路一 - 后序遍历"></a>思路一 - 后序遍历</h2><p>因为最后判断整个树的布尔值是看根节点的布尔值，而根节点的布尔值是由下面的孩子节点的布尔值得来的，所以一个不难想到的思路就是后序遍历，从这棵树的叶子节点开始往上统计布尔值。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给一个二维矩阵，只有 0 和 1。1 表示岛屿，0 表示水。请返回岛屿的周长。这个题虽然是 200 题的 followup，但是其实跟 BFS 或者 DFS 没什么关系。思路是遍历 input，如果当前坐标的值是 1，说明是岛屿，周长 * 4；同时判断当前坐标的右边一个位置和下面一个位置是否也是岛屿，如果是，则减去两条边，因为两个邻居各自都失去一条边。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">evaluateTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> helper(root);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> helper(root.left);<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> helper(root.right);<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> left || right;<br>        &#125;<br>        <span class="hljs-keyword">return</span> left &amp;&amp; right;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">islandPerimeter</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] grid)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">nei</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    count++;<br>                    <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; m &amp;&amp; grid[i + <span class="hljs-number">1</span>][j] == <span class="hljs-number">1</span>) &#123;<br>                        nei++;<br>                    &#125;<br>                    <span class="hljs-keyword">if</span> (j + <span class="hljs-number">1</span> &lt; n &amp;&amp; grid[i][j + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>) &#123;<br>                        nei++;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count * <span class="hljs-number">4</span> - nei * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="思路二-递归"><a href="#思路二-递归" class="headerlink" title="思路二 - 递归"></a>思路二 - 递归</h2><p>我直接给代码。时间空间复杂度同思路一。</p>
-<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">evaluateTree</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root.left == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> root.val == <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (root.val == <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> evaluateTree(root.left) || evaluateTree(root.right);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> evaluateTree(root.left) &amp;&amp; evaluateTree(root.right);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[][]</span>&#125; <span class="hljs-variable">grid</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> islandPerimeter = <span class="hljs-keyword">function</span> (<span class="hljs-params">grid</span>) &#123;<br>	<span class="hljs-keyword">let</span> m = grid.<span class="hljs-property">length</span>;<br>	<span class="hljs-keyword">let</span> n = grid[<span class="hljs-number">0</span>].<span class="hljs-property">length</span>;<br>	<span class="hljs-keyword">let</span> islands = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">let</span> neighbors = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>			<span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-number">1</span>) &#123;<br>				islands++;<br>				<span class="hljs-keyword">if</span> (i &lt; m - <span class="hljs-number">1</span> &amp;&amp; grid[i + <span class="hljs-number">1</span>][j] == <span class="hljs-number">1</span>) &#123;<br>					neighbors++;<br>				&#125;<br>				<span class="hljs-keyword">if</span> (j &lt; n - <span class="hljs-number">1</span> &amp;&amp; grid[i][j + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>) &#123;<br>					neighbors++;<br>				&#125;<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> islands * <span class="hljs-number">4</span> - neighbors * <span class="hljs-number">2</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -312,15 +304,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
-      
-        <a href="/tags/recursion/" class="print-no-link">#recursion</a>
-      
-        <a href="/tags/postorder/" class="print-no-link">#postorder</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
     </div>
   
@@ -332,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2331. Evaluate Boolean Binary Tree</div>
-      <div>https://shurui91.github.io/posts/1989222089.html</div>
+      <div>[LeetCode] 463. Island Perimeter</div>
+      <div>https://shurui91.github.io/posts/1799568252.html</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 6, 2023</div>
+          <div>May 8, 2020</div>
         </div>
       
       
@@ -377,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3286329493.html" title="[LeetCode] 1792. Maximum Average Pass Ratio">
+                      <a href="/posts/4068024640.html" title="[LeetCode] 997. Find the Town Judge">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1792. Maximum Average Pass Ratio</span>
+                        <span class="hidden-mobile">[LeetCode] 997. Find the Town Judge</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -387,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1313054330.html" title="[LeetCode] 1254. Number of Closed Islands">
-                        <span class="hidden-mobile">[LeetCode] 1254. Number of Closed Islands</span>
+                      <a href="/posts/2743385074.html" title="[LeetCode] 1249. Minimum Remove to Make Valid Parentheses">
+                        <span class="hidden-mobile">[LeetCode] 1249. Minimum Remove to Make Valid Parentheses</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -408,8 +396,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/1989222089.html';
-          this.page.identifier = '/posts/1989222089.html';
+          this.page.url = 'https://shurui91.github.io/posts/1799568252.html';
+          this.page.identifier = '/posts/1799568252.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
