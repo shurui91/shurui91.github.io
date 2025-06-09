@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 386. Lexicographical Numbers</title>
+    <link href="/posts/1026628144.html"/>
+    <url>/posts/1026628144.html</url>
+    
+    <content type="html"><![CDATA[<p>Given an integer n, return all the numbers in the range [1, n] sorted in lexicographical order.</p><p>You must write an algorithm that runs in O(n) time and uses O(1) extra space. </p><p>Example 1:<br>Input: n &#x3D; 13<br>Output: [1,10,11,12,13,2,3,4,5,6,7,8,9]</p><p>Example 2:<br>Input: n &#x3D; 2<br>Output: [1,2]</p><p>Constraints:<br>1 &lt;&#x3D; n &lt;&#x3D; 5 * 104</p><p>字典序排数。</p><blockquote>给你一个整数 n ，按字典序返回范围 [1, n] 内所有整数。<p>你必须设计一个时间复杂度为 O(n) 且使用 O(1) 额外空间的算法。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是 DFS。注意题目要求，是要我们按字典序输出 [1, n] 内所有整数。那么思路就是从 1 到 9，把这九个数字作为第一个 digit，往后面加一个digit，如果不超过 n，就加入结果集。如果超过 n 就不能加。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1) - required</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="Java实现，空间O-n"><a href="#Java实现，空间O-n" class="headerlink" title="Java实现，空间O(n)"></a>Java实现，空间O(n)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">lexicalOrder</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; i++) &#123;<br>            dfs(i, n, res);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> cur, <span class="hljs-type">int</span> n, List&lt;Integer&gt; res)</span> &#123;<br>        <span class="hljs-keyword">if</span> (cur &gt; n) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        res.add(cur);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">9</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> cur * <span class="hljs-number">10</span> + i;<br>            <span class="hljs-keyword">if</span> (next &gt; n) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            dfs(next, n, res);<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-comment">// dfs</span><br></code></pre></td></tr></table></figure><h2 id="Java实现，空间O-1"><a href="#Java实现，空间O-1" class="headerlink" title="Java实现，空间O(1)"></a>Java实现，空间O(1)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">lexicalOrder</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            res.add(cur);<br>            <span class="hljs-keyword">if</span> (cur * <span class="hljs-number">10</span> &lt;= n) &#123;<br>                cur *= <span class="hljs-number">10</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">while</span> (cur % <span class="hljs-number">10</span> == <span class="hljs-number">9</span> || cur + <span class="hljs-number">1</span> &gt; n) &#123;<br>                    cur /= <span class="hljs-number">10</span>;<br>                &#125;<br>                cur++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>dfs</tag>
+      
+      <tag>trie</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2434. Using a Robot to Print the Lexicographically Smallest String</title>
     <link href="/posts/1478144800.html"/>
     <url>/posts/1478144800.html</url>
@@ -149,11 +174,11 @@
       
       <tag>java</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
       
       <tag>math</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -363,9 +388,9 @@
       
       <tag>sliding window with fixed size</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2655,9 +2680,9 @@
       
       <tag>MOD</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -2740,9 +2765,9 @@
       
       <tag>greedy</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3272,9 +3297,9 @@
       
       <tag>greedy</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3445,9 +3470,9 @@
       
       <tag>greedy</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -3497,9 +3522,9 @@
       
       <tag>java</tag>
       
-      <tag>matrix</tag>
-      
       <tag>sort</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -4075,11 +4100,11 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
       
       <tag>gcd</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4407,9 +4432,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4519,9 +4544,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -4550,9 +4575,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -5583,9 +5608,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -5996,9 +6021,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6406,9 +6431,9 @@
       
       <tag>tree</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -7723,9 +7748,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
       <tag>stack</tag>
       
@@ -7750,9 +7775,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>math</tag>
+      
+      <tag>string</tag>
       
       <tag>stack</tag>
       
@@ -8481,9 +8506,9 @@
       
       <tag>javascript</tag>
       
-      <tag>matrix</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>matrix</tag>
       
       <tag>heap</tag>
       
