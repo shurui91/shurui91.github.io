@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2566. Maximum Difference by Remapping a Digit</title>
+    <link href="/posts/622540580.html"/>
+    <url>/posts/622540580.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer num. You know that Bob will sneakily remap one of the 10 possible digits (0 to 9) to another digit.</p><p>Return the difference between the maximum and minimum values Bob can make by remapping exactly one digit in num.</p><p>Notes:<br>When Bob remaps a digit d1 to another digit d2, Bob replaces all occurrences of d1 in num with d2.<br>Bob can remap a digit to itself, in which case num does not change.<br>Bob can remap different digits for obtaining minimum and maximum values respectively.<br>The resulting number after remapping can contain leading zeroes.</p><p>Example 1:<br>Input: num &#x3D; 11891<br>Output: 99009<br>Explanation:<br>To achieve the maximum value, Bob can remap the digit 1 to the digit 9 to yield 99899.<br>To achieve the minimum value, Bob can remap the digit 1 to the digit 0, yielding 890.<br>The difference between these two numbers is 99009.</p><p>Example 2:<br>Input: num &#x3D; 90<br>Output: 99<br>Explanation:<br>The maximum value that can be returned by the function is 99 (if 0 is replaced by 9) and the minimum value that can be returned by the function is 0 (if 9 is replaced by 0).<br>Thus, we return 99.</p><p>Constraints:<br>1 &lt;&#x3D; num &lt;&#x3D; 108</p><p>替换一个数字后的最大差值。</p><blockquote>给你一个整数 num 。你知道 Danny Mittal 会偷偷将 0 到 9 中的一个数字 替换 成另一个数字。<p>请你返回将 num 中 恰好一个 数字进行替换后，得到的最大值和最小值的差为多少。</p><p>注意：</p><p>当 Danny 将一个数字 d1 替换成另一个数字 d2 时，Danny 需要将 nums 中所有 d1 都替换成 d2 。<br>Danny 可以将一个数字替换成它自己，也就是说 num 可以不变。<br>Danny 可以将数字分别替换成两个不同的数字分别得到最大值和最小值。<br>替换后得到的数字可以包含前导 0 。<br>Danny Mittal 获得周赛 326 前 10 名，让我们恭喜他。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道字符串的实现题。给的 input 是一个字符串，表示一个数字，需要把他变成一个最大的数和一个最小的数，然后求两者的差值。首先我们思考最大的数是什么？是最高位尽量为 9，如果第一位已经为 9，那么就找到第一个不为 9 的digit，假如为 X，把所有的 X 都替换成 9。</p><p>又因为给的数字一定没有前导 0，如果最高位出现的数字为 Y，我们把所有的 Y 都替换为 0 即可。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - 遍历字符串一次<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minMaxDifference</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> String.valueOf(num);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> num;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : str.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c != <span class="hljs-string">&#x27;9&#x27;</span>) &#123;<br>                max = Integer.parseInt(str.replace(c, <span class="hljs-string">&#x27;9&#x27;</span>));<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Integer.parseInt(str.replace(str.charAt(<span class="hljs-number">0</span>), <span class="hljs-string">&#x27;0&#x27;</span>));<br>        <span class="hljs-keyword">return</span> max - min;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 386. Lexicographical Numbers</title>
     <link href="/posts/1026628144.html"/>
     <url>/posts/1026628144.html</url>
@@ -95,9 +120,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -174,9 +199,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
       <tag>matrix</tag>
       
@@ -1670,9 +1695,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1857,9 +1882,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
@@ -3653,9 +3678,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3707,9 +3732,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4289,9 +4314,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4432,9 +4457,9 @@
       
       <tag>dfs</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -4604,9 +4629,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -5219,9 +5244,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5502,13 +5527,13 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
+      <tag>greedy</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5583,9 +5608,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -6431,9 +6456,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6668,9 +6693,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>trie</tag>
       
@@ -7692,9 +7717,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>monotonic stack</tag>
       
@@ -8560,9 +8585,9 @@
       
       <tag>javascript</tag>
       
-      <tag>binary search</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>binary search</tag>
       
       <tag>heap</tag>
       
@@ -9828,9 +9853,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -9855,9 +9880,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
@@ -9884,9 +9909,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -10268,11 +10293,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>sort</tag>
       
       <tag>bucket sort</tag>
-      
-      <tag>string</tag>
       
       <tag>heap</tag>
       
