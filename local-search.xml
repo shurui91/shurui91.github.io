@@ -120,9 +120,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>sort</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -199,9 +199,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>sort</tag>
+      
+      <tag>math</tag>
       
       <tag>matrix</tag>
       
@@ -897,9 +897,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -1695,9 +1695,9 @@
       
       <tag>greedy</tag>
       
-      <tag>math</tag>
-      
       <tag>sort</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2146,11 +2146,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3520,9 +3520,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3678,9 +3678,9 @@
       
       <tag>greedy</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -3732,9 +3732,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4154,9 +4154,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4208,9 +4208,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4314,9 +4314,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4457,9 +4457,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4569,9 +4569,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>sort</tag>
       
@@ -4600,9 +4600,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>math</tag>
       
@@ -4629,13 +4629,13 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
       
       <tag>sort</tag>
       
       <tag>binary search</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5016,6 +5016,29 @@
   
   
   <entry>
+    <title>[LeetCode] 2016. Maximum Difference Between Increasing Elements</title>
+    <link href="/posts/3803496453.html"/>
+    <url>/posts/3803496453.html</url>
+    
+    <content type="html"><![CDATA[<p>Given a 0-indexed integer array nums of size n, find the maximum difference between nums[i] and nums[j] (i.e., nums[j] - nums[i]), such that 0 &lt;&#x3D; i &lt; j &lt; n and nums[i] &lt; nums[j].</p><p>Return the maximum difference. If no such i and j exists, return -1.</p><p>Example 1:<br>Input: nums &#x3D; [7,1,5,4]<br>Output: 4<br>Explanation:<br>The maximum difference occurs with i &#x3D; 1 and j &#x3D; 2, nums[j] - nums[i] &#x3D; 5 - 1 &#x3D; 4.<br>Note that with i &#x3D; 1 and j &#x3D; 0, the difference nums[j] - nums[i] &#x3D; 7 - 1 &#x3D; 6, but i &gt; j, so it is not valid.</p><p>Example 2:<br>Input: nums &#x3D; [9,4,3,2]<br>Output: -1<br>Explanation:<br>There is no i and j such that i &lt; j and nums[i] &lt; nums[j].</p><p>Example 3:<br>Input: nums &#x3D; [1,5,2,10]<br>Output: 9<br>Explanation:<br>The maximum difference occurs with i &#x3D; 0 and j &#x3D; 3, nums[j] - nums[i] &#x3D; 10 - 1 &#x3D; 9.</p><p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>2 &lt;&#x3D; n &lt;&#x3D; 1000<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 109</p><p>增量元素之间的最大差值。</p><blockquote>给你一个下标从 0 开始的整数数组 nums ，该数组的大小为 n ，请你计算 nums[j] - nums[i] 能求得的 最大差值 ，其中 0 <= i < j < n 且 nums[i] < nums[j] 。<p>返回 最大差值 。如果不存在满足要求的 i 和 j ，返回 -1 。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-difference-between-increasing-elements">https://leetcode-cn.com/problems/maximum-difference-between-increasing-elements</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题就是股票题版本一换了个说法。唯一需要注意的是如果不存在满足题意的差值，返回的是 -1。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maximumDifference</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : nums) &#123;<br>            res = Math.max(res, num - min);<br>            min = Math.min(min, num);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res &gt; <span class="hljs-number">0</span> ? res : -<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">121. Best Time to Buy and Sell Stock<br>2016. Maximum Difference Between Increasing Elements<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1491. Average Salary Excluding the Minimum and Maximum Salary</title>
     <link href="/posts/576839838.html"/>
     <url>/posts/576839838.html</url>
@@ -5244,9 +5267,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -5450,9 +5473,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5527,13 +5550,13 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>sort</tag>
       
       <tag>sliding window</tag>
       
-      <tag>sort</tag>
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5608,9 +5631,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5633,9 +5656,9 @@
       
       <tag>java</tag>
       
-      <tag>MOD</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>MOD</tag>
       
       <tag>heap</tag>
       
@@ -5799,11 +5822,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6046,9 +6069,9 @@
       
       <tag>java</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>heap</tag>
       
@@ -6456,9 +6479,9 @@
       
       <tag>tree</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -6693,9 +6716,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
+      
+      <tag>string</tag>
       
       <tag>trie</tag>
       
@@ -7744,9 +7767,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>bit manipulation</tag>
       
@@ -8585,9 +8608,9 @@
       
       <tag>javascript</tag>
       
-      <tag>matrix</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>matrix</tag>
       
       <tag>heap</tag>
       
@@ -8732,9 +8755,9 @@
       
       <tag>MOD</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -8923,9 +8946,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -10293,11 +10316,11 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>sort</tag>
       
       <tag>bucket sort</tag>
+      
+      <tag>string</tag>
       
       <tag>heap</tag>
       
