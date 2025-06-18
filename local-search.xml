@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2294. Partition Array Such That Maximum Difference Is K</title>
+    <link href="/posts/3847178217.html"/>
+    <url>/posts/3847178217.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given an integer array nums and an integer k. You may partition nums into one or more subsequences such that each element in nums appears in exactly one of the subsequences.</p><p>Return the minimum number of subsequences needed such that the difference between the maximum and minimum values in each subsequence is at most k.</p><p>A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.</p><p>Example 1:<br>Input: nums &#x3D; [3,6,1,2,5], k &#x3D; 2<br>Output: 2<br>Explanation:<br>We can partition nums into the two subsequences [3,1,2] and [6,5].<br>The difference between the maximum and minimum value in the first subsequence is 3 - 1 &#x3D; 2.<br>The difference between the maximum and minimum value in the second subsequence is 6 - 5 &#x3D; 1.<br>Since two subsequences were created, we return 2. It can be shown that 2 is the minimum number of subsequences needed.</p><p>Example 2:<br>Input: nums &#x3D; [1,2,3], k &#x3D; 1<br>Output: 2<br>Explanation:<br>We can partition nums into the two subsequences [1,2] and [3].<br>The difference between the maximum and minimum value in the first subsequence is 2 - 1 &#x3D; 1.<br>The difference between the maximum and minimum value in the second subsequence is 3 - 3 &#x3D; 0.<br>Since two subsequences were created, we return 2. Note that another optimal solution is to partition nums into the two subsequences [1] and [2,3].</p><p>Example 3:<br>Input: nums &#x3D; [2,2,4,5], k &#x3D; 0<br>Output: 3<br>Explanation:<br>We can partition nums into the three subsequences [2,2], [4], and [5].<br>The difference between the maximum and minimum value in the first subsequences is 2 - 2 &#x3D; 0.<br>The difference between the maximum and minimum value in the second subsequences is 4 - 4 &#x3D; 0.<br>The difference between the maximum and minimum value in the third subsequences is 5 - 5 &#x3D; 0.<br>Since three subsequences were created, we return 3. It can be shown that 3 is the minimum number of subsequences needed.</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 105<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 105<br>0 &lt;&#x3D; k &lt;&#x3D; 105</p><p>划分数组使最大差为 K。</p><blockquote>给你一个整数数组 nums 和一个整数 k 。你可以将 nums 划分成一个或多个 子序列 ，使 nums 中的每个元素都 恰好 出现在一个子序列中。<p>在满足每个子序列中最大值和最小值之间的差值最多为 k 的前提下，返回需要划分的 最少 子序列数目。</p><p>子序列 本质是一个序列，可以通过删除另一个序列中的某些元素（或者不删除）但不改变剩下元素的顺序得到。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是贪心。题目要求我们把 input 数组划分成多个子序列，而且注意例子，我们发现子序列是无序的。所以这里我们可以选择排序。排序过后，对于每个合法的子序列，我们是哦先可以得到子序列中最小的元素 min，然后遍历后面的数字，如果当前数字 num - min &gt; k，则说明当前数字 num 不能和 min 在同一个子序列中，所以我们需要新开一个子序列。否则就可以和 min 在同一个子序列中。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">partitionArray</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            <span class="hljs-keyword">if</span> (num - min &gt; k) &#123;<br>                count++;<br>                min = num;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>greedy</tag>
+      
+      <tag>sort</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2566. Maximum Difference by Remapping a Digit</title>
     <link href="/posts/622540580.html"/>
     <url>/posts/622540580.html</url>
@@ -201,9 +226,9 @@
       
       <tag>sort</tag>
       
-      <tag>matrix</tag>
-      
       <tag>math</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -897,9 +922,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -1882,9 +1907,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
       <tag>queue</tag>
       
@@ -2146,11 +2171,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -2524,9 +2549,9 @@
       
       <tag>recursion</tag>
       
-      <tag>linked list</tag>
-      
       <tag>stack</tag>
+      
+      <tag>linked list</tag>
       
       <tag>monotonic stack</tag>
       
@@ -3520,9 +3545,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4154,9 +4179,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4208,9 +4233,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4629,13 +4654,13 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
       
       <tag>sort</tag>
       
       <tag>binary search</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5473,9 +5498,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5550,13 +5575,13 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
       
       <tag>sort</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5631,9 +5656,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>greedy</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5822,11 +5847,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -7769,9 +7794,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>monotonic stack</tag>
       
@@ -7796,9 +7821,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>bit manipulation</tag>
       
@@ -7910,9 +7935,9 @@
       
       <tag>treemap</tag>
       
-      <tag>binary search</tag>
-      
       <tag>string</tag>
+      
+      <tag>binary search</tag>
       
       <tag>design</tag>
       
@@ -8784,9 +8809,9 @@
       
       <tag>MOD</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -8975,9 +9000,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9494,9 +9519,9 @@
       
       <tag>javascript</tag>
       
-      <tag>linked list</tag>
-      
       <tag>stack</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
@@ -9905,9 +9930,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -9932,9 +9957,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
@@ -9961,9 +9986,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
