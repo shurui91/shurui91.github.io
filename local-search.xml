@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2138. Divide a String Into Groups of Size k</title>
+    <link href="/posts/3233707564.html"/>
+    <url>/posts/3233707564.html</url>
+    
+    <content type="html"><![CDATA[<p>A string s can be partitioned into groups of size k using the following procedure:</p><p>The first group consists of the first k characters of the string, the second group consists of the next k characters of the string, and so on. Each element can be a part of exactly one group.<br>For the last group, if the string does not have k characters remaining, a character fill is used to complete the group.<br>Note that the partition is done so that after removing the fill character from the last group (if it exists) and concatenating all the groups in order, the resultant string should be s.</p><p>Given the string s, the size of each group k and the character fill, return a string array denoting the composition of every group s has been divided into, using the above procedure.</p><p>Example 1:<br>Input: s &#x3D; “abcdefghi”, k &#x3D; 3, fill &#x3D; “x”<br>Output: [“abc”,”def”,”ghi”]<br>Explanation:<br>The first 3 characters “abc” form the first group.<br>The next 3 characters “def” form the second group.<br>The last 3 characters “ghi” form the third group.<br>Since all groups can be completely filled by characters from the string, we do not need to use fill.<br>Thus, the groups formed are “abc”, “def”, and “ghi”.</p><p>Example 2:<br>Input: s &#x3D; “abcdefghij”, k &#x3D; 3, fill &#x3D; “x”<br>Output: [“abc”,”def”,”ghi”,”jxx”]<br>Explanation:<br>Similar to the previous example, we are forming the first three groups “abc”, “def”, and “ghi”.<br>For the last group, we can only use the character ‘j’ from the string. To complete this group, we add ‘x’ twice.<br>Thus, the 4 groups formed are “abc”, “def”, “ghi”, and “jxx”.</p><p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists of lowercase English letters only.<br>1 &lt;&#x3D; k &lt;&#x3D; 100<br>fill is a lowercase English letter.</p><p>将字符串拆分为若干长度为 k 的组.</p><blockquote>字符串 s 可以按下述步骤划分为若干长度为 k 的组：<p>第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。<br>对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。<br>注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的组后，所得到的字符串应该是 s 。</p><p>给你一个字符串 s ，以及每组的长度 k 和一个用于填充的字符 fill ，按上述步骤处理之后，返回一个字符串数组，该数组表示 s 分组后 每个组的组成情况 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题就是模拟。将字符串分成若干个长度为 k 的组，最后一组如果不足 k 个字符，则用 fill 填充。可以使用 StringBuilder 来构建每个组。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="Java实现一"><a href="#Java实现一" class="headerlink" title="Java实现一"></a>Java实现一</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] divideString(String s, <span class="hljs-type">int</span> k, <span class="hljs-type">char</span> fill) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">groups</span> <span class="hljs-operator">=</span> (n + k - <span class="hljs-number">1</span>) / k; <span class="hljs-comment">// Calculate the number of groups needed</span><br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[groups];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; groups; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> i * k;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> Math.min(start + k, n);<br>            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(s.substring(start, end));<br>            <span class="hljs-comment">// If the group is not full, fill it with the fill character</span><br>            <span class="hljs-keyword">while</span> (sb.length() &lt; k) &#123;<br>                sb.append(fill);<br>            &#125;<br>            res[i] = sb.toString();<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="Java实现二"><a href="#Java实现二" class="headerlink" title="Java实现二"></a>Java实现二</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] divideString(String s, <span class="hljs-type">int</span> k, <span class="hljs-type">char</span> fill) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> s.substring(i, Math.min(i + k, s.length()));<br>            <span class="hljs-keyword">if</span> (str.length() == k) &#123;<br>                list.add(str);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">diff</span> <span class="hljs-operator">=</span> k - str.length();<br>                <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : str.toCharArray()) &#123;<br>                    sb.append(c);<br>                &#125;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; diff; j++) &#123;<br>                    sb.append(fill);<br>                &#125;<br>                list.add(sb.toString());<br>            &#125;<br>            i += k;<br>        &#125;<br>        <br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[list.size()];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; list.size(); j++) &#123;<br>            res[j] = list.get(j);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+      <tag>simulation</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2294. Partition Array Such That Maximum Difference Is K</title>
     <link href="/posts/3847178217.html"/>
     <url>/posts/3847178217.html</url>
@@ -924,9 +949,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -2173,11 +2198,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3547,9 +3572,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4181,9 +4206,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4235,9 +4260,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4484,9 +4509,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4658,11 +4683,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>binary search</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5500,9 +5525,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5579,11 +5604,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5849,11 +5874,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6506,9 +6531,9 @@
       
       <tag>tree</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -7823,9 +7848,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>bit manipulation</tag>
       
@@ -7935,9 +7960,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>treemap</tag>
+      
+      <tag>string</tag>
       
       <tag>binary search</tag>
       
@@ -8811,9 +8836,9 @@
       
       <tag>MOD</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9002,9 +9027,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     

@@ -16,26 +16,25 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a 0-indexed array of strings words and a 2D array of integers queries. Each query queries[i] &#x3D; [li, ri] asks us to find the number of strings present in the range li to ri (both inc">
+    <meta name="description" content="A string s can be partitioned into groups of size k using the following procedure: The first group consists of the first k characters of the string, the second group consists of the next k characters">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2559. Count Vowel Strings in Ranges">
-<meta property="og:url" content="https://shurui91.github.io/posts/4288558704.html">
+<meta property="og:title" content="[LeetCode] 2138. Divide a String Into Groups of Size k">
+<meta property="og:url" content="https://shurui91.github.io/posts/3233707564.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a 0-indexed array of strings words and a 2D array of integers queries. Each query queries[i] &#x3D; [li, ri] asks us to find the number of strings present in the range li to ri (both inc">
+<meta property="og:description" content="A string s can be partitioned into groups of size k using the following procedure: The first group consists of the first k characters of the string, the second group consists of the next k characters">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-02T11:17:56.000Z">
-<meta property="article:modified_time" content="2024-12-09T20:03:51.354Z">
+<meta property="article:published_time" content="2025-06-21T22:32:49.000Z">
+<meta property="article:modified_time" content="2025-06-21T22:42:42.180Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="string">
-<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="simulation">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2559. Count Vowel Strings in Ranges - CNoodle</title>
+  <title>[LeetCode] 2138. Divide a String Into Groups of Size k - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2559. Count Vowel Strings in Ranges"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2138. Divide a String Into Groups of Size k"></span>
           
         </div>
 
@@ -200,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-02 04:17" pubdate>
-          June 2, 2023 am
+        <time datetime="2025-06-21 15:32" pubdate>
+          June 21, 2025 pm
         </time>
       </span>
     
@@ -212,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          2.9k words
         
       </span>
     
@@ -223,7 +222,7 @@
         
         
         
-          19 mins
+          25 mins
         
       </span>
     
@@ -260,34 +259,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2559. Count Vowel Strings in Ranges</h1>
+            <h1 id="seo-header">[LeetCode] 2138. Divide a String Into Groups of Size k</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a 0-indexed array of strings words and a 2D array of integers queries.</p>
-<p>Each query queries[i] &#x3D; [li, ri] asks us to find the number of strings present in the range li to ri (both inclusive) of words that start and end with a vowel.</p>
-<p>Return an array ans of size queries.length, where ans[i] is the answer to the ith query.</p>
-<p>Note that the vowel letters are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’.</p>
-<p>Example 1:<br>Input: words &#x3D; [“aba”,”bcb”,”ece”,”aa”,”e”], queries &#x3D; [[0,2],[1,4],[1,1]]<br>Output: [2,3,0]<br>Explanation: The strings starting and ending with a vowel are “aba”, “ece”, “aa” and “e”.<br>The answer to the query [0,2] is 2 (strings “aba” and “ece”).<br>to query [1,4] is 3 (strings “ece”, “aa”, “e”).<br>to query [1,1] is 0.<br>We return [2,3,0].</p>
-<p>Example 2:<br>Input: words &#x3D; [“a”,”e”,”i”], queries &#x3D; [[0,2],[0,1],[2,2]]<br>Output: [3,2,1]<br>Explanation: Every string satisfies the conditions, so we return [3,2,1].</p>
-<p>Constraints:<br>1 &lt;&#x3D; words.length &lt;&#x3D; 105<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 40<br>words[i] consists only of lowercase English letters.<br>sum(words[i].length) &lt;&#x3D; 3 * 105<br>1 &lt;&#x3D; queries.length &lt;&#x3D; 105<br>0 &lt;&#x3D; li &lt;&#x3D; ri &lt; words.length</p>
-<p>统计范围内的元音字符串数。</p>
+                <p>A string s can be partitioned into groups of size k using the following procedure:</p>
+<p>The first group consists of the first k characters of the string, the second group consists of the next k characters of the string, and so on. Each element can be a part of exactly one group.<br>For the last group, if the string does not have k characters remaining, a character fill is used to complete the group.<br>Note that the partition is done so that after removing the fill character from the last group (if it exists) and concatenating all the groups in order, the resultant string should be s.</p>
+<p>Given the string s, the size of each group k and the character fill, return a string array denoting the composition of every group s has been divided into, using the above procedure.</p>
+<p>Example 1:<br>Input: s &#x3D; “abcdefghi”, k &#x3D; 3, fill &#x3D; “x”<br>Output: [“abc”,”def”,”ghi”]<br>Explanation:<br>The first 3 characters “abc” form the first group.<br>The next 3 characters “def” form the second group.<br>The last 3 characters “ghi” form the third group.<br>Since all groups can be completely filled by characters from the string, we do not need to use fill.<br>Thus, the groups formed are “abc”, “def”, and “ghi”.</p>
+<p>Example 2:<br>Input: s &#x3D; “abcdefghij”, k &#x3D; 3, fill &#x3D; “x”<br>Output: [“abc”,”def”,”ghi”,”jxx”]<br>Explanation:<br>Similar to the previous example, we are forming the first three groups “abc”, “def”, and “ghi”.<br>For the last group, we can only use the character ‘j’ from the string. To complete this group, we add ‘x’ twice.<br>Thus, the 4 groups formed are “abc”, “def”, “ghi”, and “jxx”.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists of lowercase English letters only.<br>1 &lt;&#x3D; k &lt;&#x3D; 100<br>fill is a lowercase English letter.</p>
+<p>将字符串拆分为若干长度为 k 的组.</p>
 <blockquote>
-给你一个下标从 0 开始的字符串数组 words 以及一个二维整数数组 queries 。
+字符串 s 可以按下述步骤划分为若干长度为 k 的组：
 
-<p>每个查询 queries[i] &#x3D; [li, ri] 会要求我们统计在 words 中下标在 li 到 ri 范围内（包含 这两个值）并且以元音开头和结尾的字符串的数目。</p>
-<p>返回一个整数数组，其中数组的第 i 个元素对应第 i 个查询的答案。</p>
-<p>注意：元音字母是 ‘a’、’e’、’i’、’o’ 和 ‘u’ 。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-vowel-strings-in-ranges">https://leetcode.cn/problems/count-vowel-strings-in-ranges</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>第一组由字符串中的前 k 个字符组成，第二组由接下来的 k 个字符串组成，依此类推。每个字符都能够成为 某一个 组的一部分。<br>对于最后一组，如果字符串剩下的字符 不足 k 个，需使用字符 fill 来补全这一组字符。<br>注意，在去除最后一个组的填充字符 fill（如果存在的话）并按顺序连接所有的组后，所得到的字符串应该是 s 。</p>
+<p>给你一个字符串 s ，以及每组的长度 k 和一个用于填充的字符 fill ，按上述步骤处理之后，返回一个字符串数组，该数组表示 s 分组后 每个组的组成情况 。</p>
 </blockquote>
 
 
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是前缀和。这是前缀和的基础应用。如果 input 数组的长度是 n，那么我们需要一个长度为 n + 1 的数组记录前 n 个单词里面有多少个单词是以元音开头和结尾的。然后我们就可以以<code>O(1)</code>的时间找到下标在 li 到 ri 范围内（包含 这两个值）并且以元音开头和结尾的字符串的数目。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题就是模拟。将字符串分成若干个长度为 k 的组，最后一组如果不足 k 个字符，则用 fill 填充。可以使用 StringBuilder 来构建每个组。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] vowelStrings(String[] words, <span class="hljs-type">int</span>[][] queries) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> words.length;<br>        <span class="hljs-type">int</span>[] presum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        presum[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> helper(words[i]) == <span class="hljs-literal">true</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;<br>            presum[i + <span class="hljs-number">1</span>] = presum[i] + cur;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> queries.length;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[len];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> queries[i][<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> queries[i][<span class="hljs-number">1</span>];<br>            res[i] = presum[right + <span class="hljs-number">1</span>] - presum[left];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(String str)</span> &#123;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span> str.charAt(<span class="hljs-number">0</span>);<br>        <span class="hljs-type">char</span> <span class="hljs-variable">last</span> <span class="hljs-operator">=</span> str.charAt(str.length() - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> isVowel(first) &amp;&amp; isVowel(last);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isVowel</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> &#123;<br>        <span class="hljs-keyword">return</span> c == <span class="hljs-string">&#x27;a&#x27;</span> || c == <span class="hljs-string">&#x27;e&#x27;</span> || c == <span class="hljs-string">&#x27;i&#x27;</span> || c == <span class="hljs-string">&#x27;o&#x27;</span> || c == <span class="hljs-string">&#x27;u&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="Java实现一"><a href="#Java实现一" class="headerlink" title="Java实现一"></a>Java实现一</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] divideString(String s, <span class="hljs-type">int</span> k, <span class="hljs-type">char</span> fill) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">groups</span> <span class="hljs-operator">=</span> (n + k - <span class="hljs-number">1</span>) / k; <span class="hljs-comment">// Calculate the number of groups needed</span><br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[groups];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; groups; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> i * k;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> Math.min(start + k, n);<br>            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(s.substring(start, end));<br>            <span class="hljs-comment">// If the group is not full, fill it with the fill character</span><br>            <span class="hljs-keyword">while</span> (sb.length() &lt; k) &#123;<br>                sb.append(fill);<br>            &#125;<br>            res[i] = sb.toString();<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Java实现二"><a href="#Java实现二" class="headerlink" title="Java实现二"></a>Java实现二</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String[] divideString(String s, <span class="hljs-type">int</span> k, <span class="hljs-type">char</span> fill) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        List&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> s.substring(i, Math.min(i + k, s.length()));<br>            <span class="hljs-keyword">if</span> (str.length() == k) &#123;<br>                list.add(str);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">diff</span> <span class="hljs-operator">=</span> k - str.length();<br>                <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : str.toCharArray()) &#123;<br>                    sb.append(c);<br>                &#125;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; diff; j++) &#123;<br>                    sb.append(fill);<br>                &#125;<br>                list.add(sb.toString());<br>            &#125;<br>            i += k;<br>        &#125;<br>        <br>        String[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[list.size()];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; list.size(); j++) &#123;<br>            res[j] = list.get(j);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -302,13 +299,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
       
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
       
     </div>
   
@@ -320,8 +315,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2559. Count Vowel Strings in Ranges</div>
-      <div>https://shurui91.github.io/posts/4288558704.html</div>
+      <div>[LeetCode] 2138. Divide a String Into Groups of Size k</div>
+      <div>https://shurui91.github.io/posts/3233707564.html</div>
     </div>
     <div class="license-meta">
       
@@ -333,7 +328,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 2, 2023</div>
+          <div>June 21, 2025</div>
         </div>
       
       
@@ -365,18 +360,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3837729252.html" title="[LeetCode] 2460. Apply Operations to an Array">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2460. Apply Operations to an Array</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1697121728.html" title="[LeetCode] 2441. Largest Positive Integer That Exists With Its Negative">
-                        <span class="hidden-mobile">[LeetCode] 2441. Largest Positive Integer That Exists With Its Negative</span>
+                      <a href="/posts/3847178217.html" title="[LeetCode] 2294. Partition Array Such That Maximum Difference Is K">
+                        <span class="hidden-mobile">[LeetCode] 2294. Partition Array Such That Maximum Difference Is K</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -396,8 +385,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/4288558704.html';
-          this.page.identifier = '/posts/4288558704.html';
+          this.page.url = 'https://shurui91.github.io/posts/3233707564.html';
+          this.page.identifier = '/posts/3233707564.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
