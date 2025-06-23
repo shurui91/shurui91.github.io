@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>[LeetCode] 2200. Find All K-Distant Indices in an Array</title>
+    <link href="/posts/3512283209.html"/>
+    <url>/posts/3512283209.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed integer array nums and two integers key and k. A k-distant index is an index i of nums for which there exists at least one index j such that |i - j| &lt;&#x3D; k and nums[j] &#x3D;&#x3D; key.</p><p>Return a list of all k-distant indices sorted in increasing order.</p><p>Example 1:<br>Input: nums &#x3D; [3,4,9,1,3,9,5], key &#x3D; 9, k &#x3D; 1<br>Output: [1,2,3,4,5,6]<br>Explanation: Here, nums[2] &#x3D;&#x3D; key and nums[5] &#x3D;&#x3D; key.</p><ul><li>For index 0, |0 - 2| &gt; k and |0 - 5| &gt; k, so there is no j where |0 - j| &lt;&#x3D; k and nums[j] &#x3D;&#x3D; key. Thus, 0 is not a k-distant index.</li><li>For index 1, |1 - 2| &lt;&#x3D; k and nums[2] &#x3D;&#x3D; key, so 1 is a k-distant index.</li><li>For index 2, |2 - 2| &lt;&#x3D; k and nums[2] &#x3D;&#x3D; key, so 2 is a k-distant index.</li><li>For index 3, |3 - 2| &lt;&#x3D; k and nums[2] &#x3D;&#x3D; key, so 3 is a k-distant index.</li><li>For index 4, |4 - 5| &lt;&#x3D; k and nums[5] &#x3D;&#x3D; key, so 4 is a k-distant index.</li><li>For index 5, |5 - 5| &lt;&#x3D; k and nums[5] &#x3D;&#x3D; key, so 5 is a k-distant index.</li><li>For index 6, |6 - 5| &lt;&#x3D; k and nums[5] &#x3D;&#x3D; key, so 6 is a k-distant index.<br>Thus, we return [1,2,3,4,5,6] which is sorted in increasing order.</li></ul><p>Example 2:<br>Input: nums &#x3D; [2,2,2,2,2], key &#x3D; 2, k &#x3D; 2<br>Output: [0,1,2,3,4]<br>Explanation: For all indices i in nums, there exists some index j such that |i - j| &lt;&#x3D; k and nums[j] &#x3D;&#x3D; key, so every index is a k-distant index.<br>Hence, we return [0,1,2,3,4].</p><p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>key is an integer from the array nums.<br>1 &lt;&#x3D; k &lt;&#x3D; nums.length</p><p>找出数组中的所有 K 近邻下标。</p><blockquote>给你一个下标从 0 开始的整数数组 nums 和两个整数 key 和 k 。K 近邻下标 是 nums 中的一个下标 i ，并满足至少存在一个下标 j 使得 |i - j| <= k 且 nums[j] == key 。<p>以列表形式返回按 递增顺序 排序的所有 K 近邻下标。</p></blockquote><h2 id="思路一-两层循环"><a href="#思路一-两层循环" class="headerlink" title="思路一 - 两层循环"></a>思路一 - 两层循环</h2><p>先用一个 list 把 input 数组里所有等于 key 的下标存起来，然后遍历这个 list，对于 list 里的每一个 index，将在 <code>[index - k, index + k]</code> 这个范围内的所有下标都加入一个 hashset 里。再把 hashset 转换成 list 并排序后返回。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n*k)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">findKDistantIndices</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> key, <span class="hljs-type">int</span> k)</span> &#123;<br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[j] == key) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> Math.max(<span class="hljs-number">0</span>, j - k);<br>                <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> Math.min(n - <span class="hljs-number">1</span>, j + k);<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt;= end; i++) &#123;<br>                    set.add(i);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(set);<br>        Collections.sort(res); <span class="hljs-comment">// 题目要求升序排列</span><br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><span class="hljs-comment">// O(n * k)</span><br></code></pre></td></tr></table></figure><h2 id="思路二-双指针，一层循环"><a href="#思路二-双指针，一层循环" class="headerlink" title="思路二 - 双指针，一层循环"></a>思路二 - 双指针，一层循环</h2><p>和思路一类似，还是需要一个 list 先把所有 key 的下标存储起来。接着我们用双指针的做法，一个指针 i 指向 input 数组，另一个指针 j 指向 list。具体参见代码。</p><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m + n)<br>空间O(n)</p><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">findKDistantIndices</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> key, <span class="hljs-type">int</span> k)</span> &#123;<br>        List&lt;Integer&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            <span class="hljs-keyword">if</span> (num == key) &#123;<br>                indexes.add(i);<br>            &#125;<br>        &#125;<br><br>        List&lt;Integer&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">while</span> (p &lt; indexes.size() &amp;&amp; indexes.get(p) &lt; i - k) &#123;<br>                p++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (p &lt; indexes.size() &amp;&amp; Math.abs(i - indexes.get(p)) &lt;= k) &#123;<br>                res.add(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><span class="hljs-comment">// O(m+n)</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 2138. Divide a String Into Groups of Size k</title>
     <link href="/posts/3233707564.html"/>
     <url>/posts/3233707564.html</url>
@@ -949,9 +974,9 @@
       
       <tag>java</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -2198,11 +2223,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3572,9 +3597,9 @@
       
       <tag>array</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -4206,9 +4231,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -4260,9 +4285,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>string</tag>
       
     </tags>
     
@@ -4683,11 +4708,11 @@
       
       <tag>greedy</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sort</tag>
       
       <tag>binary search</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5525,9 +5550,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5604,11 +5629,11 @@
       
       <tag>greedy</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5874,11 +5899,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -7848,9 +7873,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>string</tag>
       
       <tag>bit manipulation</tag>
       
@@ -8836,9 +8861,9 @@
       
       <tag>MOD</tag>
       
-      <tag>math</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>math</tag>
       
     </tags>
     
@@ -9027,9 +9052,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -10575,9 +10600,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>recursion</tag>
       
       <tag>backtracking</tag>
       
