@@ -4632,9 +4632,9 @@
       
       <tag>dfs</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6681,9 +6681,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -7239,6 +7239,35 @@
       <tag>binary search</tag>
       
       <tag>binary search on answer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 1022. Sum of Root To Leaf Binary Numbers</title>
+    <link href="/posts/3650823632.html"/>
+    <url>/posts/3650823632.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given the root of a binary tree where each node has a value 0 or 1. Each root-to-leaf path represents a binary number starting with the most significant bit.</p><p>For example, if the path is 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1, then this could represent 01101 in binary, which is 13.<br>For all leaves in the tree, consider the numbers represented by the path from the root to that leaf. Return the sum of these numbers.</p><p>The test cases are generated so that the answer fits in a 32-bits integer.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2019/04/04/sum-of-root-to-leaf-binary-numbers.png" alt="Example 1"><br>Input: root &#x3D; [1,0,1,0,1,0,1]<br>Output: 22<br>Explanation: (100) + (101) + (110) + (111) &#x3D; 4 + 5 + 6 + 7 &#x3D; 22</p><p>Example 2:<br>Input: root &#x3D; [0]<br>Output: 0</p><p>Constraints:<br>The number of nodes in the tree is in the range [1, 1000].<br>Node.val is 0 or 1.</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是前序遍历，几乎和 129 题一样。只不过这里的数字是二进制的。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRootToLeaf</span><span class="hljs-params">(TreeNode root)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        helper(root, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode node, <span class="hljs-type">int</span> sum)</span> &#123;<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        sum = sum * <span class="hljs-number">2</span> + node.val;<br>        <span class="hljs-keyword">if</span> (node.left == <span class="hljs-literal">null</span> &amp;&amp; node.right == <span class="hljs-literal">null</span>) &#123;<br>            res += sum;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        helper(node.left, sum);<br>        helper(node.right, sum);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">129. Sum Root to Leaf Numbers<br>1022. Sum of Root To Leaf Binary Numbers<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>tree</tag>
+      
+      <tag>dfs</tag>
+      
+      <tag>preorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -8864,9 +8893,9 @@
       
       <tag>javascript</tag>
       
-      <tag>matrix</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>matrix</tag>
       
       <tag>heap</tag>
       
