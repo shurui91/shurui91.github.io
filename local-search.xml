@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>[LeetCode] 2058. Find the Minimum and Maximum Number of Nodes Between Critical Points</title>
+    <link href="/posts/138440382.html"/>
+    <url>/posts/138440382.html</url>
+    
+    <content type="html"><![CDATA[<p>A critical point in a linked list is defined as either a local maxima or a local minima.</p><p>A node is a local maxima if the current node has a value strictly greater than the previous node and the next node.</p><p>A node is a local minima if the current node has a value strictly smaller than the previous node and the next node.</p><p>Note that a node can only be a local maxima&#x2F;minima if there exists both a previous node and a next node.</p><p>Given a linked list head, return an array of length 2 containing [minDistance, maxDistance] where minDistance is the minimum distance between any two distinct critical points and maxDistance is the maximum distance between any two distinct critical points. If there are fewer than two critical points, return [-1, -1].</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/10/13/a1.png" alt="Example 1"><br>Input: head &#x3D; [3,1]<br>Output: [-1,-1]<br>Explanation: There are no critical points in [3,1].</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/10/13/a2.png" alt="Example 2"><br>Input: head &#x3D; [5,3,1,2,5,1,2]<br>Output: [1,3]<br>Explanation: There are three critical points:</p><ul><li>[5,3,1,2,5,1,2]: The third node is a local minima because 1 is less than 3 and 2.</li><li>[5,3,1,2,5,1,2]: The fifth node is a local maxima because 5 is greater than 2 and 1.</li><li>[5,3,1,2,5,1,2]: The sixth node is a local minima because 1 is less than 5 and 2.<br>The minimum distance is between the fifth and the sixth node. minDistance &#x3D; 6 - 5 &#x3D; 1.<br>The maximum distance is between the third and the sixth node. maxDistance &#x3D; 6 - 3 &#x3D; 3.</li></ul><p>Example 3:<br><img src="https://assets.leetcode.com/uploads/2021/10/14/a5.png" alt="Example 3"><br>Input: head &#x3D; [1,3,2,2,3,2,2,2,7]<br>Output: [3,3]<br>Explanation: There are two critical points:</p><ul><li>[1,3,2,2,3,2,2,2,7]: The second node is a local maxima because 3 is greater than 1 and 2.</li><li>[1,3,2,2,3,2,2,2,7]: The fifth node is a local maxima because 3 is greater than 2 and 2.<br>Both the minimum and maximum distances are between the second and the fifth node.<br>Thus, minDistance and maxDistance is 5 - 2 &#x3D; 3.<br>Note that the last node is not considered a local maxima because it does not have a next node.</li></ul><p>Constraints:<br>The number of nodes in the list is in the range [2, 105].<br>1 &lt;&#x3D; Node.val &lt;&#x3D; 105</p><p>找出临界点之间的最小和最大距离。</p><blockquote>链表中的 临界点 定义为一个 局部极大值点 或 局部极小值点 。<p>如果当前节点的值 严格大于 前一个节点和后一个节点，那么这个节点就是一个  局部极大值点 。</p><p>如果当前节点的值 严格小于 前一个节点和后一个节点，那么这个节点就是一个  局部极小值点 。</p><p>注意：节点只有在同时存在前一个节点和后一个节点的情况下，才能成为一个 局部极大值点 &#x2F; 极小值点 。</p><p>给你一个链表 head ，返回一个长度为 2 的数组 [minDistance, maxDistance] ，其中 minDistance 是任意两个不同临界点之间的最小距离，maxDistance 是任意两个不同临界点之间的最大距离。如果临界点少于两个，则返回 [-1，-1] 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题不涉及算法，需要把题目意思读懂。题目给了一个链表，需要我们找出其中所有的临界点。临界点的定义是局部极大值点和局部极小值点。所以思路是遍历链表，找出所有的临界点，并记录他们在原链表中的位置。然后根据临界点的位置计算出最小和最大距离。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] nodesBetweenCriticalPoints(ListNode head) &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span> || head.next.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> head.val;<br>        List&lt;Integer&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> head;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur.val &gt; prev &amp;&amp; cur.val &gt; cur.next.val || cur.val &lt; prev &amp;&amp; cur.val &lt; cur.next.val) &#123;<br>                indexes.add(index);<br>            &#125;<br>            prev = cur.val;<br>            cur = cur.next;<br>            index++;<br>        &#125;<br><br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (indexes.size() &lt; <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span> &#125;;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> indexes.size();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> indexes.get(n - <span class="hljs-number">1</span>) - indexes.get(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            min = Math.min(min, indexes.get(i) - indexes.get(i - <span class="hljs-number">1</span>));<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[] &#123; min, max &#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>linked list</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3201. Find the Maximum Length of Valid Subsequence I</title>
     <link href="/posts/2344491760.html"/>
     <url>/posts/2344491760.html</url>
@@ -295,9 +318,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -374,11 +397,11 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
       
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1506,9 +1529,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1533,9 +1556,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -1870,9 +1893,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3670,9 +3693,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3722,9 +3745,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3853,9 +3876,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3907,9 +3930,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4489,9 +4512,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4516,9 +4539,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
       <tag>binary search on answer</tag>
       
@@ -4804,13 +4827,13 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
+      <tag>greedy</tag>
       
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5047,9 +5070,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
       <tag>binary search on answer</tag>
       
@@ -5178,9 +5201,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>sort</tag>
       
       <tag>binary search on answer</tag>
       
@@ -5442,9 +5465,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5725,13 +5748,13 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
+      <tag>greedy</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5806,9 +5829,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>greedy</tag>
       
     </tags>
     
@@ -6918,9 +6941,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>trie</tag>
       
@@ -8893,9 +8916,9 @@
       
       <tag>javascript</tag>
       
-      <tag>binary search</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>binary search</tag>
       
       <tag>heap</tag>
       
@@ -10684,11 +10707,11 @@
       
       <tag>java</tag>
       
+      <tag>string</tag>
+      
       <tag>sort</tag>
       
       <tag>bucket sort</tag>
-      
-      <tag>string</tag>
       
       <tag>heap</tag>
       
