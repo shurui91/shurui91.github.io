@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/19/num1tree.jpg">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg">
 <meta property="article:published_time" content="2020-03-22T18:59:11.000Z">
-<meta property="article:modified_time" content="2025-07-21T03:29:42.187Z">
+<meta property="article:modified_time" content="2025-07-21T03:30:36.159Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
@@ -216,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          2.4k words
         
       </span>
     
@@ -296,6 +296,9 @@
 
 <p>JavaScript实现</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">TreeNode</span>&#125; <span class="hljs-variable">root</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> sumNumbers = <span class="hljs-keyword">function</span> (<span class="hljs-params">root</span>) &#123;<br>    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">var</span> total = <span class="hljs-number">0</span>;<br>    <span class="hljs-title function_">helper</span>(root, <span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">return</span> total;<br><br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">helper</span>(<span class="hljs-params">root, sum</span>) &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        sum = sum * <span class="hljs-number">10</span> + root.<span class="hljs-property">val</span>;<br>        <span class="hljs-keyword">if</span> (root.<span class="hljs-property">left</span> == <span class="hljs-literal">null</span> &amp;&amp; root.<span class="hljs-property">right</span> == <span class="hljs-literal">null</span>) &#123;<br>            total += sum;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-title function_">helper</span>(root.<span class="hljs-property">left</span>, sum);<br>        <span class="hljs-title function_">helper</span>(root.<span class="hljs-property">right</span>, sum);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">129. Sum Root to Leaf Numbers<br>1022. Sum of Root To Leaf Binary Numbers<br></code></pre></td></tr></table></figure>
 
                 
               </div>
