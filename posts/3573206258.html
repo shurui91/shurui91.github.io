@@ -16,27 +16,28 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array. Example 1:Input: data &#x3D; [1,0,1,0,1]Output: 1Explan">
+    <meta name="description" content="Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well. Example 1:Input: head">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1151. Minimum Swaps to Group All 1s Together">
-<meta property="og:url" content="https://shurui91.github.io/posts/663832577.html">
+<meta property="og:title" content="[LeetCode] 82. Remove Duplicates from Sorted List II">
+<meta property="og:url" content="https://shurui91.github.io/posts/3573206258.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array. Example 1:Input: data &#x3D; [1,0,1,0,1]Output: 1Explan">
+<meta property="og:description" content="Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well. Example 1:Input: head">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-11T11:04:05.000Z">
-<meta property="article:modified_time" content="2024-12-13T17:47:21.919Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg">
+<meta property="article:published_time" content="2019-11-08T11:24:10.000Z">
+<meta property="article:modified_time" content="2025-07-21T01:53:20.074Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="prefix sum">
-<meta property="article:tag" content="sliding window">
-<meta property="article:tag" content="sliding window with fixed size">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg">
   
   
   
-  <title>[LeetCode] 1151. Minimum Swaps to Group All 1s Together - CNoodle</title>
+  <title>[LeetCode] 82. Remove Duplicates from Sorted List II - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1151. Minimum Swaps to Group All 1s Together"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 82. Remove Duplicates from Sorted List II"></span>
           
         </div>
 
@@ -201,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-03-11 03:04" pubdate>
-          March 11, 2021 am
+        <time datetime="2019-11-08 03:24" pubdate>
+          November 8, 2019 am
         </time>
       </span>
     
@@ -213,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          2.6k words
         
       </span>
     
@@ -224,7 +225,7 @@
         
         
         
-          18 mins
+          22 mins
         
       </span>
     
@@ -261,34 +262,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1151. Minimum Swaps to Group All 1s Together</h1>
+            <h1 id="seo-header">[LeetCode] 82. Remove Duplicates from Sorted List II</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a binary array data, return the minimum number of swaps required to group all 1’s present in the array together in any place in the array.</p>
-<p>Example 1:<br>Input: data &#x3D; [1,0,1,0,1]<br>Output: 1<br>Explanation: There are 3 ways to group all 1’s together:<br>[1,1,1,0,0] using 1 swap.<br>[0,1,1,1,0] using 2 swaps.<br>[0,0,1,1,1] using 1 swap.<br>The minimum is 1.</p>
-<p>Example 2:<br>Input: data &#x3D; [0,0,0,1,0]<br>Output: 0<br>Explanation: Since there is only one 1 in the array, no swaps are needed.</p>
-<p>Example 3:<br>Input: data &#x3D; [1,0,1,0,1,0,0,1,1,0,1]<br>Output: 3<br>Explanation: One possible solution that uses 3 swaps is [0,0,0,0,0,1,1,1,1,1,1].</p>
-<p>Constraints:<br>1 &lt;&#x3D; data.length &lt;&#x3D; 105<br>data[i] is either 0 or 1.</p>
-<p>最少交换次数来组合所有的 1。</p>
+                <p>Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: head &#x3D; [1,2,3,3,4,4,5]<br>Output: [1,2,5]</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: head &#x3D; [1,1,1,2,3]<br>Output: [2,3]</p>
+<p>Constraints:<br>The number of nodes in the list is in the range [0, 300].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>The list is guaranteed to be sorted in ascending order.</p>
+<p>删除排序链表中的重复元素II。</p>
 <blockquote>
-给出一个二进制数组 data，你需要通过交换位置，将数组中所有的 1 组合到一起，并返回所有可能中所需最少的交换次数。
+给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表 。
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题问的是 swap 的次数，注意 swap 的策略是有好坏的，这也就是为什么例子一有三种 swap 的结果但是这三种策略的代价是不一样的。思路是固定尺寸的滑动窗口。滑动窗口的尺寸就是 1 的个数。</p>
-<p>首先我们用一个变量 ones 记录 input 数组中一共有多少个 1。然后我们用滑动窗口的模板开始扫描 input 数组，当 end 指针遇到 1 的时候，count++；当 end 和 start 两个指针的距离 &#x3D;&#x3D; ones 的时候，此时我们看一下 end 和 start 之间有几个 1，此时 ones 和 count 的差值就是需要 swap 的次数。遍历整个数组，找到全局最小的 swap 次数即可。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意跟版本一很接近，唯一的区别是，版本一是请你删除重复元素，使得 output 里面每个元素只出现一次。版本二是请你删除所有出现超过一次的元素。思路是需要创建一个 dummy 节点，放在所有需要遍历的节点之前，遍历的时候，找是否有两个节点的 val 相同，找到后记下这个 val。再往后遍历的时候，只要遇到这个 val 就跳过。</p>
+<p>比如第一个例子好了，当 cur 遍历到 2 的时候，cur.next &#x3D;&#x3D; 3, cur.next.next &#x3D;&#x3D; 3；此时记录 sameVal &#x3D; cur.next.val。接着从 cur.next 开始判断，只要 cur.next.val &#x3D;&#x3D; 3 的时候，就 cur.next &#x3D; cur.next.next。</p>
+<p>如果是比如一开始遍历到 1 的时候好了，此时cur.next &#x3D;&#x3D; 2，cur.next.next &#x3D;&#x3D; 3，两者并不相等，所以直接就遍历下一个节点，cur &#x3D; cur.next。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
-<h2 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ones</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d : data) &#123;<br>            <span class="hljs-keyword">if</span> (d == <span class="hljs-number">1</span>) &#123;<br>                ones++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (ones == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE;<br>        <span class="hljs-keyword">while</span> (end &lt; data.length) &#123;<br>            <span class="hljs-keyword">if</span> (data[end] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>            end++;<br>            <span class="hljs-keyword">if</span> (end - start == ones) &#123;<br>                res = Math.min(res, ones - count);<br>                <span class="hljs-keyword">if</span> (data[start] == <span class="hljs-number">1</span>) &#123;<br>                    count--;<br>                &#125;<br>                start++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">deleteDuplicates</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummy.next = head;<br>        <span class="hljs-comment">// 注意这里cur是从dummy开始</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span> &amp;&amp; cur.next.next != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur.next.val == cur.next.next.val) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">sameVal</span> <span class="hljs-operator">=</span> cur.next.val;<br>                <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span> &amp;&amp; cur.next.val == sameVal) &#123;<br>                    cur.next = cur.next.next;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                cur = cur.next;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h2><p>我再提供一个固定尺寸的滑动窗口的做法。如果全局一共有 k 个 1，那么我们先看前 k 个元素里有几个 1，得到一个 swap 的次数。之后我们遍历完之后所有的数字，看看过程中 swap 的次数是不是最小的，如果是的话，我们更新最小的 swap 次数。</p>
-<p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minSwaps</span><span class="hljs-params">(<span class="hljs-type">int</span>[] data)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> data.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> num : data) &#123;<br>            <span class="hljs-keyword">if</span> (num == <span class="hljs-number">1</span>) &#123;<br>                k++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">swap</span> <span class="hljs-operator">=</span> k - count;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (data[i] == <span class="hljs-number">1</span>) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (data[i - k] == <span class="hljs-number">1</span>) &#123;<br>                count--;<br>            &#125;<br>            swap = Math.min(swap, k - count);<br>        &#125;<br>        <span class="hljs-keyword">return</span> swap;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>JavaScript实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * function ListNode(val, next) &#123;</span><br><span class="hljs-comment"> *     this.val = (val===undefined ? 0 : val)</span><br><span class="hljs-comment"> *     this.next = (next===undefined ? null : next)</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> deleteDuplicates = <span class="hljs-keyword">function</span> (<span class="hljs-params">head</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (head === <span class="hljs-literal">null</span> || head.<span class="hljs-property">next</span> === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> head;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    dummy.<span class="hljs-property">next</span> = head;<br>    <span class="hljs-keyword">let</span> cur = dummy;<br>    <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span> &amp;&amp; cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span> === cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>.<span class="hljs-property">val</span>) &#123;<br>            <span class="hljs-keyword">let</span> sameVal = cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span>;<br>            <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span> &amp;&amp; cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span> === sameVal) &#123;<br>                cur.<span class="hljs-property">next</span> = cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            cur = cur.<span class="hljs-property">next</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">1151. Minimum Swaps to Group All 1s Together<br>2134. Minimum Swaps to Group All 1s Together II<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">83. Remove Duplicates from Sorted List<br>82. Remove Duplicates from Sorted List II<br>1836. Remove Duplicates From an Unsorted Linked List<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -302,15 +304,11 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/javascript/" class="print-no-link">#javascript</a>
       
-        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
-      
-        <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
+        <a href="/tags/linked-list/" class="print-no-link">#linked list</a>
       
     </div>
   
@@ -322,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1151. Minimum Swaps to Group All 1s Together</div>
-      <div>https://shurui91.github.io/posts/663832577.html</div>
+      <div>[LeetCode] 82. Remove Duplicates from Sorted List II</div>
+      <div>https://shurui91.github.io/posts/3573206258.html</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 11, 2021</div>
+          <div>November 8, 2019</div>
         </div>
       
       
@@ -367,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2929899458.html" title="[LeetCode] 1481. Least Number of Unique Integers after K Removals">
+                      <a href="/posts/1713835924.html" title="[LeetCode] 141. Linked List Cycle">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1481. Least Number of Unique Integers after K Removals</span>
+                        <span class="hidden-mobile">[LeetCode] 141. Linked List Cycle</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -377,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2810047019.html" title="[LeetCode] 303. Range Sum Query - Immutable">
-                        <span class="hidden-mobile">[LeetCode] 303. Range Sum Query - Immutable</span>
+                      <a href="/posts/3569698204.html" title="[LeetCode] 83. Remove Duplicates from Sorted List">
+                        <span class="hidden-mobile">[LeetCode] 83. Remove Duplicates from Sorted List</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -398,8 +396,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/663832577.html';
-          this.page.identifier = '/posts/663832577.html';
+          this.page.url = 'https://shurui91.github.io/posts/3573206258.html';
+          this.page.identifier = '/posts/3573206258.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

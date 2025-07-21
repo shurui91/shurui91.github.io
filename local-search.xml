@@ -2321,11 +2321,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4329,9 +4329,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5648,9 +5648,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5727,11 +5727,11 @@
       
       <tag>greedy</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
       
       <tag>sort</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -5997,11 +5997,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9202,9 +9202,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -11195,6 +11195,31 @@
       <tag>leetcode</tag>
       
       <tag>two pointer</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+      <tag>linked list</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 82. Remove Duplicates from Sorted List II</title>
+    <link href="/posts/3573206258.html"/>
+    <url>/posts/3573206258.html</url>
+    
+    <content type="html"><![CDATA[<p>Given the head of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist1.jpg" alt="Example 1"><br>Input: head &#x3D; [1,2,3,3,4,4,5]<br>Output: [1,2,5]</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/01/04/linkedlist2.jpg" alt="Example 2"><br>Input: head &#x3D; [1,1,1,2,3]<br>Output: [2,3]</p><p>Constraints:<br>The number of nodes in the list is in the range [0, 300].<br>-100 &lt;&#x3D; Node.val &lt;&#x3D; 100<br>The list is guaranteed to be sorted in ascending order.</p><p>删除排序链表中的重复元素II。</p><blockquote>给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表 。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意跟版本一很接近，唯一的区别是，版本一是请你删除重复元素，使得 output 里面每个元素只出现一次。版本二是请你删除所有出现超过一次的元素。思路是需要创建一个 dummy 节点，放在所有需要遍历的节点之前，遍历的时候，找是否有两个节点的 val 相同，找到后记下这个 val。再往后遍历的时候，只要遇到这个 val 就跳过。</p><p>比如第一个例子好了，当 cur 遍历到 2 的时候，cur.next &#x3D;&#x3D; 3, cur.next.next &#x3D;&#x3D; 3；此时记录 sameVal &#x3D; cur.next.val。接着从 cur.next 开始判断，只要 cur.next.val &#x3D;&#x3D; 3 的时候，就 cur.next &#x3D; cur.next.next。</p><p>如果是比如一开始遍历到 1 的时候好了，此时cur.next &#x3D;&#x3D; 2，cur.next.next &#x3D;&#x3D; 3，两者并不相等，所以直接就遍历下一个节点，cur &#x3D; cur.next。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode() &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">deleteDuplicates</span><span class="hljs-params">(ListNode head)</span> &#123;<br>        <span class="hljs-comment">// corner case</span><br>        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> head;<br>        &#125;<br><br>        <span class="hljs-comment">// normal case</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">dummy</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>        dummy.next = head;<br>        <span class="hljs-comment">// 注意这里cur是从dummy开始</span><br>        <span class="hljs-type">ListNode</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> dummy;<br>        <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span> &amp;&amp; cur.next.next != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">if</span> (cur.next.val == cur.next.next.val) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">sameVal</span> <span class="hljs-operator">=</span> cur.next.val;<br>                <span class="hljs-keyword">while</span> (cur.next != <span class="hljs-literal">null</span> &amp;&amp; cur.next.val == sameVal) &#123;<br>                    cur.next = cur.next.next;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                cur = cur.next;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy.next;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * function ListNode(val, next) &#123;</span><br><span class="hljs-comment"> *     this.val = (val===undefined ? 0 : val)</span><br><span class="hljs-comment"> *     this.next = (next===undefined ? null : next)</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">ListNode</span>&#125; <span class="hljs-variable">head</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">ListNode</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> deleteDuplicates = <span class="hljs-keyword">function</span> (<span class="hljs-params">head</span>) &#123;<br>    <span class="hljs-comment">// corner case</span><br>    <span class="hljs-keyword">if</span> (head === <span class="hljs-literal">null</span> || head.<span class="hljs-property">next</span> === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> head;<br><br>    <span class="hljs-comment">// normal case</span><br>    <span class="hljs-keyword">let</span> dummy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);<br>    dummy.<span class="hljs-property">next</span> = head;<br>    <span class="hljs-keyword">let</span> cur = dummy;<br>    <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span> &amp;&amp; cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">if</span> (cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span> === cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>.<span class="hljs-property">val</span>) &#123;<br>            <span class="hljs-keyword">let</span> sameVal = cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span>;<br>            <span class="hljs-keyword">while</span> (cur.<span class="hljs-property">next</span> !== <span class="hljs-literal">null</span> &amp;&amp; cur.<span class="hljs-property">next</span>.<span class="hljs-property">val</span> === sameVal) &#123;<br>                cur.<span class="hljs-property">next</span> = cur.<span class="hljs-property">next</span>.<span class="hljs-property">next</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            cur = cur.<span class="hljs-property">next</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dummy.<span class="hljs-property">next</span>;<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">83. Remove Duplicates from Sorted List<br>82. Remove Duplicates from Sorted List II<br>1836. Remove Duplicates From an Unsorted Linked List<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
       
       <tag>java</tag>
       
