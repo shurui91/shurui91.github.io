@@ -16,28 +16,24 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum. The path does not need to start or end at the root or">
+    <meta name="description" content="You are given a 0-indexed integer array nums. An index i is part of a hill in nums if the closest non-equal neighbors of i are smaller than nums[i]. Similarly, an index i is part of a valley in nums i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 437. Path Sum III">
-<meta property="og:url" content="https://shurui91.github.io/posts/2893620560.html">
+<meta property="og:title" content="[LeetCode] 2210. Count Hills and Valleys in an Array">
+<meta property="og:url" content="https://shurui91.github.io/posts/515074821.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum. The path does not need to start or end at the root or">
+<meta property="og:description" content="You are given a 0-indexed integer array nums. An index i is part of a hill in nums if the closest non-equal neighbors of i are smaller than nums[i]. Similarly, an index i is part of a valley in nums i">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/04/09/pathsum3-1-tree.jpg">
-<meta property="article:published_time" content="2020-07-30T14:11:58.000Z">
-<meta property="article:modified_time" content="2025-05-28T23:25:19.022Z">
+<meta property="article:published_time" content="2025-07-26T20:32:52.000Z">
+<meta property="article:modified_time" content="2025-07-26T20:36:20.403Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="prefix sum">
-<meta property="article:tag" content="preorder">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/04/09/pathsum3-1-tree.jpg">
   
   
   
-  <title>[LeetCode] 437. Path Sum III - CNoodle</title>
+  <title>[LeetCode] 2210. Count Hills and Valleys in an Array - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -191,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 437. Path Sum III"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2210. Count Hills and Valleys in an Array"></span>
           
         </div>
 
@@ -202,8 +198,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-07-30 07:11" pubdate>
-          July 30, 2020 am
+        <time datetime="2025-07-26 13:32" pubdate>
+          July 26, 2025 pm
         </time>
       </span>
     
@@ -214,7 +210,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          3k words
         
       </span>
     
@@ -225,7 +221,7 @@
         
         
         
-          17 mins
+          25 mins
         
       </span>
     
@@ -262,33 +258,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 437. Path Sum III</h1>
+            <h1 id="seo-header">[LeetCode] 2210. Count Hills and Valleys in an Array</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.</p>
-<p>The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).</p>
-<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/04/09/pathsum3-1-tree.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: root &#x3D; [10,5,-3,3,2,null,11,3,-2,null,1], targetSum &#x3D; 8<br>Output: 3<br>Explanation: The paths that sum to 8 are shown.</p>
-<p>Example 2:<br>Input: root &#x3D; [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum &#x3D; 22<br>Output: 3</p>
-<p>Constraints:<br>The number of nodes in the tree is in the range [0, 1000].<br>-109 &lt;&#x3D; Node.val &lt;&#x3D; 109<br>-1000 &lt;&#x3D; targetSum &lt;&#x3D; 1000</p>
-<p>路径总和 III。</p>
+                <p>You are given a 0-indexed integer array nums. An index i is part of a hill in nums if the closest non-equal neighbors of i are smaller than nums[i]. Similarly, an index i is part of a valley in nums if the closest non-equal neighbors of i are larger than nums[i]. Adjacent indices i and j are part of the same hill or valley if nums[i] &#x3D;&#x3D; nums[j].</p>
+<p>Note that for an index to be part of a hill or valley, it must have a non-equal neighbor on both the left and right of the index.</p>
+<p>Return the number of hills and valleys in nums.</p>
+<p>Example 1:<br>Input: nums &#x3D; [2,4,1,1,6,5]<br>Output: 3<br>Explanation:<br>At index 0: There is no non-equal neighbor of 2 on the left, so index 0 is neither a hill nor a valley.<br>At index 1: The closest non-equal neighbors of 4 are 2 and 1. Since 4 &gt; 2 and 4 &gt; 1, index 1 is a hill.<br>At index 2: The closest non-equal neighbors of 1 are 4 and 6. Since 1 &lt; 4 and 1 &lt; 6, index 2 is a valley.<br>At index 3: The closest non-equal neighbors of 1 are 4 and 6. Since 1 &lt; 4 and 1 &lt; 6, index 3 is a valley, but note that it is part of the same valley as index 2.<br>At index 4: The closest non-equal neighbors of 6 are 1 and 5. Since 6 &gt; 1 and 6 &gt; 5, index 4 is a hill.<br>At index 5: There is no non-equal neighbor of 5 on the right, so index 5 is neither a hill nor a valley.<br>There are 3 hills and valleys so we return 3.</p>
+<p>Example 2:<br>Input: nums &#x3D; [6,6,5,5,4,1]<br>Output: 0<br>Explanation:<br>At index 0: There is no non-equal neighbor of 6 on the left, so index 0 is neither a hill nor a valley.<br>At index 1: There is no non-equal neighbor of 6 on the left, so index 1 is neither a hill nor a valley.<br>At index 2: The closest non-equal neighbors of 5 are 6 and 4. Since 5 &lt; 6 and 5 &gt; 4, index 2 is neither a hill nor a valley.<br>At index 3: The closest non-equal neighbors of 5 are 6 and 4. Since 5 &lt; 6 and 5 &gt; 4, index 3 is neither a hill nor a valley.<br>At index 4: The closest non-equal neighbors of 4 are 5 and 1. Since 4 &lt; 5 and 4 &gt; 1, index 4 is neither a hill nor a valley.<br>At index 5: There is no non-equal neighbor of 1 on the right, so index 5 is neither a hill nor a valley.<br>There are 0 hills and valleys so we return 0.</p>
+<p>Constraints:<br>3 &lt;&#x3D; nums.length &lt;&#x3D; 100<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 100</p>
+<p>统计数组中峰和谷的数量。</p>
 <blockquote>
-给定一个二叉树的根节点 root ，和一个整数 targetSum ，求该二叉树里节点值之和等于 targetSum 的 路径 的数目。
+给你一个下标从 0 开始的整数数组 nums 。如果两侧距 i 最近的不相等邻居的值均小于 nums[i] ，则下标 i 是 nums 中，某个峰的一部分。类似地，如果两侧距 i 最近的不相等邻居的值均大于 nums[i] ，则下标 i 是 nums 中某个谷的一部分。对于相邻下标 i 和 j ，如果 nums[i] == nums[j] ， 则认为这两下标属于 同一个 峰或谷。
 
-<p>路径 不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-iii">https://leetcode.cn/problems/path-sum-iii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>注意，要使某个下标所做峰或谷的一部分，那么它左右两侧必须 都 存在不相等邻居。</p>
+<p>返回 nums 中峰和谷的数量。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意和前两个版本类似，但是这个题找的路径和，起点可以不是根节点，问满足路径和为 sum 的路径有多少。</p>
-<p>思路是前缀和。利用前缀和的思路，递归统计你遍历到的子树上的前缀和 presum 是多少，并将这个前缀和存入 hashmap。其他的部分就是很常规的前序遍历。注意最后一个 case 会导致 Integer 越界，需要用 long 型。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n) - 树有 n 个节点<br>空间O(n) - hashmap</p>
+
+<h2 id="思路一-去掉重复元素"><a href="#思路一-去掉重复元素" class="headerlink" title="思路一 - 去掉重复元素"></a>思路一 - 去掉重复元素</h2><p>类似26题那样，先去掉重复元素，然后再统计峰和谷。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * public class TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode left;</span><br><span class="hljs-comment"> *     TreeNode right;</span><br><span class="hljs-comment"> *     TreeNode() &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span><br><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span><br><span class="hljs-comment"> *         this.val = val;</span><br><span class="hljs-comment"> *         this.left = left;</span><br><span class="hljs-comment"> *         this.right = right;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">pathSum</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">int</span> targetSum)</span> &#123;<br>        HashMap&lt;Long, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-number">0L</span>, <span class="hljs-number">1</span>);<br>        helper(root, <span class="hljs-number">0L</span>, targetSum, map);<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(TreeNode root, <span class="hljs-type">long</span> curSum, <span class="hljs-type">int</span> targetSum, HashMap&lt;Long, Integer&gt; map)</span> &#123;<br>        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        curSum += root.val;<br>        <span class="hljs-keyword">if</span> (map.containsKey(curSum - targetSum)) &#123;<br>            count += map.get(curSum - targetSum);<br>        &#125;<br>        map.put(curSum, map.getOrDefault(curSum, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>);<br>        helper(root.left, curSum, targetSum, map);<br>        helper(root.right, curSum, targetSum, map);<br>        map.put(curSum, map.get(curSum) - <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countHillValley</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] != nums[j - <span class="hljs-number">1</span>]) &#123;<br>                nums[j] = nums[i];<br>                j++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; j - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] &gt; nums[i - <span class="hljs-number">1</span>] &amp;&amp; nums[i] &gt; nums[i + <span class="hljs-number">1</span>]) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (nums[i] &lt; nums[i - <span class="hljs-number">1</span>] &amp;&amp; nums[i] &lt; nums[i + <span class="hljs-number">1</span>]) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br><span class="hljs-comment">// similar to 26</span><br></code></pre></td></tr></table></figure>
 
 
-<h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">112. Path Sum<br>113. Path Sum II<br>437. Path Sum III<br>1457. Pseudo-Palindromic Paths in a Binary Tree<br></code></pre></td></tr></table></figure>
+
+<h2 id="思路二-状态机"><a href="#思路二-状态机" class="headerlink" title="思路二 - 状态机"></a>思路二 - 状态机</h2><p>还是判断每两个相邻元素的大小关系，并用一个变量记录上一对元素比较的结果。如果当前两个元素的比较结果和上一个比较结果不同，则说明当前元素是峰或谷。</p>
+<h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countHillValley</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prestate</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> nums[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> nums[i + <span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (cur &gt; next) &#123;<br>                <span class="hljs-keyword">if</span> (prestate == <span class="hljs-number">1</span>) &#123;<br>                    res++;<br>                &#125;<br>                prestate = -<span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cur &lt; next) &#123;<br>                <span class="hljs-keyword">if</span> (prestate == -<span class="hljs-number">1</span>) &#123;<br>                    res++;<br>                &#125;<br>                prestate = <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -303,13 +304,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
-      
-        <a href="/tags/tree/" class="print-no-link">#tree</a>
-      
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
-      
-        <a href="/tags/preorder/" class="print-no-link">#preorder</a>
       
     </div>
   
@@ -321,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 437. Path Sum III</div>
-      <div>https://shurui91.github.io/posts/2893620560.html</div>
+      <div>[LeetCode] 2210. Count Hills and Valleys in an Array</div>
+      <div>https://shurui91.github.io/posts/515074821.html</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +331,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 30, 2020</div>
+          <div>July 26, 2025</div>
         </div>
       
       
@@ -366,18 +363,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1953746004.html" title="[LeetCode] 373. Find K Pairs with Smallest Sums">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 373. Find K Pairs with Smallest Sums</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/221433062.html" title="[LeetCode] 529. Minesweeper">
-                        <span class="hidden-mobile">[LeetCode] 529. Minesweeper</span>
+                      <a href="/posts/311891315.html" title="[LeetCode] 815. Bus Routes">
+                        <span class="hidden-mobile">[LeetCode] 815. Bus Routes</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -397,8 +388,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/2893620560.html';
-          this.page.identifier = '/posts/2893620560.html';
+          this.page.url = 'https://shurui91.github.io/posts/515074821.html';
+          this.page.identifier = '/posts/515074821.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
