@@ -16,26 +16,27 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+    <meta name="description" content="Given an integer array nums, find the maximum possible bitwise OR of a subset of nums and return the number of different non-empty subsets with the maximum bitwise OR. An array a is a subset of an arr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2864. Maximum Odd Binary Number">
-<meta property="og:url" content="https://shurui91.github.io/posts/3856055272.html">
+<meta property="og:title" content="[LeetCode] 2044. Count Number of Maximum Bitwise-OR Subsets">
+<meta property="og:url" content="https://shurui91.github.io/posts/93896110.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="You are given a binary string s that contains at least one ‘1’. You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from">
+<meta property="og:description" content="Given an integer array nums, find the maximum possible bitwise OR of a subset of nums and return the number of different non-empty subsets with the maximum bitwise OR. An array a is a subset of an arr">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-01T03:14:44.000Z">
-<meta property="article:modified_time" content="2024-03-01T03:19:18.582Z">
+<meta property="article:published_time" content="2025-07-27T22:40:26.000Z">
+<meta property="article:modified_time" content="2025-07-27T22:45:18.729Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="greedy">
-<meta property="article:tag" content="math">
-<meta property="article:tag" content="string">
+<meta property="article:tag" content="dfs">
+<meta property="article:tag" content="backtracking">
+<meta property="article:tag" content="bit manipulation">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>[LeetCode] 2864. Maximum Odd Binary Number - CNoodle</title>
+  <title>[LeetCode] 2044. Count Number of Maximum Bitwise-OR Subsets - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2864. Maximum Odd Binary Number"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 2044. Count Number of Maximum Bitwise-OR Subsets"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 19:14" pubdate>
-          February 29, 2024 pm
+        <time datetime="2025-07-27 15:40" pubdate>
+          July 27, 2025 pm
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.6k words
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          12 mins
+          14 mins
         
       </span>
     
@@ -260,26 +261,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2864. Maximum Odd Binary Number</h1>
+            <h1 id="seo-header">[LeetCode] 2044. Count Number of Maximum Bitwise-OR Subsets</h1>
             
             
               <div class="markdown-body">
                 
-                <p>You are given a binary string s that contains at least one ‘1’.</p>
-<p>You have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.</p>
-<p>Return a string representing the maximum odd binary number that can be created from the given combination.</p>
-<p>Note that the resulting string can have leading zeros.</p>
-<p>Example 1:<br>Input: s &#x3D; “010”<br>Output: “001”<br>Explanation: Because there is just one ‘1’, it must be in the last position. So the answer is “001”.</p>
-<p>Example 2:<br>Input: s &#x3D; “0101”<br>Output: “1001”<br>Explanation: One of the ‘1’s must be in the last position. The maximum number that can be made with the remaining digits is “100”. So the answer is “1001”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 100<br>s consists only of ‘0’ and ‘1’.<br>s contains at least one ‘1’.</p>
-<p>最大二进制奇数。</p>
+                <p>Given an integer array nums, find the maximum possible bitwise OR of a subset of nums and return the number of different non-empty subsets with the maximum bitwise OR.</p>
+<p>An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b. Two subsets are considered different if the indices of the elements chosen are different.</p>
+<p>The bitwise OR of an array a is equal to a[0] OR a[1] OR … OR a[a.length - 1] (0-indexed).</p>
+<p>Example 1:<br>Input: nums &#x3D; [3,1]<br>Output: 2<br>Explanation: The maximum possible bitwise OR of a subset is 3. There are 2 subsets with a bitwise OR of 3:</p>
+<ul>
+<li>[3]</li>
+<li>[3,1]</li>
+</ul>
+<p>Example 2:<br>Input: nums &#x3D; [2,2,2]<br>Output: 7<br>Explanation: All non-empty subsets of [2,2,2] have a bitwise OR of 2. There are 23 - 1 &#x3D; 7 total subsets.</p>
+<p>Example 3:<br>Input: nums &#x3D; [3,2,1,5]<br>Output: 6<br>Explanation: The maximum possible bitwise OR of a subset is 7. There are 6 subsets with a bitwise OR of 7:</p>
+<ul>
+<li>[3,5]</li>
+<li>[3,1,5]</li>
+<li>[3,2,5]</li>
+<li>[3,2,1,5]</li>
+<li>[2,5]</li>
+<li>[2,1,5]</li>
+</ul>
+<p>Constraints:<br>1 &lt;&#x3D; nums.length &lt;&#x3D; 16<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 105</p>
+<p>统计按位或能得到最大值的子集数目。</p>
 <blockquote>
-<p>给你一个 二进制 字符串 s ，其中至少包含一个 ‘1’ 。<br>你必须按某种方式 重新排列 字符串中的位，使得到的二进制数字是可以由该组合生成的 最大二进制奇数 。<br>以字符串形式，表示并返回可以由给定组合生成的最大二进制奇数。<br>注意 返回的结果字符串 可以 含前导零。</p>
+给你一个整数数组 nums ，请你找出 nums 子集 按位或 可能得到的 最大值 ，并返回按位或能得到最大值的 不同非空子集的数目 。
+
+<p>如果数组 a 可以由数组 b 删除一些元素（或不删除）得到，则认为数组 a 是数组 b 的一个 子集 。如果选中的元素下标位置不一样，则认为两个子集 不同 。</p>
+<p>对数组 a 执行 按位或 ，结果等于 a[0] OR a[1] OR … OR a[a.length - 1]（下标从 0 开始）。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为需要保证最后的输出是一个奇数，所以需要预留一个 1 放在最低位，其他的 1 统统放在最高位。<br>具体做法是先扫描一遍 input 字符串，记录一下 0 的个数和 1 的个数，在保证最后一个位置是 1 的情况下优先放 1，其余位置放 0 即可。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目让我们求子集，那么思路就往 dfs 上靠。我们可以用一个递归函数来遍历所有可能的子集，并计算它们的按位或值。每次递归时，我们可以选择包含当前元素或不包含当前元素，从而生成所有可能的子集。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间复杂度是 O(2^n)，其中 n 是数组 nums 的长度<br>空间复杂度是 O(n)，主要是递归栈的空间</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">maximumOddBinaryNumber</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">one</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                one++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">zero</span> <span class="hljs-operator">=</span> n - one;<br><br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; one - <span class="hljs-number">1</span>; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; zero; i++) &#123;<br>            sb.append(<span class="hljs-string">&#x27;0&#x27;</span>);<br>        &#125;<br>        sb.append(<span class="hljs-string">&#x27;1&#x27;</span>);<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countMaxOrSubsets</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        dfs(nums, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> index, <span class="hljs-type">int</span> cur)</span> &#123;<br>        <span class="hljs-keyword">if</span> (index == nums.length) &#123;<br>            <span class="hljs-keyword">if</span> (cur == max) &#123;<br>                count++;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cur &gt; max) &#123;<br>                max = cur;<br>                count = <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">// 选择当前元素</span><br>        dfs(nums, index + <span class="hljs-number">1</span>, cur | nums[index]);<br>        <span class="hljs-comment">// 不选择当前元素</span><br>        dfs(nums, index + <span class="hljs-number">1</span>, cur);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -294,13 +312,15 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
+        <a href="/tags/array/" class="print-no-link">#array</a>
+      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/greedy/" class="print-no-link">#greedy</a>
+        <a href="/tags/dfs/" class="print-no-link">#dfs</a>
       
-        <a href="/tags/math/" class="print-no-link">#math</a>
+        <a href="/tags/backtracking/" class="print-no-link">#backtracking</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
+        <a href="/tags/bit-manipulation/" class="print-no-link">#bit manipulation</a>
       
     </div>
   
@@ -312,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2864. Maximum Odd Binary Number</div>
-      <div>https://shurui91.github.io/posts/3856055272.html</div>
+      <div>[LeetCode] 2044. Count Number of Maximum Bitwise-OR Subsets</div>
+      <div>https://shurui91.github.io/posts/93896110.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +345,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 29, 2024</div>
+          <div>July 27, 2025</div>
         </div>
       
       
@@ -357,18 +377,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/2740601310.html" title="[LeetCode] 2368. Reachable Nodes With Restrictions">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2368. Reachable Nodes With Restrictions</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/2991325968.html" title="[LeetCode] 2583. Kth Largest Sum in a Binary Tree">
-                        <span class="hidden-mobile">[LeetCode] 2583. Kth Largest Sum in a Binary Tree</span>
+                      <a href="/posts/515074821.html" title="[LeetCode] 2210. Count Hills and Valleys in an Array">
+                        <span class="hidden-mobile">[LeetCode] 2210. Count Hills and Valleys in an Array</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -388,8 +402,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://shurui91.github.io/posts/3856055272.html';
-          this.page.identifier = '/posts/3856055272.html';
+          this.page.url = 'https://shurui91.github.io/posts/93896110.html';
+          this.page.identifier = '/posts/93896110.html';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
