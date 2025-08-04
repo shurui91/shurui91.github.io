@@ -478,11 +478,11 @@
       
       <tag>java</tag>
       
+      <tag>matrix</tag>
+      
       <tag>sort</tag>
       
       <tag>math</tag>
-      
-      <tag>matrix</tag>
       
     </tags>
     
@@ -3774,9 +3774,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -3826,9 +3826,9 @@
       
       <tag>java</tag>
       
-      <tag>sort</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5860,9 +5860,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -9867,6 +9867,33 @@
       <tag>string</tag>
       
       <tag>backtracking</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>[LeetCode] 62. Unique Paths</title>
+    <link href="/posts/1202755244.html"/>
+    <url>/posts/1202755244.html</url>
+    
+    <content type="html"><![CDATA[<p>There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.</p><p>Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.</p><p>The test cases are generated so that the answer will be less than or equal to 2 * 109.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png" alt="Example 1"><br>Input: m &#x3D; 3, n &#x3D; 7<br>Output: 28</p><p>Example 2:<br>Input: m &#x3D; 3, n &#x3D; 2<br>Output: 3<br>Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:</p><ol><li>Right -&gt; Down -&gt; Down</li><li>Down -&gt; Down -&gt; Right</li><li>Down -&gt; Right -&gt; Down</li></ol><p>Constraints:<br>1 &lt;&#x3D; m, n &lt;&#x3D; 100</p><p>不同路径。</p><blockquote>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p><p>问总共有多少条不同的路径？</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/unique-paths">https://leetcode.cn/problems/unique-paths</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start”）。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径。</p><p>这一题也是 DP 的基础题，一定要掌握。这里我提供三种做法，</p><ul><li>自上而下（自上而下又叫递归 + memo）</li><li>自下而上</li><li>节省空间的自下而上</li></ul><h2 id="DP自上而下"><a href="#DP自上而下" class="headerlink" title="DP自上而下"></a>DP自上而下</h2><p>时间O(mn)<br>空间O(mn)</p><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[][] memo;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> &#123;<br>        memo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        <span class="hljs-keyword">return</span> dp(m - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dp</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> &amp;&amp; j == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span> || j &lt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (memo[i][j] &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> memo[i][j];<br>        &#125;<br>        memo[i][j] = dp(i - <span class="hljs-number">1</span>, j) + dp(i, j - <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> memo[i][j];<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// dp自上而下</span><br></code></pre></td></tr></table></figure><h2 id="DP自下而上，先确定矩阵边缘上的点的DP值，然后再考虑中间的点"><a href="#DP自下而上，先确定矩阵边缘上的点的DP值，然后再考虑中间的点" class="headerlink" title="DP自下而上，先确定矩阵边缘上的点的DP值，然后再考虑中间的点"></a>DP自下而上，先确定矩阵边缘上的点的DP值，然后再考虑中间的点</h2><p>时间O(mn)<br>空间O(mn)</p><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m; i++) &#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>            dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>                dp[i][j] += dp[i - <span class="hljs-number">1</span>][j];<br>                dp[i][j] += dp[i][j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m - <span class="hljs-number">1</span>][n - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br><span class="hljs-comment">// dp自下而上</span><br></code></pre></td></tr></table></figure><h2 id="节省空间的一维-DP"><a href="#节省空间的一维-DP" class="headerlink" title="节省空间的一维 DP"></a>节省空间的一维 DP</h2><p>一维 DP 的思路是逐行扫描。首先初始化一个长度为 n 的数组，并初始化第一个坐标为 1（也就是坐标上0, 0的位置）。接着往右边扫描，每一个坐标的值是当前位置的 DP 值 + 他左边一个位置的 DP 值。根据下图跑一下代码，第7行，第一遍跑的时候，一开始 res[j] &#x3D; res[1] &#x3D; 0 + res[0] &#x3D; 0 + 1 &#x3D; 1；接着 res[2] &#x3D; 0 + 1 &#x3D; 1。以此类推得到第一行的dp值是 [1, 1, 1, 1, 1, 1]。再遍历第二行，得到 [1, 2, 3, 4, 5, 6]；第三行 [1, 3, 6, 10, 15, 21] 和第四行 [1, 4, 10, 20, 35, 56]。这个思路非常巧妙，需要多多体会。<br>时间O(mn)<br>空间O(n)</p><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(res, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>                res[j] += res[j - <span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res[n - <span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br><span class="hljs-comment">// 节省空间的自下而上</span><br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">m</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">n</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> uniquePaths = <span class="hljs-keyword">function</span> (<span class="hljs-params">m, n</span>) &#123;<br>    <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(n).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>);<br>    res[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>            res[j] = res[j] + res[j - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-comment">// console.log(res);</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> res[n - <span class="hljs-number">1</span>];<br>&#125;;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">62. Unique Paths<br>63. Unique Paths II<br>64. Minimum Path Sum<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>array</tag>
+      
+      <tag>java</tag>
+      
+      <tag>javascript</tag>
+      
+      <tag>dynamic programming</tag>
       
     </tags>
     
