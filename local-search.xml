@@ -5,8 +5,8 @@
   
   <entry>
     <title>[LeetCode] 1504. Count Submatrices With All Ones</title>
-    <link href="/posts/30449.html"/>
-    <url>/posts/30449.html</url>
+    <link href="/posts/3229320101.html"/>
+    <url>/posts/3229320101.html</url>
     
     <content type="html"><![CDATA[<p>Given an m x n binary matrix mat, return the number of submatrices that have all ones.</p><p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2021/10/27/ones1-grid.jpg" alt="Example 1"><br>Input: mat &#x3D; [[1,0,1],[1,1,0],[1,1,0]]<br>Output: 13<br>Explanation:<br>There are 6 rectangles of side 1x1.<br>There are 2 rectangles of side 1x2.<br>There are 3 rectangles of side 2x1.<br>There is 1 rectangle of side 2x2.<br>There is 1 rectangle of side 3x1.<br>Total number of rectangles &#x3D; 6 + 2 + 3 + 1 + 1 &#x3D; 13.</p><p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2021/10/27/ones2-grid.jpg" alt="Example 2"><br>Input: mat &#x3D; [[0,1,1,0],[0,1,1,1],[1,1,1,0]]<br>Output: 24<br>Explanation:<br>There are 8 rectangles of side 1x1.<br>There are 5 rectangles of side 1x2.<br>There are 2 rectangles of side 1x3.<br>There are 4 rectangles of side 2x1.<br>There are 2 rectangles of side 2x2.<br>There are 2 rectangles of side 3x1.<br>There is 1 rectangle of side 3x2.<br>Total number of rectangles &#x3D; 8 + 5 + 2 + 4 + 2 + 2 + 1 &#x3D; 24.</p><p>Constraints:<br>1 &lt;&#x3D; m, n &lt;&#x3D; 150<br>mat[i][j] is either 0 or 1.</p><p>统计全 1 子矩形。</p><blockquote>给你一个 m x n 的二进制矩阵 mat ，请你返回有多少个 子矩形 的元素全部都是 1 。</blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是单调栈。做法类似84题和85题。</p><p>首先我们还是需要创建一个 heights 数组来记录矩阵里每个 j 位置上的高度。高度的定义是从当前行往上数，连续的1的个数。</p><p>把矩阵按行向下累计为“高度数组” h[j]：若 mat[i][j]&#x3D;&#x3D;1，则 h[j]++，否则清零。对于每一行的 h，计算<code>以该行作为底边、且右端点在每一列 j</code>的全 1 子矩阵数量之和。这个子问题等价于：在柱状图 h 中，统计以每个位置 j 作为右端点的矩形个数并求和。</p><p>用单调递增栈求解上一步：维护一个 sum[j] 表示“以 j 为右端点”的子矩阵数量。</p><ul><li>若栈空：sum[j] &#x3D; h[j] * (j + 1)</li><li>若有前一个更小柱高 prev：sum[j] &#x3D; sum[prev] + h[j] * (j - prev)<br>最后把本行所有 sum[j] 累加到答案。</li></ul><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(m * n^2)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSubmat</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] mat)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> mat.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> mat[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] h = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>                <span class="hljs-keyword">if</span> (mat[i][j] == <span class="hljs-number">1</span>) &#123;<br>                    h[j]++;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    h[j] = <span class="hljs-number">0</span>;<br>                &#125;<br>            &#125;<br>            res += helper(h);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] h)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> h.length;<br>        <span class="hljs-comment">// 以 j 为右端点的矩形个数</span><br>        <span class="hljs-type">int</span>[] sum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-comment">// sum[j] = 以 j 为右端点的矩形数</span><br>        Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; h[j] &lt;= h[stack.peekLast()]) &#123;<br>                stack.pollLast();<br>            &#125;<br>            <span class="hljs-keyword">if</span> (stack.isEmpty()) &#123;<br>                <span class="hljs-comment">// 左边没有更小的柱子，宽度可延伸到 0..j</span><br>                sum[j] = h[j] * (j + <span class="hljs-number">1</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> stack.peekLast();<br>                <span class="hljs-comment">// 继承到 prev 的贡献 + 以高度 h[j] 向左延伸 (j - prev) 列的新矩形</span><br>                sum[j] = sum[prev] + h[j] * (j - prev);<br>            &#125;<br>            stack.offerLast(j);<br>            res += sum[j];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">84. Largest Rectangle in Histogram<br>85. Maximal Rectangle<br>221. Maximal Square<br>1277. Count Square Submatrices with All Ones<br>1504. Count Submatrices With All Ones<br>1727. Largest Submatrix With Rearrangements<br></code></pre></td></tr></table></figure>]]></content>
     
@@ -4784,9 +4784,9 @@
       
       <tag>dfs</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -6906,9 +6906,9 @@
       
       <tag>tree</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -9286,9 +9286,9 @@
       
       <tag>javascript</tag>
       
-      <tag>binary search</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>binary search</tag>
       
       <tag>heap</tag>
       
