@@ -26,14 +26,16 @@
 <meta property="og:site_name" content="CNoodle">
 <meta property="og:description" content="A city’s skyline is the outer contour of the silhouette formed by all the buildings in that city when viewed from a distance. Given the locations and heights of all the buildings, return the skyline f">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg">
 <meta property="article:published_time" content="2020-10-07T23:01:26.000Z">
-<meta property="article:modified_time" content="2025-08-29T20:13:44.230Z">
+<meta property="article:modified_time" content="2025-08-29T20:15:40.212Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="heap">
 <meta property="article:tag" content="line sweep">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg">
   
   
   
@@ -272,7 +274,7 @@
 <p>lefti is the x coordinate of the left edge of the ith building.<br>righti is the x coordinate of the right edge of the ith building.<br>heighti is the height of the ith building.<br>You may assume all buildings are perfect rectangles grounded on an absolutely flat surface at height 0.</p>
 <p>The skyline should be represented as a list of “key points” sorted by their x-coordinate in the form [[x1,y1],[x2,y2],…]. Each key point is the left endpoint of some horizontal segment in the skyline except the last point in the list, which always has a y-coordinate 0 and is used to mark the skyline’s termination where the rightmost building ends. Any ground between the leftmost and rightmost buildings should be part of the skyline’s contour.</p>
 <p>Note: There must be no consecutive horizontal lines of equal height in the output skyline. For instance, […,[2 3],[4 5],[7 5],[11 5],[12 7],…] is not acceptable; the three lines of height 5 should be merged into one in the final output as such: […,[2 3],[4 5],[12 7],…]</p>
-<p>Example 1:<br>Input: buildings &#x3D; [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]<br>Output: [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]<br>Explanation:<br>Figure A shows the buildings of the input.<br>Figure B shows the skyline formed by those buildings. The red points in figure B represent the key points in the output list.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/01/merged.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: buildings &#x3D; [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]<br>Output: [[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]<br>Explanation:<br>Figure A shows the buildings of the input.<br>Figure B shows the skyline formed by those buildings. The red points in figure B represent the key points in the output list.</p>
 <p>Example 2:<br>Input: buildings &#x3D; [[0,2,3],[2,5,3]]<br>Output: [[0,3],[5,0]]</p>
 <p>Constraints:<br>1 &lt;&#x3D; buildings.length &lt;&#x3D; 104<br>0 &lt;&#x3D; lefti &lt; righti &lt;&#x3D; 231 - 1<br>1 &lt;&#x3D; heighti &lt;&#x3D; 231 - 1<br>buildings is sorted by lefti in non-decreasing order.</p>
 <p>天际线问题。</p>
