@@ -27,11 +27,11 @@
 <meta property="og:description" content="There is a malfunctioning keyboard where some letter keys do not work. All other keys on the keyboard work properly. Given a string text of words separated by a single space (no leading or trailing sp">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-09-14T22:34:28.000Z">
-<meta property="article:modified_time" content="2025-09-14T22:37:53.573Z">
+<meta property="article:modified_time" content="2025-09-15T04:18:24.282Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="java">
 <meta property="article:tag" content="hashmap">
+<meta property="article:tag" content="java">
 <meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -214,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          295 words
+          291 words
         
       </span>
     
@@ -284,7 +284,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是 hashmap。先将字符串 text 按空格分割成若干个单词，然后判断每个单词中是否包含 brokenLetters 里所有的单词。</p>
 <h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(mn)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">canBeTypedWords</span><span class="hljs-params">(String text, String brokenLetters)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        String[] words = text.split(<span class="hljs-string">&quot; &quot;</span>);<br>        <span class="hljs-keyword">for</span> (String word : words) &#123;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : brokenLetters.toCharArray()) &#123;<br>                <span class="hljs-keyword">if</span> (word.indexOf(c) != -<span class="hljs-number">1</span>) &#123;<br>                    flag = <span class="hljs-literal">true</span>;<br>                    count++;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> words.length - count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">canBeTypedWords</span><span class="hljs-params">(String text, String brokenLetters)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        String[] words = text.split(<span class="hljs-string">&quot; &quot;</span>);<br>        <span class="hljs-keyword">for</span> (String word : words) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : brokenLetters.toCharArray()) &#123;<br>                <span class="hljs-keyword">if</span> (word.indexOf(c) != -<span class="hljs-number">1</span>) &#123;<br>                    count++;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> words.length - count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -299,9 +299,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/java/" class="print-no-link">#java</a>
-      
         <a href="/tags/hashmap/" class="print-no-link">#hashmap</a>
+      
+        <a href="/tags/java/" class="print-no-link">#java</a>
       
         <a href="/tags/string/" class="print-no-link">#string</a>
       
