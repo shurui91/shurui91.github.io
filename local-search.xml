@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 3484. Design Spreadsheet</title>
+    <link href="/posts/35622788.html"/>
+    <url>/posts/35622788.html</url>
+    
+    <content type="html"><![CDATA[<p>A spreadsheet is a grid with 26 columns (labeled from ‘A’ to ‘Z’) and a given number of rows. Each cell in the spreadsheet can hold an integer value between 0 and 105.</p><p>Implement the Spreadsheet class:</p><p>Spreadsheet(int rows) Initializes a spreadsheet with 26 columns (labeled ‘A’ to ‘Z’) and the specified number of rows. All cells are initially set to 0.<br>void setCell(String cell, int value) Sets the value of the specified cell. The cell reference is provided in the format “AX” (e.g., “A1”, “B10”), where the letter represents the column (from ‘A’ to ‘Z’) and the number represents a 1-indexed row.<br>void resetCell(String cell) Resets the specified cell to 0.<br>int getValue(String formula) Evaluates a formula of the form “&#x3D;X+Y”, where X and Y are either cell references or non-negative integers, and returns the computed sum.<br>Note: If getValue references a cell that has not been explicitly set using setCell, its value is considered 0.</p><p>Example 1:<br>Input:<br>[“Spreadsheet”, “getValue”, “setCell”, “getValue”, “setCell”, “getValue”, “resetCell”, “getValue”]<br>[[3], [“&#x3D;5+7”], [“A1”, 10], [“&#x3D;A1+6”], [“B2”, 15], [“&#x3D;A1+B2”], [“A1”], [“&#x3D;A1+B2”]]</p><p>Output:<br>[null, 12, null, 16, null, 25, null, 15]</p><p>Explanation<br>Spreadsheet spreadsheet &#x3D; new Spreadsheet(3); &#x2F;&#x2F; Initializes a spreadsheet with 3 rows and 26 columns<br>spreadsheet.getValue(“&#x3D;5+7”); &#x2F;&#x2F; returns 12 (5+7)<br>spreadsheet.setCell(“A1”, 10); &#x2F;&#x2F; sets A1 to 10<br>spreadsheet.getValue(“&#x3D;A1+6”); &#x2F;&#x2F; returns 16 (10+6)<br>spreadsheet.setCell(“B2”, 15); &#x2F;&#x2F; sets B2 to 15<br>spreadsheet.getValue(“&#x3D;A1+B2”); &#x2F;&#x2F; returns 25 (10+15)<br>spreadsheet.resetCell(“A1”); &#x2F;&#x2F; resets A1 to 0<br>spreadsheet.getValue(“&#x3D;A1+B2”); &#x2F;&#x2F; returns 15 (0+15)</p><p>Constraints:<br>1 &lt;&#x3D; rows &lt;&#x3D; 103<br>0 &lt;&#x3D; value &lt;&#x3D; 105<br>The formula is always in the format “&#x3D;X+Y”, where X and Y are either valid cell references or non-negative integers with values less than or equal to 105.<br>Each cell reference consists of a capital letter from ‘A’ to ‘Z’ followed by a row number between 1 and rows.<br>At most 104 calls will be made in total to setCell, resetCell, and getValue.</p><p>设计电子表格。</p><blockquote>电子表格是一个网格，它有 26 列（从 'A' 到 'Z'）和指定数量的 rows。每个单元格可以存储一个 0 到 105 之间的整数值。<p>请你实现一个 Spreadsheet 类：</p><ul><li>Spreadsheet(int rows) 初始化一个具有 26 列（从 ‘A’ 到 ‘Z’）和指定行数的电子表格。所有单元格最初的值都为 0 。</li><li>void setCell(String cell, int value) 设置指定单元格的值。单元格引用以 “AX” 的格式提供（例如，”A1”，”B10”），其中字母表示列（从 ‘A’ 到 ‘Z’），数字表示从 1 开始的行号。</li><li>void resetCell(String cell) 重置指定单元格的值为 0 。</li><li>int getValue(String formula) 计算一个公式的值，格式为 “&#x3D;X+Y”，其中 X 和 Y 要么 是单元格引用，要么非负整数，返回计算的和。</li></ul><p>注意： 如果 getValue 引用一个未通过 setCell 明确设置的单元格，则该单元格的值默认为 0 。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是用 <code>HashMap&lt;String, Integer&gt;</code> 存储“被设置过”的单元格，没出现过的默认值 0。<code>getValue</code> 只需把 &#x3D;X+Y 去掉 &#x3D; 后按 + 切分，再分别判断是数字还是单元格引用。</p><p>在 getValue 方法里，我们把 &#x3D;X+Y 切成了两个 token。每个 token 要么是纯数字（比如 “3”、”100”），要么是单元格名字（比如 “A1”、”B12”）。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(1)<br>空间O(n) - 存储过多少个数字</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Spreadsheet</span> &#123;<br>    HashMap&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Spreadsheet</span><span class="hljs-params">(<span class="hljs-type">int</span> rows)</span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCell</span><span class="hljs-params">(String cell, <span class="hljs-type">int</span> value)</span> &#123;<br>        map.put(cell, value);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">resetCell</span><span class="hljs-params">(String cell)</span> &#123;<br>        map.remove(cell);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getValue</span><span class="hljs-params">(String formula)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (String cell : formula.substring(<span class="hljs-number">1</span>).split(<span class="hljs-string">&quot;\\+&quot;</span>)) &#123;<br>            <span class="hljs-comment">// System.out.println(cell);</span><br>            <span class="hljs-keyword">if</span> (Character.isUpperCase(cell.charAt(<span class="hljs-number">0</span>))) &#123;<br>                res += map.getOrDefault(cell, <span class="hljs-number">0</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                res += Integer.valueOf(cell);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your Spreadsheet object will be instantiated and called as such:</span><br><span class="hljs-comment"> * Spreadsheet obj = new Spreadsheet(rows);</span><br><span class="hljs-comment"> * obj.setCell(cell,value);</span><br><span class="hljs-comment"> * obj.resetCell(cell);</span><br><span class="hljs-comment"> * int param_3 = obj.getValue(formula);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>hashmap</tag>
+      
+      <tag>string</tag>
+      
+      <tag>design</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 3408. Design Task Manager</title>
     <link href="/posts/4262894336.html"/>
     <url>/posts/4262894336.html</url>
@@ -249,9 +276,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -478,9 +505,9 @@
       
       <tag>array</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -557,11 +584,11 @@
       
       <tag>array</tag>
       
+      <tag>math</tag>
+      
       <tag>sort</tag>
       
       <tag>matrix</tag>
-      
-      <tag>math</tag>
       
     </tags>
     
@@ -827,9 +854,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>string</tag>
       
@@ -2022,9 +2049,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -2053,9 +2080,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>math</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -2240,9 +2267,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
       <tag>queue</tag>
       
@@ -2504,11 +2531,11 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -2608,9 +2635,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -4034,9 +4061,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4088,9 +4115,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -4400,9 +4427,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>string</tag>
       
@@ -4510,9 +4537,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4670,9 +4697,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5667,9 +5694,9 @@
       
       <tag>counting sort</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -5873,9 +5900,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5952,11 +5979,11 @@
       
       <tag>greedy</tag>
       
+      <tag>sliding window</tag>
+      
       <tag>prefix sum</tag>
       
       <tag>sort</tag>
-      
-      <tag>sliding window</tag>
       
     </tags>
     
@@ -6222,11 +6249,11 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6326,9 +6353,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -6438,9 +6465,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6465,9 +6492,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -6713,9 +6740,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -6744,9 +6771,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sort</tag>
       
@@ -6800,9 +6827,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -7012,9 +7039,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>counting sort</tag>
-      
       <tag>two sum</tag>
+      
+      <tag>counting sort</tag>
       
       <tag>MOD</tag>
       
@@ -7195,9 +7222,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>sort</tag>
-      
       <tag>string</tag>
+      
+      <tag>sort</tag>
       
       <tag>trie</tag>
       
@@ -7276,9 +7303,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -7380,9 +7407,9 @@
       
       <tag>array</tag>
       
-      <tag>greedy</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -7725,9 +7752,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -7862,9 +7889,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -7970,11 +7997,11 @@
       
       <tag>java</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>greedy</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>string</tag>
       
@@ -8192,11 +8219,11 @@
       
       <tag>java</tag>
       
-      <tag>heap</tag>
-      
       <tag>graph</tag>
       
       <tag>dijkstra</tag>
+      
+      <tag>heap</tag>
       
     </tags>
     
@@ -8219,11 +8246,11 @@
       
       <tag>java</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>dynamic programming</tag>
       
       <tag>greedy</tag>
-      
-      <tag>two pointer</tag>
       
       <tag>binary search</tag>
       
@@ -8441,9 +8468,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>monotonic stack</tag>
       
@@ -8495,9 +8522,9 @@
       
       <tag>java</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9195,9 +9222,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -9307,9 +9334,9 @@
       
       <tag>array</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>prefix sum</tag>
       
@@ -9392,9 +9419,9 @@
       
       <tag>javascript</tag>
       
-      <tag>matrix</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>matrix</tag>
       
       <tag>heap</tag>
       
@@ -9693,9 +9720,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9728,9 +9755,9 @@
       
       <tag>two pointer</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9755,9 +9782,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9786,9 +9813,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9817,9 +9844,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9848,9 +9875,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -9879,9 +9906,9 @@
       
       <tag>javascript</tag>
       
-      <tag>hashmap</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>hashmap</tag>
       
       <tag>sliding window</tag>
       
@@ -10741,9 +10768,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -10768,9 +10795,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
@@ -10797,9 +10824,9 @@
       
       <tag>hashmap</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
@@ -10876,9 +10903,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -11208,11 +11235,11 @@
       
       <tag>hashmap</tag>
       
+      <tag>string</tag>
+      
       <tag>sort</tag>
       
       <tag>bucket sort</tag>
-      
-      <tag>string</tag>
       
       <tag>heap</tag>
       
@@ -11697,9 +11724,9 @@
       
       <tag>array</tag>
       
-      <tag>two sum</tag>
-      
       <tag>two pointer</tag>
+      
+      <tag>two sum</tag>
       
     </tags>
     
@@ -12599,11 +12626,11 @@
       
       <tag>array</tag>
       
+      <tag>two pointer</tag>
+      
       <tag>hashmap</tag>
       
       <tag>two sum</tag>
-      
-      <tag>two pointer</tag>
       
     </tags>
     
