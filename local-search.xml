@@ -4,19 +4,6 @@
   
   
   <entry>
-    <title>[LeetCode] 165. Compare Version Numbers</title>
-    <link href="/posts/2958159991.html"/>
-    <url>/posts/2958159991.html</url>
-    
-    <content type="html"><![CDATA[<p>Given two version strings, version1 and version2, compare them. A version string consists of revisions separated by dots ‘.’. The value of the revision is its integer conversion ignoring leading zeros.</p><p>To compare version strings, compare their revision values in left-to-right order. If one of the version strings has fewer revisions, treat the missing revision values as 0.</p><p>Return the following:</p><p>If version1 &lt; version2, return -1.<br>If version1 &gt; version2, return 1.<br>Otherwise, return 0.</p><p>Example 1:<br>Input: version1 &#x3D; “1.2”, version2 &#x3D; “1.10”<br>Output: -1</p><p>Explanation:<br>version1’s second revision is “2” and version2’s second revision is “10”: 2 &lt; 10, so version1 &lt; version2.</p><p>Example 2:<br>Input: version1 &#x3D; “1.01”, version2 &#x3D; “1.001”<br>Output: 0</p><p>Explanation:<br>Ignoring leading zeroes, both “01” and “001” represent the same integer “1”.</p><p>Example 3:<br>Input: version1 &#x3D; “1.0”, version2 &#x3D; “1.0.0.0”<br>Output: 0</p><p>Explanation:<br>version1 has less revisions, which means every missing revision are treated as “0”.</p><p>Constraints:<br>1 &lt;&#x3D; version1.length, version2.length &lt;&#x3D; 500<br>version1 and version2 only contain digits and ‘.’.<br>version1 and version2 are valid version numbers.<br>All the given revisions in version1 and version2 can be stored in a 32-bit integer.</p><p>比较版本号。</p><blockquote>给你两个版本号 version1 和 version2 ，请你比较它们。<p>版本号由一个或多个修订号组成，各修订号由一个 ‘.’ 连接。每个修订号由 多位数字 组成，可能包含 前导零 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，2.5.33 和 0.1 都是有效的版本号。</p><p>比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 忽略任何前导零后的整数值 。也就是说，修订号 1 和修订号 001 相等 。如果版本号没有指定某个下标处的修订号，则该修订号视为 0 。例如，版本 1.0 小于版本 1.1 ，因为它们下标为 0 的修订号相同，而下标为 1 的修订号分别为 0 和 1 ，0 &lt; 1 。</p><p>返回规则如下：</p><p>如果 version1 &gt; version2 返回 1，<br>如果 version1 &lt; version2 返回 -1，<br>除此之外返回 0。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/compare-version-numbers">https://leetcode-cn.com/problems/compare-version-numbers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给两个以字符串展示的版本号，请比较他们的大小。比较的规则很直白，这里核心逻辑是把字符串按<code>.</code>分割，逐段转成整数进行比较。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareVersion</span><span class="hljs-params">(String version1, String version2)</span> &#123;<br>        String[] v1 = version1.split(<span class="hljs-string">&quot;\\.&quot;</span>);<br>        String[] v2 = version2.split(<span class="hljs-string">&quot;\\.&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; Math.max(v1.length, v2.length); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> (i &lt; v1.length) ? Integer.parseInt(v1[i]) : <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num2</span> <span class="hljs-operator">=</span> (i &lt; v2.length) ? Integer.parseInt(v2[i]) : <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span> (num1 &lt; num2) &#123;<br>                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num1 &gt; num2) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>[LeetCode] 3484. Design Spreadsheet</title>
     <link href="/posts/35622788.html"/>
     <url>/posts/35622788.html</url>
@@ -2118,9 +2105,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>string</tag>
       
       <tag>simulation</tag>
       
@@ -4876,9 +4863,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -5994,9 +5981,9 @@
       
       <tag>prefix sum</tag>
       
-      <tag>sort</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>sort</tag>
       
     </tags>
     
@@ -6998,9 +6985,9 @@
       
       <tag>java</tag>
       
-      <tag>postorder</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>postorder</tag>
       
     </tags>
     
@@ -8189,6 +8176,29 @@
   
   
   <entry>
+    <title>[LeetCode] 165. Compare Version Numbers</title>
+    <link href="/posts/2958159991.html"/>
+    <url>/posts/2958159991.html</url>
+    
+    <content type="html"><![CDATA[<p>Given two version strings, version1 and version2, compare them. A version string consists of revisions separated by dots ‘.’. The value of the revision is its integer conversion ignoring leading zeros.</p><p>To compare version strings, compare their revision values in left-to-right order. If one of the version strings has fewer revisions, treat the missing revision values as 0.</p><p>Return the following:</p><p>If version1 &lt; version2, return -1.<br>If version1 &gt; version2, return 1.<br>Otherwise, return 0.</p><p>Example 1:<br>Input: version1 &#x3D; “1.2”, version2 &#x3D; “1.10”<br>Output: -1</p><p>Explanation:<br>version1’s second revision is “2” and version2’s second revision is “10”: 2 &lt; 10, so version1 &lt; version2.</p><p>Example 2:<br>Input: version1 &#x3D; “1.01”, version2 &#x3D; “1.001”<br>Output: 0</p><p>Explanation:<br>Ignoring leading zeroes, both “01” and “001” represent the same integer “1”.</p><p>Example 3:<br>Input: version1 &#x3D; “1.0”, version2 &#x3D; “1.0.0.0”<br>Output: 0</p><p>Explanation:<br>version1 has less revisions, which means every missing revision are treated as “0”.</p><p>Constraints:<br>1 &lt;&#x3D; version1.length, version2.length &lt;&#x3D; 500<br>version1 and version2 only contain digits and ‘.’.<br>version1 and version2 are valid version numbers.<br>All the given revisions in version1 and version2 can be stored in a 32-bit integer.</p><p>比较版本号。</p><blockquote>给你两个版本号 version1 和 version2 ，请你比较它们。<p>版本号由一个或多个修订号组成，各修订号由一个 ‘.’ 连接。每个修订号由 多位数字 组成，可能包含 前导零 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，2.5.33 和 0.1 都是有效的版本号。</p><p>比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 忽略任何前导零后的整数值 。也就是说，修订号 1 和修订号 001 相等 。如果版本号没有指定某个下标处的修订号，则该修订号视为 0 。例如，版本 1.0 小于版本 1.1 ，因为它们下标为 0 的修订号相同，而下标为 1 的修订号分别为 0 和 1 ，0 &lt; 1 。</p><p>返回规则如下：</p><p>如果 version1 &gt; version2 返回 1，<br>如果 version1 &lt; version2 返回 -1，<br>除此之外返回 0。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/compare-version-numbers">https://leetcode-cn.com/problems/compare-version-numbers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意是给两个以字符串展示的版本号，请比较他们的大小。比较的规则很直白，这里核心逻辑是把字符串按<code>.</code>分割，逐段转成整数进行比较。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareVersion</span><span class="hljs-params">(String version1, String version2)</span> &#123;<br>        String[] v1 = version1.split(<span class="hljs-string">&quot;\\.&quot;</span>);<br>        String[] v2 = version2.split(<span class="hljs-string">&quot;\\.&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; Math.max(v1.length, v2.length); i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> (i &lt; v1.length) ? Integer.parseInt(v1[i]) : <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num2</span> <span class="hljs-operator">=</span> (i &lt; v2.length) ? Integer.parseInt(v2[i]) : <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span> (num1 &lt; num2) &#123;<br>                <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num1 &gt; num2) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1014. Best Sightseeing Pair</title>
     <link href="/posts/2429104856.html"/>
     <url>/posts/2429104856.html</url>
@@ -8400,9 +8410,9 @@
       
       <tag>java</tag>
       
-      <tag>string</tag>
-      
       <tag>recursion</tag>
+      
+      <tag>string</tag>
       
       <tag>stack</tag>
       
