@@ -19,26 +19,28 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given a 0-indexed string s, permute s to get a new string t such that:All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that">
+    <meta name="description" content="There are numBottles water bottles that are initially full of water. You can exchange numExchange empty water bottles from the market with one full water bottle. The operation of drinking a full water">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 2785. Sort Vowels in a String">
-<meta property="og:url" content="https://shurui91.github.io/posts/3042380718.html">
+<meta property="og:title" content="[LeetCode] 1518. Water Bottles">
+<meta property="og:url" content="https://shurui91.github.io/posts/2165408436.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given a 0-indexed string s, permute s to get a new string t such that:All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that">
+<meta property="og:description" content="There are numBottles water bottles that are initially full of water. You can exchange numExchange empty water bottles from the market with one full water bottle. The operation of drinking a full water">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-14T02:38:57.000Z">
-<meta property="article:modified_time" content="2025-08-14T04:06:31.496Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
+<meta property="article:published_time" content="2025-09-30T23:30:41.000Z">
+<meta property="article:modified_time" content="2025-09-30T23:47:16.179Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="counting sort">
-<meta property="article:tag" content="string">
-<meta property="article:tag" content="sort">
+<meta property="article:tag" content="math">
+<meta property="article:tag" content="simulation">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg">
   
   
   
-  <title>[LeetCode] 2785. Sort Vowels in a String - CNoodle</title>
+  <title>[LeetCode] 1518. Water Bottles - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +194,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 2785. Sort Vowels in a String"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1518. Water Bottles"></span>
           
         </div>
 
@@ -203,8 +205,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-11-13 18:38" pubdate>
-          November 13, 2023 pm
+        <time datetime="2025-09-30 16:30" pubdate>
+          September 30, 2025 pm
         </time>
       </span>
     
@@ -215,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          575 words
+          233 words
         
       </span>
     
@@ -226,7 +228,7 @@
         
         
         
-          5 mins
+          2 mins
         
       </span>
     
@@ -263,23 +265,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 2785. Sort Vowels in a String</h1>
+            <h1 id="seo-header">[LeetCode] 1518. Water Bottles</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given a 0-indexed string s, permute s to get a new string t such that:<br>All consonants remain in their original places. More formally, if there is an index i with 0 &lt;&#x3D; i &lt; s.length such that s[i] is a consonant, then t[i] &#x3D; s[i].<br>The vowels must be sorted in the nondecreasing order of their ASCII values. More formally, for pairs of indices i, j with 0 &lt;&#x3D; i &lt; j &lt; s.length such that s[i] and s[j] are vowels, then t[i] must not have a higher ASCII value than t[j].<br>Return the resulting string.</p>
-<p>The vowels are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’, and they can appear in lowercase or uppercase. Consonants comprise all letters that are not vowels.</p>
-<p>Example 1:<br>Input: s &#x3D; “lEetcOde”<br>Output: “lEOtcede”<br>Explanation: ‘E’, ‘O’, and ‘e’ are the vowels in s; ‘l’, ‘t’, ‘c’, and ‘d’ are all consonants. The vowels are sorted according to their ASCII values, and the consonants remain in the same places.</p>
-<p>Example 2:<br>Input: s &#x3D; “lYmpH”<br>Output: “lYmpH”<br>Explanation: There are no vowels in s (all characters in s are consonants), so we return “lYmpH”.</p>
-<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists only of letters of the English alphabet in uppercase and lowercase.</p>
-<p>将字符串中的元音字母排序。</p>
+                <p>There are numBottles water bottles that are initially full of water. You can exchange numExchange empty water bottles from the market with one full water bottle.</p>
+<p>The operation of drinking a full water bottle turns it into an empty bottle.</p>
+<p>Given the two integers numBottles and numExchange, return the maximum number of water bottles you can drink.</p>
+<p>Example 1:<br><img src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" srcset="/img/loading.gif" lazyload alt="Example 1"><br>Input: numBottles &#x3D; 9, numExchange &#x3D; 3<br>Output: 13<br>Explanation: You can exchange 3 empty bottles to get 1 full water bottle.<br>Number of water bottles you can drink: 9 + 3 + 1 &#x3D; 13.</p>
+<p>Example 2:<br><img src="https://assets.leetcode.com/uploads/2020/12/20/ex1.jpg" srcset="/img/loading.gif" lazyload alt="Example 2"><br>Input: numBottles &#x3D; 15, numExchange &#x3D; 4<br>Output: 19<br>Explanation: You can exchange 4 empty bottles to get 1 full water bottle.<br>Number of water bottles you can drink: 15 + 3 + 1 &#x3D; 19.</p>
+<p>Constraints:<br>1 &lt;&#x3D; numBottles &lt;&#x3D; 100<br>2 &lt;&#x3D; numExchange &lt;&#x3D; 100</p>
+<p>换水问题。</p>
 <blockquote>
-<p>给你一个下标从 0 开始的字符串 s ，将 s 中的元素重新 排列 得到新的字符串 t ，它满足：<br>所有辅音字母都在原来的位置上。更正式的，如果满足 0 &lt;&#x3D; i &lt; s.length 的下标 i 处的 s[i] 是个辅音字母，那么 t[i] &#x3D; s[i] 。<br>元音字母都必须以他们的 ASCII 值按 非递减 顺序排列。更正式的，对于满足 0 &lt;&#x3D; i &lt; j &lt; s.length 的下标 i 和 j  ，如果 s[i] 和 s[j] 都是元音字母，那么 t[i] 的 ASCII 值不能大于 t[j] 的 ASCII 值。<br>请你返回结果字母串。<br>元音字母为 ‘a’ ，’e’ ，’i’ ，’o’ 和 ‘u’ ，它们可能是小写字母也可能是大写字母，辅音字母是除了这 5 个字母以外的所有字母。</p>
+超市正在促销，你可以用 numExchange 个空水瓶从超市兑换一瓶水。最开始，你一共购入了 numBottles 瓶水。
+
+<p>如果喝掉了水瓶中的水，那么水瓶就会变成空的。</p>
+<p>给你两个整数 numBottles 和 numExchange ，返回你 最多 可以喝到多少瓶水。</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路就是排序，但是这道题我们只对元音字母排序。具体做法我们需要遍历 input 字符串两次。第一次遍历，我们可以用一个 list 把所有的元音字母记下来，然后对这个 list 按字典序排序，这样 list 中字典序较大的字母在前。第二次遍历，如果遇到的 index 原本是一个辅音字母，则直接加入 stringbuilder，如果遇到的 index 原本是元音字母，则去 list 中拿一个字母出来放到这个位置上。</p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(nlogn)<br>空间O(n)</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sortVowels</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-comment">// 把元音字母的index记录下来</span><br>        List&lt;Character&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;aeiouAEIOU&quot;</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) != -<span class="hljs-number">1</span>) &#123;<br>                list.add(letter);<br>            &#125;<br>        &#125;<br><br>        Collections.sort(list, (a, b) -&gt; a.compareTo(b));<br>        <span class="hljs-comment">// System.out.println(list);</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">letter</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (str.indexOf(letter) == -<span class="hljs-number">1</span>) &#123;<br>                sb.append(letter);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                sb.append(list.get(j++));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是一道模拟题。题目说了每 numExchange 个空瓶可以换一瓶水，那么我们可以模拟这个过程，每喝掉 numExchange 瓶水，就去兑换一瓶水，直到 numBottles 喝光。注意兑换的水要加回 numBottles。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numWaterBottles</span><span class="hljs-params">(<span class="hljs-type">int</span> numBottles, <span class="hljs-type">int</span> numExchange)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (numBottles &gt;= numExchange) &#123;<br>            count += numExchange;<br>            numBottles -= numExchange - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> count + numBottles;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -296,11 +305,9 @@
       
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/counting-sort/" class="print-no-link">#counting sort</a>
+        <a href="/tags/math/" class="print-no-link">#math</a>
       
-        <a href="/tags/string/" class="print-no-link">#string</a>
-      
-        <a href="/tags/sort/" class="print-no-link">#sort</a>
+        <a href="/tags/simulation/" class="print-no-link">#simulation</a>
       
     </div>
   
@@ -312,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 2785. Sort Vowels in a String</div>
-      <div>https://shurui91.github.io/posts/3042380718.html</div>
+      <div>[LeetCode] 1518. Water Bottles</div>
+      <div>https://shurui91.github.io/posts/2165408436.html</div>
     </div>
     <div class="license-meta">
       
@@ -325,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>November 13, 2023</div>
+          <div>September 30, 2025</div>
         </div>
       
       
@@ -357,18 +364,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1449407836.html" title="[LeetCode] 2216. Minimum Deletions to Make Array Beautiful">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 2216. Minimum Deletions to Make Array Beautiful</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/3321093076.html" title="[LeetCode] 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance">
-                        <span class="hidden-mobile">[LeetCode] 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance</span>
+                      <a href="/posts/35622788.html" title="[LeetCode] 3484. Design Spreadsheet">
+                        <span class="hidden-mobile">[LeetCode] 3484. Design Spreadsheet</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
