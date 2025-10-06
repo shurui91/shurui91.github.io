@@ -19,27 +19,26 @@
   <meta name="author" content="Aaron Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Given an integer array nums and two integers firstLen and secondLen, return the maximum sum of elements in two non-overlapping subarrays with lengths firstLen and secondLen. The array with length firs">
+    <meta name="description" content="Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k. Vowel letters in English are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’. Example 1:Input: s &#x3D; “">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays">
-<meta property="og:url" content="https://shurui91.github.io/posts/2255635013.html">
+<meta property="og:title" content="[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length">
+<meta property="og:url" content="https://shurui91.github.io/posts/1765365781.html">
 <meta property="og:site_name" content="CNoodle">
-<meta property="og:description" content="Given an integer array nums and two integers firstLen and secondLen, return the maximum sum of elements in two non-overlapping subarrays with lengths firstLen and secondLen. The array with length firs">
+<meta property="og:description" content="Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k. Vowel letters in English are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’. Example 1:Input: s &#x3D; “">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://assets.leetcode.com/users/images/2eafddf3-c5d9-4fa3-8145-966f0a2cd63e_1605434988.6631174.png">
-<meta property="article:published_time" content="2023-04-28T08:39:03.000Z">
-<meta property="article:modified_time" content="2025-08-14T04:06:31.463Z">
+<meta property="article:published_time" content="2023-05-06T07:34:22.000Z">
+<meta property="article:modified_time" content="2025-10-06T23:35:53.848Z">
 <meta property="article:author" content="Aaron Liu">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="array">
 <meta property="article:tag" content="java">
-<meta property="article:tag" content="prefix sum">
+<meta property="article:tag" content="sliding window">
+<meta property="article:tag" content="sliding window with fixed size">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assets.leetcode.com/users/images/2eafddf3-c5d9-4fa3-8145-966f0a2cd63e_1605434988.6631174.png">
   
   
   
-  <title>[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays - CNoodle</title>
+  <title>[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length - CNoodle</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays"></span>
+            <span id="subtitle" data-typed-text="[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length"></span>
           
         </div>
 
@@ -204,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-28 01:39" pubdate>
-          April 28, 2023 am
+        <time datetime="2023-05-06 00:34" pubdate>
+          May 6, 2023 am
         </time>
       </span>
     
@@ -216,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          665 words
+          394 words
         
       </span>
     
@@ -227,7 +226,7 @@
         
         
         
-          6 mins
+          4 mins
         
       </span>
     
@@ -264,34 +263,32 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays</h1>
+            <h1 id="seo-header">[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Given an integer array nums and two integers firstLen and secondLen, return the maximum sum of elements in two non-overlapping subarrays with lengths firstLen and secondLen.</p>
-<p>The array with length firstLen could occur before or after the array with length secondLen, but they have to be non-overlapping.</p>
-<p>A subarray is a contiguous part of an array.</p>
-<p>Example 1:<br>Input: nums &#x3D; [0,6,5,2,2,5,1,9,4], firstLen &#x3D; 1, secondLen &#x3D; 2<br>Output: 20<br>Explanation: One choice of subarrays is [9] with length 1, and [6,5] with length 2.</p>
-<p>Example 2:<br>Input: nums &#x3D; [3,8,1,3,2,1,8,9,0], firstLen &#x3D; 3, secondLen &#x3D; 2<br>Output: 29<br>Explanation: One choice of subarrays is [3,8,1] with length 3, and [8,9] with length 2.</p>
-<p>Example 3:<br>Input: nums &#x3D; [2,1,5,6,0,9,5,0,3,8], firstLen &#x3D; 4, secondLen &#x3D; 3<br>Output: 31<br>Explanation: One choice of subarrays is [5,6,0,9] with length 4, and [0,3,8] with length 3.</p>
-<p>Constraints:<br>1 &lt;&#x3D; firstLen, secondLen &lt;&#x3D; 1000<br>2 &lt;&#x3D; firstLen + secondLen &lt;&#x3D; 1000<br>firstLen + secondLen &lt;&#x3D; nums.length &lt;&#x3D; 1000<br>0 &lt;&#x3D; nums[i] &lt;&#x3D; 1000</p>
-<p>两个非重叠子数组的最大和。</p>
+                <p>Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.</p>
+<p>Vowel letters in English are ‘a’, ‘e’, ‘i’, ‘o’, and ‘u’.</p>
+<p>Example 1:<br>Input: s &#x3D; “abciiidef”, k &#x3D; 3<br>Output: 3<br>Explanation: The substring “iii” contains 3 vowel letters.</p>
+<p>Example 2:<br>Input: s &#x3D; “aeiou”, k &#x3D; 2<br>Output: 2<br>Explanation: Any substring of length 2 contains 2 vowels.</p>
+<p>Example 3:<br>Input: s &#x3D; “leetcode”, k &#x3D; 3<br>Output: 2<br>Explanation: “lee”, “eet” and “ode” contain 2 vowels.</p>
+<p>Constraints:<br>1 &lt;&#x3D; s.length &lt;&#x3D; 105<br>s consists of lowercase English letters.<br>1 &lt;&#x3D; k &lt;&#x3D; s.length</p>
+<p>定长子串中元音的最大数目。</p>
 <blockquote>
-给你一个整数数组 nums 和两个整数 firstLen 和 secondLen，请你找出并返回两个非重叠 子数组 中元素的最大和，长度分别为 firstLen 和 secondLen 。
+给你字符串 s 和整数 k 。
 
-<p>长度为 firstLen 的子数组可以出现在长为 secondLen 的子数组之前或之后，但二者必须是不重叠的。</p>
-<p>子数组是数组的一个 连续 部分。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays">https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>请返回字符串 s 中长度为 k 的单个子字符串中可能包含的最大元音字母数。</p>
+<p>英文中的 元音字母 为（a, e, i, o, u）。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length">https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 </blockquote>
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是<code>前缀和</code>。我参考了<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays/solution/tu-jie-mei-you-si-lu-yi-zhang-tu-miao-do-3lli/">这个帖子</a>。因为要快速地找到子数组的和，所以容易想到用<code>前缀和</code>。注意这道题因为涉及到两个长度不同的子数组 A 和 B，长度分别为 firstLen 和 secondLen，所以需要考虑 <code>A+B</code> 和 <code>B+A</code> 两种情况，谁在前都可以。</p>
-<p>具体做法是首先我们把整个数组的前缀和计算好，用一个数组 presum 存储，这样当我们需要得到一段子数组的和的时候，我们就可以用 O(1) 的时间拿到。接着我们遍历原数组，在遍历过程中，我们用一个变量 i 表示当前遍历到哪个下标，两个子数组 A 和 B 都在下标 i 的左侧。所以当我们在某个下标 i 的时候，子数组 A 的值 &#x3D; presum[i - secondLen] - presum[i - secondLen - firstLen]，子数组 B 的值 &#x3D; presum[i] - presum[i - secondLen]。找到两者的最大值再相加，就是最后的结果。下面这个图可以帮助理解。</p>
-<p><img src="https://assets.leetcode.com/users/images/2eafddf3-c5d9-4fa3-8145-966f0a2cd63e_1605434988.6631174.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(n)</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是滑动窗口。这是一道窗口 size 固定的滑动窗口题。首先我们计算前 k 个字母中元音字母的个数，然后遍历之后剩下的所有字母，如果在滑动窗口右侧遇到的字母是元音，则 + 1，如果在滑动窗口左侧遇到的字母是元音，则 -1，因为他已经不在窗口范围内了。</p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxSumTwoNoOverlap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> firstLen, <span class="hljs-type">int</span> secondLen)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] presum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            presum[i + <span class="hljs-number">1</span>] = presum[i] + nums[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">max1</span> <span class="hljs-operator">=</span> getMax(presum, firstLen, secondLen);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max2</span> <span class="hljs-operator">=</span> getMax(presum, secondLen, firstLen);<br>        <span class="hljs-keyword">return</span> Math.max(max1, max2);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMax</span><span class="hljs-params">(<span class="hljs-type">int</span>[] presum, <span class="hljs-type">int</span> firstLen, <span class="hljs-type">int</span> secondLen)</span> &#123;<br>		<span class="hljs-comment">// 找到firstLen的最大值</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">maxFirst</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> firstLen + secondLen; i &lt; presum.length; i++) &#123;<br>            maxFirst = Math.max(maxFirst, presum[i - secondLen] - presum[i - secondLen - firstLen]);<br>			<span class="hljs-comment">// 找到整体的最大值</span><br>            max = Math.max(max, maxFirst + presum[i] - presum[i - secondLen]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> max;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxVowels</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (helper(c)) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> count;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; s.length(); i++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c2</span> <span class="hljs-operator">=</span> s.charAt(i - k);<br>            <span class="hljs-keyword">if</span> (helper(c1)) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (helper(c2)) &#123;<br>                count--;<br>            &#125;<br>            res = Math.max(res, count);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">helper</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> &#123;<br>        <span class="hljs-keyword">return</span> c == <span class="hljs-string">&#x27;a&#x27;</span> || c == <span class="hljs-string">&#x27;e&#x27;</span> || c == <span class="hljs-string">&#x27;i&#x27;</span> || c == <span class="hljs-string">&#x27;o&#x27;</span> || c == <span class="hljs-string">&#x27;u&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -305,11 +302,13 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/array/" class="print-no-link">#array</a>
-      
         <a href="/tags/java/" class="print-no-link">#java</a>
       
-        <a href="/tags/prefix-sum/" class="print-no-link">#prefix sum</a>
+        <a href="/tags/sliding-window/" class="print-no-link">#sliding window</a>
+      
+        <a href="/tags/sliding-window-with-fixed-size/" class="print-no-link">#sliding window with fixed size</a>
+      
+        <a href="/tags/string/" class="print-no-link">#string</a>
       
     </div>
   
@@ -321,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays</div>
-      <div>https://shurui91.github.io/posts/2255635013.html</div>
+      <div>[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length</div>
+      <div>https://shurui91.github.io/posts/1765365781.html</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 28, 2023</div>
+          <div>May 6, 2023</div>
         </div>
       
       
@@ -366,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/1765365781.html" title="[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length">
+                      <a href="/posts/1697121728.html" title="[LeetCode] 2441. Largest Positive Integer That Exists With Its Negative">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[LeetCode] 1456. Maximum Number of Vowels in a Substring of Given Length</span>
+                        <span class="hidden-mobile">[LeetCode] 2441. Largest Positive Integer That Exists With Its Negative</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -376,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/676651753.html" title="[LeetCode] 2336. Smallest Number in Infinite Set">
-                        <span class="hidden-mobile">[LeetCode] 2336. Smallest Number in Infinite Set</span>
+                      <a href="/posts/2255635013.html" title="[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays">
+                        <span class="hidden-mobile">[LeetCode] 1031. Maximum Sum of Two Non-Overlapping Subarrays</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
