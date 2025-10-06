@@ -908,9 +908,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -1359,11 +1359,11 @@
       
       <tag>java</tag>
       
-      <tag>dynamic programming</tag>
-      
       <tag>bfs</tag>
       
       <tag>dfs</tag>
+      
+      <tag>dynamic programming</tag>
       
       <tag>matrix</tag>
       
@@ -2292,9 +2292,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
@@ -2556,11 +2556,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3649,9 +3649,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -4562,9 +4562,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -4942,9 +4942,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -5025,9 +5025,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>sort</tag>
       
@@ -5056,9 +5056,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>math</tag>
       
@@ -5087,9 +5087,9 @@
       
       <tag>greedy</tag>
       
-      <tag>sort</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sort</tag>
       
       <tag>binary search</tag>
       
@@ -5800,9 +5800,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -5952,9 +5952,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -6031,11 +6031,11 @@
       
       <tag>greedy</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6135,9 +6135,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>MOD</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6301,11 +6301,11 @@
       
       <tag>java</tag>
       
+      <tag>prefix sum</tag>
+      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
-      
-      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6517,9 +6517,9 @@
       
       <tag>java</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -6559,7 +6559,7 @@
     <link href="/posts/2019896287.html"/>
     <url>/posts/2019896287.html</url>
     
-    <content type="html"><![CDATA[<p>You are given an integer array nums consisting of n elements, and an integer k.</p><p>Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.</p><p>Example 1:<br>Input: nums &#x3D; [1,12,-5,-6,50,3], k &#x3D; 4<br>Output: 12.75000<br>Explanation: Maximum average is (12 - 5 - 6 + 50) &#x2F; 4 &#x3D; 51 &#x2F; 4 &#x3D; 12.75</p><p>Example 2:<br>Input: nums &#x3D; [5], k &#x3D; 1<br>Output: 5.00000</p><p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>1 &lt;&#x3D; k &lt;&#x3D; n &lt;&#x3D; 105<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104</p><p>子数组最大平均数 I。</p><blockquote>给你一个由 n 个元素组成的整数数组 nums 和一个整数 k 。<p>请你找出平均数最大且 长度为 k 的连续子数组，并输出该最大平均数。</p><p>任何误差小于 10-5 的答案都将被视为正确答案。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/maximum-average-subarray-i">https://leetcode.cn/problems/maximum-average-subarray-i</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路是滑动窗口，但是窗口的长度是固定的，为 k。我们先计算一下数组前 k 个数的和；然后从第 k + 1 个数开始，分别计算不同窗口里面数字的 sum，并且记录一个最大的 sum。最后再计算平均值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMaxAverage</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">double</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            sum += nums[i];<br>        &#125;<br><br>        <span class="hljs-type">double</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> sum;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; nums.length; i++) &#123;<br>            sum = sum + nums[i] - nums[i - k];<br>            max = Math.max(max, sum);<br>        &#125;<br>        <span class="hljs-keyword">return</span> max / k;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findMaxAverage = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>        sum += nums[i];<br>    &#125;<br>    <span class="hljs-keyword">let</span> maxSum = sum;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = k; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum = sum - nums[i - k] + nums[i];<br>        maxSum = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(maxSum, sum);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1.0</span> * maxSum / k;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>You are given an integer array nums consisting of n elements, and an integer k.</p><p>Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.</p><p>Example 1:<br>Input: nums &#x3D; [1,12,-5,-6,50,3], k &#x3D; 4<br>Output: 12.75000<br>Explanation: Maximum average is (12 - 5 - 6 + 50) &#x2F; 4 &#x3D; 51 &#x2F; 4 &#x3D; 12.75</p><p>Example 2:<br>Input: nums &#x3D; [5], k &#x3D; 1<br>Output: 5.00000</p><p>Constraints:<br>n &#x3D;&#x3D; nums.length<br>1 &lt;&#x3D; k &lt;&#x3D; n &lt;&#x3D; 105<br>-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104</p><p>子数组最大平均数 I。</p><blockquote>给你一个由 n 个元素组成的整数数组 nums 和一个整数 k 。<p>请你找出平均数最大且 长度为 k 的连续子数组，并输出该最大平均数。</p><p>任何误差小于 10-5 的答案都将被视为正确答案。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode.cn/problems/maximum-average-subarray-i">https://leetcode.cn/problems/maximum-average-subarray-i</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题的思路是滑动窗口，但是窗口的长度是固定的，为 k。我们先计算一下数组前 k 个数的和；然后从第 k + 1 个数开始，分别计算不同窗口里面数字的 sum，并且记录一个最大的 sum。最后再计算平均值。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMaxAverage</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">double</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            sum += num;<br>        &#125;<br>        <br>        <span class="hljs-type">double</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> sum;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; nums.length; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> nums[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num2</span> <span class="hljs-operator">=</span> nums[i - k];<br>            sum += num1;<br>            sum -= num2;<br>            res = Math.max(res, sum);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res / k;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>JavaScript实现</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number[]</span>&#125; <span class="hljs-variable">nums</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &#123;<span class="hljs-type">number</span>&#125; <span class="hljs-variable">k</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-type">number</span>&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">var</span> findMaxAverage = <span class="hljs-keyword">function</span>(<span class="hljs-params">nums, k</span>) &#123;<br>    <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>        sum += nums[i];<br>    &#125;<br>    <span class="hljs-keyword">let</span> maxSum = sum;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = k; i &lt; nums.<span class="hljs-property">length</span>; i++) &#123;<br>        sum = sum - nums[i - k] + nums[i];<br>        maxSum = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(maxSum, sum);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1.0</span> * maxSum / k;<br>&#125;;<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
@@ -6627,9 +6627,9 @@
       
       <tag>java</tag>
       
-      <tag>greedy</tag>
-      
       <tag>counting sort</tag>
+      
+      <tag>greedy</tag>
       
       <tag>heap</tag>
       
@@ -6852,9 +6852,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>backtracking</tag>
       
@@ -6910,9 +6910,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -7617,9 +7617,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>recursion</tag>
       
@@ -7858,9 +7858,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -8543,9 +8543,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>monotonic stack</tag>
       
@@ -8709,9 +8709,9 @@
       
       <tag>treemap</tag>
       
-      <tag>binary search</tag>
-      
       <tag>string</tag>
+      
+      <tag>binary search</tag>
       
       <tag>design</tag>
       
@@ -9494,9 +9494,9 @@
       
       <tag>javascript</tag>
       
-      <tag>binary search</tag>
-      
       <tag>matrix</tag>
+      
+      <tag>binary search</tag>
       
       <tag>heap</tag>
       
@@ -9525,9 +9525,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
       <tag>matrix</tag>
       
@@ -9554,9 +9554,9 @@
       
       <tag>bfs</tag>
       
-      <tag>flood fill</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>flood fill</tag>
       
     </tags>
     
@@ -9830,9 +9830,9 @@
       
       <tag>javascript</tag>
       
-      <tag>sliding window</tag>
-      
       <tag>prefix sum</tag>
+      
+      <tag>sliding window</tag>
       
     </tags>
     
@@ -10222,9 +10222,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -10843,9 +10843,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -10870,9 +10870,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
       <tag>queue</tag>
       
@@ -10899,9 +10899,9 @@
       
       <tag>java</tag>
       
-      <tag>design</tag>
-      
       <tag>linked list</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -10978,9 +10978,9 @@
       
       <tag>javascript</tag>
       
-      <tag>design</tag>
-      
       <tag>stack</tag>
+      
+      <tag>design</tag>
       
     </tags>
     
@@ -11397,9 +11397,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>n-ary tree</tag>
       
@@ -11457,9 +11457,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -11486,9 +11486,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
       <tag>recursion</tag>
       
@@ -11521,9 +11521,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -11631,9 +11631,9 @@
       
       <tag>bfs</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -11745,9 +11745,9 @@
       
       <tag>tree</tag>
       
-      <tag>preorder</tag>
-      
       <tag>dfs</tag>
+      
+      <tag>preorder</tag>
       
     </tags>
     
@@ -12364,9 +12364,9 @@
       
       <tag>javascript</tag>
       
-      <tag>binary search</tag>
-      
       <tag>math</tag>
+      
+      <tag>binary search</tag>
       
     </tags>
     
