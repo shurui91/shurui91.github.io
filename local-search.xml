@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>[LeetCode] 2379. Minimum Recolors to Get K Consecutive Black Blocks</title>
+    <link href="/posts/1033562152.html"/>
+    <url>/posts/1033562152.html</url>
+    
+    <content type="html"><![CDATA[<p>You are given a 0-indexed string blocks of length n, where blocks[i] is either ‘W’ or ‘B’, representing the color of the ith block. The characters ‘W’ and ‘B’ denote the colors white and black, respectively.</p><p>You are also given an integer k, which is the desired number of consecutive black blocks.</p><p>In one operation, you can recolor a white block such that it becomes a black block.</p><p>Return the minimum number of operations needed such that there is at least one occurrence of k consecutive black blocks.</p><p>Example 1:<br>Input: blocks &#x3D; “WBBWWBBWBW”, k &#x3D; 7<br>Output: 3<br>Explanation:<br>One way to achieve 7 consecutive black blocks is to recolor the 0th, 3rd, and 4th blocks<br>so that blocks &#x3D; “BBBBBBBWBW”.<br>It can be shown that there is no way to achieve 7 consecutive black blocks in less than 3 operations.<br>Therefore, we return 3.</p><p>Example 2:<br>Input: blocks &#x3D; “WBWBBBW”, k &#x3D; 2<br>Output: 0<br>Explanation:<br>No changes need to be made, since 2 consecutive black blocks already exist.<br>Therefore, we return 0.</p><p>Constraints:<br>n &#x3D;&#x3D; blocks.length<br>1 &lt;&#x3D; n &lt;&#x3D; 100<br>blocks[i] is either ‘W’ or ‘B’.<br>1 &lt;&#x3D; k &lt;&#x3D; n</p><p>得到 K 个黑块的最少涂色次数。</p><blockquote>给你一个长度为 n 下标从 0 开始的字符串 blocks ，blocks[i] 要么是 'W' 要么是 'B' ，表示第 i 块的颜色。字符 'W' 和 'B' 分别表示白色和黑色。<p>给你一个整数 k ，表示想要 连续 黑色块的数目。</p><p>每一次操作中，你可以选择一个白色块将它 涂成 黑色块。</p><p>请你返回至少出现 一次 连续 k 个黑色块的 最少 操作次数。</p></blockquote><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>思路是窗口 size 固定的滑动窗口。首先我们看前 k 个字符里有多少个白色块，白色块的数量就是需要操作的次数，记为 count。接着我们扫描字符串剩余的部分，找到全局最小的 count 即可。</p><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>时间O(n)<br>空间O(1)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Java实现</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">minimumRecolors</span><span class="hljs-params">(String blocks, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> blocks.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// first k</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; k; i++) &#123;<br>            <span class="hljs-keyword">if</span> (blocks.charAt(i) == <span class="hljs-string">&#x27;W&#x27;</span>) &#123;<br>                count++;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> count;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> k; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (blocks.charAt(i) == <span class="hljs-string">&#x27;W&#x27;</span>) &#123;<br>                count++;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (blocks.charAt(i - k) == <span class="hljs-string">&#x27;W&#x27;</span>) &#123;<br>                count--;<br>            &#125;<br>            res = Math.min(res, count);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>java</tag>
+      
+      <tag>sliding window</tag>
+      
+      <tag>sliding window with fixed size</tag>
+      
+      <tag>string</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>[LeetCode] 1518. Water Bottles</title>
     <link href="/posts/2165408436.html"/>
     <url>/posts/2165408436.html</url>
@@ -908,9 +935,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -1307,9 +1334,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -1359,11 +1386,11 @@
       
       <tag>java</tag>
       
+      <tag>dynamic programming</tag>
+      
       <tag>bfs</tag>
       
       <tag>dfs</tag>
-      
-      <tag>dynamic programming</tag>
       
       <tag>matrix</tag>
       
@@ -2292,9 +2319,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
       <tag>queue</tag>
       
@@ -2556,11 +2583,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -3649,9 +3676,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -3928,9 +3955,9 @@
       
       <tag>array</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4562,9 +4589,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4616,9 +4643,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -4915,9 +4942,9 @@
       
       <tag>dfs</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -4942,9 +4969,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -5087,11 +5114,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>binary search</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -5800,9 +5827,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -5952,9 +5979,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6031,11 +6058,11 @@
       
       <tag>greedy</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sort</tag>
       
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6301,11 +6328,11 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
       
       <tag>sliding window with fixed size</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6517,9 +6544,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -6852,9 +6879,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>backtracking</tag>
       
@@ -6910,9 +6937,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -7037,9 +7064,9 @@
       
       <tag>tree</tag>
       
-      <tag>recursion</tag>
-      
       <tag>postorder</tag>
+      
+      <tag>recursion</tag>
       
     </tags>
     
@@ -7617,9 +7644,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -7858,9 +7885,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -7887,9 +7914,9 @@
       
       <tag>dfs</tag>
       
-      <tag>matrix</tag>
-      
       <tag>memorization</tag>
+      
+      <tag>matrix</tag>
       
     </tags>
     
@@ -8543,9 +8570,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>monotonic stack</tag>
       
@@ -8570,9 +8597,9 @@
       
       <tag>java</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>string</tag>
+      
+      <tag>prefix sum</tag>
       
       <tag>bit manipulation</tag>
       
@@ -9494,9 +9521,9 @@
       
       <tag>javascript</tag>
       
-      <tag>matrix</tag>
-      
       <tag>binary search</tag>
+      
+      <tag>matrix</tag>
       
       <tag>heap</tag>
       
@@ -9525,9 +9552,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
       <tag>matrix</tag>
       
@@ -9554,9 +9581,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>flood fill</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -9639,9 +9666,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>math</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -9830,9 +9857,9 @@
       
       <tag>javascript</tag>
       
-      <tag>prefix sum</tag>
-      
       <tag>sliding window</tag>
+      
+      <tag>prefix sum</tag>
       
     </tags>
     
@@ -10222,9 +10249,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -10843,9 +10870,9 @@
       
       <tag>java</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -10870,9 +10897,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
       <tag>queue</tag>
       
@@ -10899,9 +10926,9 @@
       
       <tag>java</tag>
       
-      <tag>linked list</tag>
-      
       <tag>design</tag>
+      
+      <tag>linked list</tag>
       
     </tags>
     
@@ -10978,9 +11005,9 @@
       
       <tag>javascript</tag>
       
-      <tag>stack</tag>
-      
       <tag>design</tag>
+      
+      <tag>stack</tag>
       
     </tags>
     
@@ -11397,9 +11424,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>n-ary tree</tag>
       
@@ -11457,9 +11484,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -11486,9 +11513,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
       <tag>recursion</tag>
       
@@ -11521,9 +11548,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -11631,9 +11658,9 @@
       
       <tag>bfs</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
@@ -11745,9 +11772,9 @@
       
       <tag>tree</tag>
       
-      <tag>dfs</tag>
-      
       <tag>preorder</tag>
+      
+      <tag>dfs</tag>
       
     </tags>
     
